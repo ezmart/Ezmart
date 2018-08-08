@@ -1,0 +1,1 @@
+Use o formato Tar quando clicar em restaurar e selecionar o arquivo.

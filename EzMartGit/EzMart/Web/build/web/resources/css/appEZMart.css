@@ -1,0 +1,23 @@
+.menu-profile{
+    text-align: center;
+}
+
+/*input FORMULÁRIOS*/
+.form-control.input-text-register{
+    font-weight: bold;
+    color: #000000;
+    font-size: x-large;
+}
+
+.btn-ezmart-stylebtn-ezmart-style{
+    
+}
+
+/*header dos USÁRIOS*/
+a.user-header-style{
+    color: #DBD800;
+}
+
+a.dropdown-content-user-header-style{
+    color: #000000;
+}
