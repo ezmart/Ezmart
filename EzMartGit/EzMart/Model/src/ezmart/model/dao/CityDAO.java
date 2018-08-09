@@ -1,6 +1,7 @@
 package ezmart.model.dao;
 
 import ezmart.model.base.BaseDAO;
+import ezmart.model.criteria.CityCriteria;
 import ezmart.model.entity.City;
 import ezmart.model.entity.State;
 import ezmart.model.util.PreparedStatementBuilder;
@@ -58,12 +59,12 @@ public class CityDAO implements BaseDAO<City> {
         List<Object> paramList = new ArrayList<>();
 
         if (criteria != null) {
-//            if (criteria.containsKey(CategoriaCriteria.NOME_ILIKE)) {
-//                String nome = (String) criteria.get(CategoriaCriteria.NOME_ILIKE);
-//                sql += " AND nome ILIKE ?";
+//            if (criteria.containsKey(CityCriteria.STATE_ID_EQ)) {
+//                String cityStateId = (String) criteria.get(CityCriteria.STATE_ID_EQ);
+//                sql += " AND state_id ILIKE ?";
 //                paramList.add("%" + nome + "%");
 //            }
-//
+
 //            if (criteria.containsKey(CategoriaCriteria.NOME_EQ)) {
 //                String nome = (String) criteria.get(CategoriaCriteria.NOME_EQ);
 //                sql += " AND nome = ?";
@@ -76,11 +77,11 @@ public class CityDAO implements BaseDAO<City> {
 //                paramList.add(quantidadeProdutos);
 //            }
 //
-//            if (criteria.containsKey(CategoriaCriteria.ID_NE)) {
-//                Long id = (Long) criteria.get(CategoriaCriteria.ID_NE);
-//                sql += " AND id != ?";
-//                paramList.add(id);
-//            }
+            if (criteria.containsKey(CityCriteria.STATE_ID_EQ)) {
+                Long cityStateId = (Long) criteria.get(CityCriteria.STATE_ID_EQ);
+                sql += " AND city_stateid = ?";
+                paramList.add(cityStateId);
+            }
 
         }
 
