@@ -108,8 +108,9 @@ public class ConsumerService implements BaseConsumerService {
         Map<String, String> errors = new HashMap<>();
         String validationType = (String) fields.get("validationType");
         String email = (String) fields.get("email");
-        String cpf = (String) fields.get("email");
-        String password = (String) fields.get("email");
+        String cpf = (String) fields.get("cpf");
+        String passwordConfirm = (String) fields.get("passwordConfirm");
+        String password = (String) fields.get("password");
 
         if (validationType.equals((SystemConstant.VALIDATION.REGISTER.REGISTER_CONSUMER))) {
             if (email == null || email.isEmpty()) {
@@ -127,13 +128,14 @@ public class ConsumerService implements BaseConsumerService {
                     }
                 }
             }
+            
             if (cpf == null || cpf.isEmpty()) {
-                errors.put("email", "Campo obrigatório!");
+                errors.put("cpf", "Campo obrigatório!");
             } else {
                 Map<Long, Object> criteria = new HashMap<>();
                 criteria.put(ConsumerCriteria.CPF_EQ, cpf);
                 if (readByCriteria(criteria, null, null).size() > 0) {
-                    
+                    errors.put("cpf", "CPF já cadastrado no sistema!");
                 }
             }
 
