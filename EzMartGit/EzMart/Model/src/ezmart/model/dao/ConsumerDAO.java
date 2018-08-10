@@ -1,6 +1,7 @@
 package ezmart.model.dao;
 
 import ezmart.model.base.BaseDAO;
+import ezmart.model.criteria.ConsumerCriteria;
 import ezmart.model.criteria.UserCriteria;
 import ezmart.model.entity.Consumer;
 import ezmart.model.entity.Establishment;
@@ -41,25 +42,24 @@ public class ConsumerDAO implements BaseDAO<Consumer> {
 
     @Override
     public List<Consumer> readByCriteria(Connection conn, Map<Long, Object> criteria, Long limit, Long offset) throws Exception {
-        String sql = "SELECT usersystem_id, usersystem_email, usersystem_password, usersystem_addresslocation, "
-                + "usersystem_numberhouse, usersystem_neighborhood, usersystem_cityid, usersystem_zipcode, "
-                + "usersystem_telephone, usersystem_usertype, usersystem_active, usersystem_latitude, usersystem_longitude "
-                + "FROM usersystem "
+        String sql = "SELECT consumer__id, consumer_name, consumer_lastname, consumer_cpf, "
+                + "consumer_userid, "
+                + "FROM consumer "
                 + "WHERE 1=1";
 
         List<Object> paramList = new ArrayList<>();
         if (criteria != null) {
-            if (criteria.containsKey(UserCriteria.EMAIL_EQ)) {
-                String email = (String) criteria.get(UserCriteria.EMAIL_EQ);
-                sql += " AND usersystem.usersystem_email = ?";
-                paramList.add(email);
+            if (criteria.containsKey(ConsumerCriteria.CPF_EQ)) {
+                String cpf = (String) criteria.get(ConsumerCriteria.CPF_EQ);
+                sql += " AND consumer_cpf = ?";
+                paramList.add(cpf);
             }
 
-            if (criteria.containsKey(UserCriteria.ID_NE)) {
-                Long id = (Long) criteria.get(UserCriteria.ID_NE);
-                sql += " AND usersystem.usersystem_id != ?";
-                paramList.add(id);
-            }
+//            if (criteria.containsKey(UserCriteria.ID_NE)) {
+//                Long id = (Long) criteria.get(UserCriteria.ID_NE);
+//                sql += " AND usersystem.usersystem_id != ?";
+//                paramList.add(id);
+//            }
             //Add criterio ....
         }
 
@@ -84,7 +84,7 @@ public class ConsumerDAO implements BaseDAO<Consumer> {
             consumer.setLastName(rs.getString("consumer_name"));
             consumer.setCpf(rs.getString("consumer_name"));
 
-            //userList.add(user);
+            //consumerList.add(user);
         }
 
         rs.close();

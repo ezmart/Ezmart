@@ -44,8 +44,10 @@ public class ConsumerRegisterController {
     }
 
     @RequestMapping(value = "/register/consumer", method = RequestMethod.POST)
-    public ModelAndView create(String name, String lastName, String cpf, String email, String password, String addressLocation,
-            Integer numberHouse, String neighborhood, Long cityId, String zipCode, String telephone) {
+    public ModelAndView create(String name, String lastName, String cpf, String email, String password,
+            String passwordConfirm, String addressLocation, Integer numberHouse, String neighborhood,
+            Long cityId, String zipCode, String telephone) {
+
         ModelAndView mv = null;
         String confirmationEmail = email;
         String userName = name;
@@ -53,12 +55,22 @@ public class ConsumerRegisterController {
         try {
             ConsumerService consumerService = new ConsumerService();
             Map<String, Object> fields = new HashMap<>();
+            fields.put("name", name);
+            fields.put("lastName", lastName);
             fields.put("cpf", cpf);
             fields.put("email", email);
             fields.put("password", password);
+            fields.put("passwordConfirm", passwordConfirm);
+            fields.put("addressLocation", addressLocation);
+            fields.put("numberHouse", numberHouse);
+            fields.put("neighborhood", neighborhood);
+            fields.put("cityId", cityId);
+            fields.put("zipCode", zipCode);
+            fields.put("telephone", telephone);
             fields.put("validationType", SystemConstant.VALIDATION.REGISTER.REGISTER_CONSUMER);
 
             Map<String, String> errors = consumerService.validate(fields);
+
             if (errors.isEmpty()) {
                 Consumer consumer = new Consumer();
                 consumer.setName(name);
@@ -103,6 +115,27 @@ public class ConsumerRegisterController {
                 mv = new ModelAndView("message/message_confirmation");
             } else {
                 mv = new ModelAndView("register/register_consumer");
+
+                //Faz com que não se perca o que já foi inserido no formulário
+                if (name != null && !name.isEmpty()) {
+                    mv.addObject("name", name);
+                } else if (lastName != null && !lastName.isEmpty()) {
+                    mv.addObject("name", name);
+                } else if (cpf != null && !cpf.isEmpty()) {
+                    mv.addObject("lastName", lastName);
+                } else if (email != null && !email.isEmpty()) {
+                    mv.addObject("email", email);
+                } else if (numberHouse != null) {
+                    mv.addObject("numberHouse", numberHouse);
+                } else if (neighborhood != null && neighborhood.isEmpty()) {
+                    mv.addObject("neighborhood", neighborhood);
+                }else if (zipCode != null && zipCode.isEmpty()) {
+                    mv.addObject("zipCode", zipCode);
+                }else if (telephone != null && telephone.isEmpty()) {
+                    mv.addObject("telephone", telephone);
+                }
+
+                //Caso haja erros, será mostrado
                 mv.addObject("errors", errors);
             }
         } catch (Exception ex) {

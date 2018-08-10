@@ -26,43 +26,52 @@
                             <form method="POST">
                                 <div class="form-group col s6" style="padding: 0">
                                     <label for="name">Nome:</label>
-                                    <input type="text" class="form-control" name="name" id="name" value="${consumer.name}" required>
+                                    <input type="text" class="form-control" name="name" id="name" value="${name}">
+                                    <span style="color: orangered">${errors.name}</span>
                                 </div>
                                 <div class="form-group col s6" style="padding-right: 0">
                                     <label for="lastName">Sobrenome:</label>
-                                    <input type="text" class="form-control" name="lastName" id="lastName" value="${consumer.lastName}" required>
+                                    <input type="text" class="form-control" name="lastName" id="lastName" value="${lastName}">
+                                    <span style="color: orangered">${errors.lastName}</span>
                                 </div>
                                 <div class="form-group">
                                     <label for="email">Email:</label>
-                                    <input type="email" class="form-control" name="email" id="email" value="${consumer.email}" required>
+                                    <input type="email" class="form-control" name="email" id="email" value="${email}">
+                                    <span style="color: orangered">${errors.email}</span>
                                 </div>
                                 <div class="form-group col s6" style="padding: 0">
                                     <label for="password">Senha:</label>
-                                    <input type="password" class="form-control" name="password" id="password" required>
+                                    <input type="password" class="form-control" name="password" id="password" value="${consumer.password}">
+                                    <span style="color: orangered">${errors.password}</span>
                                 </div>
                                 <div class="form-group col s6" style="padding-right: 0">
                                     <label for="passwordConfirm">Confirmar Senha:</label>
-                                    <input type="password" class="form-control" name="passwordConfirm" id="passwordConfirm" required>
+                                    <input type="password" class="form-control" name="passwordConfirm" id="passwordConfirm" value="${consumer.passwordConfirm}">
+                                    <span style="color: orangered">${errors.passwordConfirm}</span>
                                 </div>
                                 <div class="form-group" style="padding-right: 0">
                                     <label for="addressLocation">Logradouro:</label>
-                                    <input type="text" class="form-control" name="addressLocation" id="addressLocation" value="${consumer.addressLocation}" required>
+                                    <input type="text" class="form-control" name="addressLocation" id="addressLocation" value="${consumer.addressLocation}">
+                                    <span style="color: orangered">${errors.addressLocation}</span>
                                 </div>
                                 <div class="form-group">
                                     <label for="numberHouse">Número:</label>
-                                    <input type="number" class="form-control" name="numberHouse" id="numberHouse" value="${consumer.numberHouse}" required>
+                                    <input type="number" class="form-control" name="numberHouse" id="numberHouse" value="${consumer.numberHouse}">
+                                    <span style="color: orangered">${errors.numberHouse}</span>
                                 </div>
                                 <div class="form-group">
                                     <label for="neighborhood">Bairro:</label>
-                                    <input type="text" class="form-control" name="neighborhood" id="neighborhood" value="${consumer.neighborhood}" required>
+                                    <input type="text" class="form-control" name="neighborhood" id="neighborhood" value="${consumer.neighborhood}">
+                                    <span style="color: orangered">${errors.neighborhood}</span>
                                 </div>
                                 <div class="form-group col s6">
-                                    <label for="cityId">Estado:</label>
-                                    <select class="form-control" name="cityId" id="cityId">
+                                    <label for="stateId">Estado:</label>
+                                    <select class="form-control" name="stateId" id="stateId">
                                         <c:forEach items="${cityList}" var="city">
                                             <option <c:if test="${consumer.cityId eq city.id}">selected="true"</c:if> value="${city.id}">${categoria.nome}</option>                            
                                         </c:forEach>
                                     </select>
+                                    <span style="color: orangered">${errors.stateId}</span>
                                 </div>
                                 <div class="form-group col s6">
                                     <label for="cityId">Municipio:</label>
@@ -72,18 +81,22 @@
                                             <option <c:if test="${consumer.cityId eq city.id}">selected="true"</c:if> value="${city.id}">${city.name}</option>                            
                                         </c:forEach>
                                     </select>
+<!--                                    <span style="color: orangered">${errors.cityId}</span>-->
                                 </div>
                                 <div class="form-group">
                                     <label for="zipCode">CEP:</label>
-                                    <input type="text" class="form-control" name="zipCode" id="zipCode" value="${consumer.zipCode}" required>
+                                    <input type="text" class="form-control" name="zipCode" id="zipCode" value="${consumer.zipCode}">
+                                    <span style="color: orangered">${errors.zipCode}</span>
                                 </div>
                                 <div class="form-group">
                                     <label for="zipCode">CPF:</label>
-                                    <input type="text" class="form-control" name="cpf" id="cpf" value="${consumer.cpf}" required>
+                                    <input type="text" class="form-control" name="cpf" id="cpf" value="${consumer.cpf}">
+                                    <span style="color: orangered">${errors.cpf}</span>
                                 </div>
                                 <div class="form-group">
                                     <label for="telephone">Telefone:</label>
-                                    <input type="text"  class="form-control" name="telephone" id="telephone" value="${consumer.telephone}" required>
+                                    <input type="text"  class="form-control" name="telephone" id="telephone" value="${consumer.telephone}">
+                                    <span style="color: orangered">${errors.telephone}</span>
                                 </div>
                                 <button id="btn-btn-ezmart-style" type="submit" class="btn" value="confirmar"><i class="material-icons left">border_color</i>Cadastrar</button>
                             </form>
@@ -98,20 +111,28 @@
         <script src="<c:url value="/resources/js/appEZMart.js"/>"></script>
     </body>
 </html>
-<script>
-var password = document.getElementById("password")
-  , passwordConfirm = document.getElementById("passwordConfirm");
-
-function validatePassword(){
-  if(password.value !== passwordConfirm.value) {
-    passwordConfirm.setCustomValidity("Confirmação de Senha invalida");
-  } else {
-    passwordConfirm.setCustomValidity('');
-  }
+<script type="text/javascript">
+/* Máscaras ER */
+function mascara(o,f){
+    v_obj=o,
+    v_fun=f,
+    setTimeout("execmascara()",1),
+};
+function execmascara(){
+    v_obj.value=v_fun(v_obj.value),
 }
-password.onchange = validatePassword;
-passwordConfirm.onkeyup = validatePassword;
-
-$("#telephone").mask("(00) 0000-00009");
-
+function mtel(v){
+    v=v.replace(/D/g,"");             //Remove tudo o que não é dígito
+    v=v.replace(/^(d{2})(d)/g,"($1) $2"); //Coloca parênteses em volta dos dois primeiros dígitos
+    v=v.replace(/(d)(d{4})$/,"$1-$2");    //Coloca hífen entre o quarto e o quinto dígitos
+    return v;
+};
+function id( el ){
+	return document.getElementById( el );
+;
+window.onload = function(){
+	id('telephone').onkeypress = function(){
+		mascara( this, mtel );
+	}
+};
 </script>
