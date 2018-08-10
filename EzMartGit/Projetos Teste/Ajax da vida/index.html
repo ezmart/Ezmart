@@ -1,0 +1,50 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="js/jquery/jquery-3.1.1.min.js"></script>
+</head>
+<body>
+    
+    <input type="text" value="1" id="lokura" />
+    <button onclick="chamaOMarcos()">Marcos Chupetero</button>
+    <span id="chupeta">to aqui</span>
+</body>
+</html>
+
+<script>
+
+    function chamaOMarcos() {
+
+        
+        $.ajax({
+
+            url: 'http://192.168.1.104:3000/marcos',
+            type: 'GET',
+            dataType: "json",
+            success: function (response) {
+
+                // console.log(response);
+
+                response.forEach(function (euSouOItemDaIteracao) {
+                    console.log(euSouOItemDaIteracao);
+
+                    if(euSouOItemDaIteracao.name == 'luciano') {
+                        console.log(euSouOItemDaIteracao.name + " | " + euSouOItemDaIteracao.age);
+                        $("#chupeta").text(euSouOItemDaIteracao.name + " | " + euSouOItemDaIteracao.age);
+                    }
+
+
+                });
+            },
+            error: function () {
+                console.log('Failed! =/');
+            },
+        });
+
+        //alert('abre a porra do console pressionando F12 e clicando em console');
+    }
+
+
+</script>
