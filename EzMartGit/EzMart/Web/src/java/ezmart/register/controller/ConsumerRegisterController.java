@@ -33,7 +33,7 @@ public class ConsumerRegisterController {
 
             CityService cityService = new CityService();
             Map<Long, Object> criteria = new HashMap<>();
-            criteria.put(new CityCriteria().STATE_ID_EQ, mv);
+            //criteria.put(new CityCriteria().STATE_ID_EQ, mv);
             List<City> cityList = cityService.readByCriteria(null, null, null);
             mv.addObject("cityList", cityList);
         } catch (Exception exception) {
@@ -119,22 +119,44 @@ public class ConsumerRegisterController {
                 //Faz com que não se perca o que já foi inserido no formulário
                 if (name != null && !name.isEmpty()) {
                     mv.addObject("name", name);
-                } else if (lastName != null && !lastName.isEmpty()) {
-                    mv.addObject("name", name);
-                } else if (cpf != null && !cpf.isEmpty()) {
+                }
+                if (lastName != null && !lastName.isEmpty()) {
                     mv.addObject("lastName", lastName);
-                } else if (email != null && !email.isEmpty()) {
+                }
+                if (cpf != null && !cpf.isEmpty()) {
+                    mv.addObject("cpf", cpf);
+                }
+                if (email != null && !email.isEmpty()) {
                     mv.addObject("email", email);
-                } else if (numberHouse != null) {
+                }
+                if (numberHouse != null) {
                     mv.addObject("numberHouse", numberHouse);
-                } else if (neighborhood != null && neighborhood.isEmpty()) {
+                }
+                if (neighborhood != null && !neighborhood.isEmpty()) {
                     mv.addObject("neighborhood", neighborhood);
-                }else if (zipCode != null && zipCode.isEmpty()) {
+                }
+                if (addressLocation != null && !addressLocation.isEmpty()) {
+                    mv.addObject("addressLocation", addressLocation);
+                }
+                if (zipCode != null && !zipCode.isEmpty()) {
                     mv.addObject("zipCode", zipCode);
-                }else if (telephone != null && telephone.isEmpty()) {
+                }
+                if (telephone != null && !telephone.isEmpty()) {
                     mv.addObject("telephone", telephone);
                 }
-
+                if (password != null && !password.isEmpty()) {
+                    mv.addObject("password", password);
+                }
+                if (passwordConfirm != null && !passwordConfirm.isEmpty()) {
+                    mv.addObject("passwordConfirm", passwordConfirm);
+                }
+                if (cityId != null || cityId == null) {
+                    CityService cityService = new CityService();
+                    Map<Long, Object> criteria = new HashMap<>();
+                    //criteria.put(new CityCriteria().STATE_ID_EQ, mv);
+                    List<City> cityList = cityService.readByCriteria(null, null, null);
+                    mv.addObject("cityList", cityList);
+                }
                 //Caso haja erros, será mostrado
                 mv.addObject("errors", errors);
             }

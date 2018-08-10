@@ -41,63 +41,64 @@
                                 </div>
                                 <div class="form-group col s6" style="padding: 0">
                                     <label for="password">Senha:</label>
-                                    <input type="password" class="form-control" name="password" id="password" value="${consumer.password}">
+                                    <input type="password" class="form-control" name="password" id="password" value="${password}">
                                     <span style="color: orangered">${errors.password}</span>
                                 </div>
                                 <div class="form-group col s6" style="padding-right: 0">
                                     <label for="passwordConfirm">Confirmar Senha:</label>
-                                    <input type="password" class="form-control" name="passwordConfirm" id="passwordConfirm" value="${consumer.passwordConfirm}">
+                                    <input type="password" class="form-control" name="passwordConfirm" id="passwordConfirm" value="${passwordConfirm}">
                                     <span style="color: orangered">${errors.passwordConfirm}</span>
                                 </div>
                                 <div class="form-group" style="padding-right: 0">
                                     <label for="addressLocation">Logradouro:</label>
-                                    <input type="text" class="form-control" name="addressLocation" id="addressLocation" value="${consumer.addressLocation}">
+                                    <input type="text" class="form-control" name="addressLocation" id="addressLocation" value="${addressLocation}">
                                     <span style="color: orangered">${errors.addressLocation}</span>
                                 </div>
                                 <div class="form-group">
                                     <label for="numberHouse">Número:</label>
-                                    <input type="number" class="form-control" name="numberHouse" id="numberHouse" value="${consumer.numberHouse}">
+                                    <input type="number" class="form-control" name="numberHouse" id="numberHouse" value="${numberHouse}">
                                     <span style="color: orangered">${errors.numberHouse}</span>
                                 </div>
                                 <div class="form-group">
                                     <label for="neighborhood">Bairro:</label>
-                                    <input type="text" class="form-control" name="neighborhood" id="neighborhood" value="${consumer.neighborhood}">
+                                    <input type="text" class="form-control" name="neighborhood" id="neighborhood" value="${neighborhood}">
                                     <span style="color: orangered">${errors.neighborhood}</span>
                                 </div>
                                 <div class="form-group col s6">
                                     <label for="stateId">Estado:</label>
-                                    <select class="form-control" name="stateId" id="stateId">
-                                        <c:forEach items="${cityList}" var="city">
-                                            <option <c:if test="${consumer.cityId eq city.id}">selected="true"</c:if> value="${city.id}">${categoria.nome}</option>                            
+                                    <select class="form-control input-text-register" name="stateId" id="stateId">
+                                        <option notselected></option>
+                                        <c:forEach items="${stateList}" var="state">
+                                            <option <c:if test="${stateIdConsumer eq state.id}">selected="true"</c:if> id="stateId" value="${state.id}">${state.name}</option>                            
                                         </c:forEach>
                                     </select>
-                                    <span style="color: orangered">${errors.stateId}</span>
                                 </div>
                                 <div class="form-group col s6">
                                     <label for="cityId">Municipio:</label>
-                                    <select class="form-control" name="cityId" id="cityId">
+                                    <select class="form-control input-text-register" name="cityId" id="cityId">
                                         <option notselected></option>
                                         <c:forEach items="${cityList}" var="city">
-                                            <option <c:if test="${consumer.cityId eq city.id}">selected="true"</c:if> value="${city.id}">${city.name}</option>                            
+                                            <option <c:if test="${cityIdConsumer eq city.id}">selected="true"</c:if> id="cityId" value="${city.id}">${city.name}</option>                            
                                         </c:forEach>
                                     </select>
-<!--                                    <span style="color: orangered">${errors.cityId}</span>-->
+                                    <span style="color: orangered">${errors.cityId}</span>
                                 </div>
                                 <div class="form-group">
                                     <label for="zipCode">CEP:</label>
-                                    <input type="text" class="form-control" name="zipCode" id="zipCode" value="${consumer.zipCode}">
+                                    <input type="text" class="form-control" name="zipCode" id="zipCode" value="${zipCode}">
                                     <span style="color: orangered">${errors.zipCode}</span>
                                 </div>
                                 <div class="form-group">
                                     <label for="zipCode">CPF:</label>
-                                    <input type="text" class="form-control" name="cpf" id="cpf" value="${consumer.cpf}">
+                                    <input type="text" class="form-control" name="cpf" id="cpf" value="${cpf}">
                                     <span style="color: orangered">${errors.cpf}</span>
                                 </div>
                                 <div class="form-group">
-                                    <label for="telephone">Telefone:</label>
-                                    <input type="text"  class="form-control" name="telephone" id="telephone" value="${consumer.telephone}">
+                                    <label for="telephone">Celular:</label>
+                                    <input type="text"  class="form-control" name="telephone" id="telephone" value="${telephone}">
                                     <span style="color: orangered">${errors.telephone}</span>
                                 </div>
+                                <br/>
                                 <button id="btn-btn-ezmart-style" type="submit" class="btn" value="confirmar"><i class="material-icons left">border_color</i>Cadastrar</button>
                             </form>
                         </div>
@@ -112,27 +113,30 @@
     </body>
 </html>
 <script type="text/javascript">
-/* Máscaras ER */
-function mascara(o,f){
-    v_obj=o,
-    v_fun=f,
-    setTimeout("execmascara()",1),
-};
-function execmascara(){
-    v_obj.value=v_fun(v_obj.value),
-}
-function mtel(v){
-    v=v.replace(/D/g,"");             //Remove tudo o que não é dígito
-    v=v.replace(/^(d{2})(d)/g,"($1) $2"); //Coloca parênteses em volta dos dois primeiros dígitos
-    v=v.replace(/(d)(d{4})$/,"$1-$2");    //Coloca hífen entre o quarto e o quinto dígitos
-    return v;
-};
-function id( el ){
-	return document.getElementById( el );
-;
-window.onload = function(){
-	id('telephone').onkeypress = function(){
-		mascara( this, mtel );
-	}
-};
+    /* Máscaras ER */
+    function mascara(o, f) {
+    v_obj = o,
+            v_fun = f,
+            setTimeout("execmascara()", 1),
+    }
+    ;
+            function execmascara() {
+            v_obj.value = v_fun(v_obj.value)
+                    ,
+            }
+    function mtel(v) {
+    v = v.replace(/D/g, ""); //Remove tudo o que não é dígito
+            v = v.replace(/^(d{2})(d)/g, "($1) $2"); //Coloca parênteses em volta dos dois primeiros dígitos
+            v = v.replace(/(d)(d{4})$/, "$1-$2"); //Coloca hífen entre o quarto e o quinto dígitos
+            return v;
+    }
+    ;
+            function id(el){
+            return document.getElementById(el);
+                    ;
+                    window.onload = function(){
+                    id('telephone').onkeypress = function(){
+                    mascara(this, mtel);
+                    }
+                    };
 </script>

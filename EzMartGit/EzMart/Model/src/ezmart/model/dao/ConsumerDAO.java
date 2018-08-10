@@ -42,8 +42,8 @@ public class ConsumerDAO implements BaseDAO<Consumer> {
 
     @Override
     public List<Consumer> readByCriteria(Connection conn, Map<Long, Object> criteria, Long limit, Long offset) throws Exception {
-        String sql = "SELECT consumer__id, consumer_name, consumer_lastname, consumer_cpf, "
-                + "consumer_userid, "
+        String sql = "SELECT consumer_id, consumer_name, consumer_lastname, consumer_cpf, "
+                + "consumer_userid "
                 + "FROM consumer "
                 + "WHERE 1=1";
 
@@ -81,10 +81,10 @@ public class ConsumerDAO implements BaseDAO<Consumer> {
             Consumer consumer = new Consumer();
             consumer.setId(rs.getLong("consumer_id"));
             consumer.setName(rs.getString("consumer_name"));
-            consumer.setLastName(rs.getString("consumer_name"));
-            consumer.setCpf(rs.getString("consumer_name"));
+            consumer.setLastName(rs.getString("consumer_lastname"));
+            consumer.setCpf(rs.getString("consumer_cpf"));
 
-            //consumerList.add(user);
+            consumerList.add(consumer);
         }
 
         rs.close();

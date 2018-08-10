@@ -128,60 +128,73 @@ public class ConsumerService implements BaseConsumerService {
             //Validação de preenchimento do campo NOME
             if (name == null || name.isEmpty()) {
                 errors.put("name", "*Campo nome obrigatório!");
-                flag = false;
             }
             //Validação de preenchimento do campo SOBRENOME
             if (lastName == null || lastName.isEmpty()) {
                 errors.put("lastName", "*Campo sobrenome obrigatório!");
-                flag = false;
             }
 
             //Validação de preenchimento do campo EMAIL
             if (email == null || email.isEmpty()) {
                 errors.put("email", "*Campo EMAIL obrigatório!");
-                flag = false;
             } else {
                 Pattern VALID_EMAIL_ADDRESS_REGEX = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
                 Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(email);
                 if (!matcher.find()) {
                     errors.put("email", "*Formato inválido!");
+                } else {
+                    //Verifica se o EMAIL já foi cadastrado
+                    Map<Long, Object> criteriaEmail = new HashMap<>();
+                    criteriaEmail.put(UserCriteria.EMAIL_EQ, email);
+                    UserService userService = new UserService();
+                    if (userService.readByCriteria(criteriaEmail, null, null).size() > 0) {
+                        errors.put("email", "*E-Mail já cadastrado no sistema!");
+                    }
                 }
             }
 
             //Validação de preenchimento do campo CPF
             if (cpf == null || cpf.isEmpty()) {
                 errors.put("cpf", "*Campo CPF obrigatório!");
-                flag = false;
+            } else {
+                //Verifica se o CPF já foi cadastrado
+                Map<Long, Object> criteriaCpf = new HashMap<>();
+                criteriaCpf.put(ConsumerCriteria.CPF_EQ, cpf);
+                if (readByCriteria(criteriaCpf, null, null).size() > 0) {
+                    errors.put("cpf", "*CPF já cadastrado no sistema!");
+                }
             }
 
             //Validação de preenchimento do campo SENHA
             if (password == null || password.isEmpty()) {
                 errors.put("password", "*Campo senha obrigatório!");
-                flag = false;
             }
 
             //Validação de preenchimento do campo CONFIRMAÇÃO DE SENHA
             if (passwordConfirm == null || passwordConfirm.isEmpty()) {
                 errors.put("passwordConfirm", "*Campo de confirmação obrigatório!");
-                flag = false;
+            }
+
+            //Validade a igualdade dos valores
+            if (password != null && !password.isEmpty() && passwordConfirm != null && !passwordConfirm.isEmpty()) {
+                if (!password.equals(passwordConfirm)) {
+                    errors.put("passwordConfirm", "*Confirme a senha corretamente!");
+                }
             }
 
             //Validação de preenchimento do campo RUA
             if (addressLocation == null || addressLocation.isEmpty()) {
                 errors.put("addressLocation", "*Campo rua obrigatório!");
-                flag = false;
             }
 
             //Validação de preenchimento do campo NÚMERO
             if (numberHouse == null) {
                 errors.put("numberHouse", "*Campo número obrigatório!");
-                flag = false;
             }
 
             //Validação de preenchimento do campo BAIRRO
             if (neighborhood == null || neighborhood.isEmpty()) {
                 errors.put("neighborhood", "*Campo bairro obrigatório!");
-                flag = false;
             }
 
             //Validação de preenchimento do campo CIDADE
@@ -189,42 +202,27 @@ public class ConsumerService implements BaseConsumerService {
                 errors.put("cityId", "*Campo cidade obrigatório!");
                 flag = false;
             }
-
             //Validação de preenchimento do campo BAIRRO
             if (neighborhood == null || neighborhood.isEmpty()) {
                 errors.put("neighborhood", "*Campo bairro obrigatório!");
-                flag = false;
             }
 
             //Validação de preenchimento do campo SOBRENOME
             if (zipCode == null || zipCode.isEmpty()) {
                 errors.put("zipCode", "*Campo CEP obrigatório!");
-                flag = false;
             }
 
             //Validação de preenchimento do campo TELEFONE
             if (telephone == null || telephone.isEmpty()) {
                 errors.put("telephone", "*Campo telefone obrigatório!");
-                flag = false;
-            }
-
-            if (flag != false) {
-
-                //Verifica se o CPF já foi cadastrado
-                Map<Long, Object> criteriaCpf = new HashMap<>();
-                criteriaCpf.put(ConsumerCriteria.CPF_EQ, cpf);
-                if (readByCriteria(criteriaCpf, null, null).size() > 0) {
-                    errors.put("cpf", "*CPF já cadastrado no sistema!");
+            } else {
+                //Formato da expressão regular (XX)XXXXX-XXXX"
+                String regex = "^\\([1-9]{2}\\)[2-9][0-9]{3,4}\\-[0-9]{4}$";
+                Pattern VALID_TELEPHONE_REGEX = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+                Matcher matcher = VALID_TELEPHONE_REGEX.matcher(telephone);
+                if (!matcher.find()) {
+                    errors.put("telephone", "*Formato correto: (XX)12345-6789");
                 }
-
-                //Verifica se o EMAIL já foi cadastrado
-                Map<Long, Object> criteriaEmail = new HashMap<>();
-                criteriaEmail.put(UserCriteria.EMAIL_EQ, email);
-                UserService userService= new UserService();
-                if (userService.readByCriteria(criteriaCpf, null, null).size() > 0) {
-                    errors.put("email", "*E-Mail já existente em nosso sistema!");
-                }
-
             }
         }
 

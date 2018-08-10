@@ -93,7 +93,7 @@ public class UserDAO implements BaseDAO<User> {
         if (criteria != null) {
             if (criteria.containsKey(UserCriteria.EMAIL_EQ)) {
                 String email = (String) criteria.get(UserCriteria.EMAIL_EQ);
-                sql += " AND usersystem.usersystem_email = ?";
+                sql += " AND usersystem_email = ?";
                 paramList.add(email);
             }
 
