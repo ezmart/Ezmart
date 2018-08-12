@@ -41,7 +41,7 @@
                                         <h5 class="col s12 center-align">Jéssica Souza Pivoto</h5>
                                         <h6 class="col s12"><strong>Email:</strong> jessica_spivoto@hotmail.com</h6>
                                         <h6 class="col s12"><strong>Celular:</strong> (35) 9 9811-5396</h6>
-                                        <h6 class="col s12"><strong>Função:</strong> Diretora Comercial e Gerente de projetos</h6>
+                                        <h6 class="col s12"><strong>Função:</strong> Gerente de projetos</h6>
                                     </div>
                                 </div>
                             </li>
@@ -51,17 +51,27 @@
                                         <h5 class="col s12 center-align">Diego Amaral</h5>
                                         <h6 class="col s12"><strong>Email:</strong> diego123amaral@gmail.com</h6>
                                         <h6 class="col s12"><strong>Celular:</strong> (35) 9 9186-4857</h6>
-                                        <h6 class="col s12"><strong>Função:</strong> Comprador de Coca Cola pra Equipe</h6>
+                                        <h6 class="col s12"><strong>Função:</strong> Designer gráfico</h6>
                                     </div>
                                 </div>
                             </li>
                             <li class="col l4 m6 s12">
                                 <div class="card teal lighten-5">
                                     <div class="row" style="padding: 20px;">
-                                        <h5 class="col s12 center-align">Marcos Henrique</h5>
-                                        <h6 class="col s12"><strong>Email:</strong>markjuniorazevedo@gmail.com</h6>
+                                        <h5 class="col s12 center-align">Marcos Henrique Azevedo</h5>
+                                        <h6 class="col s12"><strong>Email:</strong> markjuniorazevedo@gmail.com</h6>
                                         <h6 class="col s12"><strong>Celular:</strong> (35) 9 9248-6767</h6>
                                         <h6 class="col s12"><strong>Função:</strong> Diretor de desenvolvimento</h6>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="col l4 m6 s12">
+                                <div class="card teal lighten-5">
+                                    <div class="row" style="padding: 20px;">
+                                        <h5 class="col s12 center-align">Camila Costa</h5>
+                                        <h6 class="col s12"><strong>Email:</strong> kmilacosta89@gmail.com</h6>
+                                        <h6 class="col s12"><strong>Celular:</strong> (35) 9 9134-4369</h6>
+                                        <h6 class="col s12"><strong>Função:</strong> Diretora comercial</h6>
                                     </div>
                                 </div>
                             </li>
