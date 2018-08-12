@@ -2,6 +2,16 @@ package ezmart.model.util;
 
 public final class SystemConstant {
 
+    public class PAGE {
+
+        public class SIZE {
+
+            public final static String LIMIT = "25";
+
+        }
+
+    }
+
     public class SQL {
 
     }
