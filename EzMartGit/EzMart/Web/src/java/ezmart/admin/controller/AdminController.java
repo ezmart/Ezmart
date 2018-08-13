@@ -8,7 +8,7 @@ import ezmart.model.util.SystemConstant.PAGE;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map; 
+import java.util.Map;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,7 +33,7 @@ public class AdminController {
 
             if (auxSession instanceof Consumer) {
                 /// desenvolver
-
+                mv = new ModelAndView("admin/sector");
                 List<Sector> sectorList = new ArrayList<>();
                 sectorList = sectorService.findAll(Integer.parseInt(PAGE.SIZE.LIMIT), null);
                 mv.addObject("sectorList", sectorList);

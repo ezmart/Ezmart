@@ -67,7 +67,7 @@
                                 <hr>
                                 <th></th>
                                 </tr>
-                                <a href="#modal-create" class="btn btn-sm btn-default btn-small green left modal-trigger">Adicionar</a>
+                                <a href="#modal-create" class="btn btn-sm btn-default btn-small green left modal-trigger" style="color:white;">Adicionar</a>
                                 <br><br/>
                                 <br><br/>
                                 <c:forEach items="${sectorList}" var="sector">
@@ -75,8 +75,8 @@
                                         <td>${sector.id}</td>
                                         <td>${sector.name}</td>
                                         <td>
-                                            <a class="btn btn-sm btn-default btn-small yellow modal-trigger" href="#modal-update">Alterar</a>
-                                            <a class="btn btn-sm btn-danger btn-small red modal-trigger" href="#modal-delete" onclick="setDadosModal(sector.id)">Excluir</a>
+                                            <a class="btn btn-sm btn-default btn-small yellow modal-trigger" href="#modal-update" style="color:white;">Alterar</a>
+                                            <a class="btn btn-sm btn-danger btn-small red modal-trigger" href="#modal-delete" onclick="setDadosModal(sector.id)" style="color:white;">Excluir</a>
                                             <hr> 
                                         </td>
                                     </tr>    
