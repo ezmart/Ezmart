@@ -3,7 +3,7 @@
     <ul style="margin-top: 65px" id="main" class="dropdown-content">
         <li><a href="<c:url value="#!"/>">Usuários</a></li>
         <li class="divider"></li>
-        <li><a href="<c:url value="#!"/>">Produtos</a></li>
+        <li><a href="<c:url value="/product"/>">Produtos</a></li>
         <li class="divider"></li>
         <li><a href="<c:url value="#!"/>">Fornecedores</a></li>
         <li class="divider"></li>
