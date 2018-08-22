@@ -1,3 +1,14 @@
+#map {
+    height: 60%;
+    width: 70%;
+}
+/* Optional: Makes the sample page fill the window. */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
 .menu-profile{
     text-align: center;
 }
@@ -10,7 +21,7 @@
 }
 
 .btn-ezmart-stylebtn-ezmart-style{
-    
+
 }
 
 /*header dos USÁRIOS*/
