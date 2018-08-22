@@ -30,11 +30,4 @@
     <!-- For iPhone -->
     <meta name="msapplication-TileColor" content="#00bcd4">
     <meta name="msapplication-TileImage" href="<c:url value="/resources/img/logo_preto_icon.png"/>">
-
-    <script>
-        $('.btnExcluir').click(function () {
-            var aux = $(this).attr("aux");
-            $('#btnConfirma').attr('href', aux);
-        });
-    </script>
 </head>
