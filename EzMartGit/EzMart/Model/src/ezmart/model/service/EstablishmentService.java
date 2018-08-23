@@ -9,6 +9,8 @@ import java.sql.Connection;
 import java.util.List;
 import java.util.Map;
 import ezmart.model.base.service.BaseEstablishmentService;
+import ezmart.model.util.SystemConstant;
+import java.util.HashMap;
 
 public class EstablishmentService implements BaseEstablishmentService {
 
@@ -97,7 +99,16 @@ public class EstablishmentService implements BaseEstablishmentService {
 
     @Override
     public Map<String, String> validate(Map<String, Object> fields) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Map<String, String> errors = new HashMap<>();
+
+        String validationType = (String) fields.get("validationType");
+        
+        if (validationType.equals((SystemConstant.VALIDATION.REGISTER.REGISTER_ESTABLISHMENT))) {
+            
+            
+        }
+
+        return errors;
     }
 
     public void readById(User user) throws Exception {
