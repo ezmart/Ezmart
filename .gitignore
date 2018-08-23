@@ -1,6 +1,4 @@
 /EzMartGit/EzMart/Web/build/
 /EzMartGit/EzMart/Model/dist/
-EzMartGit/EzMart/Model/build/built-jar.properties
 *.class
-EzMartGit/EzMart/Model/nbproject/private/private.properties
-EzMartGit/EzMart/Web/nbproject/private/private.properties
+/EzMartGit/EzMart/Model/nbproject
