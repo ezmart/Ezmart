@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class EmporiumRegisterController {
+public class EstablishmentRegisterController {
 
     @RequestMapping(value = "/register/emporium", method = RequestMethod.GET)
     public ModelAndView getConsumerRegister() {
