@@ -131,7 +131,7 @@ public class EstablishmentService implements BaseEstablishmentService {
                 errors.put("lastName", "*Campo sobrenome obrigatório!");
             }
 
-                        //Validação de preenchimento do campo CPF
+            //Validação de preenchimento do campo CPF
             if (cnpj == null || cnpj.isEmpty()) {
                 errors.put("cnpj", "*Campo CNPJ obrigatório!");
             } else {
@@ -142,7 +142,7 @@ public class EstablishmentService implements BaseEstablishmentService {
                     errors.put("cnpj", "*CNPJ já cadastrado no sistema!");
                 }
             }
-            
+
             //Validação de preenchimento do campo EMAIL
             if (email == null || email.isEmpty()) {
                 errors.put("email", "*Campo EMAIL obrigatório!");
@@ -159,6 +159,66 @@ public class EstablishmentService implements BaseEstablishmentService {
                     if (userService.readByCriteria(criteriaEmail, null, null).size() > 0) {
                         errors.put("email", "*E-Mail já cadastrado no sistema!");
                     }
+                }
+            }
+
+            //Validação de preenchimento do campo SENHA
+            if (password == null || password.isEmpty()) {
+                errors.put("password", "*Campo senha obrigatório!");
+            }
+
+            //Validação de preenchimento do campo CONFIRMAÇÃO DE SENHA
+            if (passwordConfirm == null || passwordConfirm.isEmpty()) {
+                errors.put("passwordConfirm", "*Campo de confirmação obrigatório!");
+            }
+
+            //Validade a igualdade dos valores
+            if (password != null && !password.isEmpty() && passwordConfirm != null && !passwordConfirm.isEmpty()) {
+                if (!password.equals(passwordConfirm)) {
+                    errors.put("passwordConfirm", "*Confirme a senha corretamente!");
+                }
+            }
+
+            //Validação de preenchimento do campo RUA
+            if (addressLocation == null || addressLocation.isEmpty()) {
+                errors.put("addressLocation", "*Campo rua obrigatório!");
+            }
+
+            //Validação de preenchimento do campo NÚMERO
+            if (numberHouse == null) {
+                errors.put("numberHouse", "*Campo número obrigatório!");
+            }
+
+            //Validação de preenchimento do campo BAIRRO
+            if (neighborhood == null || neighborhood.isEmpty()) {
+                errors.put("neighborhood", "*Campo bairro obrigatório!");
+            }
+
+            //Validação de preenchimento do campo CIDADE
+            if (cityId == null) {
+                errors.put("cityId", "*Campo cidade obrigatório!");
+                //flag = false;
+            }
+            //Validação de preenchimento do campo BAIRRO
+            if (neighborhood == null || neighborhood.isEmpty()) {
+                errors.put("neighborhood", "*Campo bairro obrigatório!");
+            }
+
+            //Validação de preenchimento do campo SOBRENOME
+            if (zipCode == null || zipCode.isEmpty()) {
+                errors.put("zipCode", "*Campo CEP obrigatório!");
+            }
+
+            //Validação de preenchimento do campo TELEFONE
+            if (telephone == null || telephone.isEmpty()) {
+                errors.put("telephone", "*Campo telefone obrigatório!");
+            } else {
+                //Formato da expressão regular (XX)XXXXX-XXXX"
+                String regex = "^\\([1-9]{2}\\)[2-9][0-9]{3,4}\\-[0-9]{4}$";
+                Pattern VALID_TELEPHONE_REGEX = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+                Matcher matcher = VALID_TELEPHONE_REGEX.matcher(telephone);
+                if (!matcher.find()) {
+                    errors.put("telephone", "*Formato correto: (XX)12345-6789");
                 }
             }
         }
