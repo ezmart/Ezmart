@@ -2,3 +2,6 @@
 /EzMartGit/EzMart/Model/dist/
 *.class
 /EzMartGit/EzMart/Model/nbproject
+*.properties
+EzMartGit/EzMart/Model/nbproject/private/private.xml
+EzMartGit/EzMart/Web/nbproject/private/private.xml

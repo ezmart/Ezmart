@@ -38,7 +38,7 @@
                 </div>
                 <div id="modal-delete" class="modal">
                     <div class="modal-content">
-                        <h4>Tem certeza que deseja excluir esta linha?</h4>
+                        <h4>Tem certeza que deseja excluir a linha <container id = "sector-id"></container> ?</h4>
                         <div class="modal-footer">
                             <a class="btn btn-sm btn-default btn-small red modal-close modal-sction">Não</a>
                             <a class="btn btn-sm btn-default btn-small green">Sim</a>
@@ -76,7 +76,7 @@
                                         <td>${sector.name}</td>
                                         <td>
                                             <a class="btn btn-sm btn-default btn-small yellow modal-trigger" href="#modal-update" style="color:white;">Alterar</a>
-                                            <a class="btn btn-sm btn-danger btn-small red modal-trigger" href="#modal-delete" onclick="setDadosModal(sector.id)" style="color:white;">Excluir</a>
+                                            <a class="btn btn-sm btn-danger btn-small red modal-trigger" href="#modal-delete" onclick="setDadosModal(${sector.id})" style="color:white;">Excluir</a>
                                             <hr> 
                                         </td>
                                     </tr>    
@@ -93,8 +93,8 @@
         <script src="<c:url value="/resources/js/appEZMart.js"/>"></script>
         <script src="<c:url value="/resources/js/initializeModal.js"/>"></script>
         <script>
-                                                function setaDadosModal(valor) {
-                                                    document.getElementById('sector.id').value = valor;
+                                                function setDadosModal(valor) {
+                                                    document.getElementById('sector-id').innerHTML = valor;
                                                 }
         </script>
     </body>
