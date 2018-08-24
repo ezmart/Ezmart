@@ -24,21 +24,10 @@ public class AdminController {
     public ModelAndView findAllSector(HttpSession session) {
         ModelAndView mv = null;
         try {
-            String profileValue = "page_editProfile";
-            Map<String, String> profile = new HashMap<>();
-            profile.put("profileValue", profileValue);
-
-            Object auxSession = session.getAttribute("userLogged");
-            User user = null;
-
-            if (auxSession instanceof Consumer) {
-                /// desenvolver
-                mv = new ModelAndView("admin/sector");
-                List<Sector> sectorList = new ArrayList<>();
-                sectorList = sectorService.findAll(Integer.parseInt(PAGE.SIZE.LIMIT), null);
-                mv.addObject("sectorList", sectorList);
-            }
-            mv.addObject("profile", profile);
+            mv = new ModelAndView("admin/sector");
+            List<Sector> sectorList = new ArrayList<>();
+            sectorList = sectorService.findAll(Integer.parseInt(PAGE.SIZE.LIMIT), null);
+            mv.addObject("sectorList", sectorList);
         } catch (Exception exception) {
             System.out.println(exception);
         }
