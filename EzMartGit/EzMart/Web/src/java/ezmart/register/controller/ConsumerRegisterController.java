@@ -1,7 +1,5 @@
 package ezmart.register.controller;
 
-import ezmart.model.criteria.CityCriteria;
-import ezmart.model.criteria.ConsumerCriteria;
 import ezmart.model.entity.City;
 import ezmart.model.entity.Consumer;
 import ezmart.model.service.CityService;

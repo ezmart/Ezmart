@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
     <c:import url="/WEB-INF/views/templates/head.jsp"></c:import>
-    <body>  
+        <body>  
         <c:import url="/WEB-INF/views/templates/header.jsp"></c:import>            
             <div>
                 <nav>
@@ -31,56 +31,76 @@
                                 </div>
                                 <div class="form-group col s6" style="padding-right: 0">
                                     <label for="businessName">Razão Social:</label>
-                                    <input type="text" class="form-control" name="businessName" id="businessName" value="${businessName}" required>
+                                    <input type="text" class="form-control" name="businessName" id="businessName" value="${businessName}">
                                     <span style="color: orangered">${errors.businessName}</span>
                                 </div>
                                 <div class="form-group">
                                     <label for="cnpj">CNPJ:</label>
-                                    <input type="text" class="form-control" name="cnpj" id="cnpj" value="${cnpj}" required>
+                                    <input type="text" class="form-control" name="cnpj" id="cnpj" value="${cnpj}">
                                     <span style="color: orangered">${errors.cnpj}</span>
                                 </div>
                                 <div class="form-group">
-                                    <label for="telefone">Email:</label>
-                                    <input type="email" class="form-control" name="email" id="email" value="${email}" required>
+                                    <label for="email">Email:</label>
+                                    <input type="email" class="form-control" name="email" id="email" value="${email}">
                                     <span style="color: orangered">${errors.email}</span>
                                 </div>
-                                <div class="form-group col s6" style="padding: 0">
+                                <div class="form-group">
+                                    <label for="telefone">Second Email:</label>
+                                    <input type="email" class="form-control" name="secondEmail" id="secondEmail" value="${secondEmail}">
+                                    <span style="color: orangered">${errors.email}</span>
+                                </div>
+                                <div class="form-group" style="padding: 0">
                                     <label for="password">Senha:</label>
                                     <input type="password" class="form-control" name="password" id="password" value="${password}">
                                     <span style="color: orangered">${errors.password}</span>
                                 </div>
-                                <div class="form-group col s6" style="padding-right: 0">
+                                <div class="form-group" style="padding-right: 0">
                                     <label for="passwordConfirm">Confirmar Senha:</label>
                                     <input type="password" class="form-control" name="passwordConfirm" id="passwordConfirm" value="${passwordConfirm}">
                                     <span style="color: orangered">${errors.passwordConfirm}</span>
                                 </div>
-                                <div class="form-group col s6" style="padding-right: 0">
+                                <div class="form-groug" style="padding-right: 0">
                                     <label for="addressLocation">Logradouro:</label>
-                                    <input type="text" class="form-control" name="addressLocation" id="addressLocation" value="${addressLocation}" required>
+                                    <input type="text" class="form-control" name="addressLocation" id="addressLocation" value="${addressLocation}">
                                     <span style="color: orangered">${errors.addressLocation}</span>
                                 </div>
                                 <div class="form-group">
                                     <label for="numberHouse">Número:</label>
-                                    <input type="number" class="form-control" name="numberHouse" id="numberHouse" value="${numberHouse}" required>
+                                    <input type="number" class="form-control" name="numberHouse" id="numberHouse" value="${numberHouse}">
                                     <span style="color: orangered">${errors.numberHouse}</span>
                                 </div>
                                 <div class="form-group">
                                     <label for="neighborhood">Bairro:</label>
-                                    <input type="text" class="form-control" name="neighborhood" id="neighborhood" value="${neighborhood}" required>
+                                    <input type="text" class="form-control" name="neighborhood" id="neighborhood" value="${neighborhood}">
                                     <span style="color: orangered">${errors.neighborhood}</span>
                                 </div>
-                                <div class="form-group ">
-                                    <label for="city">Cidade:</label>
-                                    <input type="text" class="form-control" name="city" id="city" value="${city}" required>
+                                <div class="form-group col s6">
+                                    <label for="stateId">Estado:</label>
+                                    <select class="form-control input-text-register" name="stateId" id="stateId">
+                                        <option notselected></option>
+                                        <c:forEach items="${stateList}" var="state">
+                                            <option <c:if test="${stateIdConsumer eq state.id}">selected="true"</c:if> id="stateId" value="${state.id}">${state.name}</option>                            
+                                        </c:forEach>
+                                    </select>
+                                </div>
+                                <div class="form-group col s6">
+                                    <label for="cityId">Municipio:</label>
+                                    <select class="form-control input-text-register" name="cityId" id="cityId">
+                                        <option notselected></option>
+                                        <c:forEach items="${cityList}" var="city">
+                                            <option <c:if test="${cityIdConsumer eq city.id}">selected="true"</c:if> id="cityId" value="${city.id}">${city.name}</option>                            
+                                        </c:forEach>
+                                    </select>
+                                    <span style="color: orangered">${errors.cityId}</span>
                                 </div>
                                 <div class="form-group ">
                                     <label for="zipCode">CEP:</label>
-                                    <input type="text" class="form-control" name="zipCode" id="zipCode" value="${zipCode}" required>
+                                    <input type="text" class="form-control" name="zipCode" id="zipCode" value="${zipCode}">
                                     <span style="color: orangered">${errors.zipCode}</span>
                                 </div>
                                 <div class="form-group ">
                                     <label for="telephone">Telefone:</label>
-                                    <input type="text" class="form-control" name="telephone" id="telephone" value="${telephone}" required>
+                                    <input type="text" class="form-control" name="telephone" id="telephone" value="${telephone}">
                                     <span style="color: orangered">${errors.telephone}</span>
                                 </div>
                                 <button id="btn-btn-ezmart-style" type="submit" class="btn"><i class="material-icons left">border_color</i>Cadastrar</button>
