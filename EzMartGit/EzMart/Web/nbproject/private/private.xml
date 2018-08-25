@@ -3,8 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Marcos%20Paulo/Documents/GitHub/Ezmart/EzMartGit/EzMart/Web/web/WEB-INF/views/authentication/change_password.jsp</file>
-            <file>file:/C:/Users/Marcos%20Paulo/Documents/GitHub/Ezmart/EzMartGit/EzMart/Web/src/java/ezmart/authentication/controller/ChangePasswordController.java</file>
+            <file>file:/C:/Users/Marcos%20Paulo/Documents/GitHub/Ezmart/EzMartGit/EzMart/Web/src/java/ezmart/register/controller/ConsumerRegisterController.java</file>
+            <file>file:/C:/Users/Marcos%20Paulo/Documents/GitHub/Ezmart/EzMartGit/EzMart/Web/src/java/ezmart/register/controller/EstablishmentRegisterController.java</file>
         </group>
     </open-files>
 </project-private>
