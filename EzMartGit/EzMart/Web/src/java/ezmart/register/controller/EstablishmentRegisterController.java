@@ -26,6 +26,18 @@ public class EstablishmentRegisterController {
     public ModelAndView getConsumerRegister() {
         ModelAndView mv = new ModelAndView("register/register_emporium");
 
+        try {
+            //StateService stateService = new StateService();
+
+            CityService cityService = new CityService();
+            Map<Long, Object> criteria = new HashMap<>();
+            //criteria.put(new CityCriteria().STATE_ID_EQ, mv);
+            List<City> cityList = cityService.readByCriteria(null, null, null);
+            mv.addObject("cityList", cityList);
+        } catch (Exception exception) {
+            System.out.println(exception);
+        }
+
         return mv;
     }
 
@@ -55,7 +67,7 @@ public class EstablishmentRegisterController {
             fields.put("cityId", cityId);
             fields.put("zipCode", zipCode);
             fields.put("telephone", telephone);
-            fields.put("validationType", SystemConstant.VALIDATION.REGISTER.REGISTER_CONSUMER);
+            fields.put("validationType", SystemConstant.VALIDATION.REGISTER.REGISTER_ESTABLISHMENT);
 
             Map<String, String> errors = emporiumService.validate(fields);
 
@@ -65,6 +77,7 @@ public class EstablishmentRegisterController {
                 emporium.setBusinessName(businessName);
                 emporium.setCnpj(cnpj);
                 emporium.setEmail(email);
+                emporium.setSecondEmail(secondEmail);
                 emporium.setPassword(password);
                 emporium.setAddressLocation(addressLocation);
                 emporium.setNumberHouse(numberHouse);
@@ -102,7 +115,7 @@ public class EstablishmentRegisterController {
 
                 mv = new ModelAndView("message/message_confirmation");
             } else {
-                mv = new ModelAndView("register/emporium_consumer");
+                mv = new ModelAndView("register/register_emporium");
 
                 //Faz com que não se perca o que já foi inserido no formulário
                 if (companyName != null && !companyName.isEmpty()) {
@@ -152,7 +165,7 @@ public class EstablishmentRegisterController {
                 mv.addObject("errors", errors);
             }
         } catch (Exception ex) {
-            mv = new ModelAndView("redirect:/home");
+            mv = new ModelAndView("message/message_error_register");
         }
 
         return mv;

@@ -20,7 +20,7 @@ public class EstablishmentDAO implements BaseDAO<Establishment> {
         String sql = "INSERT INTO establishment(establishment_cnpj, establishment_secondemail, establishment_name, "
                 + "establishment_businessname, establishment_plan, establishment_planstartdate, "
                 + "establishment_planfinaldate, establishment_userid) "
-                + "VALUES (?,?,?,?) RETURNING establishment_userid;";
+                + "VALUES (?,?,?,?,?,?,?,?) RETURNING establishment_userid;";
 
         PreparedStatement statement = conn.prepareStatement(sql);
         int i = 0;
@@ -46,7 +46,9 @@ public class EstablishmentDAO implements BaseDAO<Establishment> {
 
     @Override
     public List<Establishment> readByCriteria(Connection conn, Map<Long, Object> criteria, Long limit, Long offset) throws Exception {
-        String sql = "SELECT establishment_id, establishment_, establishment_, establishment_, "
+        String sql = "SELECT establishment_id, establishment_name, establishment_businessname, "
+                + "establishment_secondemail, establishment_cnpj, establishment_plan, "
+                + "establishment_planstartdate, establishment_planfinaldate, "
                 + "establishment_userid "
                 + "FROM establishment "
                 + "WHERE 1=1";
@@ -59,6 +61,12 @@ public class EstablishmentDAO implements BaseDAO<Establishment> {
                 paramList.add(cnpj);
             }
 
+            if (criteria.containsKey(EstablishmentCriteria.SECOND_EMAIL_EQ)) {
+                String secondEmail = (String) criteria.get(EstablishmentCriteria.SECOND_EMAIL_EQ);
+                sql += " AND establishment_secondemail = ?";
+                paramList.add(secondEmail);
+            }
+            
 //            if (criteria.containsKey(UserCriteria.ID_NE)) {
 //                Long id = (Long) criteria.get(UserCriteria.ID_NE);
 //                sql += " AND usersystem.usersystem_id != ?";

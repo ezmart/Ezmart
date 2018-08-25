@@ -32,7 +32,7 @@
                 <nav>
                     <div class="nav-wrapper">
                         <div style="margin-left: 40px" class="col s12">
-                            <a href="<c:url value="/home"/>" class="breadcrumb">inicio</a>
+                            <a href="<c:url value="/home"/>" class="breadcrumb">Início</a>
                             <a href="<c:url value="/profile"/>" class="breadcrumb">Meu Perfil</a>
                         </div>
                     </div>
@@ -65,7 +65,7 @@
                             </li>
                             <li>
                                 <div class="col s12 controls" style="margin-top: 20px">   
-                                    <a class="waves-effect waves-teal btn" id="myList" href="<c:url value="/myList"/> "><i class="material-icons left">account_box</i>CHUPETA</a>
+                                    <a class="waves-effect waves-teal btn" id="myList" href="<c:url value="#"/> "><i class="material-icons left">account_box</i>OUTRO VALOR</a>
                                 </div>
                             </li>
                             <li>

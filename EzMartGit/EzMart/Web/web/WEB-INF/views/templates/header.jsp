@@ -9,9 +9,9 @@
                     </a>
                     <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
                     <ul class="right hide-on-med-and-down">
-                        <li><a href="<c:url value="/home"/>">Início</a></li>
-                        <li><a href="<c:url value="#!"/>">Sobre</a></li>
-                        <li><a href="<c:url value="/contact"/>">Contatos</a></li>
+                        <li><a class="user-header-style" href="<c:url value="/home"/>">Início</a></li>
+                        <li><a class="user-header-style" href="<c:url value="#!"/>">Sobre</a></li>
+                        <li><a class="user-header-style" href="<c:url value="/contact"/>">Contatos</a></li>
                     </ul>
                     <ul class="side-nav" id="mobile-demo">
                         <li><a href="<c:url value="/home"/>" class="active">Início</a></li>

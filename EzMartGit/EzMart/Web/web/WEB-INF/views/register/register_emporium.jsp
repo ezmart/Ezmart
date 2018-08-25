@@ -9,10 +9,10 @@
                 <nav>
                     <div class="nav-wrapper">
                         <div style="margin-left: 40px" class="col s12">
-                            <a href="<c:url value="/home"/>" class="breadcrumb">inicio</a>
-                        <a href="<c:url value="/login"/>" class="breadcrumb">autenticação</a>
-                        <a href="<c:url value="/register"/>" class="breadcrumb">cadastro</a>
-                        <a href="#!" class="breadcrumb">cadastro estabelecimento</a>
+                            <a href="<c:url value="/home"/>" class="breadcrumb">Início</a>
+                        <a href="<c:url value="/login"/>" class="breadcrumb">Autenticação</a>
+                        <a href="<c:url value="/register"/>" class="breadcrumb">Cadastro</a>
+                        <a href="#!" class="breadcrumb">Cadastro Estabelecimento</a>
                     </div>
                 </div>
             </nav>
@@ -26,7 +26,7 @@
                             <form method="POST">
                                 <div class="form-group col s6" style="padding: 0">
                                     <label for="companyName">Nome Fantasia:</label>
-                                    <input type="text" class="form-control" name="companyName" id="companyName" value="${companyName}" required>
+                                    <input type="text" class="form-control" name="companyName" id="companyName" value="${companyName}">
                                     <span style="color: orangered">${errors.companyName}</span>
                                 </div>
                                 <div class="form-group col s6" style="padding-right: 0">
@@ -39,22 +39,22 @@
                                     <input type="text" class="form-control" name="cnpj" id="cnpj" value="${cnpj}">
                                     <span style="color: orangered">${errors.cnpj}</span>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group col s6">
                                     <label for="email">Email:</label>
                                     <input type="email" class="form-control" name="email" id="email" value="${email}">
                                     <span style="color: orangered">${errors.email}</span>
                                 </div>
-                                <div class="form-group">
-                                    <label for="telefone">Second Email:</label>
+                                <div class="form-group col s6">
+                                    <label for="secondEmail">Outro Email:</label>
                                     <input type="email" class="form-control" name="secondEmail" id="secondEmail" value="${secondEmail}">
-                                    <span style="color: orangered">${errors.email}</span>
+                                    <span style="color: orangered">${errors.secondEmail}</span>
                                 </div>
-                                <div class="form-group" style="padding: 0">
+                                <div class="form-group col s6" style="padding: 0">
                                     <label for="password">Senha:</label>
                                     <input type="password" class="form-control" name="password" id="password" value="${password}">
                                     <span style="color: orangered">${errors.password}</span>
                                 </div>
-                                <div class="form-group" style="padding-right: 0">
+                                <div class="form-group col s6" style="padding-right: 0">
                                     <label for="passwordConfirm">Confirmar Senha:</label>
                                     <input type="password" class="form-control" name="passwordConfirm" id="passwordConfirm" value="${passwordConfirm}">
                                     <span style="color: orangered">${errors.passwordConfirm}</span>
@@ -110,8 +110,23 @@
                 </div>  
             </div>                    
         </div>      
+
+        <div class="container" id="map">
+            <div class="row">
+                <div class="col s12">
+
+                    <div class="card">
+                        <div class="card-content">
+                            <c:import url="/WEB-INF/views/google_maps.jsp"/>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </div> 
+
         <script src="<c:url value="/resources/js/jquery.min.js"/>"></script>
         <c:import url="/WEB-INF/views/templates/footer.jsp"></c:import>
         <script src="<c:url value="/resources/js/materialize.min.js"/>"></script>
+        <script src="<c:url value="/resources/js/appEZMart.js"/>"></script>
     </body>
 </html>

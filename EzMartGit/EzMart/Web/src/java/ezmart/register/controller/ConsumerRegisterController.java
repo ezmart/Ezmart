@@ -159,7 +159,7 @@ public class ConsumerRegisterController {
                 mv.addObject("errors", errors);
             }
         } catch (Exception ex) {
-            mv = new ModelAndView("redirect:/home");
+            mv = new ModelAndView("message/message_error_register");
         }
         return mv;
     }

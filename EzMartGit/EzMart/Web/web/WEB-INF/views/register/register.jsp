@@ -10,9 +10,9 @@
                 <nav>
                     <div class="nav-wrapper">
                         <div style="margin-left: 40px" class="col s12">
-                            <a href="<c:url value="/home"/>" class="breadcrumb">inicio</a>
-                        <a href="<c:url value="/login"/>" class="breadcrumb">autenticação</a>
-                        <a href="<c:url value="/cadastro"/>" class="breadcrumb">cadastro</a>
+                            <a href="<c:url value="/home"/>" class="breadcrumb">Início</a>
+                        <a href="<c:url value="/login"/>" class="breadcrumb">Autenticação</a>
+                        <a href="<c:url value="/cadastro"/>" class="breadcrumb">Cadastro</a>
                     </div>
                 </div>
             </nav>

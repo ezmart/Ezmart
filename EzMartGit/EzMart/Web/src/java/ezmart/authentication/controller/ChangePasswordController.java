@@ -47,7 +47,9 @@ public class ChangePasswordController {
                 user.setId(user.getId());
                 user.setPassword(newPassword);
                 userService.updatePasswordByUser(user);
-                mv = new ModelAndView("redirect:/logout");
+                mv = new ModelAndView("message/message_password_change");
+                
+                session.invalidate();
             } else {
                 mv = new ModelAndView("authentication/change_password");
                 mv.addObject("errors", errors);

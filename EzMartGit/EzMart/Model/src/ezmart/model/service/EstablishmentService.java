@@ -9,13 +9,13 @@ import java.sql.Connection;
 import java.util.List;
 import java.util.Map;
 import ezmart.model.base.service.BaseEstablishmentService;
-import ezmart.model.criteria.ConsumerCriteria;
 import ezmart.model.criteria.EstablishmentCriteria;
 import ezmart.model.criteria.UserCriteria;
 import ezmart.model.util.SystemConstant;
 import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.sql.Date;
 
 public class EstablishmentService implements BaseEstablishmentService {
 
@@ -24,9 +24,14 @@ public class EstablishmentService implements BaseEstablishmentService {
         Connection conn = ConnectionManager.getInstance().getConnection();
         try {
             entity.setUserType("emporium");
+            entity.setActive(false);
+
             UserDAO userDao = new UserDAO();
             userDao.create(conn, entity);
-
+            
+            entity.setPlan(1);
+            entity.setPlanStartDate(null);
+            entity.setPlanStartDate(null);
             EstablishmentDAO dao = new EstablishmentDAO();
             dao.create(conn, entity);
             conn.commit();
@@ -59,7 +64,7 @@ public class EstablishmentService implements BaseEstablishmentService {
         Connection conn = ConnectionManager.getInstance().getConnection();
         try {
             EstablishmentDAO dao = new EstablishmentDAO();
-            List<Establishment> emporiumList = dao.readByCriteria(conn, criteria, 0L, 0L);
+            List<Establishment> emporiumList = dao.readByCriteria(conn, criteria, limit, offset);
             conn.commit();
             conn.close();
             return emporiumList;
@@ -111,6 +116,7 @@ public class EstablishmentService implements BaseEstablishmentService {
         String businessName = (String) fields.get("businessName");
         String cnpj = (String) fields.get("cnpj");
         String email = (String) fields.get("email");
+        String secondEmail = (String) fields.get("secondEmail");
         String password = (String) fields.get("password");
         String passwordConfirm = (String) fields.get("passwordConfirm");
         String addressLocation = (String) fields.get("addressLocation");
@@ -128,7 +134,7 @@ public class EstablishmentService implements BaseEstablishmentService {
 
             //Validação de preenchimento do campo RAZÃO SOCIAL
             if (businessName == null || businessName.isEmpty()) {
-                errors.put("lastName", "*Campo sobrenome obrigatório!");
+                errors.put("businessName", "*Campo sobrenome obrigatório!");
             }
 
             //Validação de preenchimento do campo CPF
@@ -158,6 +164,25 @@ public class EstablishmentService implements BaseEstablishmentService {
                     UserService userService = new UserService();
                     if (userService.readByCriteria(criteriaEmail, null, null).size() > 0) {
                         errors.put("email", "*E-Mail já cadastrado no sistema!");
+                    }
+                }
+            }
+
+            //Validação de preenchimento do campo OUTRO EMAIL
+            if (secondEmail == null || secondEmail.isEmpty()) {
+                errors.put("secondEmail", "*Campo OUTRO EMAIL obrigatório!");
+            } else {
+                Pattern VALID_EMAIL_ADDRESS_REGEX = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
+                Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(secondEmail);
+                if (!matcher.find()) {
+                    errors.put("secondEmail", "*Formato inválido!");
+                } else {
+                    //Verifica se o SEGUNDO EMAIL já foi cadastrado
+                    Map<Long, Object> criteriaSecondEmail = new HashMap<>();
+                    criteriaSecondEmail.put(EstablishmentCriteria.SECOND_EMAIL_EQ, secondEmail);
+                    EstablishmentService establishmentService = new EstablishmentService();
+                    if (establishmentService.readByCriteria(criteriaSecondEmail, null, null).size() > 0) {
+                        errors.put("secondEmail", "*E-Mail já cadastrado no sistema!");
                     }
                 }
             }

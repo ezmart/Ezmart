@@ -9,8 +9,8 @@
                 <nav>
                     <div class="nav-menu">
                         <div style="margin-left: 40px" class="col s12">
-                            <a href="<c:url value="/home"/>" class="breadcrumb">inicio</a>
-                        <a href="<c:url value="/login"/>" class="breadcrumb">autenticação</a>
+                            <a href="<c:url value="/home"/>" class="breadcrumb">Início</a>
+                        <a href="<c:url value="/login"/>" class="breadcrumb">Autenticação</a>
                     </div>
                 </div>
             </nav>
@@ -42,7 +42,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="input-field col s12">
-                                                <button id="btn-cadpf" type="submit" class="btn" value="confirmar" style="background-color: #01579b"><i class="material-icons left">border_color</i>Entrar</button>
+                                                <button id="btn-btn-ezmart-style" type="submit" class="btn" value="confirmar"><i class="material-icons left">border_color</i>Entrar</button>
                                             </div>
                                         </div>
                                     </div>

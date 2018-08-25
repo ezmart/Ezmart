@@ -28,7 +28,7 @@
                     <nav>
                         <div class="nav-wrapper">
                             <div style="margin-left: 40px" class="col s12">
-                                <a href="<c:url value="/home"/>" class="breadcrumb">inicio</a>
+                                <a href="<c:url value="/home"/>" class="breadcrumb">Início</a>
                             <a href="<c:url value="/login"/>" class="breadcrumb">Meus Produtos</a>
                         </div>
                     </div>
@@ -38,7 +38,7 @@
                 <br/>
                 <div style="margin-top:10px">
                     <div>
-                        <a id="btn-login" href="<c:url value="/produto/novo"/>" class="btn btn-success" style="background-color: #01579b"><i class="material-icons left">add_circle_outline</i>Novo produto</a>
+                        <a id="btn-btn-ezmart-style" href="#" class="btn btn-success"><i class="material-icons left">add_circle_outline</i>Novo produto</a>
                     </div>
                 </div>
                 <br/>
