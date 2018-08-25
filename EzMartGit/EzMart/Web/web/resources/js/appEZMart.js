@@ -31,5 +31,9 @@ window.onload = function () {
     });
 };
 
+function setDadosModal(sectorId, sectorName) {
+    document.getElementById('sector-id').innerHTML = sectorId + " - " + sectorName;
+}
+
 
         

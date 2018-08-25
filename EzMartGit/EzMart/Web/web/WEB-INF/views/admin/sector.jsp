@@ -38,10 +38,10 @@
                 </div>
                 <div id="modal-delete" class="modal">
                     <div class="modal-content">
-                        <h4>Tem certeza que deseja excluir a linha <container id = "sector-id"></container> ?</h4>
+                        <h5>Tem certeza que deseja excluir a linha <container id = "sector-id"></container> ?</h5>
                         <div class="modal-footer">
-                            <a class="btn btn-sm btn-default btn-small red modal-close modal-sction">Não</a>
-                            <a class="btn btn-sm btn-default btn-small green">Sim</a>
+                            <a class="btn btn-sm btn-default btn-small red modal-close modal-sction" style="color:white;">Não</a>
+                            <a class="btn btn-sm btn-default btn-small green" style="color:white; margin-right: 10px;" >Sim</a>
                         </div>
                     </div>
                 </div>
@@ -50,7 +50,7 @@
                         <div class="nav-wrapper">
                             <div style="margin-left: 40px" class="col s12">
                                 <a href="<c:url value="/home"/>" class="breadcrumb">inicio</a>
-                            <a href="<c:url value="/login"/>" class="breadcrumb">Meus Produtos</a>
+                            <a href="<c:url value="#"/>" class="breadcrumb">Linhas</a>
                         </div>
                     </div>
                 </nav>
@@ -76,7 +76,7 @@
                                         <td>${sector.name}</td>
                                         <td>
                                             <a class="btn btn-sm btn-default btn-small yellow modal-trigger" href="#modal-update" style="color:white;">Alterar</a>
-                                            <a class="btn btn-sm btn-danger btn-small red modal-trigger" href="#modal-delete" onclick="setDadosModal(${sector.id})" style="color:white;">Excluir</a>
+                                            <a class="btn btn-sm btn-danger btn-small red modal-trigger" href="#modal-delete" onclick="setDadosModal(${sector.id}, '${sector.name}')" style="color:white;">Excluir</a>
                                             <hr> 
                                         </td>
                                     </tr>    
@@ -92,10 +92,5 @@
         <script src="<c:url value="/resources/js/materialize.min.js"/>"></script>
         <script src="<c:url value="/resources/js/appEZMart.js"/>"></script>
         <script src="<c:url value="/resources/js/initializeModal.js"/>"></script>
-        <script>
-                                                function setDadosModal(valor) {
-                                                    document.getElementById('sector-id').innerHTML = valor;
-                                                }
-        </script>
     </body>
 </html>
