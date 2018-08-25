@@ -14,6 +14,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.imageio.ImageIO;
+import org.apache.tomcat.jni.Directory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -90,6 +91,7 @@ public class EstablishmentRegisterController {
 
                 BufferedImage originalImage = null;
                 try {
+                     
                     originalImage = ImageIO.read(new File("D:\\TCC 2018\\EzMart\\Web\\web\\resources\\img\\avatar\\storm.jpg"));
 
                     ByteArrayOutputStream baos = new ByteArrayOutputStream();
