@@ -32,7 +32,7 @@
                                     <div style="margin-top:10px" class="form-group">
                                         <label class="panel-info"  style="font-size: x-large; color: #9e9e9e">Cadastro Para Consumidor</label>
                                         <div class="col s12 controls">                                                    
-                                            <a class="waves-effect waves-teal btn" id="cadpf" style="background-color: #01579b" href="<c:url value="/register/consumer"/> "><i class="material-icons left">account_box</i>Cadastrar</a>
+                                            <a class="waves-effect waves-teal btn" id="btn-btn-ezmart-style" href="<c:url value="/register/consumer"/> "><i class="material-icons left">account_box</i>Cadastrar</a>
                                         </div>
                                     </div> 
                                     <br/>
@@ -40,7 +40,7 @@
                                     <div style="margin-top:10px" class="form-group">
                                         <label class="panel-info" style="font-size: x-large ; color: #9e9e9e">Cadastro Para Estabelecimento</label>
                                         <div class="col s12">
-                                            <a class="waves-effect waves-light btn" id="cadpj" style="background-color: #01579b" href="<c:url value="/register/emporium"/> "><i class="material-icons left">account_box</i>Cadastrar</a>
+                                            <a class="waves-effect waves-light btn" id="btn-btn-ezmart-style" href="<c:url value="/register/emporium"/> "><i class="material-icons left">account_box</i>Cadastrar</a>
                                         </div>
                                     </div> 
                                         <div style="margin-top:60px; border-top: 3px solid#888"></div>

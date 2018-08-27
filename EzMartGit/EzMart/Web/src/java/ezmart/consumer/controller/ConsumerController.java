@@ -3,12 +3,15 @@ package ezmart.consumer.controller;
 import ezmart.model.entity.City;
 import ezmart.model.entity.Consumer;
 import ezmart.model.entity.Establishment;
+import ezmart.model.entity.ShoppingList;
 import ezmart.model.entity.State;
 import ezmart.model.entity.User;
 import ezmart.model.service.CityService;
 import ezmart.model.service.ConsumerService;
 import ezmart.model.service.EstablishmentService;
+import ezmart.model.service.ShoppingListService;
 import ezmart.model.service.StateService;
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -79,7 +82,7 @@ public class ConsumerController {
         User user = null;
 
         try {
-            
+
             if (auxSession instanceof Consumer) {
 
                 user = (Consumer) auxSession;
@@ -105,6 +108,78 @@ public class ConsumerController {
 
         } catch (Exception exception) {
             System.out.println(exception);
+        }
+
+        return mv;
+    }
+
+    @RequestMapping(value = "/shoppingList", method = RequestMethod.GET)
+    public ModelAndView getShoppingList() {
+        ModelAndView mv = new ModelAndView("consumer/consumer_shopping_list");
+
+        try {
+            ShoppingListService service = new ShoppingListService();
+            List<ShoppingList> shoppingList = service.readByCriteria(null, null, null);
+
+            mv.addObject("shoppingList", shoppingList);
+        } catch (Exception exception) {
+            System.out.println(exception);
+        }
+
+        return mv;
+    }
+
+    @RequestMapping(value = "/shoppingList", method = RequestMethod.POST)
+    public ModelAndView postNewShoppingList(String value, String type, HttpSession session) {
+
+        ModelAndView mv = new ModelAndView("redirect:/shoppingList");
+
+        Object auxSession = session.getAttribute("userLogged");
+        User user = null;
+
+        if (auxSession instanceof Consumer) {
+            user = (Consumer) auxSession;
+        } else {
+            user = (Establishment) auxSession;
+        }
+
+        if (type != null && type.equals("CREATE")) {
+            try {
+                String name = value;
+                ShoppingList shoppingList = new ShoppingList();
+                shoppingList.setName(name);
+                shoppingList.setConsumerId(user.getId());
+                shoppingList.setFaborite(false);
+
+                //Paga a data atual do sistema
+                Date date = new Date(System.currentTimeMillis());
+                shoppingList.setDate(date);
+
+                shoppingList.setProductList(null);
+
+                ShoppingListService service = new ShoppingListService();
+                service.create(shoppingList);
+
+            } catch (Exception exception) {
+                System.out.println(exception);
+            }
+        } else if (type != null && type.equals("UPDATE")) {
+//            ShoppingListService service = new ShoppingListService();
+//            Long id = (Long) value;
+//            
+//            service.update(id);
+
+        } else if (type != null && type.equals("DELETE")) {
+            try {
+                ShoppingListService service = new ShoppingListService();
+//                Long id = (Long) objValue;
+//                service.delete(id);
+
+                System.out.println("PASSEIII AQUI FDP");
+
+            } catch (Exception exception) {
+                System.out.println(exception);
+            }
         }
 
         return mv;
