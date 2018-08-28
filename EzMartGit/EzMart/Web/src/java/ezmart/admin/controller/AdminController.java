@@ -1,14 +1,10 @@
 package ezmart.admin.controller;
 
-import ezmart.model.entity.Consumer;
 import ezmart.model.entity.Sector;
-import ezmart.model.entity.User;
 import ezmart.model.service.SectorService;
 import ezmart.model.util.SystemConstant.PAGE;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +26,24 @@ public class AdminController {
             mv.addObject("sectorList", sectorList);
         } catch (Exception exception) {
             System.out.println(exception);
+        }
+        return mv;
+    }
+
+    @RequestMapping(value = "/sector", method = RequestMethod.POST)
+    public ModelAndView saveSector(String nameSector, String type) {
+        ModelAndView mv = new ModelAndView("redirect:/sector");
+
+        if (type != null && type.equals("CREATE")) {
+            try {
+                
+                Sector sector = new Sector();
+                sector.setName(nameSector);
+                sectorService.create(sector);
+
+            } catch (Exception exception) {
+                System.out.println(exception);
+            }
         }
         return mv;
     }
