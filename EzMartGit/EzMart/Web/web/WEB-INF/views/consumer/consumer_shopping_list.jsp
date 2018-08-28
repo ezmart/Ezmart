@@ -41,8 +41,8 @@
                         <h4>Tem certeza que deseja excluir a linha  ?</h4>
                         <div class="modal-footer">
                             <form method="POST">
-                                <input type="text" style="display: none" class="form-control input-text-register" name="type" id="type" value="DELETE">
-                                <input type="text" style="display: none" class="form-control input-text-register" name="value" id="value" value="">
+                                <input type="text" style="display: none" name="type" id="type" value="DELETE">
+                                <input type="text" style="display: none"  name="value" id="idDelete" value="">
                                 <button id="btn-btn-ezmart-style" type="submit" class="btn modal-close" value="confirmar">Sim</button>
                             </form>
                             <a class="btn btn-sm btn-default btn-small red modal-close modal-sction">Não</a>
@@ -59,56 +59,51 @@
                     </div>
                 </nav>
             </div>
-            <div class="container">
-                <c:if test="${empty shoppingList}">
-                    <div class="card">
-                        <div class="row center-align" style="padding: 20px;">
-                            <h4 class="center-align" style="color: #2196f3">Nenhuma lista encontrado! :)</h4>
-                            <br/>
-                            <br/>
-                            <a href="#modal-create" id="btn-btn-ezmart-style" class="btn btn-sm btn-default btn-small modal-trigger">Adicionar nova lista de compras</a>
-                        </div>
+            <c:if test="${empty shoppingList}">
+                <div class="card">
+                    <div class="row center-align" style="padding: 20px;">
+                        <h4 class="center-align" style="color: #2196f3">Nenhuma lista encontrado! :)</h4>
+                        <br/>
+                        <br/>
+                        <a href="#modal-create" class="btn btn-sm btn-default btn-small green left modal-trigger" style="color:white;"><i class="material-icons right">add_box</i>Adicionar</a>
+                        <!--<a href="#modal-create" id="btn-btn-ezmart-style" class="btn btn-sm btn-default btn-small modal-trigger">Adicionar nova lista de compras</a>-->
                     </div>
-                </c:if>
-                <c:if test="${not empty shoppingList}">
-                    <div class="col s12" style="align-content: center">
-                        <div class="card">
-                            <div class="card-content">
-                                <h3>Listas cadastradas</h3>
-                                <table class="table">
-                                    <tr>
-                                        <th>Id</th>
-                                        <th>Nome</th>
-                                    </tr>
-                                    <a href="#modal-create" id="btn-btn-ezmart-style" class="btn modal-trigger">Adicionar</a>
-                                    <br/>
-                                    <br/>
-                                    <c:forEach items="${shoppingList}" var="list">
-                                        <tr>
-                                            <td>${list.id}</td>
-                                            <td>${list.name}</td>
-                                            <td>
-                                                <a class="btn btn-sm btn-default btn-small yellow modal-trigger" href="#modal-update" style="color:white;">Alterar</a>
-
-                                                <a class="btn btn-sm btn-danger btn-small red modal-trigger" href="#modal-delete" onclick="setDadosModal(${list.id})" style="color:white;">Excluir</a>
-                                            </td>
-                                        </tr>    
-                                    </c:forEach>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </c:if>
+                </div>
             </c:if>
-            <script src="<c:url value="/resources/js/jquery.min.js"/>"></script>
-            <c:import url="/WEB-INF/views/templates/footer.jsp"></c:import>
-            <script src="<c:url value="/resources/js/materialize.min.js"/>"></script>
-            <script src="<c:url value="/resources/js/appEZMart.js"/>"></script>
-            <script>
-                                                    function setDadosModal(data) {
-                                                        document.getElementById('value').value = data;
-                                                        alert(data);
-                                                    }
-            </script>
+            <c:if test="${not empty shoppingList}">
+                <div class="container">
+                    <div class="card">
+                        <div class="card-content">
+                            <h3>Listas cadastradas</h3>
+                            <table class="table">
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Nome</th>
+                                </tr>
+                                <a href="#modal-create" class="btn btn-sm btn-default btn-small green left modal-trigger" style="color:white;"><i class="material-icons right">add_box</i>Adicionar</a>
+                                <!--<a href="#modal-create" id="btn-btn-ezmart-style" class="btn modal-trigger">Adicionar</a>-->
+                                <br/>
+                                <br/>
+                                <c:forEach items="${shoppingList}" var="list">
+                                    <tr>
+                                        <td>${list.id}</td>
+                                        <td>${list.name}</td>
+                                        <td>
+                                            <a class="btn btn-sm btn-default btn-small yellow modal-trigger" href="#modal-update" style="color:white;">Gerênciar Lista</a>
+
+                                            <a class="btn btn-sm btn-danger btn-small red modal-trigger" href="#modal-delete" onclick="setDadaModalList(${list.id})" style="color:white;">Excluir</a>
+                                        </td>
+                                    </tr>    
+                                </c:forEach>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </c:if>
+        </c:if>
+        <script src="<c:url value="/resources/js/jquery.min.js"/>"></script>
+        <c:import url="/WEB-INF/views/templates/footer.jsp"></c:import>
+        <script src="<c:url value="/resources/js/materialize.min.js"/>"></script>
+        <script src="<c:url value="/resources/js/appEZMart.js"/>"></script>
     </body>
 </html>

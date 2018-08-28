@@ -21,7 +21,7 @@ public class ShoppingListDAO implements BaseDAO<ShoppingList> {
         int i = 0;
 
         statement.setLong(++i, entity.getConsumerId());
-        statement.setBoolean(++i, entity.getFaborite());
+        statement.setBoolean(++i, entity.getFavorite());
         statement.setString(++i, entity.getName());
         statement.setDate(++i, entity.getDate());
 
@@ -73,7 +73,7 @@ public class ShoppingListDAO implements BaseDAO<ShoppingList> {
             list.setConsumerId(resultSet.getLong("list_consumerid"));
             list.setName(resultSet.getString("list_name"));
             list.setDate(resultSet.getDate("list_date"));
-            list.setFaborite(resultSet.getBoolean("list_favorite"));
+            list.setFavorite(resultSet.getBoolean("list_favorite"));
 
             shoppingList.add(list);
         }
@@ -94,7 +94,7 @@ public class ShoppingListDAO implements BaseDAO<ShoppingList> {
 
     @Override
     public void delete(Connection conn, Long id) throws Exception {
-        String sql = "DELETE FROM list WHERE id=?;";
+        String sql = "DELETE FROM list WHERE list_id=?;";
         PreparedStatement statement = conn.prepareStatement(sql);
         statement.setLong(1, id);
         statement.execute();

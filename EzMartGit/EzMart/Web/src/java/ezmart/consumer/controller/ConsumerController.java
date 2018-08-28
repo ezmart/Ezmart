@@ -149,13 +149,13 @@ public class ConsumerController {
                 ShoppingList shoppingList = new ShoppingList();
                 shoppingList.setName(name);
                 shoppingList.setConsumerId(user.getId());
-                shoppingList.setFaborite(false);
+                shoppingList.setFavorite(false);
 
                 //Paga a data atual do sistema
                 Date date = new Date(System.currentTimeMillis());
                 shoppingList.setDate(date);
 
-                shoppingList.setProductList(null);
+                //shoppingList.setProductList(null);
 
                 ShoppingListService service = new ShoppingListService();
                 service.create(shoppingList);
@@ -172,10 +172,8 @@ public class ConsumerController {
         } else if (type != null && type.equals("DELETE")) {
             try {
                 ShoppingListService service = new ShoppingListService();
-//                Long id = (Long) objValue;
-//                service.delete(id);
-
-                System.out.println("PASSEIII AQUI FDP");
+                Long id = Long.parseLong(value);
+                service.delete(id);
 
             } catch (Exception exception) {
                 System.out.println(exception);

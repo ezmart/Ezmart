@@ -7,7 +7,7 @@ import java.util.List;
 public class ShoppingList extends BaseEntity{
     private String name;
     private Long consumerId;
-    private Boolean faborite;
+    private Boolean favorite;
     private Date date;
     private List<Product> productList;
     
@@ -27,12 +27,12 @@ public class ShoppingList extends BaseEntity{
         this.consumerId = consumerId;
     }
 
-    public Boolean getFaborite() {
-        return faborite;
+    public Boolean getFavorite() {
+        return favorite;
     }
 
-    public void setFaborite(Boolean faborite) {
-        this.faborite = faborite;
+    public void setFavorite(Boolean favorite) {
+        this.favorite = favorite;
     }
 
     public Date getDate() {

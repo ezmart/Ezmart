@@ -35,5 +35,7 @@ function setDadosModal(sectorId, sectorName) {
     document.getElementById('sector-id').innerHTML = sectorId + " - " + sectorName;
 }
 
-
-        
+function setDadaModalList(data) {
+    document.getElementById('idDelete').value = data;
+//    alert(data);
+}
