@@ -1,21 +1,21 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <header>
     <ul style="margin-top: 65px" id="main" class="dropdown-content">
-        <li><a href="<c:url value="#!"/>">Usuários</a></li>
+        <li><a class="dropdown-content-user-header-style" href="<c:url value="#!"/>">Usuários</a></li>
         <li class="divider"></li>
-        <li><a href="<c:url value="/product"/>">Produtos</a></li>
+        <li><a class="dropdown-content-user-header-style" href="<c:url value="/product"/>">Produtos</a></li>
         <li class="divider"></li>
-        <li><a href="<c:url value="#!"/>">Fornecedores</a></li>
+        <li><a class="dropdown-content-user-header-style" href="<c:url value="#!"/>">Fornecedores</a></li>
         <li class="divider"></li>
-        <li><a href="<c:url value="/sector"/>">Linhas</a></li>
+        <li><a class="dropdown-content-user-header-style" href="<c:url value="/sector"/>">Linhas</a></li>
         <li class="divider"></li>
     </ul>
     <ul style="margin-top: 65px" id="user" class="dropdown-content">
-        <li><a href="<c:url value="/profile"/>">Meu Perfil</a></li>
+        <li><a class="dropdown-content-user-header-style" href="<c:url value="/profile"/>">Meu Perfil</a></li>
         <li class="divider"></li>
-        <li><a href="<c:url value="/changePassword"/>">Alterar Senha</a></li>
+        <li><a class="dropdown-content-user-header-style" href="<c:url value="/changePassword"/>">Alterar Senha</a></li>
         <li class="divider"></li>
-        <li><a href="<c:url value="/logout"/>">Sair</a></li>
+        <li><a class="dropdown-content-user-header-style" href="<c:url value="/logout"/>">Sair</a></li>
         <li class="divider"></li>
     </ul>
     <nav style="height: 70px">

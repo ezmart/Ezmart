@@ -19,11 +19,11 @@
         </div>
         <div class="container" >
             <div class="row">
-                <h1 style="color: #2196f3">Quase lá!</h1>                
+                <h1 style="color: #2196f3">Olá!</h1>                
                 <br/>
                 <div class="col s5">
                     <p style="color: #898989; font-size: x-large">
-                        Acesse o email que foi cadastrado e confirme seu cadastro clicando no link enviado!
+                        Sua senha foi alterada com sucesso! Logue novamente.
                     </p>
                 </div>
                 <div class="col s4 offset-s2">

@@ -8,11 +8,22 @@ import java.sql.Connection;
 import java.util.List;
 import java.util.Map;
 
-public class SectorService implements BaseSectorService{
+public class SectorService implements BaseSectorService {
+
+    SectorDAO dao = new SectorDAO();
 
     @Override
     public void create(Sector entity) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Connection conn = ConnectionManager.getInstance().getConnection();
+        try {
+            dao.create(conn, entity);
+            conn.commit();
+            conn.close();
+        } catch (Exception e) {
+            conn.rollback();
+            conn.close();
+            throw e;
+        }
     }
 
     @Override
@@ -24,7 +35,6 @@ public class SectorService implements BaseSectorService{
     public List<Sector> readByCriteria(Map<Long, Object> criteria, Long limit, Long offset) throws Exception {
         Connection conn = ConnectionManager.getInstance().getConnection();
         try {
-            SectorDAO dao = new SectorDAO();
             List<Sector> productList = dao.readByCriteria(conn, criteria, limit, offset);
             conn.commit();
             conn.close();
@@ -55,7 +65,6 @@ public class SectorService implements BaseSectorService{
     public List<Sector> findAll(Integer limit, Integer offset) throws Exception {
         Connection conn = ConnectionManager.getInstance().getConnection();
         try {
-            SectorDAO dao = new SectorDAO();
             List<Sector> productList = dao.findAll(conn, limit, offset);
             conn.commit();
             conn.close();
@@ -66,5 +75,5 @@ public class SectorService implements BaseSectorService{
             throw e;
         }
     }
-    
+
 }

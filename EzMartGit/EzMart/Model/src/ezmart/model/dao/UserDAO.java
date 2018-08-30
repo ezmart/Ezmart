@@ -60,9 +60,8 @@ public class UserDAO implements BaseDAO<User> {
             statement.setLong(1, id);
             ResultSet resultSet = statement.executeQuery();
 
-            
             if (resultSet.next()) {
-                
+
                 user.setEmail(resultSet.getString("usersystem_email"));
                 user.setAddressLocation(resultSet.getString("usersystem_addresslocation"));
                 user.setNumberHouse(resultSet.getInt("usersystem_numberhouse"));
@@ -234,6 +233,8 @@ public class UserDAO implements BaseDAO<User> {
 
         while (resultSet.next()) {
             if (resultSet.getString("usersystem_usertype").equals("consumer")) {
+                user = new Consumer();
+            } else if (resultSet.getString("usersystem_usertype").equals("admin")) {
                 user = new Consumer();
             } else {
                 user = new Establishment();

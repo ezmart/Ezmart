@@ -1,11 +1,14 @@
 package ezmart.model.dao;
 
 import ezmart.model.base.BaseDAO;
+import ezmart.model.criteria.EstablishmentCriteria;
 import ezmart.model.entity.Establishment;
 import ezmart.model.entity.User;
+import ezmart.model.util.PreparedStatementBuilder;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -17,7 +20,7 @@ public class EstablishmentDAO implements BaseDAO<Establishment> {
         String sql = "INSERT INTO establishment(establishment_cnpj, establishment_secondemail, establishment_name, "
                 + "establishment_businessname, establishment_plan, establishment_planstartdate, "
                 + "establishment_planfinaldate, establishment_userid) "
-                + "VALUES (?,?,?,?) RETURNING establishment_userid;";
+                + "VALUES (?,?,?,?,?,?,?,?) RETURNING establishment_userid;";
 
         PreparedStatement statement = conn.prepareStatement(sql);
         int i = 0;
@@ -43,7 +46,66 @@ public class EstablishmentDAO implements BaseDAO<Establishment> {
 
     @Override
     public List<Establishment> readByCriteria(Connection conn, Map<Long, Object> criteria, Long limit, Long offset) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = "SELECT establishment_id, establishment_name, establishment_businessname, "
+                + "establishment_secondemail, establishment_cnpj, establishment_plan, "
+                + "establishment_planstartdate, establishment_planfinaldate, "
+                + "establishment_userid "
+                + "FROM establishment "
+                + "WHERE 1=1";
+
+        List<Object> paramList = new ArrayList<>();
+        if (criteria != null) {
+            if (criteria.containsKey(EstablishmentCriteria.CNPJ_EQ)) {
+                String cnpj = (String) criteria.get(EstablishmentCriteria.CNPJ_EQ);
+                sql += " AND establishment_cnpj = ?";
+                paramList.add(cnpj);
+            }
+
+            if (criteria.containsKey(EstablishmentCriteria.SECOND_EMAIL_EQ)) {
+                String secondEmail = (String) criteria.get(EstablishmentCriteria.SECOND_EMAIL_EQ);
+                sql += " AND establishment_secondemail = ?";
+                paramList.add(secondEmail);
+            }
+            
+//            if (criteria.containsKey(UserCriteria.ID_NE)) {
+//                Long id = (Long) criteria.get(UserCriteria.ID_NE);
+//                sql += " AND usersystem.usersystem_id != ?";
+//                paramList.add(id);
+//            }
+            //Add criterio ....
+        }
+
+        if (limit != null) {
+            sql += " LIMIT ?";
+            paramList.add(limit);
+        }
+        if (offset != null) {
+            sql += " OFFSET ?";
+            paramList.add(offset);
+        }
+
+        PreparedStatement statement = PreparedStatementBuilder.build(conn, sql, paramList);
+        ResultSet rs = statement.executeQuery();
+        List<Establishment> establishmentList = new ArrayList<>();
+        Long aux = null;
+        if (rs.next()) {
+
+            Establishment establishment = new Establishment();
+            establishment.setId(rs.getLong("establishment_id"));
+            establishment.setName(rs.getString("establishment_name"));
+            establishment.setBusinessName(rs.getString("establishment_businessname"));
+            establishment.setSecondEmail(rs.getString("establishment_secondemail"));
+            establishment.setCnpj(rs.getString("establishment_cnpj"));
+            establishment.setPlan(rs.getInt("establishment_plan"));
+            establishment.setPlanStartDate(rs.getDate("establishment_planstartdate"));
+            establishment.setPlanFinalDate(rs.getDate("establishment_planfinaldate"));
+
+            establishmentList.add(establishment);
+        }
+
+        rs.close();
+        statement.close();
+        return establishmentList;
     }
 
     @Override

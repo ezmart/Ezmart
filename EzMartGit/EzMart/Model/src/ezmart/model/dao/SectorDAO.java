@@ -14,9 +14,16 @@ public class SectorDAO implements BaseDAO<Sector> {
 
     @Override
     public void create(Connection conn, Sector entity) throws Exception {
-        System.out.println("");
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        
+        String sql = " INSERT INTO sector (sector_name) VALUES(?); ";
+
+        PreparedStatement statement = conn.prepareStatement(sql);
+        int i = 0;
+
+        statement.setString(++i, entity.getName());
+
+        statement.execute();
+
+        statement.close();
     }
 
     @Override
@@ -38,8 +45,8 @@ public class SectorDAO implements BaseDAO<Sector> {
     public void delete(Connection conn, Long id) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    public List<Sector> findAll(Connection conn, Integer limit, Integer offset) throws Exception{
+
+    public List<Sector> findAll(Connection conn, Integer limit, Integer offset) throws Exception {
         String sql = "SELECT * FROM sector WHERE 1=1 ";
 
         List<Object> paramList = new ArrayList<>();
@@ -58,7 +65,7 @@ public class SectorDAO implements BaseDAO<Sector> {
         List<Sector> sectorList = new ArrayList<>();
         while (rs.next()) {
             Sector sector = new Sector();
-            
+
             sector.setId(rs.getLong("sector_id"));
             sector.setName(rs.getString("sector_name"));
             sectorList.add(sector);

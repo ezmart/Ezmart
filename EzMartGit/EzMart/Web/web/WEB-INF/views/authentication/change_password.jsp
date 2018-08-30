@@ -28,11 +28,14 @@
             <c:if test="${userLogged.userType eq 'emporium'}">
                 <c:import url="/WEB-INF/views/templates/header_emporium.jsp"></c:import>
             </c:if>
+            <c:if test="${userLogged.userType eq 'admin'}">
+                <c:import url="/WEB-INF/views/templates/header_admin.jsp"></c:import>
+            </c:if>
             <div>
                 <nav>
                     <div class="nav-wrapper">
                         <div style="margin-left: 40px" class="col s12">
-                            <a href="<c:url value="/home"/>" class="breadcrumb">Home</a> 
+                            <a href="<c:url value="/home"/>" class="breadcrumb">Início</a> 
                             <a href="<c:url value="/changePassword"/>" class="breadcrumb">Alterar Senha</a>
                         </div>
                     </div>
@@ -62,7 +65,7 @@
                                         <span style="color: orangered">${errors.confirmNewPassword}</span>
                                     </div>
                                     <div>
-                                        <button id="btn-login" type="submit" class="btn btn-success" style="background-color: #01579b"><i class="material-icons left">vpn_key</i>Salvar</button>
+                                        <button id="btn-btn-ezmart-style" type="submit" class="btn btn-success"><i class="material-icons left">vpn_key</i>Salvar</button>
                                     </div>
                                 </form>
                             </div>

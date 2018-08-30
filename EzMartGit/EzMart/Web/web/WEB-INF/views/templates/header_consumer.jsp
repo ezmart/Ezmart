@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <header>
     <ul style="margin-top: 65px" id="main" class="dropdown-content">
-        <li><a class="dropdown-content-user-header-style" href="<c:url value="#!"/>">Meus Produtos</a></li>
+        <li><a class="dropdown-content-user-header-style" href="<c:url value="/shoppingList"/>">Minhas Listas</a></li>
         <li class="divider"></li>
         <li><a class="dropdown-content-user-header-style" href="<c:url value="#!"/>">Dashboard</a></li>
         <li class="divider"></li>
@@ -31,7 +31,12 @@
                             <a class="dropdown-button user-header-style" href="#!" data-activates="main"><i class="material-icons left" style="font-size: 20px">settings</i>Minha opções</a>
                         </li>
                         <li>
-                            <a class="dropdown-button user-header-style" href="#!" id="avatar" data-activates="user"><i class="material-icons left" style="font-size: 20px"><img class="circle responsive" style="width:25px;height:25px; padding-top: 0px;" name="img1" src="imgProfile"></i>${userLogged.name}</a>
+                            <a class="dropdown-button user-header-style" href="#!" id="avatar" data-activates="user">
+                                <i class="material-icons left" style="font-size: 20px">
+                                    <img class="circle responsive" style="width:25px;height:25px; padding-top: 0px;" name="img1" src="imgProfile">
+                                </i>
+                                ${userLogged.name}
+                            </a>
                         </li>
                     </ul>
                     <ul class="side-nav" id="mobile-demo">

@@ -110,7 +110,7 @@ public class EstablishmentController {
 
     @RequestMapping(value = "/establishmentProductList", method = RequestMethod.GET)
     public ModelAndView getConsumerRegisterForm(Long limit, Long offset) throws Exception {
-        ModelAndView mv = new ModelAndView("list/establishment_list_product");
+        ModelAndView mv = new ModelAndView("list/establishment_product_list");
 
         ProductService service = new ProductService();
         Map<Long, Object> criteria = new HashMap<>();

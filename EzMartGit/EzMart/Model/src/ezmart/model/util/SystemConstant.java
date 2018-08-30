@@ -38,6 +38,7 @@ public final class SystemConstant {
         public class REGISTER {
 
             public final static String REGISTER_CONSUMER = "REGISTER_CONSUMER";
+            public final static String REGISTER_ESTABLISHMENT = "REGISTER_ESTABLISHMENT";
 
         }
     }

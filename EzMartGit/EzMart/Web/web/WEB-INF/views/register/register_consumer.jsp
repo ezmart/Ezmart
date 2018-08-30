@@ -9,15 +9,15 @@
                 <nav>
                     <div class="nav-wrapper">
                         <div style="margin-left: 40px" class="col s12">
-                            <a href="<c:url value="/home"/>" class="breadcrumb">inicio</a>
-                        <a href="<c:url value="/login"/>" class="breadcrumb">autenticação</a>
-                        <a href="<c:url value="/register"/>" class="breadcrumb">cadastro</a>
-                        <a href="#!" class="breadcrumb">cadastro consumidor</a>
+                            <a href="<c:url value="/home"/>" class="breadcrumb">Início</a>
+                        <a href="<c:url value="/login"/>" class="breadcrumb">Autenticação</a>
+                        <a href="<c:url value="/register"/>" class="breadcrumb">Cadastro</a>
+                        <a href="#!" class="breadcrumb">Cadastro Consumidor</a>
                     </div>
                 </div>
             </nav>
         </div>
-        <div class="container" >
+        <div class="container">
             <div class="row">
                 <div class="col s12">
                     <h3 style="color: #2196f3">Cadastro Para Consumidor</h3>
@@ -104,39 +104,28 @@
                         </div>
                     </div>
                 </div>  
-            </div>                    
-        </div>      
+            </div>   
+        </div> 
+
+        <div class="container" id="map">
+            <div class="row">
+                <div class="col s12">
+
+                    <div class="card">
+                        <div class="card-content">
+                            <c:import url="/WEB-INF/views/google_maps.jsp"/>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </div> 
+
         <script src="<c:url value="/resources/js/jquery.min.js"/>"></script>
         <c:import url="/WEB-INF/views/templates/footer.jsp"></c:import>
         <script src="<c:url value="/resources/js/materialize.min.js"/>"></script>
         <script src="<c:url value="/resources/js/appEZMart.js"/>"></script>
     </body>
 </html>
-<script type="text/javascript">
-    /* Máscaras ER */
-    function mascara(o, f) {
-    v_obj = o,
-            v_fun = f,
-            setTimeout("execmascara()", 1),
-    }
-    ;
-            function execmascara() {
-            v_obj.value = v_fun(v_obj.value)
-                    ,
-            }
-    function mtel(v) {
-    v = v.replace(/D/g, ""); //Remove tudo o que não é dígito
-            v = v.replace(/^(d{2})(d)/g, "($1) $2"); //Coloca parênteses em volta dos dois primeiros dígitos
-            v = v.replace(/(d)(d{4})$/, "$1-$2"); //Coloca hífen entre o quarto e o quinto dígitos
-            return v;
-    }
-    ;
-            function id(el){
-            return document.getElementById(el);
-                    ;
-                    window.onload = function(){
-                    id('telephone').onkeypress = function(){
-                    mascara(this, mtel);
-                    }
-                    };
-</script>
+
+
+

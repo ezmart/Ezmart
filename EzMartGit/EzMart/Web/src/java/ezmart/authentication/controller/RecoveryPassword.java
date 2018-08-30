@@ -50,7 +50,7 @@ public class RecoveryPassword {
 
                 new UtilServices().sendEmail(values);
 
-                mv = new ModelAndView("redirect:/logout");
+                mv = new ModelAndView("message/message_recovery_password");
             } else {
                 mv = new ModelAndView("authentication/recovery_password");
                 mv.addObject("errors", errors);

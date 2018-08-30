@@ -10,7 +10,7 @@
                     <nav>
                         <div class="nav-wrapper">
                             <div style="margin-left: 40px" class="col s12">
-                                <a href="<c:url value="/home"/>" class="breadcrumb">Home</a>
+                                <a href="<c:url value="/home"/>" class="breadcrumb">Início</a>
                             <a href="<c:url value="/login"/>" class="breadcrumb">login</a>
                             <a href="<c:url value="/recoveryPassword"/>" class="breadcrumb">Recuperar Senha</a>
                         </div>
@@ -32,7 +32,7 @@
                                         <span style="color: orangered">${errors.email}</span>
                                     </div>
                                     <div>
-                                        <button id="btn-login" type="submit" class="btn btn-success" style="background-color: #01579b"><i class="material-icons left">vpn_key</i>Comfirmar</button>
+                                        <button id="btn-btn-ezmart-style" type="submit" class="btn btn-success"><i class="material-icons left">vpn_key</i>Comfirmar</button>
                                     </div>
                                 </form>
                             </div>
