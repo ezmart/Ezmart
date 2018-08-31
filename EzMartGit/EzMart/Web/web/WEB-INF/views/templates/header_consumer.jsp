@@ -33,7 +33,7 @@
                         <li>
                             <a class="dropdown-button user-header-style" href="#!" id="avatar" data-activates="user">
                                 <i class="material-icons left" style="font-size: 20px">
-                                    <img class="circle responsive" style="width:25px;height:25px; padding-top: 0px;" name="img1" src="imgProfile">
+                                    <img class="circle responsive" style="width:25px;height:25px; padding-top: 0px;" name="img1" src="imgProfile"/>
                                 </i>
                                 ${userLogged.name}
                             </a>

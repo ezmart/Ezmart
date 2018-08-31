@@ -8,7 +8,6 @@ import ezmart.model.entity.State;
 import ezmart.model.entity.User;
 import ezmart.model.service.CityService;
 import ezmart.model.service.ConsumerService;
-import ezmart.model.service.EstablishmentService;
 import ezmart.model.service.ShoppingListService;
 import ezmart.model.service.StateService;
 import java.sql.Date;
@@ -17,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -156,7 +156,6 @@ public class ConsumerController {
                 shoppingList.setDate(date);
 
                 //shoppingList.setProductList(null);
-
                 ShoppingListService service = new ShoppingListService();
                 service.create(shoppingList);
 
@@ -178,6 +177,22 @@ public class ConsumerController {
             } catch (Exception exception) {
                 System.out.println(exception);
             }
+        }
+
+        return mv;
+    }
+
+    @RequestMapping(value = "/products/{id}/list", method = RequestMethod.GET)
+    public ModelAndView getProductsList(@PathVariable Long id) {
+        ModelAndView mv = new ModelAndView("redirect:/home");
+
+        try {
+            ShoppingListService service = new ShoppingListService();
+            List<ShoppingList> shoppingList = service.readByCriteria(null, null, null);
+
+            mv.addObject("shoppingList", shoppingList);
+        } catch (Exception exception) {
+            System.out.println(exception);
         }
 
         return mv;
