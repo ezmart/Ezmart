@@ -36,7 +36,7 @@ public class AdminController {
 
         if (type != null && type.equals("CREATE")) {
             try {
-                
+
                 Sector sector = new Sector();
                 sector.setName(nameSector);
                 sectorService.create(sector);
@@ -44,6 +44,18 @@ public class AdminController {
             } catch (Exception exception) {
                 System.out.println(exception);
             }
+        } else if (type != null && type.equals("DELETE")) {
+            try {
+                sectorService.delete(Long.parseLong(nameSector));
+            } catch (Exception exception) {
+                System.out.println(exception);
+            }
+        } else if (type != null && type.equals("UPDATE")) {
+//            try {
+//                sectorService.delete(Long.parseLong(nameSector));
+//            } catch (Exception exception) {
+//                System.out.println(exception);
+//            }
         }
         return mv;
     }

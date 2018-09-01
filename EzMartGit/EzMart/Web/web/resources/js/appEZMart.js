@@ -33,6 +33,8 @@ window.onload = function () {
 
 function setDadosModal(sectorId, sectorName) {
     document.getElementById('sector-id').innerHTML = sectorId + " - " + sectorName;
+    document.getElementById('sectorId').value = sectorId;
+    document.getElementById('nameSectorEdit').value = sectorName;
 }
 
 function setDadaModalList(data) {

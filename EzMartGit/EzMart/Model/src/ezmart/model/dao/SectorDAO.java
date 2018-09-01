@@ -43,7 +43,16 @@ public class SectorDAO implements BaseDAO<Sector> {
 
     @Override
     public void delete(Connection conn, Long id) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = " DELETE FROM sector WHERE sector_id = ?; ";
+
+        PreparedStatement statement = conn.prepareStatement(sql);
+        int i = 0;
+
+        statement.setLong(++i, id);
+
+        statement.execute();
+
+        statement.close();
     }
 
     public List<Sector> findAll(Connection conn, Integer limit, Integer offset) throws Exception {

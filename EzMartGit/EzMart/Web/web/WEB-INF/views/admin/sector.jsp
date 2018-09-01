@@ -46,25 +46,30 @@
                     <div class="modal-content">
                         <h4>Editar Linha<i class=" small material-icons" style="margin-left: 10px;">edit</i></h4>
                         <div class="row">
-                            <form class="col s12">
+                            <form class="col s12" method="POST">
                                 <div class="input-field col s12">
-                                    <input required name="sectorNameEdit" type="text" value="">
+                                    <input id="nameSectorEdit" required name="sectorNameEdit" type="text" class="validate">
+                                    <input type="text" style="display: none" class="form-control input-text-register" name="type" id="type" value="UPDATE">
                                     <label for="nome">Nome</label>
                                 </div>
+                                <div class="modal-footer">
+                                    <button class=" modal-action modal-close green btn-flat" type="submit" value="confirmar" style="margin-right: 15px; color:white;">CONFIRMAR</button>
+                                </div>
                             </form>
-                        </div>
-                        <div class="modal-footer">
-                            <a class=" modal-action modal-close green btn-flat" style="margin-right: 15px; color:white;">CONFIRMAR</a>
                         </div>
                     </div>
                 </div>
                 <div id="modal-delete" class="modal">
                     <div class="modal-content">
                         <h4>Excluir Linha<i class=" small material-icons" style="margin-left: 10px;">delete</i></h4>
-                        <p><font size="5">Tem certeza que deseja excluir a linha</font><font color="red" size="5"><container id = "sector-id"></container></font> <font size="5">?</font></p>
+                        <p><font size="5">Tem certeza que deseja excluir a linha: </font><font color="red" size="5"><container id = "sector-id"></container></font> <font size="5">?</font></p>
                         <div class="modal-footer">
-                            <a class="btn btn-sm btn-default btn-small red modal-close modal-action" style="color:white;">Não</a>
-                            <a class="btn btn-sm btn-default btn-small green" style="color:white; margin-right: 10px;" >Sim</a>
+                            <form method="POST">
+                                <input type="text" style="display: none"  name="nameSector" id = "sectorId">
+                                <input type="text" style="display: none" name="type" id="type" value="DELETE">
+                                <a class="btn btn-sm btn-default btn-small red modal-close modal-action" style="color:white;">Não</a>
+                                <button class="btn btn-sm btn-default btn-small green" type="submit" style="color:white; margin-right: 10px;" >Sim</button>
+                            </form>
                         </div>
                     </div>
                 </div>
