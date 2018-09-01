@@ -31,31 +31,45 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/sector", method = RequestMethod.POST)
-    public ModelAndView saveSector(String nameSector, String type) {
+    public ModelAndView saveSector(String nameSector) {
         ModelAndView mv = new ModelAndView("redirect:/sector");
 
-        if (type != null && type.equals("CREATE")) {
-            try {
+        try {
 
-                Sector sector = new Sector();
-                sector.setName(nameSector);
-                sectorService.create(sector);
+            Sector sector = new Sector();
+            sector.setName(nameSector);
+            sectorService.create(sector);
 
-            } catch (Exception exception) {
-                System.out.println(exception);
-            }
-        } else if (type != null && type.equals("DELETE")) {
-            try {
-                sectorService.delete(Long.parseLong(nameSector));
-            } catch (Exception exception) {
-                System.out.println(exception);
-            }
-        } else if (type != null && type.equals("UPDATE")) {
-//            try {
-//                sectorService.delete(Long.parseLong(nameSector));
-//            } catch (Exception exception) {
-//                System.out.println(exception);
-//            }
+        } catch (Exception exception) {
+            System.out.println(exception);
+        }
+        return mv;
+    }
+
+    @RequestMapping(value = "/sectorEdit", method = RequestMethod.POST)
+    public ModelAndView editSector(Long sectorId, String sectorNameEdit) {
+        ModelAndView mv = new ModelAndView("redirect:/sector");
+
+        try {
+
+            Sector sector = new Sector();
+            sector.setId(sectorId);
+            sector.setName(sectorNameEdit);
+            sectorService.update(sector);
+        } catch (Exception exception) {
+            System.out.println(exception);
+        }
+        return mv;
+    }
+
+    @RequestMapping(value = "/sectorDelete", method = RequestMethod.POST)
+    public ModelAndView deleteSector(Long sectorId) {
+        ModelAndView mv = new ModelAndView("redirect:/sector");
+
+        try {
+            sectorService.delete(sectorId);
+        } catch (Exception exception) {
+            System.out.println(exception);
         }
         return mv;
     }

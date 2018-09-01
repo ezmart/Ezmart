@@ -48,7 +48,17 @@ public class SectorService implements BaseSectorService {
 
     @Override
     public void update(Sector entity) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        Connection conn = ConnectionManager.getInstance().getConnection();
+        try {
+            dao.update(conn, entity);
+            conn.commit();
+            conn.close();
+        } catch (Exception e) {
+            conn.rollback();
+            conn.close();
+            throw e;
+        }
     }
 
     @Override

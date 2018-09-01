@@ -38,7 +38,17 @@ public class SectorDAO implements BaseDAO<Sector> {
 
     @Override
     public void update(Connection conn, Sector entity) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = " UPDATE sector set sector_name = ? WHERE sector_id = ?; ";
+
+        PreparedStatement statement = conn.prepareStatement(sql);
+        int i = 0;
+
+        statement.setString(++i, entity.getName());
+        statement.setLong(++i, entity.getId());
+
+        statement.execute();
+
+        statement.close();
     }
 
     @Override
