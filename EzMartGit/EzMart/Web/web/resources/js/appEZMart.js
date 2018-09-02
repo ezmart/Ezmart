@@ -31,10 +31,35 @@ window.onload = function () {
     });
 };
 
-function setDadosModal(sectorId, sectorName) {
+function setDadosModalSector(sectorId, sectorName) {
     document.getElementById('sector-id').innerHTML = sectorId + " - " + sectorName;
     document.getElementById('idSectorDelete').value = sectorId;
 }
+
+function setNameSectorEdit(sectorId, sectorName) {
+    document.getElementById('idSector').value = sectorId;
+    document.querySelector("[name='sectorNameEdit']").value = sectorName;
+}
+
+function setDadosModalProvider(providerId, providerName) {
+    document.getElementById('provider-id').innerHTML = providerId + " - " + providerName;
+    document.getElementById('idProviderDelete').value = providerId;
+}
+
+function setProviderEdit(providerId, providerCnpj, providerName, providerBusinessName) {
+    document.getElementById('idProvider').value = providerId;
+    document.querySelector("[name='providerCnpjEdit']").value = providerCnpj;
+    document.querySelector("[name='providerNameEdit']").value = providerName;
+    document.querySelector("[name='providerBusinessNameEdit']").value = providerBusinessName;
+}
+
+$(document).ready(function () {
+    var $cnpj = $("#providerCnpj");
+    $cnpj.mask('00.000.000/0000-00', {reverse: true});
+
+    var $cnpjEdit = $("#cnpjProviderEdit");
+    $cnpjEdit.mask('00.000.000/0000-00', {reverse: true});
+});
 
 function setDadaModalList(data) {
     document.getElementById('idDelete').value = data;

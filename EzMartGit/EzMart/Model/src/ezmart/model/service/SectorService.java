@@ -35,10 +35,10 @@ public class SectorService implements BaseSectorService {
     public List<Sector> readByCriteria(Map<Long, Object> criteria, Long limit, Long offset) throws Exception {
         Connection conn = ConnectionManager.getInstance().getConnection();
         try {
-            List<Sector> productList = dao.readByCriteria(conn, criteria, limit, offset);
+            List<Sector> sectorList = dao.readByCriteria(conn, criteria, limit, offset);
             conn.commit();
             conn.close();
-            return productList;
+            return sectorList;
         } catch (Exception e) {
             conn.rollback();
             conn.close();
@@ -84,10 +84,10 @@ public class SectorService implements BaseSectorService {
     public List<Sector> findAll(Integer limit, Integer offset) throws Exception {
         Connection conn = ConnectionManager.getInstance().getConnection();
         try {
-            List<Sector> productList = dao.findAll(conn, limit, offset);
+            List<Sector> sectorList = dao.findAll(conn, limit, offset);
             conn.commit();
             conn.close();
-            return productList;
+            return sectorList;
         } catch (Exception e) {
             conn.rollback();
             conn.close();

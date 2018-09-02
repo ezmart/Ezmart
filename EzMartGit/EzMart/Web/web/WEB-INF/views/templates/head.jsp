@@ -30,4 +30,5 @@
     <!-- For iPhone -->
     <meta name="msapplication-TileColor" content="#00bcd4">
     <meta name="msapplication-TileImage" href="<c:url value="/resources/img/logo_preto_icon.png"/>">
+    <script src="<c:url value="/resources/js/jquery3_3_1.js"/>"></script>
 </head>
