@@ -65,3 +65,8 @@ function setDadaModalList(data) {
     document.getElementById('idDelete').value = data;
 //    alert(data);
 }
+
+function setDadaModalProductList(data) {
+    document.getElementById('idCreate').value = data;
+//    alert(data);
+}

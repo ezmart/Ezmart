@@ -1,16 +1,15 @@
 package ezmart.profile.controller;
 
-import com.sun.xml.internal.messaging.saaj.util.ByteInputStream;
 import ezmart.model.entity.Consumer;
 import ezmart.model.entity.Establishment;
 import ezmart.model.entity.User;
 import ezmart.model.service.UserService;
+import ezmart.services.EzMartWebServices;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.http.HttpSession;
 import org.springframework.core.io.InputStreamResource;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -127,8 +126,10 @@ public class MyProfileController {
     @RequestMapping(value = "/imgProfile", method = RequestMethod.GET)
     public ResponseEntity<InputStreamResource> streamImg(HttpSession session) throws Exception {
         Object auxSession = session.getAttribute("userLogged");
-        byte bytes[] = null;
         User user = null;
+        EzMartWebServices webServices = new EzMartWebServices();
+        ResponseEntity<InputStreamResource> img = null;
+        
         try {
             if (auxSession instanceof Consumer) {
                 user = (Consumer) auxSession;
@@ -136,17 +137,11 @@ public class MyProfileController {
                 user = (Establishment) auxSession;
             }
 
-            UserService service = new UserService();
-            bytes = service.getImg(user.getId());
+            img = webServices.getImage(user.getId());
 
         } catch (Exception exception) {
             System.out.println(exception);
         }
-        return ResponseEntity.ok()
-                .contentLength(bytes.length)
-                .contentType(MediaType.IMAGE_JPEG)
-                .body(
-                        new InputStreamResource(
-                                new ByteInputStream(bytes, bytes.length)));
+        return img;
     }
 }

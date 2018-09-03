@@ -32,7 +32,29 @@ public class ShoppingListDAO implements BaseDAO<ShoppingList> {
 
     @Override
     public ShoppingList readById(Connection conn, Long id) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = "SELECT * from list WHERE list_id=?";
+        ShoppingList shoppingList = null;
+        try {
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setLong(1, id);
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                
+                shoppingList.setId(resultSet.getLong("list_id"));
+                shoppingList.setConsumerId(resultSet.getLong("list_consumerid"));
+                shoppingList.setName(resultSet.getString("list_name"));
+                shoppingList.setDate(resultSet.getDate("list_date"));
+                shoppingList.setFavorite(resultSet.getBoolean("list_favorite"));
+
+            }
+            resultSet.close();
+            statement.close();
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return shoppingList;
     }
 
     @Override

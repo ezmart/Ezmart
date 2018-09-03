@@ -1,20 +1,31 @@
 package ezmart.consumer.controller;
 
+import ezmart.model.criteria.ListProductCriteria;
 import ezmart.model.entity.City;
 import ezmart.model.entity.Consumer;
 import ezmart.model.entity.Establishment;
 import ezmart.model.entity.ShoppingList;
 import ezmart.model.entity.State;
 import ezmart.model.entity.User;
+import ezmart.model.model_entity.ListProductModel;
 import ezmart.model.service.CityService;
 import ezmart.model.service.ConsumerService;
+import ezmart.model.service.ListProductService;
 import ezmart.model.service.ShoppingListService;
 import ezmart.model.service.StateService;
+import ezmart.model.service.UserService;
+import java.nio.file.Files;
+import java.nio.file.OpenOption;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import static java.nio.file.StandardOpenOption.CREATE_NEW;
+import static java.nio.file.StandardOpenOption.WRITE;
 import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpSession;
+import javax.swing.ImageIcon;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -183,18 +194,94 @@ public class ConsumerController {
     }
 
     @RequestMapping(value = "/products/{id}/list", method = RequestMethod.GET)
-    public ModelAndView getProductsList(@PathVariable Long id) {
-        ModelAndView mv = new ModelAndView("redirect:/home");
+    public ModelAndView getProductsList(@PathVariable Long id, HttpSession session) {
+        ModelAndView mv = new ModelAndView("consumer/consumer_products_list");
 
         try {
             ShoppingListService service = new ShoppingListService();
-            List<ShoppingList> shoppingList = service.readByCriteria(null, null, null);
+            ShoppingList shoppingList = service.readById(id);
+
+            ListProductService listProductService = new ListProductService();
+            Map<Long, Object> criteria = new HashMap<>();
+            criteria.put(ListProductCriteria.PRODUCT_ID_EQ, id);
+            List<ListProductModel> productsList = listProductService.readByCriteriaModel(criteria, null, null);
 
             mv.addObject("shoppingList", shoppingList);
+            mv.addObject("productsList", productsList);
+
+            //Lista Atual
+            mv.addObject("listId", id);
+
+            Object auxSession = session.getAttribute("userLogged");
+            User user = null;
+
+            if (auxSession instanceof Consumer) {
+                user = (Consumer) auxSession;
+            } else {
+                user = (Establishment) auxSession;
+            }
+//         byte[] bytes = Files.readAllBytes(path);
+
+            //byte[] bytes = service.getImg(1L);
+            byte[] bytes = new UserService().getImg(user.getId());
+
+            mv.addObject("imgProfile123", bytes);
+
         } catch (Exception exception) {
             System.out.println(exception);
         }
 
         return mv;
     }
+
+    @RequestMapping(value = "/products/{id}/list", method = RequestMethod.POST)
+    public ModelAndView postProductList(@PathVariable Long id, String value, String type, HttpSession session) {
+        ModelAndView mv = new ModelAndView("redirect:/products/" + id + "/list");
+
+        Object auxSession = session.getAttribute("userLogged");
+        User user = null;
+
+        if (auxSession instanceof Consumer) {
+            user = (Consumer) auxSession;
+        } else {
+            user = (Establishment) auxSession;
+        }
+
+        if (type != null && type.equals("CREATE")) {
+            try {
+//                String name = value;
+//                ShoppingList shoppingList = new ShoppingList();
+//                shoppingList.setName(name);
+//                shoppingList.setConsumerId(user.getId());
+//                shoppingList.setFavorite(false);
+
+                //Paga a data atual do sistema
+//                Date date = new Date(System.currentTimeMillis());
+//                shoppingList.setDate(date);
+                //shoppingList.setProductList(null);
+//                ShoppingListService service = new ShoppingListService();
+//                service.create(shoppingList);
+            } catch (Exception exception) {
+                System.out.println(exception);
+            }
+        } else if (type != null && type.equals("UPDATE")) {
+//            ShoppingListService service = new ShoppingListService();
+//            Long id = (Long) value;
+//            
+//            service.update(id);
+
+        } else if (type != null && type.equals("DELETE")) {
+            try {
+                ListProductService service = new ListProductService();
+                Long productId = Long.parseLong(value);
+                service.deleteFromList(id, productId);
+
+            } catch (Exception exception) {
+                System.out.println(exception);
+            }
+        }
+
+        return mv;
+    }
+
 }
