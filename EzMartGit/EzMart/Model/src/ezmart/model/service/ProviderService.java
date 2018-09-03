@@ -53,7 +53,16 @@ public class ProviderService implements BaseProviderService {
 
     @Override
     public void update(Provider entity) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Connection conn = ConnectionManager.getInstance().getConnection();
+        try {
+            dao.update(conn, entity);
+            conn.commit();
+            conn.close();
+        } catch (Exception e) {
+            conn.rollback();
+            conn.close();
+            throw e;
+        }
     }
 
     @Override
