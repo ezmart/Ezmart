@@ -3,6 +3,8 @@ package ezmart.model.dao;
 import ezmart.model.base.BaseDAO;
 import ezmart.model.criteria.ProductCriteria;
 import ezmart.model.entity.Product;
+import ezmart.model.entity.Provider;
+import ezmart.model.entity.Sector;
 import ezmart.model.util.PreparedStatementBuilder;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -25,7 +27,10 @@ public class ProductDAO implements BaseDAO<Product> {
 
     @Override
     public List<Product> readByCriteria(Connection conn, Map<Long, Object> criteria, Long limit, Long offset) throws Exception {
-        String sql = "SELECT * from product WHERE 1=1 ";
+        String sql = "SELECT * from product"
+                + " LEFT JOIN sector on sector_id = product_sectorid"
+                + " LEFT JOIN provider on provider_id = product_providerid"
+                + " WHERE 1=1 ";
 
         List<Object> paramList = new ArrayList<>();
 
@@ -74,12 +79,22 @@ public class ProductDAO implements BaseDAO<Product> {
         List<Product> productList = new ArrayList<>();
         while (resultSet.next()) {
             Product product = new Product();
-
+            Sector sector = new Sector();
+            Provider provider = new Provider();
+                    
+            sector.setId(resultSet.getLong("sector_id"));
+            sector.setName(resultSet.getString("sector_name"));
+            provider.setId(resultSet.getLong("provider_id"));
+            provider.setCnpj(resultSet.getString("provider_cnpj"));
+            provider.setName(resultSet.getString("provider_name"));
+            provider.setBusinessName(resultSet.getString("provider_businessname"));
+           
             product.setId(resultSet.getLong("product_id"));
-            product.setSectorId(resultSet.getLong("product_sectorid"));
-            product.setProviderId(resultSet.getLong("product_providerid"));
             product.setBarCode(resultSet.getString("product_barcode"));
             product.setName(resultSet.getString("product_name"));
+            product.setBrand(resultSet.getString("product_brand"));
+            product.setSector(sector);
+            product.setProvider(provider);
             //product.setImg(resultSet.getLong("city_stateid"));
 
             productList.add(product);
@@ -123,5 +138,49 @@ public class ProductDAO implements BaseDAO<Product> {
         resultSet.close();
         statement.close();
         return bytes;
+    }
+
+    public List<Product> findAll(Connection conn, Integer offset, Integer limit) throws Exception {
+        String sql = "SELECT * FROM product"
+                + " LEFT JOIN sector on sector_id = product_sectorid"
+                + " LEFT JOIN provider on provider_id = product_providerid;";
+
+        List<Object> paramList = new ArrayList<>();
+
+        if (limit != null) {
+            sql += " LIMIT ?";
+            paramList.add(limit);
+        }
+        if (offset != null) {
+            sql += " OFFSET ?";
+            paramList.add(offset);
+        }
+
+        PreparedStatement statement = PreparedStatementBuilder.build(conn, sql, paramList);
+        ResultSet rs = statement.executeQuery();
+        List<Product> productList = new ArrayList<>();
+        while (rs.next()) {
+            Product product = new Product();
+            Provider provider = new Provider();
+            Sector sector = new Sector();
+
+            sector.setId(rs.getLong("sector_id"));
+            sector.setName(rs.getString("sector_name"));
+            provider.setId(rs.getLong("provider_id"));
+            provider.setCnpj(rs.getString("provider_cnpj"));
+            provider.setName(rs.getString("provider_name"));
+            provider.setBusinessName(rs.getString("provider_businessname"));
+            
+            product.setId(rs.getLong("product_id"));
+            product.setBarCode(rs.getString("product_barcode"));
+            product.setName(rs.getString("product_name"));
+            product.setBrand(rs.getString("product_brand"));
+            product.setSector(sector);
+            product.setProvider(provider);
+        }
+
+        rs.close();
+        statement.close();
+        return productList;
     }
 }

@@ -4,27 +4,13 @@ import ezmart.model.base.BaseEntity;
 
 public class Product extends BaseEntity {
 
-    private Long sectorId;
-    private Long providerId;
+    private Sector sector;
+    private Provider provider;
     private String barCode;
     private String name;
-    private byte[] img;
+    private byte[] image;
+    private String brand;
 
-    public Long getSectorId() {
-        return sectorId;
-    }
-
-    public void setSectorId(Long sectorId) {
-        this.sectorId = sectorId;
-    }
-
-    public Long getProviderId() {
-        return providerId;
-    }
-
-    public void setProviderId(Long providerId) {
-        this.providerId = providerId;
-    }
 
     public String getBarCode() {
         return barCode;
@@ -42,11 +28,35 @@ public class Product extends BaseEntity {
         this.name = name;
     }
 
-    public byte[] getImg() {
-        return img;
+    public Sector getSector() {
+        return sector;
     }
 
-    public void setImg(byte[] img) {
-        this.img = img;
+    public void setSector(Sector sector) {
+        this.sector = sector;
+    }
+
+    public Provider getProvider() {
+        return provider;
+    }
+
+    public void setProvider(Provider provider) {
+        this.provider = provider;
+    }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
     }
 }

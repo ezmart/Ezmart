@@ -10,11 +10,12 @@ import java.util.Map;
 
 public class ProductService implements BaseProductService {
 
+    ProductDAO dao = new ProductDAO();
+    
     @Override
     public void create(Product entity) throws Exception {
         Connection conn = ConnectionManager.getInstance().getConnection();
         try {
-            ProductDAO dao = new ProductDAO();
             dao.create(conn, entity);
             conn.commit();
             conn.close();
@@ -29,7 +30,6 @@ public class ProductService implements BaseProductService {
     public Product readById(Long id) throws Exception {
         Connection conn = ConnectionManager.getInstance().getConnection();
         try {
-            ProductDAO dao = new ProductDAO();
             Product product = dao.readById(conn, id);
             conn.commit();
             conn.close();
@@ -45,7 +45,6 @@ public class ProductService implements BaseProductService {
     public List<Product> readByCriteria(Map<Long, Object> criteria, Long limit, Long offset) throws Exception {
         Connection conn = ConnectionManager.getInstance().getConnection();
         try {
-            ProductDAO dao = new ProductDAO();
             List<Product> productList = dao.readByCriteria(conn, criteria, limit, offset);
             conn.commit();
             conn.close();
@@ -61,7 +60,6 @@ public class ProductService implements BaseProductService {
     public void update(Product entity) throws Exception {
         Connection conn = ConnectionManager.getInstance().getConnection();
         try {
-            ProductDAO dao = new ProductDAO();
             dao.update(conn, entity);
             conn.commit();
             conn.close();
@@ -76,7 +74,6 @@ public class ProductService implements BaseProductService {
     public void delete(Long id) throws Exception {
         Connection conn = ConnectionManager.getInstance().getConnection();
         try {
-            ProductDAO dao = new ProductDAO();
             dao.delete(conn, id);
             conn.commit();
             conn.close();
@@ -90,6 +87,20 @@ public class ProductService implements BaseProductService {
     @Override
     public Map<String, String> validate(Map<String, Object> fields) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public List<Product> findAll(Integer offset, Integer limit) throws Exception{
+        Connection conn = ConnectionManager.getInstance().getConnection();
+        try {
+            List<Product> productList = dao.findAll(conn, limit, offset);
+            conn.commit();
+            conn.close();
+            return productList;
+        } catch (Exception e) {
+            conn.rollback();
+            conn.close();
+            throw e;
+        }
     }
 
 }
