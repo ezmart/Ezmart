@@ -17,7 +17,22 @@ public class ProductDAO implements BaseDAO<Product> {
 
     @Override
     public void create(Connection conn, Product entity) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = " INSERT INTO product (product_sectorid, product_providerid, product_barcode, product_name, product_image, product_brand)"
+                + " VALUES(?,?,?,?,?,?); ";
+
+        PreparedStatement statement = conn.prepareStatement(sql);
+        int i = 0;
+
+        statement.setLong(++i, entity.getSector().getId());
+        statement.setLong(++i, entity.getProvider().getId());
+        statement.setString(++i, entity.getBarCode());
+        statement.setString(++i, entity.getName());
+        statement.setBytes(++i, entity.getImage());
+        statement.setString(++i, entity.getBrand());
+
+        statement.execute();
+
+        statement.close();
     }
 
     @Override
@@ -81,14 +96,14 @@ public class ProductDAO implements BaseDAO<Product> {
             Product product = new Product();
             Sector sector = new Sector();
             Provider provider = new Provider();
-                    
+
             sector.setId(resultSet.getLong("sector_id"));
             sector.setName(resultSet.getString("sector_name"));
             provider.setId(resultSet.getLong("provider_id"));
             provider.setCnpj(resultSet.getString("provider_cnpj"));
             provider.setName(resultSet.getString("provider_name"));
             provider.setBusinessName(resultSet.getString("provider_businessname"));
-           
+
             product.setId(resultSet.getLong("product_id"));
             product.setBarCode(resultSet.getString("product_barcode"));
             product.setName(resultSet.getString("product_name"));
@@ -106,12 +121,38 @@ public class ProductDAO implements BaseDAO<Product> {
 
     @Override
     public void update(Connection conn, Product entity) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        String sql = " UPDATE product SET product_sectorid = ?, product_providerid = ?, product_barcode = ?, product_name = ?, product_image = ?, product_brand = ?)"
+                + " WHERE product_id = ?; ";
+
+        PreparedStatement statement = conn.prepareStatement(sql);
+        int i = 0;
+
+        statement.setLong(++i, entity.getSector().getId());
+        statement.setLong(++i, entity.getProvider().getId());
+        statement.setString(++i, entity.getBarCode());
+        statement.setString(++i, entity.getName());
+        statement.setBytes(++i, entity.getImage());
+        statement.setString(++i, entity.getBrand());
+        statement.setLong(++i, entity.getId());
+
+        statement.execute();
+
+        statement.close();
     }
 
     @Override
     public void delete(Connection conn, Long id) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = " DELETE FROM product WHERE product_id = ?;";
+
+        PreparedStatement statement = conn.prepareStatement(sql);
+        int i = 0;
+
+        statement.setLong(++i, id);
+
+        statement.execute();
+
+        statement.close();
     }
 
     public void setImg(Connection conn, Long id, byte[] bytes) throws Exception {
@@ -143,17 +184,17 @@ public class ProductDAO implements BaseDAO<Product> {
     public List<Product> findAll(Connection conn, Integer offset, Integer limit) throws Exception {
         String sql = "SELECT * FROM product"
                 + " LEFT JOIN sector on sector_id = product_sectorid"
-                + " LEFT JOIN provider on provider_id = product_providerid;";
+                + " LEFT JOIN provider on provider_id = product_providerid";
 
         List<Object> paramList = new ArrayList<>();
 
-        if (limit != null) {
-            sql += " LIMIT ?";
-            paramList.add(limit);
-        }
         if (offset != null) {
             sql += " OFFSET ?";
             paramList.add(offset);
+        }
+        if (limit != null) {
+            sql += " LIMIT ?";
+            paramList.add(limit);
         }
 
         PreparedStatement statement = PreparedStatementBuilder.build(conn, sql, paramList);
@@ -170,13 +211,16 @@ public class ProductDAO implements BaseDAO<Product> {
             provider.setCnpj(rs.getString("provider_cnpj"));
             provider.setName(rs.getString("provider_name"));
             provider.setBusinessName(rs.getString("provider_businessname"));
-            
+
             product.setId(rs.getLong("product_id"));
             product.setBarCode(rs.getString("product_barcode"));
             product.setName(rs.getString("product_name"));
             product.setBrand(rs.getString("product_brand"));
+            product.setImage(rs.getBytes("product_image"));
             product.setSector(sector);
             product.setProvider(provider);
+            
+            productList.add(product);
         }
 
         rs.close();

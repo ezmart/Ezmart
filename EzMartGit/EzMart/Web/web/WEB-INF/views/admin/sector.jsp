@@ -76,7 +76,7 @@
                     <nav>
                         <div class="nav-wrapper">
                             <div style="margin-left: 40px" class="col s12">
-                                <a href="<c:url value="/home"/>" class="breadcrumb">inicio</a>
+                                <a href="<c:url value="/home"/>" class="breadcrumb">Início</a>
                             <a href="<c:url value=""/>" class="breadcrumb">Linhas</a>
                         </div>
                     </div>

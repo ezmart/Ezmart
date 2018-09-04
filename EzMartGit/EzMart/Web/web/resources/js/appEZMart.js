@@ -53,6 +53,18 @@ function setProviderEdit(providerId, providerCnpj, providerName, providerBusines
     document.querySelector("[name='providerBusinessNameEdit']").value = providerBusinessName;
 }
 
+function setDadosModalProduct(productId, productName) {
+    document.getElementById('product-id').innerHTML = productId + " - " + productName;
+    document.getElementById('idProductDelete').value = productId;
+}
+
+function setProductEdit(productId, productName, productBarCode, productBrand) {
+    document.getElementById('idProduct').value = productId;
+    document.querySelector("[name='productNameEdit']").value = productName;
+    document.querySelector("[name='productBarCodeEdit']").value = productBarCode;
+    document.querySelector("[name='productBrandEdit']").value = productBrand;
+}
+
 $(document).ready(function () {
     var $cnpj = $("#providerCnpj");
     $cnpj.mask('00.000.000/0000-00', {reverse: true});

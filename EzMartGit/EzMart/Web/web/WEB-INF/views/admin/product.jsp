@@ -26,20 +26,24 @@
             <c:import url="/WEB-INF/views/templates/header_admin.jsp"></c:import>
                 <div id="modal-create" class="modal">
                     <div class="modal-content">
-                        <h4>Adicionar Fornecedor<i class=" small material-icons" style="margin-left: 10px;">add_box</i></h4>
+                        <h4>Adicionar Produto<i class=" small material-icons" style="margin-left: 10px;">add_box</i></h4>
                         <div class="row">
                             <form class="col s12" method="POST">
+<!--                                <div class="input-field col s12">
+                                    <label for="imagem">Imagem</label>
+                                    <input id="productImage" name="ImageProduct" type="text" class="validate">
+                                </div>-->
                                 <div class="input-field col s12">
-                                    <label for="cnpj">CNPJ</label>
-                                    <input id="providerCnpj" name="cnpjProvider" maxlength="18" type="text" class="validate">
+                                    <label for="nome">Nome</label>
+                                    <input id="productName" name="nameProduct" type="text" class="validate">
                                 </div>
                                 <div class="input-field col s12">
-                                    <label for="nome">Nome Fantasia</label>
-                                    <input id="providerName" name="nameProvider" type="text" class="validate">
+                                    <label for="codBarras">Código de Barras</label>
+                                    <input id="productBarCode" name="barCode" maxlength="13" type="text" class="validate">
                                 </div>
                                 <div class="input-field col s12">
-                                    <label for="businessName">Razão Social</label>
-                                    <input id="providerBusinessName" name="businessNameProvider" type="text" class="validate">
+                                    <label for="marca">Marca</label>
+                                    <input id="productBrand" name="brandProduct" type="text" class="validate">
                                 </div>
                                 <div class="modal-footer">
                                     <a class="btn btn-sm btn-default btn-small red modal-close modal-action" style="color:white;">Voltar</a>
@@ -51,21 +55,25 @@
                 </div>
                 <div id="modal-update" class="modal">
                     <div class="modal-content">
-                        <h4>Editar Fornecedor<i class=" small material-icons" style="margin-left: 10px;">edit</i></h4>
+                        <h4>Editar Produto<i class=" small material-icons" style="margin-left: 10px;">edit</i></h4>
                         <div class="row">
                             <form class="col s12" method="POST" action="/ezmartWeb/providerEdit">
                                 <div class="input-field col s12">
-                                    <label for="cnpj">CNPJ</label>
-                                    <input type="text" style="display: none"  name="providerId" id = "idProvider">
-                                    <input id="cnpjProviderEdit" name="providerCnpjEdit" maxlength="18" type="text" class="validate">
+                                    <label for="id">Id</label>
+                                    <input id="idProduct" name="idProductEdit" type="text" class="validate">
                                 </div>
                                 <div class="input-field col s12">
-                                    <label for="nome">Nome Fantasia</label>
-                                    <input id="nameProviderEdit" name="providerNameEdit" type="text" class="validate">
+                                    <label for="nome">Nome</label>
+                                    <input type="text" style="display: none"  name="productId" id = "idProduct">
+                                    <input id="nameProductEdit" name="productNameEdit" type="text" class="validate">
                                 </div>
                                 <div class="input-field col s12">
-                                    <label for="razaoSocial">Razão Social</label>
-                                    <input id="businessNameProviderEdit" name="providerBusinessNameEdit" type="text" class="validate">
+                                    <label for="codBarras">Código de Barras</label>
+                                    <input id="barCodeProductEdit" name="productBarCodeEdit" maxlength="13" type="text" class="validate">
+                                </div>
+                                <div class="input-field col s12">
+                                    <label for="marca">Marca</label>
+                                    <input id="brandProductEdit" name="productBrandEdit" type="text" class="validate">
                                 </div>
                                 <div class="modal-footer">
                                     <a class="btn btn-sm btn-default btn-small red modal-close modal-action" style="color:white;">Voltar</a>
@@ -77,11 +85,11 @@
                 </div>
                 <div id="modal-delete" class="modal">
                     <div class="modal-content">
-                        <h4>Excluir Fornecedor<i class=" small material-icons" style="margin-left: 10px;">delete</i></h4>
-                        <p><font size="5">Tem certeza que deseja excluir o fornecedor: </font><font color="red" size="5"><container id = "provider-id"></container></font> <font size="5">?</font></p>
+                        <h4>Excluir Produto<i class=" small material-icons" style="margin-left: 10px;">delete</i></h4>
+                        <p><font size="5">Tem certeza que deseja excluir o produto: </font><font color="red" size="5"><container id = "product-id"></container></font> <font size="5">?</font></p>
                         <div class="modal-footer">
-                            <form method="POST" action="/ezmartWeb/providerDelete">
-                                <input type="text" style="display: none"  name="providerId" id = "idProviderDelete">
+                            <form method="POST" action="/ezmartWeb/productDelete">
+                                <input type="text" style="display: none"  name="productId" id = "idProductDelete">
                                 <a class="btn btn-sm btn-default btn-small red modal-close modal-action" style="color:white;">Não</a>
                                 <button class="btn btn-sm btn-default btn-small green" type="submit" style="color:white; margin-right: 10px;" >Sim</button>
                             </form>
@@ -93,7 +101,7 @@
                         <div class="nav-wrapper">
                             <div style="margin-left: 40px" class="col s12">
                                 <a href="<c:url value="/home"/>" class="breadcrumb">Início</a>
-                            <a href="<c:url value=""/>" class="breadcrumb">Fornecedores</a>
+                            <a href="<c:url value=""/>" class="breadcrumb">Produtos</a>
                         </div>
                     </div>
                 </nav>
@@ -103,28 +111,34 @@
                     <div class="col s12">
                         <div class="card">
                             <div class="card-content">
-                                <h3>Fornecedores</h3>
+                                <h3>Produtos</h3>
                                 <table class="table">
                                     <tr>
                                         <th>Id</th>
-                                        <th>CNPJ</th>
-                                        <th>Nome Fantasia</th>
-                                        <th>Razão Social</th>
+                                        <th>Imagem</th>
+                                        <th>Nome</th>
+                                        <th>Código de Barras</th>
+                                        <th>Marca</th>
+                                        <th>Id da Linha</th>
+                                        <th>Id do Fornecedor</th>
                                     <hr>
                                     <th></th>
                                     </tr>
                                     <a href="#modal-create" class="btn btn-sm btn-default btn-small green left modal-trigger" style="color:white;"><i class="material-icons right">add_box</i>Adicionar</a>
                                     <br><br/>
                                     <br><br/>
-                                    <c:forEach items="${providerList}" var="provider">
+                                    <c:forEach items="${productList}" var="product">
                                         <tr>
-                                            <td>${provider.id}</td>
-                                            <td>${provider.cnpj}</td>
-                                            <td>${provider.name}</td>
-                                            <td>${provider.businessName}</td>
+                                            <td>${product.id}</td>
+                                            <td>${product.image}</td>
+                                            <td>${product.name}</td>
+                                            <td>${product.barCode}</td>
+                                            <td>${product.brand}</td>
+                                            <td>${product.sector.id}</td>
+                                            <td>${product.provider.id}</td>
                                             <td>
-                                                <a class="btn btn-sm btn-default btn-small ffc400 amber accent-3 modal-trigger" href="#modal-update" style="color:white;" onclick="setProviderEdit(${provider.id}, '${provider.cnpj}', '${provider.name}', '${provider.businessName}')"><i class="material-icons right">edit</i>Alterar</a>
-                                                <a class="btn btn-sm btn-danger btn-small red modal-trigger" href="#modal-delete" onclick="setDadosModalProvider(${provider.id}, '${provider.name}')" style="color:white;"><i class="material-icons right">delete</i>Excluir</a>
+                                                <a class="btn btn-sm btn-default btn-small ffc400 amber accent-3 modal-trigger" href="#modal-update" style="color:white;" onclick="setProductEdit(${product.id}, '${product.name}', '${product.barCode}', '${product.brand}')"><i class="material-icons right">edit</i>Alterar</a>
+                                                <a class="btn btn-sm btn-danger btn-small red modal-trigger" href="#modal-delete" onclick="setDadosModalProduct(${product.id}, '${product.name}')" style="color:white;"><i class="material-icons right">delete</i>Excluir</a>
                                             </td>
                                         </tr>    
                                     </c:forEach>

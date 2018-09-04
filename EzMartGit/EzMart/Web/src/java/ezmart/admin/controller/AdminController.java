@@ -119,12 +119,12 @@ public class AdminController {
 
         try {
 
-            Provider sector = new Provider();
-            sector.setId(providerId);
-            sector.setCnpj(providerCnpjEdit);
-            sector.setName(providerNameEdit);
-            sector.setBusinessName(providerBusinessNameEdit);
-            providerService.update(sector);
+            Provider provider = new Provider();
+            provider.setId(providerId);
+            provider.setCnpj(providerCnpjEdit);
+            provider.setName(providerNameEdit);
+            provider.setBusinessName(providerBusinessNameEdit);
+            providerService.update(provider);
 
         } catch (Exception exception) {
             System.out.println(exception.getMessage());
@@ -144,8 +144,6 @@ public class AdminController {
         return mv;
     }
     
-    ////////
-    
     @RequestMapping(value = "/produto", method = RequestMethod.GET)
     public ModelAndView findAllProduct(HttpSession session) {
         ModelAndView mv = null;
@@ -160,51 +158,70 @@ public class AdminController {
         return mv;
     }
 
-//    @RequestMapping(value = "/produto", method = RequestMethod.POST)
-//    public ModelAndView saveProduct(String cnpjProvider, String nameProvider, String businessNameProvider) {
-//        ModelAndView mv = new ModelAndView("redirect:/produto");
-//        try {
-//
-//            Provider provider = new Provider();
-//            provider.setCnpj(cnpjProvider);
-//            provider.setName(nameProvider);
-//            provider.setBusinessName(businessNameProvider);
-//            providerService.create(provider);
-//
-//        } catch (Exception exception) {
-//            System.out.println(exception.getMessage());
-//        }
-//        return mv;
-//    }
-//
-//    @RequestMapping(value = "/providerEdit", method = RequestMethod.POST)
-//    public ModelAndView editProvider(Long providerId, String providerCnpjEdit, String providerNameEdit, String providerBusinessNameEdit) {
-//        ModelAndView mv = new ModelAndView("redirect:/fornecedor");
-//
-//        try {
-//
-//            Provider sector = new Provider();
-//            sector.setId(providerId);
-//            sector.setCnpj(providerCnpjEdit);
-//            sector.setName(providerNameEdit);
-//            sector.setBusinessName(providerBusinessNameEdit);
-//            providerService.update(sector);
-//
-//        } catch (Exception exception) {
-//            System.out.println(exception.getMessage());
-//        }
-//        return mv;
-//    }
-//
-//    @RequestMapping(value = "/providerDelete", method = RequestMethod.POST)
-//    public ModelAndView deleteProvider(Long providerId) {
-//        ModelAndView mv = new ModelAndView("redirect:/fornecedor");
-//
-//        try {
-//            providerService.delete(providerId);
-//        } catch (Exception exception) {
-//            System.out.println(exception.getMessage());
-//        }
-//        return mv;
-//    }
+    @RequestMapping(value = "/produto", method = RequestMethod.POST)
+    public ModelAndView saveProduct(Long sectorId, Long providerId, String barCode, String productName, byte[] image, String brand) {
+        ModelAndView mv = new ModelAndView("redirect:/produto");
+        try {
+
+            Sector sector = new Sector();
+            sector.setId(sectorId);
+
+            Provider provider = new Provider();
+            provider.setId(providerId);
+            
+            Product product = new Product();
+            product.setSector(sector);
+            product.setProvider(provider);
+            product.setBarCode(barCode);
+            product.setName(productName);
+            product.setImage(image);
+            product.setBrand(brand);
+            
+            productService.create(product);
+
+        } catch (Exception exception) {
+            System.out.println(exception.getMessage());
+        }
+        return mv;
+    }
+
+    @RequestMapping(value = "/productEdit", method = RequestMethod.POST)
+    public ModelAndView editProduct(Long productId, Long sectorId, Long providerId, String barCode, String productName, byte[] image, String brand) {
+        ModelAndView mv = new ModelAndView("redirect:/produto");
+
+        try {
+            
+            Sector sector = new Sector();
+            sector.setId(sectorId);
+
+            Provider provider = new Provider();
+            provider.setId(providerId);
+            
+            Product product = new Product();
+            product.setSector(sector);
+            product.setProvider(provider);
+            product.setId(productId);
+            product.setBarCode(barCode);
+            product.setName(productName);
+            product.setImage(image);
+            product.setBrand(brand);
+            productService.update(product);
+
+        } catch (Exception exception) {
+            System.out.println(exception.getMessage());
+        }
+        return mv;
+    }
+
+    @RequestMapping(value = "/productDelete", method = RequestMethod.POST)
+    public ModelAndView deleteProduct(Long productId) {
+        ModelAndView mv = new ModelAndView("redirect:/produto");
+
+        try {
+            productService.delete(productId);
+        } catch (Exception exception) {
+            System.out.println(exception.getMessage());
+        }
+        return mv;
+    }
 }
