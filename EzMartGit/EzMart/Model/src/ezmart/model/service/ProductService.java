@@ -11,7 +11,7 @@ import java.util.Map;
 public class ProductService implements BaseProductService {
 
     ProductDAO dao = new ProductDAO();
-    
+
     @Override
     public void create(Product entity) throws Exception {
         Connection conn = ConnectionManager.getInstance().getConnection();
@@ -88,8 +88,8 @@ public class ProductService implements BaseProductService {
     public Map<String, String> validate(Map<String, Object> fields) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    public List<Product> findAll(Integer offset, Integer limit) throws Exception{
+
+    public List<Product> findAll(Integer offset, Integer limit) throws Exception {
         Connection conn = ConnectionManager.getInstance().getConnection();
         try {
             List<Product> productList = dao.findAll(conn, limit, offset);
@@ -103,4 +103,16 @@ public class ProductService implements BaseProductService {
         }
     }
 
+    public void uploadImage(byte[] productImage, Long idProduct) throws Exception {
+        Connection conn = ConnectionManager.getInstance().getConnection();
+        try {
+            dao.uploadImage(conn, productImage, idProduct);
+            conn.commit();
+            conn.close();
+        } catch (Exception e) {
+            conn.rollback();
+            conn.close();
+            throw e;
+        }
+    }
 }

@@ -29,10 +29,10 @@
                         <h4>Adicionar Produto<i class=" small material-icons" style="margin-left: 10px;">add_box</i></h4>
                         <div class="row">
                             <form class="col s12" method="POST">
-<!--                                <div class="input-field col s12">
-                                    <label for="imagem">Imagem</label>
-                                    <input id="productImage" name="ImageProduct" type="text" class="validate">
-                                </div>-->
+                                <!--                                <div class="input-field col s12">
+                                                                    <label for="imagem">Imagem</label>
+                                                                    <input id="productImage" name="ImageProduct" type="text" class="validate">
+                                                                </div>-->
                                 <div class="input-field col s12">
                                     <label for="nome">Nome</label>
                                     <input id="productName" name="nameProduct" type="text" class="validate">
@@ -57,7 +57,7 @@
                     <div class="modal-content">
                         <h4>Editar Produto<i class=" small material-icons" style="margin-left: 10px;">edit</i></h4>
                         <div class="row">
-                            <form class="col s12" method="POST" action="/ezmartWeb/providerEdit">
+                            <form class="col s12" method="POST" action="/ezmartWeb/productEdit">
                                 <div class="input-field col s12">
                                     <label for="id">Id</label>
                                     <input id="idProduct" name="idProductEdit" type="text" class="validate">
@@ -124,21 +124,36 @@
                                     <hr>
                                     <th></th>
                                     </tr>
-                                    <a href="#modal-create" class="btn btn-sm btn-default btn-small green left modal-trigger" style="color:white;"><i class="material-icons right">add_box</i>Adicionar</a>
+                                    <a href="#modal-create" class="btn-floating btn-n-floatingsmall green left modal-trigger" style="color:white;"><i class="material-icons center">add</i></a>
                                     <br><br/>
                                     <br><br/>
                                     <c:forEach items="${productList}" var="product">
                                         <tr>
                                             <td>${product.id}</td>
-                                            <td>${product.image}</td>
+                                            <td>${product.image}
+                                                <form method="post" enctype="multipart/form-data" action="/ezmartWeb/product/uploadImage">
+                                                    <div class="file-field input-field">
+                                                        <div class="btn">
+                                                            <span><i class="material-icons center">file_upload</i></span>
+                                                            <input type="file" id="productImage" name="productImage">
+                                                            <input value="${product.id}" name="idProductForImage" style="display: none">
+                                                        </div>
+                                                        <div class="file-path-wrapper">
+                                                            <input class="file-path validate" type="text" placeholder="Upload file">
+                                                        </div>
+                                                    </div>
+                                                    <container>
+                                                        <button id="btnUpload" type="submit" class="btn btn-success btn-small"><i class="material-icons left">save</i>Salvar</button>
+                                                    </container>
+                                                </form>
                                             <td>${product.name}</td>
                                             <td>${product.barCode}</td>
                                             <td>${product.brand}</td>
                                             <td>${product.sector.id}</td>
                                             <td>${product.provider.id}</td>
                                             <td>
-                                                <a class="btn btn-sm btn-default btn-small ffc400 amber accent-3 modal-trigger" href="#modal-update" style="color:white;" onclick="setProductEdit(${product.id}, '${product.name}', '${product.barCode}', '${product.brand}')"><i class="material-icons right">edit</i>Alterar</a>
-                                                <a class="btn btn-sm btn-danger btn-small red modal-trigger" href="#modal-delete" onclick="setDadosModalProduct(${product.id}, '${product.name}')" style="color:white;"><i class="material-icons right">delete</i>Excluir</a>
+                                                <a class="btn btn-sm btn-default btn-small ffc400 amber accent-3 modal-trigger" href="#modal-update" style="color:white;" onclick="setProductEdit(${product.id}, '${product.name}', '${product.barCode}', '${product.brand}')"><i class="material-icons center">edit</i></a>
+                                                <a class="btn btn-sm btn-danger btn-small red modal-trigger" href="#modal-delete" onclick="setDadosModalProduct(${product.id}, '${product.name}')" style="color:white;"><i class="material-icons center">delete</i></a>
                                             </td>
                                         </tr>    
                                     </c:forEach>

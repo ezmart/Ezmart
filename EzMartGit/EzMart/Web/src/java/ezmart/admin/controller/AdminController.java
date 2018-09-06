@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -219,6 +220,19 @@ public class AdminController {
 
         try {
             productService.delete(productId);
+        } catch (Exception exception) {
+            System.out.println(exception.getMessage());
+        }
+        return mv;
+    }
+
+    @RequestMapping(value = "/product/uploadImage", method = RequestMethod.POST)
+    public ModelAndView uploadImage(MultipartFile productImage, Long idProductForImage) {
+        ModelAndView mv = new ModelAndView("redirect:/produto");
+
+        try {
+            byte[] imgBytes = productImage.getBytes();
+            productService.uploadImage(imgBytes, idProductForImage);
         } catch (Exception exception) {
             System.out.println(exception.getMessage());
         }

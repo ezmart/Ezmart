@@ -184,7 +184,8 @@ public class ProductDAO implements BaseDAO<Product> {
     public List<Product> findAll(Connection conn, Integer offset, Integer limit) throws Exception {
         String sql = "SELECT * FROM product"
                 + " LEFT JOIN sector on sector_id = product_sectorid"
-                + " LEFT JOIN provider on provider_id = product_providerid";
+                + " LEFT JOIN provider on provider_id = product_providerid"
+                + " ORDER BY product_name ";
 
         List<Object> paramList = new ArrayList<>();
 
@@ -226,5 +227,19 @@ public class ProductDAO implements BaseDAO<Product> {
         rs.close();
         statement.close();
         return productList;
+    }
+
+    public void uploadImage(Connection conn, byte[] productImage, Long idProduct) throws Exception {
+        String sql = " UPDATE product SET product_image = ? WHERE product_id = ?;";
+
+        PreparedStatement statement = conn.prepareStatement(sql);
+        int i = 0;
+
+        statement.setBytes(++i, productImage);
+        statement.setLong(++i, idProduct);
+
+        statement.execute();
+
+        statement.close();
     }
 }
