@@ -32,3 +32,10 @@ a.user-header-style{
 a.dropdown-content-user-header-style{
     color: #000000;
 }
+
+img.responsive-img-center {
+    margin-left: 25%;
+    margin-right: 25%;
+    max-width: 100%;
+    height: auto;
+}
