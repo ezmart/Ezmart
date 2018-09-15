@@ -90,7 +90,7 @@
                                         <td>${list.name}</td>
                                         <td>
                                             <!--<a class="btn btn-sm btn-default btn-small yellow modal-trigger" href="#modal-update" style="color:white;">Gerênciar Lista</a>-->
-                                            <a class="btn yellow" href="<c:url value="/products/${list.id}/list"/>" style="color:white;">Gerenciar Lista</a>
+                                            <a class="btn yellow" href="<c:url value="/products-${list.id}"/>" style="color:white;">Gerenciar Lista</a>
                                             <a class="btn btn-sm btn-danger btn-small red modal-trigger" href="#modal-delete" onclick="setDadaModalList(${list.id})" style="color:white;">Excluir</a>
                                         </td>
                                     </tr>    

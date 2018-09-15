@@ -130,8 +130,8 @@
                                     <c:forEach items="${productList}" var="product">
                                         <tr>
                                             <td>${product.id}</td>
-                                            <td>${product.image}
-                                                <form method="post" enctype="multipart/form-data" action="/ezmartWeb/product/uploadImage">
+                                            <td>${product.image}</td>
+<!--                                                <form method="post" enctype="multipart/form-data" action="/ezmartWeb/product/uploadImage">
                                                     <div class="file-field input-field">
                                                         <div class="btn">
                                                             <span><i class="material-icons center">file_upload</i></span>
@@ -145,7 +145,7 @@
                                                     <container>
                                                         <button id="btnUpload" type="submit" class="btn btn-success btn-small"><i class="material-icons left">save</i>Salvar</button>
                                                     </container>
-                                                </form>
+                                                </form>-->
                                             <td>${product.name}</td>
                                             <td>${product.barCode}</td>
                                             <td>${product.brand}</td>

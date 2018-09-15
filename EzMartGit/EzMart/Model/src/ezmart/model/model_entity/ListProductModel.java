@@ -6,6 +6,7 @@ public class ListProductModel extends BaseEntity {
 
     private Long listId;
     private String productName;
+    private Long productId;
     private Integer quantity;
 
     public Long getListId() {
@@ -30,5 +31,13 @@ public class ListProductModel extends BaseEntity {
 
     public void setQuantity(Integer qauntity) {
         this.quantity = qauntity;
+    }
+
+    public Long getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Long productId) {
+        this.productId = productId;
     }
 }

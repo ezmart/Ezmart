@@ -23,7 +23,7 @@
         </c:if>   
         <c:if test="${not empty userLogged}">
             <c:import url="/WEB-INF/views/templates/header_consumer.jsp"></c:import>
-            
+
                 <div id="modal-create" class="modal">
                     <div class="modal-content">
                         <form method="POST">
@@ -76,34 +76,66 @@
             </c:if>
             <c:if test="${not empty productsList}">
                 <div class="container">
-                    <div class="card">
-                        <div class="card-content">
-                            <h3>Produtos cadastrados na lista</h3>
-                            <table class="table">
-                                <tr>
-                                    <th>Id</th>
-                                    <th>Nome</th>
-                                </tr>
-                                <!--<a href="<c:url value="/products/${listId}/list"/>" class="btn btn-sm btn-default btn-small green left modal-trigger" style="color:white;"><i class="material-icons right">add_box</i>Adicionar Novo Produto</a>-->
-                                <a class="btn btn-sm btn-danger btn-small green modal-trigger" href="#modal-create" onclick="setDadaModalProductList(${listId})" style="color:white;">ADD</a>
+                    <!--<div class="card">-->
+                    <!--<div class="card-content">-->
+                    <h3>Produtos cadastrados na lista</h3>
 
-                                <!--<a href="#modal-create" id="btn-btn-ezmart-style" class="btn modal-trigger">Adicionar</a>-->
-                                <br/>
-                                <br/>
-                                <c:forEach items="${productsList}" var="product">
-                                    <tr>
-                                        <td>${product.id}</td>
-                                        <td>${product.productName}</td>
-                                        <td>
-                                            <!--<a class="btn btn-sm btn-default btn-small yellow modal-trigger" href="#modal-update" style="color:white;">Gerênciar Lista</a>-->
-                                            <a class="btn yellow" href="<c:url value="/products/${product.id}/list"/>" style="color:white;">Gerenciar Lista</a>
-                                            <a class="btn btn-sm btn-danger btn-small red modal-trigger" href="#modal-delete" onclick="setDadaModalList(${product.id})" style="color:white;">Excluir</a>
-                                        </td>
-                                    </tr>    
+                    <div class="row">
+                        <div class="col s12 m12">
+                            <ul>
+                                <c:forEach items="${productsList}" var="productsList">
+                                    <li class="col l4 m6 s12" >
+                                        <div class="card" style="align-items: center">
+                                            <div class="row" style="padding: 20px;">
+                                                <div>
+                                                    <img class="responsive-img" src="<c:url value = "/resources/img/product/${productsList.id}.png"/>" alt="foto" height="">
+                                                    <!--<img class="responsive-img" style="align-items: center" src="data:image/jpg;base64, ${produto.foto}" alt="foto" height="150" />-->
+                                                </div>
+                                                <br/>
+                                                <h6 class="col s6"> Nome do Produto:</h6>
+                                                <h4 class="center" style="font-size: 20px">${productsList.productName}</h4>
+                                                <span class="col s6"> Quantidade:</span>
+                                                <h4 class="center" style="font-size: 20px">${productsList.productName}</h4>
+                                                <div class="card-action card-content">
+                                                    <div class="col s12">
+                                                        <a class="btn btn-sm btn-danger btn-small red modal-trigger" href="#modal-delete" onclick="setDadaModalList(${product.id})" style="color:white;">Excluir</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
                                 </c:forEach>
-                            </table>
+                            </ul>
                         </div>
                     </div>
+
+                    <table class="table">
+                        <tr>
+                            <th>Foto</th>
+                            <th>Id</th>
+                            <th>Nome</th>
+                        </tr>
+                        <!--<a href="<c:url value="/products/${listId}/list"/>" class="btn btn-sm btn-default btn-small green left modal-trigger" style="color:white;"><i class="material-icons right">add_box</i>Adicionar Novo Produto</a>-->
+                        <a class="btn btn-sm btn-danger btn-small green modal-trigger" href="#modal-create" onclick="setDadaModalProductList(${listId})" style="color:white;">ADD</a>
+
+                        <!--<a href="#modal-create" id="btn-btn-ezmart-style" class="btn modal-trigger">Adicionar</a>-->
+                        <br/>
+                        <br/>
+                        <c:forEach items="${productsList}" var="productList">
+                            <tr>
+                                <td><img class="responsive-img" width="25px" height="25px" src="<c:url value = "/resources/img/product/${productList.id}.png"/>"></td>
+                                <td>${productList.id}</td>
+                                <td>${productList.productName}</td>
+                                <td>
+                                    <!--<a class="btn btn-sm btn-default btn-small yellow modal-trigger" href="#modal-update" style="color:white;">Gerênciar Lista</a>-->
+                                    <!--<a class="btn yellow" href="<c:url value="/products/${productList.id}/list"/>" style="color:white;">Gerenciar Lista</a>-->
+                                    <a class="btn btn-sm btn-danger btn-small red modal-trigger" href="#modal-delete" onclick="setDadaModalList(${product.id})" style="color:white;">Excluir</a>
+                                </td>
+                            </tr>    
+                        </c:forEach>
+                    </table>
+                    <!--</div>-->
+                    <!--</div>-->
                 </div>
             </c:if>
         </c:if>

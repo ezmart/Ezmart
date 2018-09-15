@@ -193,7 +193,7 @@ public class ConsumerController {
         return mv;
     }
 
-    @RequestMapping(value = "/products/{id}/list", method = RequestMethod.GET)
+    @RequestMapping(value = "/products-{id}", method = RequestMethod.GET)
     public ModelAndView getProductsList(@PathVariable Long id, HttpSession session) {
         ModelAndView mv = new ModelAndView("consumer/consumer_products_list");
 

@@ -26,7 +26,7 @@
                         <li><a class="user-header-style" href="<c:url value="/home"/>"><i class="material-icons left" style="font-size: 20px">home</i>Início</a></li>
                         <li><a class="user-header-style" href="<c:url value="#!"/>"><i class="material-icons left" style="font-size: 20px">supervisor_account</i>Sobre</a></li>  
                         <li><a class="user-header-style" href="<c:url value="/contact"/>"><i class="material-icons left" style="font-size: 20px">contacts</i>Contato</a></li>
-                        <li><a class="user-header-style" href="<c:url value="#!"/>"><i class="material-icons left" style="font-size: 20px">email</i>Mensagens</a></li>
+                        <!--<li><a class="user-header-style" href="<c:url value="#!"/>"><i class="material-icons left" style="font-size: 20px">email</i>Mensagens</a></li>-->
                         <li>
                             <a class="dropdown-button user-header-style" href="#!" data-activates="main"><i class="material-icons left" style="font-size: 20px">settings</i>Minha opções</a>
                         </li>
@@ -40,7 +40,7 @@
                         </li>
                     </ul>
                     <ul class="side-nav" id="mobile-demo">
-                        <li><a class="user-header-style" href="/home" class="active">Início</a></li>
+                        <li><a class="user-header-style" href="<c:url value="/home"/>" class="active">Início</a></li>
                         <li><a class="user-header-style" href="#!" class="active">Sobre</a></li>
 <!--                        <li>
                             <a class="dropdown-button" href="<c:url value="#!"/>" data-activates="main">Minha opções<i class="material-icons right">arrow_drop_down</i></a>
