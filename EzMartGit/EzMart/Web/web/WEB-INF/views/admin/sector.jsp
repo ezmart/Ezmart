@@ -29,13 +29,13 @@
                         <h4>Adicionar Linha<i class=" small material-icons" style="margin-left: 10px;">add_box</i></h4>
                         <div class="row">
                             <form class="col s12" method="POST">
-                                <div class="input-field col s12">
-                                    <input id="sectorName" name="nameSector" type="text" class="validate">
+                                <div>
                                     <label for="nome">Nome</label>
+                                    <input id="sectorName" name="nameSector" type="text" class="validate" required>
                                 </div>
                                 <div class="modal-footer">
                                     <a class="btn btn-sm btn-default btn-small red modal-close modal-action" style="color:white;">Voltar</a>
-                                    <button class=" modal-action modal-close green btn-flat" type="submit" value="confirmar" style="margin-right: 15px; color:white;">CONFIRMAR</button>
+                                    <button class=" modal-action green btn-flat" type="submit" value="confirmar" style="margin-right: 15px; color:white;">CONFIRMAR</button>
                                 </div>
                             </form>
                         </div>
@@ -46,14 +46,14 @@
                         <h4>Editar Linha<i class=" small material-icons" style="margin-left: 10px;">edit</i></h4>
                         <div class="row">
                             <form class="col s12" method="POST" action="/ezmartWeb/sectorEdit">
-                                <div class="input-field col s12">
+                                <div>
                                     <label for="nome">Nome</label>
                                     <input type="text" style="display: none"  name="sectorId" id = "idSector">
-                                    <input id="nameSectorEdit" name="sectorNameEdit" type="text" class="validate">
+                                    <input id="nameSectorEdit" name="sectorNameEdit" type="text" class="validate" required>
                                 </div>
                                 <div class="modal-footer">
                                     <a class="btn btn-sm btn-default btn-small red modal-close modal-action" style="color:white;">Voltar</a>
-                                    <button class=" modal-action modal-close green btn-flat" type="submit" value="confirmar" style="margin-right: 15px; color:white;">CONFIRMAR</button>
+                                    <button class=" modal-action green btn-flat" type="submit" value="confirmar" style="margin-right: 15px; color:white;">CONFIRMAR</button>
                                 </div>
                             </form>
                         </div>
@@ -84,9 +84,9 @@
             </div>
             <div class="container">
                 <div class="row">
-                    <div class="col s10 offset-s1">
-                        <div class="card">
-                            <div class="card-content">
+                    <div class="col s12 ">
+<!--                        <div class="card">
+                            <div class="card-content">-->
                                 <h3>Linhas</h3>
                                 <table class="table">
                                     <tr>
@@ -109,8 +109,8 @@
                                         </tr>    
                                     </c:forEach>
                                 </table>
-                            </div>
-                        </div>
+<!--                            </div>
+                        </div>-->
                     </div>
                 </div>
             </div>   

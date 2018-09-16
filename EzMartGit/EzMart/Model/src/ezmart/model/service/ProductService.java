@@ -12,13 +12,13 @@ public class ProductService implements BaseProductService {
 
     ProductDAO dao = new ProductDAO();
 
-    @Override
-    public void create(Product entity) throws Exception {
+    public Long createWithReturn(Product entity) throws Exception {
         Connection conn = ConnectionManager.getInstance().getConnection();
         try {
-            dao.create(conn, entity);
+            Long productId = dao.createWithReturn(conn, entity);
             conn.commit();
             conn.close();
+            return productId;
         } catch (Exception e) {
             conn.rollback();
             conn.close();
@@ -114,5 +114,10 @@ public class ProductService implements BaseProductService {
             conn.close();
             throw e;
         }
+    }
+
+    @Override
+    public void create(Product entity) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

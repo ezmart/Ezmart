@@ -29,21 +29,21 @@
                         <h4>Adicionar Fornecedor<i class=" small material-icons" style="margin-left: 10px;">add_box</i></h4>
                         <div class="row">
                             <form class="col s12" method="POST">
-                                <div class="input-field col s12">
+                                <div>
                                     <label for="cnpj">CNPJ</label>
-                                    <input id="providerCnpj" name="cnpjProvider" maxlength="18" type="text" class="validate">
+                                    <input id="providerCnpj" name="cnpjProvider" maxlength="18" type="text" class="validate" required>
                                 </div>
-                                <div class="input-field col s12">
+                                <div>
                                     <label for="nome">Nome Fantasia</label>
-                                    <input id="providerName" name="nameProvider" type="text" class="validate">
+                                    <input id="providerName" name="nameProvider" type="text" class="validate" required>
                                 </div>
-                                <div class="input-field col s12">
+                                <div>
                                     <label for="businessName">Razão Social</label>
                                     <input id="providerBusinessName" name="businessNameProvider" type="text" class="validate">
                                 </div>
                                 <div class="modal-footer">
                                     <a class="btn btn-sm btn-default btn-small red modal-close modal-action" style="color:white;">Voltar</a>
-                                    <button class=" modal-action  green btn-flat" id="addButton" value="confirmar" style="margin-right: 15px; color:white;">CONFIRMAR</button>
+                                    <button class=" modal-action green btn-flat" id="addButton" value="confirmar" style="margin-right: 15px; color:white;">CONFIRMAR</button>
                                 </div>
                             </form>
                         </div>
@@ -54,22 +54,22 @@
                         <h4>Editar Fornecedor<i class=" small material-icons" style="margin-left: 10px;">edit</i></h4>
                         <div class="row">
                             <form class="col s12" method="POST" action="/ezmartWeb/providerEdit">
-                                <div class="input-field col s12">
+                                <div>
                                     <label for="cnpj">CNPJ</label>
                                     <input type="text" style="display: none"  name="providerId" id = "idProvider">
-                                    <input id="cnpjProviderEdit" name="providerCnpjEdit" maxlength="18" type="text" class="validate">
+                                    <input id="cnpjProviderEdit" name="providerCnpjEdit" maxlength="18" type="text" class="validate" required>
                                 </div>
-                                <div class="input-field col s12">
+                                <div>
                                     <label for="nome">Nome Fantasia</label>
-                                    <input id="nameProviderEdit" name="providerNameEdit" type="text" class="validate">
+                                    <input id="nameProviderEdit" name="providerNameEdit" type="text" class="validate" required>
                                 </div>
-                                <div class="input-field col s12">
+                                <div>
                                     <label for="razaoSocial">Razão Social</label>
                                     <input id="businessNameProviderEdit" name="providerBusinessNameEdit" type="text" class="validate">
                                 </div>
                                 <div class="modal-footer">
                                     <a class="btn btn-sm btn-default btn-small red modal-close modal-action" style="color:white;">Voltar</a>
-                                    <button class=" modal-action modal-close green btn-flat" type="submit" value="confirmar" style="margin-right: 15px; color:white;">CONFIRMAR</button>
+                                    <button class=" modal-action green btn-flat" type="submit" value="confirmar" style="margin-right: 15px; color:white;">CONFIRMAR</button>
                                 </div>
                             </form>
                         </div>
@@ -101,8 +101,8 @@
             <div>
                 <div class="row">
                     <div class="col s12">
-                        <div class="card">
-                            <div class="card-content">
+<!--                        <div class="card">
+                            <div class="card-content">-->
                                 <h3>Fornecedores</h3>
                                 <table class="table">
                                     <tr>
@@ -129,8 +129,8 @@
                                         </tr>    
                                     </c:forEach>
                                 </table>
-                            </div>
-                        </div>
+<!--                            </div>
+                        </div>-->
                     </div>
                 </div>
             </div>   

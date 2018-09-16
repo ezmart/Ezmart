@@ -8,8 +8,15 @@ import ezmart.model.service.ProductService;
 import ezmart.model.service.ProviderService;
 import ezmart.model.service.SectorService;
 import ezmart.model.util.SystemConstant.PAGE;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -144,15 +151,15 @@ public class AdminController {
         }
         return mv;
     }
-    
+
     @RequestMapping(value = "/produto", method = RequestMethod.GET)
     public ModelAndView findAllProduct(HttpSession session) {
         ModelAndView mv = null;
         try {
             mv = new ModelAndView("admin/product");
-            List<Product> productList = new ArrayList<>();
-            productList = productService.findAll(Integer.parseInt(PAGE.SIZE.LIMIT), null);
-            mv.addObject("productList", productList);
+            mv.addObject("productList", productService.findAll(Integer.parseInt(PAGE.SIZE.LIMIT), null));
+            mv.addObject("sectorList", sectorService.findAll(Integer.parseInt(PAGE.SIZE.LIMIT), null));
+            mv.addObject("providerList", providerService.findAll(Integer.parseInt(PAGE.SIZE.LIMIT), null));
         } catch (Exception exception) {
             System.out.println(exception.getMessage());
         }
@@ -160,25 +167,29 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/produto", method = RequestMethod.POST)
-    public ModelAndView saveProduct(Long sectorId, Long providerId, String barCode, String productName, byte[] image, String brand) {
+    public ModelAndView saveProduct(Long sectorIdProduct, Long providerIdProduct, String barCode, String nameProduct, MultipartFile productImage, String brandProduct) {
         ModelAndView mv = new ModelAndView("redirect:/produto");
         try {
 
             Sector sector = new Sector();
-            sector.setId(sectorId);
+            sector.setId(sectorIdProduct);
 
             Provider provider = new Provider();
-            provider.setId(providerId);
-            
+            provider.setId(providerIdProduct);
+
             Product product = new Product();
             product.setSector(sector);
             product.setProvider(provider);
             product.setBarCode(barCode);
-            product.setName(productName);
-            product.setImage(image);
-            product.setBrand(brand);
-            
-            productService.create(product);
+            product.setName(nameProduct);
+            product.setImage(productImage.getBytes());
+            product.setBrand(brandProduct);
+
+            Long productId = productService.createWithReturn(product);
+
+            if (productImage.getBytes() != null) {
+                this.saveImageProduct(productImage.getBytes(), productId.toString());
+            }
 
         } catch (Exception exception) {
             System.out.println(exception.getMessage());
@@ -187,25 +198,24 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/productEdit", method = RequestMethod.POST)
-    public ModelAndView editProduct(Long productId, Long sectorId, Long providerId, String barCode, String productName, byte[] image, String brand) {
+    public ModelAndView editProduct(Long productIdEdit, Long sectorIdProductEdit, Long providerIdProductEdit, String productBarCodeEdit, String productNameEdit, String productBrandEdit) {
         ModelAndView mv = new ModelAndView("redirect:/produto");
 
         try {
-            
+
             Sector sector = new Sector();
-            sector.setId(sectorId);
+            sector.setId(sectorIdProductEdit);
 
             Provider provider = new Provider();
-            provider.setId(providerId);
-            
+            provider.setId(providerIdProductEdit);
+
             Product product = new Product();
             product.setSector(sector);
             product.setProvider(provider);
-            product.setId(productId);
-            product.setBarCode(barCode);
-            product.setName(productName);
-            product.setImage(image);
-            product.setBrand(brand);
+            product.setId(productIdEdit);
+            product.setBarCode(productBarCodeEdit);
+            product.setName(productNameEdit);
+            product.setBrand(productBrandEdit);
             productService.update(product);
 
         } catch (Exception exception) {
@@ -233,9 +243,42 @@ public class AdminController {
         try {
             byte[] imgBytes = productImage.getBytes();
             productService.uploadImage(imgBytes, idProductForImage);
+            this.deleteImageProduct(idProductForImage.toString());
+            this.saveImageProduct(imgBytes, idProductForImage.toString());
         } catch (Exception exception) {
             System.out.println(exception.getMessage());
         }
         return mv;
+    }
+
+    public void saveImageProduct(byte[] productImage, String imageName) {
+        try {
+//            File outPutFile = new File("../EzMartGit2018/Ezmart/EzMartGit/EzMart/Web/web/resources/img/product/"+imageName+".jpg");
+
+//            String path = getClass().getResource("../product/").toString() + imageName + ".jpg";
+            String path = "c:/Users/marko/Desktop/EzMartGit2018/Ezmart/EzMartGit/EzMart/Web/web/resources/img/product/" + imageName + ".jpg";
+
+            File outPutFile = new File(path);
+
+            InputStream inputStream = new ByteArrayInputStream(productImage);
+            BufferedImage imagem = ImageIO.read(inputStream);
+            if (imagem != null) {
+                ImageIO.write(imagem, "jpg", outPutFile);
+            }
+        } catch (Exception exception) {
+            System.out.println(exception.getMessage());
+        }
+    }
+
+    public void deleteImageProduct(String imageName) {
+        try {
+
+            String path = "c:/Users/marko/Desktop/EzMartGit2018/Ezmart/EzMartGit/EzMart/Web/web/resources/img/product/" + imageName + ".jpg";
+
+            File file = new File(path);
+            file.delete();
+        } catch (Exception exception) {
+            System.out.println(exception.getMessage());
+        }
     }
 }

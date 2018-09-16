@@ -9,16 +9,16 @@ import ezmart.model.util.PreparedStatementBuilder;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class ProductDAO implements BaseDAO<Product> {
 
-    @Override
-    public void create(Connection conn, Product entity) throws Exception {
+    public Long createWithReturn(Connection conn, Product entity) throws Exception {
         String sql = " INSERT INTO product (product_sectorid, product_providerid, product_barcode, product_name, product_image, product_brand)"
-                + " VALUES(?,?,?,?,?,?); ";
+                + " VALUES(?,?,?,?,?,?) RETURNING product_id; ";
 
         PreparedStatement statement = conn.prepareStatement(sql);
         int i = 0;
@@ -27,12 +27,23 @@ public class ProductDAO implements BaseDAO<Product> {
         statement.setLong(++i, entity.getProvider().getId());
         statement.setString(++i, entity.getBarCode());
         statement.setString(++i, entity.getName());
-        statement.setBytes(++i, entity.getImage());
+        if (entity.getImage() != null) {
+            statement.setBytes(++i, entity.getImage());
+        } else {
+            statement.setNull(++i, Types.ARRAY);
+        }
         statement.setString(++i, entity.getBrand());
 
-        statement.execute();
-
+       ResultSet resultSet = statement.executeQuery();
+ 
+        Long productId = null;
+        if(resultSet.next()){
+            productId = resultSet.getLong("product_id");
+        }
+        resultSet.close();
         statement.close();
+        
+        return productId;
     }
 
     @Override
@@ -122,7 +133,7 @@ public class ProductDAO implements BaseDAO<Product> {
     @Override
     public void update(Connection conn, Product entity) throws Exception {
 
-        String sql = " UPDATE product SET product_sectorid = ?, product_providerid = ?, product_barcode = ?, product_name = ?, product_image = ?, product_brand = ?)"
+        String sql = " UPDATE product SET product_sectorid = ?, product_providerid = ?, product_barcode = ?, product_name = ?, product_brand = ?"
                 + " WHERE product_id = ?; ";
 
         PreparedStatement statement = conn.prepareStatement(sql);
@@ -132,7 +143,6 @@ public class ProductDAO implements BaseDAO<Product> {
         statement.setLong(++i, entity.getProvider().getId());
         statement.setString(++i, entity.getBarCode());
         statement.setString(++i, entity.getName());
-        statement.setBytes(++i, entity.getImage());
         statement.setString(++i, entity.getBrand());
         statement.setLong(++i, entity.getId());
 
@@ -169,7 +179,7 @@ public class ProductDAO implements BaseDAO<Product> {
 
     public byte[] getImg(Connection conn, Long id) throws Exception {
         byte[] bytes = null;
-        String sql = "SELECT product_img FROM product WHERE usersystem_id=?;";
+        String sql = "SELECT product_img FROM product WHERE product_id=?;";
         PreparedStatement statement = conn.prepareStatement(sql);
         statement.setLong(1, id);
         ResultSet resultSet = statement.executeQuery();
@@ -220,7 +230,7 @@ public class ProductDAO implements BaseDAO<Product> {
             product.setImage(rs.getBytes("product_image"));
             product.setSector(sector);
             product.setProvider(provider);
-            
+
             productList.add(product);
         }
 
@@ -241,5 +251,10 @@ public class ProductDAO implements BaseDAO<Product> {
         statement.execute();
 
         statement.close();
+    }
+
+    @Override
+    public void create(Connection conn, Product entity) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

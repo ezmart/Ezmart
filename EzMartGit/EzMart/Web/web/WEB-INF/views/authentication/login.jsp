@@ -42,7 +42,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="input-field col s12">
-                                                <button id="btn-btn-ezmart-style" type="submit" class="btn" value="confirmar"><i class="material-icons left">border_color</i>Entrar</button>
+                                                <button id="btn-btn-ezmart-style" type="submit" class="btn" value="confirmar"><i class="material-icons left">subdirectory_arrow_right</i>Entrar</button>
                                             </div>
                                         </div>
                                     </div>

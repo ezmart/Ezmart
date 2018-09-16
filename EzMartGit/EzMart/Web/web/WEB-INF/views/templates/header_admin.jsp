@@ -27,19 +27,24 @@
                     </a>
                     <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">format_align_justify</i></a>
                     <ul class="right hide-on-med-and-down">
-                        <li><a href="<c:url value="/home"/>"><i class="material-icons left" style="font-size: 20px">home</i>Início</a></li>
-                        <li><a href="<c:url value="#!"/>"><i class="material-icons left" style="font-size: 20px">supervisor_account</i>Sobre</a></li>  
-                        <li><a href="<c:url value="/contact"/>"><i class="material-icons left" style="font-size: 20px">contacts</i>Contato</a></li>
-                        <li><a href="<c:url value="#!"/>"><i class="material-icons left" style="font-size: 20px">email</i>Mensagens</a></li>
+                        <li><a class="user-header-style" href="<c:url value="/home"/>"><i class="material-icons left" style="font-size: 20px">home</i>Início</a></li>
+                        <li><a class="user-header-style" href="<c:url value="#!"/>"><i class="material-icons left" style="font-size: 20px">supervisor_account</i>Sobre</a></li>  
+                        <li><a class="user-header-style" href="<c:url value="/contact"/>"><i class="material-icons left" style="font-size: 20px">contacts</i>Contato</a></li>
                         <li>
-                            <a class="dropdown-button" href="#!" data-activates="main"><i class="material-icons left" style="font-size: 20px">settings</i>Minha opções</a>
+                            <a class="dropdown-button user-header-style" href="#!" data-activates="main"><i class="material-icons left" style="font-size: 20px">settings</i>Minha opções</a>
                         </li>
                         <li>
-                            <a class="dropdown-button" href="#!" id="avatar" data-activates="user"><i class="material-icons left" style="font-size: 20px"><img class="circle responsive" style="width:25px;height:25px; padding-top: 0px;" name="img1" src="imgProfile"></i>${userLogged.name}</a>
+                            <a class="dropdown-button user-header-style" href="#!" id="avatar" data-activates="user">
+                                <i class="material-icons left" style="font-size: 20px">
+                                    <img class="circle responsive" style="width:25px;height:25px; padding-top: 0px;" id="imgProfile" name="imgProfile" src="imgProfile"/>
+                                </i>
+                                ${userLogged.name}
+                            </a>
                         </li>
                     </ul>
                     <ul class="side-nav" id="mobile-demo">
                         <li><a href="/home" class="active">Início</a></li>
+                        <li><a href="<c:url value="/contact"/>">Contato</a></li>
                         <li><a href="#!" class="active">Sobre</a></li>
 <!--                        <li>
                             <a class="dropdown-button" href="<c:url value="#!"/>" data-activates="main">Minha opções<i class="material-icons right">arrow_drop_down</i></a>

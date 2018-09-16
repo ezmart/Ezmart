@@ -58,11 +58,14 @@ function setDadosModalProduct(productId, productName) {
     document.getElementById('idProductDelete').value = productId;
 }
 
-function setProductEdit(productId, productName, productBarCode, productBrand) {
+function setProductEdit(productId, productName, productBarCode, productBrand, productSector, productProvider) {
     document.getElementById('idProduct').value = productId;
     document.querySelector("[name='productNameEdit']").value = productName;
     document.querySelector("[name='productBarCodeEdit']").value = productBarCode;
     document.querySelector("[name='productBrandEdit']").value = productBrand;
+    document.querySelector("[name='productSectorEdit']").value = productSector;
+//    document.querySelector("[name='productProviderEdit']").value = productProvider;
+    
 }
 
 $(document).ready(function () {
