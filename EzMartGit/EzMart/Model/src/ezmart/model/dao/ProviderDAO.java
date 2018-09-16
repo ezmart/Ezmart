@@ -71,7 +71,7 @@ public class ProviderDAO implements BaseDAO<Provider> {
     }
 
     public List<Provider> findAll(Connection conn, Integer limit, Integer offset) throws Exception {
-        String sql = "SELECT * FROM provider WHERE 1=1 ";
+        String sql = "SELECT * FROM provider ORDER BY provider_name ";
 
         List<Object> paramList = new ArrayList<>();
 

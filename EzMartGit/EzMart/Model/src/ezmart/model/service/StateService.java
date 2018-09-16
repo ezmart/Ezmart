@@ -91,5 +91,19 @@ public class StateService implements BaseStateService {
     public Map<String, String> validate(Map<String, Object> fields) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
+    public List<State> findAll(Integer offset, Integer limit) throws Exception {
+        Connection conn = ConnectionManager.getInstance().getConnection();
+        try {
+            StateDAO dao = new StateDAO();
+            List<State> stateList = dao.findAll(conn, offset, limit);
+            conn.commit();
+            conn.close();
+            return stateList;
+        } catch (Exception e) {
+            conn.rollback();
+            conn.close();
+            throw e;
+        }
+    }
 }

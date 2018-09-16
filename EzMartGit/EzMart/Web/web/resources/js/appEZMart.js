@@ -65,7 +65,18 @@ function setProductEdit(productId, productName, productBarCode, productBrand, pr
     document.querySelector("[name='productBrandEdit']").value = productBrand;
     document.querySelector("[name='productSectorEdit']").value = productSector;
 //    document.querySelector("[name='productProviderEdit']").value = productProvider;
-    
+
+}
+
+function setDadosModalUser(userId, consumerName, establishmentName) {
+    var complement = '';
+    if (consumerName != null && consumerName != '') {
+        complement = userId + " - " + consumerName;
+    } else {
+        complement = userId + " - " + establishmentName;
+    }
+    document.getElementById('user-id').innerHTML = complement;
+    document.getElementById('idUserDelete').value = userId;
 }
 
 $(document).ready(function () {
@@ -74,6 +85,9 @@ $(document).ready(function () {
 
     var $cnpjEdit = $("#cnpjProviderEdit");
     $cnpjEdit.mask('00.000.000/0000-00', {reverse: true});
+    
+    var $cnpjUser = $("#cnpjUser");
+    $cnpjUser.mask('00.000.000/0000-00', {reverse: true});
 });
 
 function setDadaModalList(data) {

@@ -113,4 +113,36 @@ public class StateDAO implements BaseDAO<State> {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    public List<State> findAll(Connection conn, Integer offset, Integer limit)throws Exception{
+        String sql = "select * from state ";
+
+        List<Object> paramList = new ArrayList<>();
+
+        if (offset != null) {
+            sql += " OFFSET ?";
+            paramList.add(offset);
+        }
+        if (limit != null) {
+            sql += " LIMIT ?";
+            paramList.add(limit);
+        }
+
+        PreparedStatement statement = PreparedStatementBuilder.build(conn, sql, paramList);
+        ResultSet rs = statement.executeQuery();
+        List<State> stateList = new ArrayList<>();
+        while (rs.next()) {
+
+            State state = new State();
+            
+            state.setId(rs.getLong("state_id"));
+            state.setInitials(rs.getString("state_initials"));
+            state.setName(rs.getString("state_name"));
+            
+            stateList.add(state);
+        }
+
+        rs.close();
+        statement.close();
+        return stateList;
+    }
 }

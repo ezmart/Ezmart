@@ -131,4 +131,34 @@ public class CityDAO implements BaseDAO<City> {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    public List<City> findAll(Connection conn, Integer offset, Integer limit) throws Exception {
+
+        String sql = "select * from city ";
+
+        List<Object> paramList = new ArrayList<>();
+
+        if (offset != null) {
+            sql += " OFFSET ?";
+            paramList.add(offset);
+        }
+        if (limit != null) {
+            sql += " LIMIT ?";
+            paramList.add(limit);
+        }
+
+        PreparedStatement statement = PreparedStatementBuilder.build(conn, sql, paramList);
+        ResultSet rs = statement.executeQuery();
+        List<City> cityList = new ArrayList<>();
+        while (rs.next()) {
+            City city = new City();
+            
+            city.setCodeIbge(rs.getString("city_codeibge"));
+            city.setId(rs.getLong("city_id"));
+            city.setName(rs.getString("city_name"));
+            cityList.add(city);
+        }
+        rs.close();
+        statement.close();
+        return cityList;
+    }
 }

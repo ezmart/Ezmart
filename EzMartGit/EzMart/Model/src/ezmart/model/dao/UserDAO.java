@@ -2,9 +2,12 @@ package ezmart.model.dao;
 
 import ezmart.model.base.BaseDAO;
 import ezmart.model.criteria.UserCriteria;
+import ezmart.model.entity.City;
 import ezmart.model.entity.Consumer;
 import ezmart.model.entity.Establishment;
+import ezmart.model.entity.State;
 import ezmart.model.entity.User;
+import ezmart.model.entity.UserSystem;
 import ezmart.model.model_entity.UserModel;
 import ezmart.model.util.PreparedStatementBuilder;
 import java.sql.Connection;
@@ -310,5 +313,127 @@ public class UserDAO implements BaseDAO<User> {
         statement.close();
 
         return true;
+    }
+
+    public List<UserSystem> findAll(Connection conn, Integer offset, Integer limit) throws SQLException {
+        String sql = "select\n"
+                + "	*\n"
+                + "from\n"
+                + "	usersystem\n"
+                + "left join city on\n"
+                + "		usersystem_cityid = city_id\n"
+                + "left join state on\n"
+                + "		state_id = city_stateid\n"
+                + "left join consumer on\n"
+                + "		consumer_userid = usersystem_id\n"
+                + "left join establishment on\n"
+                + "		establishment_userid = usersystem_id";
+
+        List<Object> paramList = new ArrayList<>();
+
+        if (offset != null) {
+            sql += " OFFSET ?";
+            paramList.add(offset);
+        }
+        if (limit != null) {
+            sql += " LIMIT ?";
+            paramList.add(limit);
+        }
+
+        PreparedStatement statement = PreparedStatementBuilder.build(conn, sql, paramList);
+        ResultSet rs = statement.executeQuery();
+        List<UserSystem> userSystemList = new ArrayList<>();
+        while (rs.next()) {
+
+            UserSystem userSystem = new UserSystem();
+            Consumer consumer = new Consumer();
+            Establishment establishment = new Establishment();
+            City city = new City();
+            State state = new State();
+
+            if (rs.getObject("consumer_id") != null) {
+                consumer.setId(rs.getLong("consumer_id"));
+                consumer.setName(rs.getString("consumer_name"));
+                consumer.setLastName(rs.getString("consumer_lastname"));
+                consumer.setCpf(rs.getString("consumer_cpf"));
+            }
+
+            if (rs.getObject("establishment_id") != null) {
+                establishment.setId(rs.getLong("establishment_id"));
+                establishment.setCnpj(rs.getString("establishment_cnpj"));
+                establishment.setSecondEmail(rs.getString("establishment_secondemail"));
+                establishment.setName(rs.getString("establishment_name"));
+                establishment.setBusinessName(rs.getString("establishment_businessname"));
+                establishment.setPlan(rs.getInt("establishment_plan"));
+                establishment.setPlanStartDate(rs.getDate("establishment_planstartdate"));
+                establishment.setPlanFinalDate(rs.getDate("establishment_planfinaldate"));
+            }
+            city.setName(rs.getString("city_name"));
+
+            state.setInitials(rs.getString("state_initials"));
+
+            userSystem.setId(rs.getLong("usersystem_id"));
+            userSystem.setEmail(rs.getString("usersystem_email"));
+            userSystem.setAddressLocation(rs.getString("usersystem_addresslocation"));
+            userSystem.setNumberHouse(rs.getInt("usersystem_numberhouse"));
+            userSystem.setNeighborhood(rs.getString("usersystem_neighborhood"));
+            userSystem.setTelephone(rs.getString("usersystem_telephone"));
+            if (rs.getString("usersystem_usertype").equals(UserSystem.TIPO_CONSUMER)) {
+                userSystem.setUserType("CONSUMIDOR");
+            } else if (rs.getString("usersystem_usertype").equals(UserSystem.TIPO_EMPORIUM)) {
+                userSystem.setUserType("ESTABELECIMENTO");
+            } else if (rs.getString("usersystem_usertype").equals(UserSystem.TIPO_ADMIN)) {
+                userSystem.setUserType("ADMINISTRADOR");
+            }
+            userSystem.setActive(rs.getBoolean("usersystem_active"));
+            if (userSystem.getActive()) {
+                userSystem.setActiveString("SIM");
+            } else {
+                userSystem.setActiveString("NÃO");
+            }
+
+            userSystem.setConsumer(consumer);
+            userSystem.setEstablishment(establishment);
+            userSystem.setCity(city);
+            userSystem.setState(state);
+
+            userSystemList.add(userSystem);
+        }
+
+        rs.close();
+        statement.close();
+        return userSystemList;
+    }
+    
+    public UserSystem createUserSystem (Connection conn, UserSystem entity) throws Exception {
+
+        String sql = "INSERT INTO "
+                + "usersystem(usersystem_email, usersystem_password, usersystem_addresslocation, usersystem_numberhouse, "
+                + "usersystem_neighborhood, usersystem_cityid, usersystem_zipcode, usersystem_telephone, "
+                + "usersystem_usertype, usersystem_active) "
+                + "VALUES (?,md5('Ez'||?||'Mart'),?,?,?,?,?,?,?,?) RETURNING usersystem_id;";
+
+        PreparedStatement statement = conn.prepareStatement(sql);
+        int i = 0;
+
+        statement.setString(++i, entity.getEmail());
+        statement.setString(++i, entity.getPassword());
+        statement.setString(++i, entity.getAddressLocation());
+        statement.setInt(++i, entity.getNumberHouse());
+        statement.setString(++i, entity.getNeighborhood());
+        statement.setLong(++i, entity.getCity().getId());
+        statement.setString(++i, entity.getZipCode());
+        statement.setString(++i, entity.getTelephone());
+        statement.setString(++i, entity.getUserType());
+        statement.setBoolean(++i, entity.getActive());
+
+        ResultSet resultSet = statement.executeQuery();
+        if (resultSet.next()) {
+            entity.setId(resultSet.getLong("usersystem_id"));
+        }
+        resultSet.close();
+        statement.close();
+        
+        return entity;
     }
 }

@@ -3,8 +3,13 @@ package ezmart.model.service;
 import ezmart.model.ConnectionManager;
 import ezmart.model.base.service.BaseUserService;
 import ezmart.model.criteria.UserCriteria;
+import ezmart.model.dao.ConsumerDAO;
+import ezmart.model.dao.EstablishmentDAO;
 import ezmart.model.dao.UserDAO;
+import ezmart.model.entity.Consumer;
+import ezmart.model.entity.Establishment;
 import ezmart.model.entity.User;
+import ezmart.model.entity.UserSystem;
 import ezmart.model.model_entity.UserModel;
 import ezmart.model.util.SystemConstant;
 import java.sql.Connection;
@@ -252,6 +257,50 @@ public class UserService implements BaseUserService {
             conn.commit();
             conn.close();
             return response;
+        } catch (Exception e) {
+            conn.rollback();
+            conn.close();
+            throw e;
+        }
+    }
+
+    public List<UserSystem> findAll(Integer offset, Integer limit) throws Exception {
+        Connection conn = ConnectionManager.getInstance().getConnection();
+        try {
+            UserDAO dao = new UserDAO();
+            List<UserSystem> userList = dao.findAll(conn, offset, limit);
+            conn.commit();
+            conn.close();
+            return userList;
+        } catch (Exception e) {
+            conn.rollback();
+            conn.close();
+            throw e;
+        }
+    }
+
+    public UserSystem createUserSystem(UserSystem entity) throws Exception {
+        Connection conn = ConnectionManager.getInstance().getConnection();
+        try {
+            UserDAO dao = new UserDAO();
+            ConsumerDAO consumerDAO = new ConsumerDAO();
+            EstablishmentDAO establishmentDAO = new EstablishmentDAO();
+            
+            UserSystem userSystem = dao.createUserSystem(conn, entity);
+            if(userSystem.getConsumer() != null){
+                Consumer consumer = new Consumer();
+                consumer = userSystem.getConsumer();
+                consumer.setId(userSystem.getId());
+                consumerDAO.create(conn, userSystem.getConsumer());
+            }else{
+                Establishment est = new Establishment();
+                est = userSystem.getEstablishment();
+                est.setId(userSystem.getId());
+                establishmentDAO.create(conn, userSystem.getEstablishment());
+            }
+            conn.commit();
+            conn.close();
+            return userSystem;
         } catch (Exception e) {
             conn.rollback();
             conn.close();

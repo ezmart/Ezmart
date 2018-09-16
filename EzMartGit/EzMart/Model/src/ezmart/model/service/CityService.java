@@ -92,5 +92,19 @@ public class CityService implements BaseCityService {
     public Map<String, String> validate(Map<String, Object> fields) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
+    public List<City> findAll(Integer offset, Integer limit) throws Exception {
+        Connection conn = ConnectionManager.getInstance().getConnection();
+        try {
+            CityDAO dao = new CityDAO();
+            List<City> cityList = dao.findAll(conn, offset, limit);
+            conn.commit();
+            conn.close();
+            return cityList;
+        } catch (Exception e) {
+            conn.rollback();
+            conn.close();
+            throw e;
+        }
+    }
 }

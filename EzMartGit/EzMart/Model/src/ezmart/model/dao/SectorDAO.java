@@ -66,7 +66,7 @@ public class SectorDAO implements BaseDAO<Sector> {
     }
 
     public List<Sector> findAll(Connection conn, Integer limit, Integer offset) throws Exception {
-        String sql = "SELECT * FROM sector WHERE 1=1 ";
+        String sql = "SELECT * FROM sector ORDER BY sector_name ";
 
         List<Object> paramList = new ArrayList<>();
 

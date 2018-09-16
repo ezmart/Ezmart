@@ -1,13 +1,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <header>
     <ul style="margin-top: 65px" id="main" class="dropdown-content">
-        <li><a class="dropdown-content-user-header-style" href="<c:url value="/usuario"/>">Usuários</a></li>
+        <li><a class="dropdown-content-user-header-style" href="<c:url value="/user"/>">Usuários</a></li>
         <li class="divider"></li>
-        <li><a class="dropdown-content-user-header-style" href="<c:url value="/produto"/>">Produtos</a></li>
+        <li><a class="dropdown-content-user-header-style" href="<c:url value="/product"/>">Produtos</a></li>
         <li class="divider"></li>
-        <li><a class="dropdown-content-user-header-style" href="<c:url value="/fornecedor"/>">Fornecedores</a></li>
+        <li><a class="dropdown-content-user-header-style" href="<c:url value="/provider"/>">Fornecedores</a></li>
         <li class="divider"></li>
-        <li><a class="dropdown-content-user-header-style" href="<c:url value="/linha"/>">Linhas</a></li>
+        <li><a class="dropdown-content-user-header-style" href="<c:url value="/sector"/>">Linhas</a></li>
         <li class="divider"></li>
     </ul>
     <ul style="margin-top: 65px" id="user" class="dropdown-content">
@@ -53,7 +53,6 @@
                             <a class="dropdown-button" href="<c:url value="#!"/>" data-activates="user"><i class="material-icons left" style="font-size: 20px">account_circle</i>${userLogged.name}</a>
                         </li>-->
                         <li><a href="/contact">Contato</a></li>
-                        <li><a href="#!">Mensagens</a></li>
                         <li><a href="<c:url value="/logout"/>">Sair</a></li>
                     </ul>
                 </div>

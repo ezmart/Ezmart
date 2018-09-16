@@ -180,7 +180,6 @@
                                                         <button id="btnUpload" type="submit" class="btn btn-success btn-small"><i class="material-icons left">save</i>SALVAR</button>
                                                     </container>
                                                 </form>
-<!--                                                <img class="responsive-img-center" src="<c:url value = "/resources/img/product/${product.id}.jpg"/>" alt="${product.barCode} - ${product.name}" width="150">-->
                                             </div>
                                             <br/>
                                             <p style="font-size: 20px"><b>Id:</b> ${product.id}</p>
@@ -226,7 +225,7 @@
                                                 <a href="#modal-create" class="btn-floating btn-n-floatingsmall green left modal-trigger" style="color:white;"><i class="material-icons center">add</i></a>
                                                 <br><br/>
                                                 <br><br/>
-            <c:forEach items="${productList}" var="product">
+            <%--<c:forEach items="${productList}" var="product">--%>
                 
                 <tr>
                     <td>${product.id}</td>
@@ -258,7 +257,7 @@
                 </tr>    
                 
                 
-            </c:forEach>
+            <%--</c:forEach>--%>
         </table>
     </div>
 </div>
@@ -270,7 +269,6 @@
         <c:import url="/WEB-INF/views/templates/footer.jsp"></c:import>
         <script src="<c:url value="/resources/js/jquery.min.js"/>"></script>
         <script src="<c:url value="/resources/js/materialize.min.js"/>"></script>
-        <script type="text/javascript" src="<c:url value="/resources/js/mascara.js"/>"></script>
         <script src="<c:url value="/resources/js/appEZMart.js"/>"></script>
     </body>
 </html>
