@@ -85,17 +85,54 @@ $(document).ready(function () {
 
     var $cnpjEdit = $("#cnpjProviderEdit");
     $cnpjEdit.mask('00.000.000/0000-00', {reverse: true});
-    
+
     var $cnpjUser = $("#cnpjUser");
     $cnpjUser.mask('00.000.000/0000-00', {reverse: true});
+
+    //Mascara para CNPJ no cadastro
+    var $cnpjUserRegister = $("#cnpjUserRegister");
+    $cnpjUserRegister.mask('00.000.000/0000-00', {reverse: true});
+
+    //Mascara para CPF no cadastro
+    var $cpfUserRegister = $("#cpfUserRegister");
+    $cpfUserRegister.mask('000.000.000-00', {reverse: true});
+
+    //Mascara para CELULAR no cadastro de consumidor
+    var $cellUserConsumerRegister = $("#cellUserConsumerRegister");
+    $cellUserConsumerRegister.mask('00 00000-0000', {reverse: true});
+
+    //Mascara para CELULAR no cadastro de estabelicimento
+    var $cellUserEstablishmentRegister = $("#cellUserEstablishmentRegister");
+    $cellUserEstablishmentRegister.mask('00 00000-0000', {reverse: true});
+
+    //Mascara para CEP no cadastro de consumidor
+    var $zipCodeUserConsumerRegister = $("#zipCodeUserConsumerRegister");
+    $zipCodeUserConsumerRegister.mask('00000-000', {reverse: true});
+
+    //Mascara para CEP no cadastro de estabelicimento
+    var $zipCodeUserEstablishmentRegister = $("#zipCodeUserEstablishmentRegister");
+    $zipCodeUserEstablishmentRegister.mask('00000-000', {reverse: true});
 });
 
-function setDadaModalList(data) {
-    document.getElementById('idDelete').value = data;
+//Deleta a lista dos usuário
+function setDeleteDadaModalShoppingList(data) {
+    document.getElementById('idDeleteShoppingList').value = data;
 //    alert(data);
 }
 
-function setDadaModalProductList(data) {
-    document.getElementById('idCreate').value = data;
+//Deleta a lista dos usuário
+function setUpdateDadaModalShoppingList(data) {
+    document.getElementById('idUpdateNameShoppingList').value = data;
 //    alert(data);
 }
+
+//Deleta o produto da lista do usuário
+function setDeleteDadaModalProductInList(data) {
+    document.getElementById('idDeleteProductList').value = data;
+
+}
+
+//function setDadaProductList(data) {
+//    document.getElementById('idDeleteProductList').value = data;
+////    alert(data);
+//}

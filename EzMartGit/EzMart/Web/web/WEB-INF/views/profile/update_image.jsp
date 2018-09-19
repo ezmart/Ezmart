@@ -9,11 +9,11 @@
             <form method="post" enctype="multipart/form-data">
                 <div class="file-field input-field">
                     <div class="btn">
-                        <span>File</span>
+                        <span>Arquivo</span>
                         <input type="file" id="imgTop" name="imgTop">
                     </div>
                     <div class="file-path-wrapper">
-                        <input class="file-path validate" type="text" placeholder="Upload file">
+                        <input class="file-path validate" type="text" placeholder="Carregar Foto">
                     </div>
                 </div>
                 <div>

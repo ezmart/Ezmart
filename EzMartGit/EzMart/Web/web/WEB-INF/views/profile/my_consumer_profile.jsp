@@ -70,7 +70,7 @@
                             </li>
                             <li>
                                 <div class="col s12 controls" style="margin-top: 20px">                                                    
-                                    <a class="waves-effect waves-teal btn " id="myPhoto" href="<c:url value="/updatePhoto"/> "><i class="material-icons left">account_box</i>Altarar Foto</a>
+                                    <a class="waves-effect waves-teal btn " id="myPhoto" href="<c:url value="/updatePhoto"/> "><i class="material-icons left">account_box</i>Alterar Foto</a>
                                 </div>
                             </li>
                         </ul>

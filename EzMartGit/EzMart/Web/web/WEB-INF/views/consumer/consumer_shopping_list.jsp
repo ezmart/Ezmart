@@ -33,7 +33,7 @@
                 <div id="modal-update" class="modal">
                     <div class="modal-content">
                         <h4>Modal Header</h4>
-
+                    <c:import url="/WEB-INF/views/consumer/modal/update_shopping_list.jsp"></c:import>
                     </div>
                 </div>
                 <div id="modal-delete" class="modal">
@@ -42,7 +42,7 @@
                         <div class="modal-footer">
                             <form method="POST">
                                 <input type="text" style="display: none" name="type" id="type" value="DELETE">
-                                <input type="text" style="display: none"  name="value" id="idDelete" value="">
+                                <input type="text" style="display: none"  name="value" id="idDeleteShoppingList" value="">
                                 <button id="btn-btn-ezmart-style" type="submit" class="btn modal-close" value="confirmar">Sim</button>
                             </form>
                             <a class="btn btn-sm btn-default btn-small red modal-close modal-sction">Não</a>
@@ -53,8 +53,8 @@
                     <nav>
                         <div class="nav-wrapper">
                             <div style="margin-left: 40px" class="col s12">
-                                <a href="<c:url value="/home"/>" class="breadcrumb">inicio</a>
-                            <a href="<c:url value="/login"/>" class="breadcrumb">Meus Produtos</a>
+                                <a href="<c:url value="/home"/>" class="breadcrumb">Início</a>
+                            <a href="<c:url value="/shoppingList"/>" class="breadcrumb">Minha Listas</a>
                         </div>
                     </div>
                 </nav>
@@ -84,14 +84,14 @@
                                 <!--<a href="#modal-create" id="btn-btn-ezmart-style" class="btn modal-trigger">Adicionar</a>-->
                                 <br/>
                                 <br/>
-                                <c:forEach items="${shoppingList}" var="list">
+                                <c:forEach items="${shoppingList}" var="shoppingList">
                                     <tr>
-                                        <td>${list.id}</td>
-                                        <td>${list.name}</td>
+                                        <td>${shoppingList.id}</td>
+                                        <td>${shoppingList.name}</td>
                                         <td>
-                                            <!--<a class="btn btn-sm btn-default btn-small yellow modal-trigger" href="#modal-update" style="color:white;">Gerênciar Lista</a>-->
-                                            <a class="btn yellow" href="<c:url value="/products-${list.id}"/>" style="color:white;">Gerenciar Lista</a>
-                                            <a class="btn btn-sm btn-danger btn-small red modal-trigger" href="#modal-delete" onclick="setDadaModalList(${list.id})" style="color:white;">Excluir</a>
+                                            <a class="btn btn-sm btn-default btn-small ffc400 amber accent-3 modal-trigger" href="#modal-update" onclick="setUpdateDadaModalShoppingList(${shoppingList.id})" style="color:white;"><i class="material-icons right">edit</i>Alterar</a>
+                                            <a class="btn btn-sm btn-default btn-small blue-grey" href="<c:url value="/products-${shoppingList.id}"/>" style="color:white;"><i class="material-icons right">edit</i>Gerenciar Produtos</a>
+                                            <a class="btn btn-sm btn-danger btn-small red modal-trigger" href="#modal-delete" onclick="setDeleteDadaModalShoppingList(${shoppingList.id})" style="color:white;"><i class="material-icons right">delete</i>Excluir</a>
                                         </td>
                                     </tr>    
                                 </c:forEach>

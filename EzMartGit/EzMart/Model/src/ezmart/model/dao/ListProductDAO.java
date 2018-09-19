@@ -82,6 +82,7 @@ public class ListProductDAO implements BaseDAO<ListProduct> {
             value.setId(resultSet.getLong("listproduct_id"));
             value.setListId(resultSet.getLong("listproduct_listid"));
             value.setProductName(resultSet.getString("product_name"));
+            value.setProductId(resultSet.getLong("product_id"));
             value.setQuantity(resultSet.getInt("listproduct_quantity"));
 
             listProduct.add(value);

@@ -36,15 +36,15 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="cnpj">CNPJ:</label>
-                                    <input type="text" class="form-control" name="cnpj" id="cnpj" value="${cnpj}">
+                                    <input type="text" class="form-control" name="cnpj" id="cnpjUserRegister" value="${cnpj}">
                                     <span style="color: orangered">${errors.cnpj}</span>
                                 </div>
-                                <div class="form-group col s6">
+                                <div class="form-group">
                                     <label for="email">Email:</label>
                                     <input type="email" class="form-control" name="email" id="email" value="${email}">
                                     <span style="color: orangered">${errors.email}</span>
                                 </div>
-                                <div class="form-group col s6">
+                                <div class="form-group">
                                     <label for="secondEmail">Outro Email:</label>
                                     <input type="email" class="form-control" name="secondEmail" id="secondEmail" value="${secondEmail}">
                                     <span style="color: orangered">${errors.secondEmail}</span>
@@ -95,12 +95,12 @@
                                 </div>
                                 <div class="form-group ">
                                     <label for="zipCode">CEP:</label>
-                                    <input type="text" class="form-control" name="zipCode" id="zipCode" value="${zipCode}">
+                                    <input type="text" class="form-control" name="zipCode" id="zipCodeUserEstablishmentRegister" value="${zipCode}">
                                     <span style="color: orangered">${errors.zipCode}</span>
                                 </div>
                                 <div class="form-group ">
                                     <label for="telephone">Telefone:</label>
-                                    <input type="text" class="form-control" name="telephone" id="telephone" value="${telephone}">
+                                    <input type="text" class="form-control" name="telephone" id="cellUserEstablishmentRegister" value="${telephone}">
                                     <span style="color: orangered">${errors.telephone}</span>
                                 </div>
                                 <button id="btn-btn-ezmart-style" type="submit" class="btn"><i class="material-icons left">border_color</i>Cadastrar</button>
@@ -128,5 +128,6 @@
         <c:import url="/WEB-INF/views/templates/footer.jsp"></c:import>
         <script src="<c:url value="/resources/js/materialize.min.js"/>"></script>
         <script src="<c:url value="/resources/js/appEZMart.js"/>"></script>
+        <script type="text/javascript" src="<c:url value="/resources/js/mascara.js"/>"></script>
     </body>
 </html>
