@@ -38,7 +38,7 @@ public class UserService implements BaseUserService {
 
     @Override
     public User readById(Long id) throws Exception {
-                Connection conn = ConnectionManager.getInstance().getConnection();
+        Connection conn = ConnectionManager.getInstance().getConnection();
         try {
             UserDAO dao = new UserDAO();
             User user = dao.readById(conn, id);
@@ -49,7 +49,8 @@ public class UserService implements BaseUserService {
             conn.rollback();
             conn.close();
             throw e;
-        }}
+        }
+    }
 
     @Override
     public List<User> readByCriteria(Map<Long, Object> criteria, Long limit, Long offset) throws Exception {
@@ -74,7 +75,38 @@ public class UserService implements BaseUserService {
 
     @Override
     public void delete(Long id) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Connection conn = ConnectionManager.getInstance().getConnection();
+        try {
+            UserDAO dao = new UserDAO();
+            dao.delete(conn, id);
+            conn.commit();
+            conn.close();
+        } catch (Exception e) {
+            conn.rollback();
+            conn.close();
+            throw e;
+        }
+    }
+
+    public void deleteRelationship(UserSystem user) throws Exception {
+        Connection conn = ConnectionManager.getInstance().getConnection();
+        try {
+            UserDAO dao = new UserDAO();
+            ConsumerDAO consumerDAO = new ConsumerDAO();
+            EstablishmentDAO establishmentDAO = new EstablishmentDAO();
+            if (user.getConsumer() != null) {
+                consumerDAO.delete(conn, user.getConsumer().getId());
+            }else{
+                establishmentDAO.delete(conn, user.getEstablishment().getId());
+            }
+            dao.delete(conn, user.getId());
+            conn.commit();
+            conn.close();
+        } catch (Exception e) {
+            conn.rollback();
+            conn.close();
+            throw e;
+        }
     }
 
     @Override
@@ -102,9 +134,7 @@ public class UserService implements BaseUserService {
                     errors.put("password", "Tamanho inválido!");
                 }
             }
-            
-            
-            
+
         } else if (validationType.equals(SystemConstant.VALIDATION.USER.RECOVERY_PASSWORD)) {
             Map<Long, Object> criteria = new HashMap<>();
             criteria.put(UserCriteria.EMAIL_EQ, email);
@@ -215,7 +245,7 @@ public class UserService implements BaseUserService {
             throw e;
         }
     }
-    
+
     @Override
     public void setImg(Long id, byte[] bytes) throws Exception {
         Connection conn = ConnectionManager.getInstance().getConnection();
@@ -285,22 +315,50 @@ public class UserService implements BaseUserService {
             UserDAO dao = new UserDAO();
             ConsumerDAO consumerDAO = new ConsumerDAO();
             EstablishmentDAO establishmentDAO = new EstablishmentDAO();
-            
+
             UserSystem userSystem = dao.createUserSystem(conn, entity);
-            if(userSystem.getConsumer() != null){
+            if (userSystem.getConsumer() != null) {
                 Consumer consumer = new Consumer();
                 consumer = userSystem.getConsumer();
                 consumer.setId(userSystem.getId());
-                consumerDAO.create(conn, userSystem.getConsumer());
-            }else{
+                consumerDAO.create(conn, consumer);
+            } else {
                 Establishment est = new Establishment();
                 est = userSystem.getEstablishment();
                 est.setId(userSystem.getId());
-                establishmentDAO.create(conn, userSystem.getEstablishment());
+                establishmentDAO.create(conn, est);
             }
             conn.commit();
             conn.close();
             return userSystem;
+        } catch (Exception e) {
+            conn.rollback();
+            conn.close();
+            throw e;
+        }
+    }
+
+    public void updateUserSystem(UserSystem entity) throws Exception {
+        Connection conn = ConnectionManager.getInstance().getConnection();
+        try {
+            UserDAO dao = new UserDAO();
+            ConsumerDAO consumerDAO = new ConsumerDAO();
+            EstablishmentDAO establishmentDAO = new EstablishmentDAO();
+
+            if (entity.getConsumer() != null) {
+                Consumer consumer = new Consumer();
+                consumer = entity.getConsumer();
+                consumer.setId(entity.getId());
+                consumerDAO.update(conn, consumer);
+            } else {
+                Establishment est = new Establishment();
+                est = entity.getEstablishment();
+                est.setId(entity.getId());
+                establishmentDAO.update(conn, est);
+            }
+            dao.updateUserSystem(conn, entity);
+            conn.commit();
+            conn.close();
         } catch (Exception e) {
             conn.rollback();
             conn.close();

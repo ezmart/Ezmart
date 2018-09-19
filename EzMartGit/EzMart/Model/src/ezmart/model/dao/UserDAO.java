@@ -172,7 +172,16 @@ public class UserDAO implements BaseDAO<User> {
 
     @Override
     public void delete(Connection conn, Long id) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = " DELETE FROM usersystem WHERE usersystem_id = ?;";
+
+        PreparedStatement statement = conn.prepareStatement(sql);
+        int i = 0;
+
+        statement.setLong(++i, id);
+
+        statement.execute();
+
+        statement.close();
     }
 
     public User authenticate(Connection conn, String email, String password) throws Exception {
@@ -327,7 +336,8 @@ public class UserDAO implements BaseDAO<User> {
                 + "left join consumer on\n"
                 + "		consumer_userid = usersystem_id\n"
                 + "left join establishment on\n"
-                + "		establishment_userid = usersystem_id";
+                + "		establishment_userid = usersystem_id"
+                + "		order by usersystem_id ";
 
         List<Object> paramList = new ArrayList<>();
 
@@ -368,9 +378,14 @@ public class UserDAO implements BaseDAO<User> {
                 establishment.setPlanStartDate(rs.getDate("establishment_planstartdate"));
                 establishment.setPlanFinalDate(rs.getDate("establishment_planfinaldate"));
             }
+            
+            city.setId(rs.getLong("city_id"));
             city.setName(rs.getString("city_name"));
+            city.setCodeIbge(rs.getString("city_codeibge"));
 
+            state.setId(rs.getLong("state_id"));
             state.setInitials(rs.getString("state_initials"));
+            state.setName(rs.getString("state_name"));
 
             userSystem.setId(rs.getLong("usersystem_id"));
             userSystem.setEmail(rs.getString("usersystem_email"));
@@ -380,11 +395,16 @@ public class UserDAO implements BaseDAO<User> {
             userSystem.setTelephone(rs.getString("usersystem_telephone"));
             if (rs.getString("usersystem_usertype").equals(UserSystem.TIPO_CONSUMER)) {
                 userSystem.setUserType("CONSUMIDOR");
+                userSystem.setAdm(false);
             } else if (rs.getString("usersystem_usertype").equals(UserSystem.TIPO_EMPORIUM)) {
                 userSystem.setUserType("ESTABELECIMENTO");
+                userSystem.setAdm(false);
             } else if (rs.getString("usersystem_usertype").equals(UserSystem.TIPO_ADMIN)) {
                 userSystem.setUserType("ADMINISTRADOR");
+                userSystem.setAdm(true);
             }
+            userSystem.setZipCode(rs.getString("usersystem_zipcode"));
+            
             userSystem.setActive(rs.getBoolean("usersystem_active"));
             if (userSystem.getActive()) {
                 userSystem.setActiveString("SIM");
@@ -410,8 +430,8 @@ public class UserDAO implements BaseDAO<User> {
         String sql = "INSERT INTO "
                 + "usersystem(usersystem_email, usersystem_password, usersystem_addresslocation, usersystem_numberhouse, "
                 + "usersystem_neighborhood, usersystem_cityid, usersystem_zipcode, usersystem_telephone, "
-                + "usersystem_usertype, usersystem_active) "
-                + "VALUES (?,md5('Ez'||?||'Mart'),?,?,?,?,?,?,?,?) RETURNING usersystem_id;";
+                + "usersystem_usertype, usersystem_active, usersystem_img) "
+                + "VALUES (?,md5('Ez'||?||'Mart'),?,?,?,?,?,?,?,?,?) RETURNING usersystem_id;";
 
         PreparedStatement statement = conn.prepareStatement(sql);
         int i = 0;
@@ -426,6 +446,7 @@ public class UserDAO implements BaseDAO<User> {
         statement.setString(++i, entity.getTelephone());
         statement.setString(++i, entity.getUserType());
         statement.setBoolean(++i, entity.getActive());
+        statement.setBytes(++i, entity.getImage());
 
         ResultSet resultSet = statement.executeQuery();
         if (resultSet.next()) {
@@ -435,5 +456,30 @@ public class UserDAO implements BaseDAO<User> {
         statement.close();
         
         return entity;
+    }
+
+    public void updateUserSystem(Connection conn, UserSystem entity) throws Exception{
+        
+         String sql = "UPDATE usersystem SET "
+                + "usersystem_email = ?, usersystem_addresslocation = ?, usersystem_numberhouse = ?, "
+                + "usersystem_neighborhood = ?, usersystem_cityid = ?, usersystem_zipcode = ?, usersystem_telephone = ?, "
+                + "usersystem_usertype = ?, usersystem_active = ? WHERE usersystem_id = ? ";
+
+        PreparedStatement statement = conn.prepareStatement(sql);
+        int i = 0;
+
+        statement.setString(++i, entity.getEmail());
+        statement.setString(++i, entity.getAddressLocation());
+        statement.setInt(++i, entity.getNumberHouse());
+        statement.setString(++i, entity.getNeighborhood());
+        statement.setLong(++i, entity.getCity().getId());
+        statement.setString(++i, entity.getZipCode());
+        statement.setString(++i, entity.getTelephone());
+        statement.setString(++i, entity.getUserType());
+        statement.setBoolean(++i, entity.getActive());
+        statement.setLong(++i, entity.getId());
+        
+        statement.execute();
+        statement.close();
     }
 }

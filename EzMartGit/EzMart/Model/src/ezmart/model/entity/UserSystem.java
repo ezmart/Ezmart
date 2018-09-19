@@ -23,6 +23,8 @@ public class UserSystem extends BaseEntity{
     private String userType;
     private Boolean active;
     private String activeString;
+    private byte[] image;
+    private Boolean adm;
 
     public Consumer getConsumer() {
         return consumer;
@@ -142,5 +144,21 @@ public class UserSystem extends BaseEntity{
 
     public void setActiveString(String activeString) {
         this.activeString = activeString;
+    }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
+
+    public Boolean getAdm() {
+        return adm;
+    }
+
+    public void setAdm(Boolean adm) {
+        this.adm = adm;
     }
 }

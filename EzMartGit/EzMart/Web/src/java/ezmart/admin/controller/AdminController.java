@@ -9,6 +9,7 @@ import ezmart.model.entity.Sector;
 import ezmart.model.entity.State;
 import ezmart.model.entity.UserSystem;
 import ezmart.model.service.CityService;
+import ezmart.model.service.ConsumerService;
 import ezmart.model.service.EstablishmentService;
 import ezmart.model.service.ProductService;
 import ezmart.model.service.ProviderService;
@@ -20,6 +21,7 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.InputStream;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import javax.imageio.ImageIO;
@@ -39,6 +41,7 @@ public class AdminController {
     UserService userService = new UserService();
     CityService cityService = new CityService();
     StateService stateService = new StateService();
+    ConsumerService consumerService = new ConsumerService();
 
     @RequestMapping(value = "/sector", method = RequestMethod.GET)
     public ModelAndView findAllSector() {
@@ -307,15 +310,17 @@ public class AdminController {
     @RequestMapping(value = "/user", method = RequestMethod.POST)
     public ModelAndView saveUser(String companyName, String userType, String businessName, String cnpj, String email,
             String secondEmail, String password, String addressLocation, Integer numberHouse, String neighborhood,
-            Long stateId, Long cityId, String zipCode, String telephone, Boolean activeUser,Boolean admin, String name, String lastName, String cpf, MultipartFile userImage) throws Exception{
+            Long stateId, Long cityId, String zipCode, String telephone, Boolean activeUser, Boolean admin, String name,
+            String lastName, Integer plan, Date planStart, Date planFinish, String cpf, MultipartFile userImage) throws Exception {
         ModelAndView mv = new ModelAndView("redirect:/user");
         try {
-            
-            if(admin != null){
-                if(admin)
+
+            if (admin != null) {
+                if (admin) {
                     userType = UserSystem.TIPO_ADMIN;
-                else
+                } else {
                     userType = UserSystem.TIPO_CONSUMER;
+                }
             }
 
             City city = new City();
@@ -337,6 +342,7 @@ public class AdminController {
             user.setUserType(userType);
             user.setCity(city);
             user.setState(state);
+            user.setImage(userImage.getBytes());
 
             if (userType.equals(UserSystem.TIPO_EMPORIUM)) {
                 Establishment establishment = new Establishment();
@@ -344,21 +350,25 @@ public class AdminController {
                 establishment.setCnpj(cnpj);
                 establishment.setSecondEmail(secondEmail);
                 establishment.setName(companyName);
+                establishment.setPlan(plan);
+                establishment.setPlanStartDate(planStart);
+                establishment.setPlanFinalDate(planFinish);
                 user.setEstablishment(establishment);
             } else {
                 Consumer consumer = new Consumer();
-                
+
                 consumer.setName(name);
                 consumer.setLastName(lastName);
                 consumer.setCpf(cpf);
-                
+
                 user.setConsumer(consumer);
             }
-            
+
             user = userService.createUserSystem(user);
-            
-            if (userImage.getBytes() != null)
-                this.saveImageProduct(userImage.getBytes(), user.getId().toString());
+
+            if (userImage.getBytes() != null) {
+                this.saveImageUser(userImage.getBytes(), user.getId().toString());
+            }
 
         } catch (Exception exception) {
             System.out.println(exception.getMessage());
@@ -367,17 +377,103 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/userEdit", method = RequestMethod.POST)
-    public ModelAndView editUser(Long providerId, String providerCnpjEdit, String providerNameEdit, String providerBusinessNameEdit) {
+    public ModelAndView editUser(Long userIdEdit, String nameEdit, String lastNameEdit, String cpfEdit, String emailEdit,
+            String addressLocationEdit, Integer numberHouseEdit, String neighborhoodEdit, Long stateIdEdit,
+            Long cityIdEdit, String zipCodeEdit, String telephoneEdit, Boolean adminEdit, Boolean activeUserEdit) {
+
         ModelAndView mv = new ModelAndView("redirect:/user");
 
         try {
 
-            Provider provider = new Provider();
-            provider.setId(providerId);
-            provider.setCnpj(providerCnpjEdit);
-            provider.setName(providerNameEdit);
-            provider.setBusinessName(providerBusinessNameEdit);
-            providerService.update(provider);
+            String userType = null;
+            if (adminEdit != null) {
+                if (adminEdit) {
+                    userType = UserSystem.TIPO_ADMIN;
+                } else {
+                    userType = UserSystem.TIPO_CONSUMER;
+                }
+            }
+
+            City city = new City();
+            city.setId(cityIdEdit);
+
+            State state = new State();
+            state.setId(stateIdEdit);
+
+            UserSystem user = new UserSystem();
+
+            user.setId(userIdEdit);
+            user.setActive(activeUserEdit);
+            user.setEmail(emailEdit);
+            user.setNeighborhood(neighborhoodEdit);
+            user.setTelephone(telephoneEdit);
+            user.setNumberHouse(numberHouseEdit);
+            user.setAddressLocation(addressLocationEdit);
+            user.setZipCode(zipCodeEdit);
+            user.setUserType(userType);
+            user.setCity(city);
+            user.setState(state);
+
+            Consumer consumer = new Consumer();
+
+            consumer.setName(nameEdit);
+            consumer.setLastName(lastNameEdit);
+            consumer.setCpf(cpfEdit);
+
+            user.setConsumer(consumer);
+
+            userService.updateUserSystem(user);
+
+        } catch (Exception exception) {
+            System.out.println(exception.getMessage());
+        }
+        return mv;
+    }
+
+    @RequestMapping(value = "/userEstEdit", method = RequestMethod.POST)
+    public ModelAndView userEstEdit(Long userIdEstEdit, String companyNameEdit, String businessNameEdit, String cnpjEdit,
+            String emailEstEdit, String secondEmailEdit, String addressLocationEstEdit, Integer numberHouseEstEdit,
+            String neighborhoodEstEdit, Long stateIdEstEdit, Long cityIdEstEdit, String zipCodeEstEdit,
+            String telephoneEstEdit, Integer planEdit, Date planStartEdit, Date planFinishEdit, Boolean activeUserEstEdit) {
+
+        ModelAndView mv = new ModelAndView("redirect:/user");
+
+        try {
+
+            String userType = UserSystem.TIPO_EMPORIUM;
+
+            City city = new City();
+            city.setId(cityIdEstEdit);
+
+            State state = new State();
+            state.setId(stateIdEstEdit);
+
+            UserSystem user = new UserSystem();
+
+            user.setId(userIdEstEdit);
+            user.setActive(activeUserEstEdit);
+            user.setEmail(emailEstEdit);
+            user.setNeighborhood(neighborhoodEstEdit);
+            user.setTelephone(telephoneEstEdit);
+            user.setNumberHouse(numberHouseEstEdit);
+            user.setAddressLocation(addressLocationEstEdit);
+            user.setZipCode(zipCodeEstEdit);
+            user.setUserType(userType);
+            user.setCity(city);
+            user.setState(state);
+
+            Establishment establishment = new Establishment();
+            establishment.setBusinessName(businessNameEdit);
+            establishment.setCnpj(cnpjEdit);
+            establishment.setSecondEmail(secondEmailEdit);
+            establishment.setName(companyNameEdit);
+            establishment.setPlan(planEdit);
+            establishment.setPlanStartDate(planStartEdit);
+            establishment.setPlanFinalDate(planFinishEdit);
+
+            user.setEstablishment(establishment);
+            
+            userService.updateUserSystem(user);
 
         } catch (Exception exception) {
             System.out.println(exception.getMessage());
@@ -386,11 +482,20 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/userDelete", method = RequestMethod.POST)
-    public ModelAndView deleteUser(Long providerId) {
+    public ModelAndView deleteUser(Long userId
+    ) {
         ModelAndView mv = new ModelAndView("redirect:/user");
 
         try {
-            providerService.delete(providerId);
+
+            Consumer consumer = consumerService.readByUserId(userId);
+            Establishment establishment = establishmentService.readByUserId(userId);
+
+            UserSystem user = new UserSystem();
+            user.setConsumer(consumer);
+            user.setEstablishment(establishment);
+            user.setId(userId);
+            userService.deleteRelationship(user);
         } catch (Exception exception) {
             System.out.println(exception.getMessage());
         }
@@ -398,7 +503,8 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/user/uploadImage", method = RequestMethod.POST)
-    public ModelAndView uploadImageUser(MultipartFile userImage, Long idUserForImage) {
+    public ModelAndView uploadImageUser(MultipartFile userImage, Long idUserForImage
+    ) {
         ModelAndView mv = new ModelAndView("redirect:/user");
 
         try {

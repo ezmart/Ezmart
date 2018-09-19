@@ -97,6 +97,23 @@
                                 <input type="text" class="form-control" name="telephone" id="telephone">
                             </div>
                             <div>
+                                <label for="planId">Plano:</label>
+                                <select class="form-control input-text-register" name="plan" id="planId">
+                                    <option notselected></option>
+                                    <option id="planId" value="1">OURO</option>                            
+                                    <option id="planId" value="2">PRATA</option>                            
+                                    <option id="planId" value="3">BRONZE</option>                            
+                                </select>
+                            </div>
+                            <div>
+                                <label for="planStartId">Início do Plano:</label>
+                                <input type="date" name="planStart">
+                            </div>
+                            <div>
+                                <label for="planFinishId">Término do Plano:</label>
+                                <input type="date" name="planFinish">
+                            </div>
+                            <div>
                                 <label for="active">Ativo:</label>
                                 <select class="form-control input-text-register" name="activeUser" id="activeId">
                                     <option notselected></option>
@@ -104,7 +121,7 @@
                                     <option value="false">NÃO</option>                            
                                 </select>
                             </div>
-                                <div>
+                            <div>
                                 <label for="imageProduct">Imagem</label>
                                 <div class="file-field input-field">
                                     <div class="btn">
@@ -194,9 +211,9 @@
                             </div>
                             <div>
                                 <label for="adm">Administrador:</label>
-                                <select class="form-control input-text-register" name="admin" id="adminId">
+                                <select class="form-control input-text-register" name="admin" id="adminId" required>
                                     <option notselected></option>
-                                    <option value="true" selected="true">SIM</option>                            
+                                    <option value="true">SIM</option>                            
                                     <option value="false">NÃO</option>                            
                                 </select>
                             </div>
@@ -228,61 +245,197 @@
                     </div>
                 </div>
             </div>
-            <div id="modal-update" class="modal">
+
+            <div id="modal-update-consumer" class="modal">
                 <div class="modal-content">
                     <h4>Editar Usuário<i class=" small material-icons" style="margin-left: 10px;">edit</i></h4>
                     <div class="row">
                         <form class="col s12" method="POST" action="/ezmartWeb/userEdit">
-                            <div>
-                                <label for="nome">Nome</label>
-                                <input type="text" style="display: none"  name="userIdEdit" id = "idProduct">
-                                <input id="nameProductEdit" name="userNameEdit" type="text" class="validate" required>
+                            <div class="form-group col s6" style="padding: 0">
+                                <label for="nameEdit">Nome:</label>
+                                <input type="text" class="form-control" name="nameEdit" id="nameEdit">
+                                <input type="text" style="display: none"  name="userIdEdit" id = "idUserEdit">
                             </div>
-                            <div>
-                                <label for="codBarras">Código de Barras</label>
-                                <input id="barCodeProductEdit" name="userBarCodeEdit" maxlength="13" pattern="[0-9]+$" title="Somente números!" type="text" class="validate" required>
+                            <div class="form-group col s6" style="padding-right: 0">
+                                <label for="lastNameEdit">Sobrenome:</label>
+                                <input type="text" class="form-control" name="lastNameEdit" id="lastNameEdit">
                             </div>
-                            <div>
-                                <label for="marca">Marca</label>
-                                <input id="brandProductEdit" name="userBrandEdit" type="text" class="validate">
+                            <div class="form-group">
+                                <label for="cpfEdit">CPF:</label>
+                                <input type="text" class="form-control" name="cpfEdit" maxlength="11" id="cpfEdit">
                             </div>
-                            <div>
-                                <label for="sector">Linha</label>
-                                <select name="sectorIdProductEdit" id="sectorIdProductEdit" required>
+                            <div class="form-group">
+                                <label for="emailEdit">Email:</label>
+                                <input type="email" class="form-control" name="emailEdit" id="emailEdit">
+                            </div>
+                            <div class="form-group" style="padding-right: 0">
+                                <label for="addressLocationEdit">Logradouro:</label>
+                                <input type="text" class="form-control" name="addressLocationEdit" id="addressLocationEdit">
+                            </div>
+                            <div class="form-group">
+                                <label for="numberHouseEdit">Número:</label>
+                                <input type="number" class="form-control" name="numberHouseEdit" id="numberHouse">
+                            </div>
+                            <div class="form-group">
+                                <label for="neighborhoodEdit">Bairro:</label>
+                                <input type="text" class="form-control" name="neighborhoodEdit" id="neighborhoodEdit">
+                            </div>
+                            <div class="form-group col s6">
+                                <label for="stateIdEdit">Estado:</label>
+                                <select class="form-control input-text-register" name="stateIdEdit" id="stateIdEdit">
                                     <option notselected></option>
-                                    <c:forEach items="${sectorList}" var="sector">
-                                        <option 
-                                            <%--<c:if test="${userList.sector.id eq sector.id}">selected="true"</c:if>--%>
-                                            value="${sector.id}" id="sectorIdProductEdit">${sector.name}</option>
+                                    <c:forEach items="${stateList}" var="state">
+                                        <option id="stateIdEdit" value="${state.id}">${state.name}</option>                            
                                     </c:forEach>
                                 </select>
                             </div>
-                            <div>
-                                <label for="provider">Fornecedor</label>
-                                <select name="providerIdProductEdit" id="providerIdProductEdit" required>
+                            <div class="form-group col s6">
+                                <label for="cityIdEdit">Municipio:</label>
+                                <select class="form-control input-text-register" name="cityIdEdit" id="cityIdEdit">
                                     <option notselected></option>
-                                    <c:forEach items="${providerList}" var="provider">
-                                        <option 
-                                            <%--<c:if test="${userList.provider.id eq provider.id}">selected="true"</c:if>--%>
-                                            value="${provider.id}">${provider.name} - ${provider.cnpj}</option>
+                                    <c:forEach items="${cityList}" var="city">
+                                        <option id="cityIdEdit" value="${city.id}">${city.name}</option>                            
                                     </c:forEach>
+                                </select>
+                            </div>
+                            <div class="form-group col s6" style="padding: 0">
+                                <label for="zipCodeEdit">CEP:</label>
+                                <input type="text" class="form-control" name="zipCodeEdit" id="zipCodeEdit">
+                            </div>
+                            <div class="form-group col s6" style="padding-right:0">
+                                <label for="telephoneEdit">Telefone:</label>
+                                <input type="text" class="form-control" name="telephoneEdit" id="telephoneEdit">
+                            </div>
+                            <div>
+                                <label for="admEdit">Administrador:</label>
+                                <select class="form-control input-text-register" name="adminEdit" id="adminIdEdit">
+                                    <option notselected></option>
+                                    <option value="true" name="adminEditTrue">SIM</option>                            
+                                    <option value="false" name="adminEditFalse">NÃO</option>                            
+                                </select>
+                            </div>
+                            <div>
+                                <label for="activeEdit">Ativo:</label>
+                                <select class="form-control input-text-register" name="activeUserEdit" id="activeIdEdit">
+                                    <option notselected></option>
+                                    <option value="true" name="activeUserTrue" >SIM</option>                            
+                                    <option value="false" name="activeUserFalse" >NÃO</option>                            
                                 </select>
                             </div>
                             <div class="modal-footer">
                                 <a class="btn btn-sm btn-default btn-small red modal-close modal-action" style="color:white;">Voltar</a>
-                                <button class=" modal-action green btn-flat" type="submit" value="confirmar" style="margin-right: 15px; color:white;">CONFIRMAR</button>
+                                <button class=" modal-action green btn-flat" type="submit" id="addButton" value="confirmar" style="margin-right: 15px; color:white;">CONFIRMAR</button>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
+
+            <div id="modal-update-est" class="modal">
+                <div class="modal-content">
+                    <h4>Editar Usuário<i class=" small material-icons" style="margin-left: 10px;">edit</i></h4>
+                    <div class="row">
+                        <form class="col s12" enctype="multipart/form-data" method="POST" action="/ezmartWeb/userEstEdit">
+                            <div class="form-group col s6" style="padding: 0">
+                                    <label for="companyNameEdit">Nome Fantasia:</label>
+                                    <input type="text" class="form-control" name="companyNameEdit" id="companyNameEdit">
+                                    <input type="text" style="display: none"  name="userIdEstEdit" id = "idUserEstEdit">
+                                </div>
+                                <div class="form-group col s6" style="padding-right: 0">
+                                    <label for="businessNameEdit">Razão Social:</label>
+                                    <input type="text" class="form-control" name="businessNameEdit" id="businessNameEdit">
+                                </div>
+                                <div class="form-group">
+                                    <label for="cnpjEdit">CNPJ:</label>
+                                    <input type="text" class="form-control" name="cnpjEdit" maxlength="18" id="cnpjUserEdit">
+                                </div>
+                                <div class="form-group col s6">
+                                    <label for="emailEstEdit">Email:</label>
+                                    <input type="email" class="form-control" name="emailEstEdit" id="emailEstEdit">
+                                </div>
+                                <div class="form-group col s6">
+                                    <label for="secondEmailEdit">Outro Email:</label>
+                                    <input type="email" class="form-control" name="secondEmailEdit" id="secondEmailEdit">
+                                </div>
+                                <div class="form-groug" style="padding-right: 0">
+                                    <label for="addressLocationEstEdit">Logradouro:</label>
+                                    <input type="text" class="form-control" name="addressLocationEstEdit" id="addressLocationEstEdit">
+                                </div>
+                                <div class="form-group">
+                                    <label for="numberHouseEstEdit">Número:</label>
+                                    <input type="number" class="form-control" name="numberHouseEstEdit" id="numberHouseEstEdit">
+                                </div>
+                                <div class="form-group">
+                                    <label for="neighborhoodEstEdit">Bairro:</label>
+                                    <input type="text" class="form-control" name="neighborhoodEstEdit" id="neighborhoodEstEdit">
+                                </div>
+                                <div class="form-group col s6">
+                                    <label for="stateIdEstEdit">Estado:</label>
+                                    <select class="form-control input-text-register" name="stateIdEstEdit" id="stateIdEstEdit">
+                                        <option notselected></option>
+                                    <c:forEach items="${stateList}" var="state">
+                                        <option id="stateIdEstEdit" value="${state.id}">${state.name}</option>                            
+                                    </c:forEach>
+                                </select>
+                            </div>
+                            <div class="form-group col s6">
+                                <label for="cityIdEstEdit">Municipio:</label>
+                                <select class="form-control input-text-register" name="cityIdEstEdit" id="cityIdEstEdit">
+                                    <option notselected></option>
+                                    <c:forEach items="${cityList}" var="city">
+                                        <option id="cityIdEstEdit" value="${city.id}">${city.name}</option>                            
+                                    </c:forEach>
+                                </select>
+                            </div>
+                            <div class="form-group col s6" style="padding: 0">
+                                <label for="zipCodeEstEdit">CEP:</label>
+                                <input type="text" class="form-control" name="zipCodeEstEdit" id="zipCodeEstEdit">
+                            </div>
+                            <div class="form-group col s6" style="padding-right:0">
+                                <label for="telephoneEstEdit">Telefone:</label>
+                                <input type="text" class="form-control" name="telephoneEstEdit" id="telephoneEstEdit">
+                            </div>
+                            <div>
+                                <label for="planIdEdit">Plano:</label>
+                                <select class="form-control input-text-register" name="planEdit" id="planIdEdit">
+                                    <option notselected></option>
+                                    <option id="planId" value="1">OURO</option>                            
+                                    <option id="planId" value="2">PRATA</option>                            
+                                    <option id="planId" value="3">BRONZE</option>                            
+                                </select>
+                            </div>
+                            <div>
+                                <label for="planStartIdEdit">Início do Plano:</label>
+                                <input type="date" name="planStartEdit">
+                            </div>
+                            <div>
+                                <label for="planFinishIdEdit">Término do Plano:</label>
+                                <input type="date" name="planFinishEdit">
+                            </div>
+                            <div>
+                                <label for="activeEstEdit">Ativo:</label>
+                                <select class="form-control input-text-register" name="activeUserEstEdit" id="activeIdEstEdit">
+                                    <option notselected></option>
+                                    <option value="true">SIM</option>                            
+                                    <option value="false">NÃO</option>                            
+                                </select>
+                            </div>
+                            <div class="modal-footer">
+                                <a class="btn btn-sm btn-default btn-small red modal-close modal-action" style="color:white;">Voltar</a>
+                                <button class=" modal-action green btn-flat" id="addButton" value="confirmar" style="margin-right: 15px; color:white;">CONFIRMAR</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
             <div id="modal-delete" class="modal">
                 <div class="modal-content">
                     <h4>Excluir Usuário<i class=" small material-icons" style="margin-left: 10px;">delete</i></h4>
                     <p><font size="5">Tem certeza que deseja excluir o usuário: </font><font color="red" size="5"><container id = "user-id"></container></font> <font size="5">?</font></p>
                     <div class="modal-footer">
                         <form method="POST" action="/ezmartWeb/userDelete">
-                            <input type="text" style="display: none"  name="UserId" id = "idUserDelete">
+                            <input type="text" style="display: none"  name="userId" id = "idUserDelete">
                             <a class="btn btn-sm btn-default btn-small red modal-close modal-action" style="color:white;">Não</a>
                             <button class="btn btn-sm btn-default btn-small green" type="submit" style="color:white; margin-right: 10px;" >Sim</button>
                         </form>
@@ -301,15 +454,15 @@
             </div>
             <div class="container">
                 <h4>Usuários</h4>
-                <a href="#modal-create-est" class="btn btn-n-floatingsmall green left modal-trigger" style="color:white;"><i class="material-icons center">add</i>ESTABELECIMENTO</a>
-                <a href="#modal-create-consumer" class="btn btn-n-floatingsmall green left modal-trigger" style="color:white; margin-left: 15px;"><i class="material-icons center">add</i>CONSUMIDOR/ADM</a>
+                <a href="#modal-create-est" class="btn btn-n-floatingsmall green left modal-trigger" style="color:white;"><i class="material-icons right">add_box</i>ESTABELECIMENTO</a>
+                <a href="#modal-create-consumer" class="btn btn-n-floatingsmall green left modal-trigger" style="color:white; margin-left: 15px;"><i class="material-icons right">add_box</i>CONSUMIDOR/ADM</a>
                 <br><br/>
                 <div class="row">
                     <div class="col s12 m12">
                         <ul>
                             <c:forEach items="${userList}" var="user">
                                 <li class="col l4 m6 s12" >
-                                    <div class="card">
+                                    <div class="card-panel medium">
                                         <div class="row" style="padding: 20px;">
                                             <div>
                                                 <img class="responsive-img-center" src="<c:url value = "/resources/img/user/${user.id}.jpg"/>" alt="imagem usuario" width="150">
@@ -330,21 +483,21 @@
                                                 </form>
                                             </div>
                                             <br/>
-                                            <p style="font-size: 20px"><b>Id:</b> ${user.id}</p>
-                                            <p style="font-size: 20px"><b>Nome:</b> <c:if test="${not empty user.consumer.name}">${user.consumer.name}</c:if> <c:if test="${not empty user.establishment.name}">${user.establishment.name}</c:if> </p>
-                                            <p style="font-size: 20px"><b>E-mail:</b> ${user.email}</p>
+                                            <p style="font-size: 18px"><b>Id:</b> ${user.id}</p>
+                                            <p style="font-size: 18px"><b>Nome:</b> <c:if test="${not empty user.consumer.name}">${user.consumer.name}</c:if> <c:if test="${not empty user.establishment.name}">${user.establishment.name}</c:if> </p>
+                                            <p style="font-size: 18px"><b>E-mail:</b> ${user.email}</p>
     <!--                                            <p style="font-size: 20px"><b>Logradouro:</b> ${user.addressLocation}</p>
                                             <p style="font-size: 20px"><b>Número:</b> ${user.numberHouse}</p>
                                             <p style="font-size: 20px"><b>Bairro:</b> ${user.neighborhood}</p>
                                             <p style="font-size: 20px"><b>Cidade:</b> ${user.city.name}</p>
                                             <p style="font-size: 20px"><b>Estado:</b> ${user.state.initials}</p>
                                             <p style="font-size: 20px"><b>Telefone:</b> ${user.telephone}</p>-->
-                                            <p style="font-size: 20px"><b>Tipo:</b> ${user.userType}</p>
-                                            <p style="font-size: 20px"><b>Ativo:</b> ${user.activeString}</p>
+                                            <p style="font-size: 18px"><b>Tipo:</b> ${user.userType}</p>
+                                            <p style="font-size: 18px"><b>Ativo:</b> ${user.activeString}</p>
                                             <div class="card-action card-content">
                                                 <div class="col s12 center">
-                                                    <a class="btn btn-sm btn-default btn-small ffc400 amber accent-3 modal-trigger" href="#modal-update" style="color:white;" ><i class="material-icons center">edit</i></a>
-                                                    <a class="btn btn-sm btn-danger btn-small red modal-trigger" href="#modal-delete" onclick="setDadosModalUser(${user.id}, '${user.consumer.name}', '${user.establishment.name}')" style="color:white;"><i class="material-icons center">delete</i></a>
+                                                    <a title="Alterar" class="btn btn-sm btn-default btn-small ffc400 amber accent-3 modal-trigger" <c:if test="${not empty user.consumer.name}"> href="#modal-update-consumer" onclick="setUserEdit(${user.id}, '${user.consumer.name}', '${user.consumer.lastName}', '${user.consumer.cpf}', '${user.email}', '${user.addressLocation}', ${user.numberHouse}, '${user.neighborhood}', '${user.state.name}', '${user.city.name}', '${user.zipCode}', '${user.telephone}', ${user.adm}, ${user.active})" </c:if> <c:if test="${not empty user.establishment.name}"> href="#modal-update-est" onclick="setUserEstEdit(${user.id}, '${user.establishment.name}', '${user.establishment.businessName}', '${user.establishment.cnpj}', '${user.email}','${user.establishment.secondEmail}', '${user.addressLocation}', ${user.numberHouse}, '${user.neighborhood}', '${user.state.name}', '${user.city.name}', '${user.zipCode}', '${user.telephone}', ${user.establishment.plan}, ${user.establishment.planStartDate}, ${user.establishment.planFinalDate}, ${user.active})"</c:if> style="color:white;" ><i class="material-icons center">edit</i></a>
+                                                    <a title="Excluir" class="btn btn-sm btn-danger btn-small red modal-trigger" href="#modal-delete" onclick="setDadosModalUser(${user.id}, '${user.consumer.name}', '${user.establishment.name}')" style="color:white;"><i class="material-icons center">delete</i></a>
                                                 </div>
                                             </div>
                                         </div>

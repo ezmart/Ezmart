@@ -79,7 +79,62 @@ function setDadosModalUser(userId, consumerName, establishmentName) {
     document.getElementById('idUserDelete').value = userId;
 }
 
+function setUserEdit(userIdEdit, nameEdit, lastNameEdit, cpfEdit, emailEdit, addressLocationEdit, numberHouseEdit, neighborhoodEdit,
+        stateIdEdit, cityIdEdit, zipCodeEdit, telephoneEdit, adminEdit, activeUserEdit) {
+
+        document.getElementById('idUserEdit').value = userIdEdit;
+        document.querySelector("[name='nameEdit']").value = nameEdit;
+        document.querySelector("[name='lastNameEdit']").value = lastNameEdit;
+        document.querySelector("[name='cpfEdit']").value = cpfEdit;
+        document.querySelector("[name='emailEdit']").value = emailEdit;
+        document.querySelector("[name='addressLocationEdit']").value = addressLocationEdit;
+        document.querySelector("[name='numberHouseEdit']").value = numberHouseEdit;
+        document.querySelector("[name='neighborhoodEdit']").value = neighborhoodEdit;
+//    document.querySelector("[name='stateIdEdit']").value = stateIdEdit;
+//    document.querySelector("[name='cityIdEdit']").value = cityIdEdit;
+        document.querySelector("[name='zipCodeEdit']").value = zipCodeEdit;
+        document.querySelector("[name='telephoneEdit']").value = telephoneEdit;
+//    if (adminEdit)
+//        document.querySelector("[name='adminEditTrue']").selected = true;
+//    else
+//        document.querySelector("[name='adminEditFalse']").selected = true;
+//    if (activeUserEdit)
+//        document.querySelector("[name='activeUserTrue']").selected = true;
+//    else
+//        document.querySelector("[name='activeUserFalse']").selected = true;
+
+}
+
+function setUserEstEdit(userIdEdit, companyNameEdit, businessNameEdit, cnpjEdit, emailEdit, secondEmailEdit, addressLocationEdit,
+                        numberHouseEdit, neighborhoodEdit, stateIdEdit, cityIdEdit, zipCodeEdit, telephoneEdit,
+                        planEdit, planStartEdit, planFinishEdit, activeUserEdit) {
+
+        document.getElementById('idUserEstEdit').value = userIdEdit;
+        document.querySelector("[name='companyNameEdit']").value = companyNameEdit;
+        document.querySelector("[name='businessNameEdit']").value = businessNameEdit;
+        document.querySelector("[name='cnpjEdit']").value = cnpjEdit;
+        document.querySelector("[name='emailEstEdit']").value = emailEdit;
+        document.querySelector("[name='secondEmailEdit']").value = secondEmailEdit;
+        document.querySelector("[name='addressLocationEstEdit']").value = addressLocationEdit;
+        document.querySelector("[name='numberHouseEstEdit']").value = numberHouseEdit;
+        document.querySelector("[name='neighborhoodEstEdit']").value = neighborhoodEdit;
+//    document.querySelector("[name='stateIdEstEdit']").value = stateIdEdit;
+//    document.querySelector("[name='cityIdEstEdit']").value = cityIdEdit;
+        document.querySelector("[name='zipCodeEstEdit']").value = zipCodeEdit;
+        document.querySelector("[name='telephoneEstEdit']").value = telephoneEdit;
+        
+        document.querySelector("[name='planEdit']").value = planEdit;
+        document.querySelector("[name='planStartEdit']").value = planStartEdit;
+        document.querySelector("[name='planFinishEdit']").value = planFinishEdit;
+//    if (activeUserEdit)
+//        document.querySelector("[name='activeUserTrue']").selected = true;
+//    else
+//        document.querySelector("[name='activeUserFalse']").selected = true;
+
+}
+
 $(document).ready(function () {
+
     var $cnpj = $("#providerCnpj");
     $cnpj.mask('00.000.000/0000-00', {reverse: true});
 
