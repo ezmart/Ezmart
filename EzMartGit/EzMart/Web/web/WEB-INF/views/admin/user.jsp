@@ -31,20 +31,20 @@
                             <form class="col s12" enctype="multipart/form-data" method="POST" >
                                 <div class="form-group col s6" style="padding: 0">
                                     <label for="companyName">Nome Fantasia:</label>
-                                    <input type="text" class="form-control" name="companyName" id="companyName">
+                                    <input type="text" class="form-control" name="companyName" id="companyName" required>
                                     <input type="text" style="display: none"  name="userType" value="emporium">
                                 </div>
                                 <div class="form-group col s6" style="padding-right: 0">
                                     <label for="businessName">Razão Social:</label>
-                                    <input type="text" class="form-control" name="businessName" id="businessName">
+                                    <input type="text" class="form-control" name="businessName" id="businessName" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="cnpj">CNPJ:</label>
-                                    <input type="text" class="form-control" name="cnpj" maxlength="18" id="cnpjUser">
+                                    <input type="text" class="form-control" name="cnpj" maxlength="18" id="cnpjUser" required>
                                 </div>
                                 <div class="form-group col s6">
                                     <label for="email">Email:</label>
-                                    <input type="email" class="form-control" name="email" id="email">
+                                    <input type="email" class="form-control" name="email" id="email" required>
                                 </div>
                                 <div class="form-group col s6">
                                     <label for="secondEmail">Outro Email:</label>
@@ -52,27 +52,27 @@
                                 </div>
                                 <div class="form-group col s6" style="padding: 0">
                                     <label for="password">Senha:</label>
-                                    <input type="password" class="form-control" name="password" id="password">
+                                    <input type="password" class="form-control" name="password" id="password" required>
                                 </div>
                                 <div class="form-group col s6" style="padding-right: 0">
                                     <label for="passwordConfirm">Confirmar Senha:</label>
-                                    <input type="password" class="form-control" name="passwordConfirm" id="passwordConfirm">
+                                    <input type="password" class="form-control" name="passwordConfirm" id="passwordConfirm" required>
                                 </div>
                                 <div class="form-groug" style="padding-right: 0">
                                     <label for="addressLocation">Logradouro:</label>
-                                    <input type="text" class="form-control" name="addressLocation" id="addressLocation">
+                                    <input type="text" class="form-control" name="addressLocation" id="addressLocation" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="numberHouse">Número:</label>
-                                    <input type="number" class="form-control" name="numberHouse" id="numberHouse">
+                                    <input type="number" class="form-control" name="numberHouse" id="numberHouse" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="neighborhood">Bairro:</label>
-                                    <input type="text" class="form-control" name="neighborhood" id="neighborhood">
+                                    <input type="text" class="form-control" name="neighborhood" id="neighborhood" required>
                                 </div>
                                 <div class="form-group col s6">
                                     <label for="stateId">Estado:</label>
-                                    <select class="form-control input-text-register" name="stateId" id="stateId">
+                                    <select class="form-control input-text-register" name="stateId" id="stateId" required>
                                         <option notselected></option>
                                     <c:forEach items="${stateList}" var="state">
                                         <option id="stateId" value="${state.id}">${state.name}</option>                            
@@ -81,7 +81,7 @@
                             </div>
                             <div class="form-group col s6">
                                 <label for="cityId">Municipio:</label>
-                                <select class="form-control input-text-register" name="cityId" id="cityId">
+                                <select class="form-control input-text-register" name="cityId" id="cityId" required>
                                     <option notselected></option>
                                     <c:forEach items="${cityList}" var="city">
                                         <option id="cityId" value="${city.id}">${city.name}</option>                            
@@ -90,15 +90,15 @@
                             </div>
                             <div class="form-group col s6" style="padding: 0">
                                 <label for="zipCode">CEP:</label>
-                                <input type="text" class="form-control" name="zipCode" id="zipCode">
+                                <input type="text" class="form-control" name="zipCode" id="zipCode" required>
                             </div>
                             <div class="form-group col s6" style="padding-right:0">
                                 <label for="telephone">Telefone:</label>
-                                <input type="text" class="form-control" name="telephone" id="telephone">
+                                <input type="text" class="form-control" name="telephone" id="telephone" required>
                             </div>
                             <div>
                                 <label for="planId">Plano:</label>
-                                <select class="form-control input-text-register" name="plan" id="planId">
+                                <select class="form-control input-text-register" name="plan" id="planId" required>
                                     <option notselected></option>
                                     <option id="planId" value="1">OURO</option>                            
                                     <option id="planId" value="2">PRATA</option>                            
@@ -107,15 +107,15 @@
                             </div>
                             <div>
                                 <label for="planStartId">Início do Plano:</label>
-                                <input type="date" name="planStart">
+                                <input type="date" name="planStart" required>
                             </div>
                             <div>
                                 <label for="planFinishId">Término do Plano:</label>
-                                <input type="date" name="planFinish">
+                                <input type="date" name="planFinish" required>
                             </div>
                             <div>
                                 <label for="active">Ativo:</label>
-                                <select class="form-control input-text-register" name="activeUser" id="activeId">
+                                <select class="form-control input-text-register" name="activeUser" id="activeId" required>
                                     <option notselected></option>
                                     <option value="true" selected="true">SIM</option>                            
                                     <option value="false">NÃO</option>                            
@@ -126,7 +126,7 @@
                                 <div class="file-field input-field">
                                     <div class="btn">
                                         <span><i class="material-icons center">file_upload</i></span>
-                                        <input type="file" id="imageUser" name="userImage">
+                                        <input type="file" id="imageUser" name="userImage" required>
                                     </div>
                                     <div class="file-path-wrapper">
                                         <input class="file-path validate" type="text" placeholder="Upload imagem">
@@ -149,43 +149,43 @@
                         <form class="col s12" enctype="multipart/form-data" method="POST" >
                             <div class="form-group col s6" style="padding: 0">
                                 <label for="name">Nome:</label>
-                                <input type="text" class="form-control" name="name" id="name" value="${name}">
+                                <input type="text" class="form-control" name="name" id="name" value="${name}" required>
                             </div>
                             <div class="form-group col s6" style="padding-right: 0">
                                 <label for="lastName">Sobrenome:</label>
-                                <input type="text" class="form-control" name="lastName" id="lastName" value="${lastName}">
+                                <input type="text" class="form-control" name="lastName" id="lastName" value="${lastName}" required>
                             </div>
                             <div class="form-group">
                                 <label for="cpf">CPF:</label>
-                                <input type="text" class="form-control" name="cpf" maxlength="11" id="cpf" value="${cpf}">
+                                <input type="text" class="form-control" name="cpf" maxlength="11" id="cpf" value="${cpf}" required>
                             </div>
                             <div class="form-group">
                                 <label for="email">Email:</label>
-                                <input type="email" class="form-control" name="email" id="email" value="${email}">
+                                <input type="email" class="form-control" name="email" id="email" value="${email}" required>
                             </div>
                             <div class="form-group col s6" style="padding: 0">
                                 <label for="password">Senha:</label>
-                                <input type="password" class="form-control" name="password" id="password" value="${password}">
+                                <input type="password" class="form-control" name="password" id="password" value="${password}" required>
                             </div>
                             <div class="form-group col s6" style="padding-right: 0">
                                 <label for="passwordConfirm">Confirmar Senha:</label>
-                                <input type="password" class="form-control" name="passwordConfirm" id="passwordConfirm" value="${passwordConfirm}">
+                                <input type="password" class="form-control" name="passwordConfirm" id="passwordConfirm" value="${passwordConfirm}" required>
                             </div>
                             <div class="form-group" style="padding-right: 0">
                                 <label for="addressLocation">Logradouro:</label>
-                                <input type="text" class="form-control" name="addressLocation" id="addressLocation" value="${addressLocation}">
+                                <input type="text" class="form-control" name="addressLocation" id="addressLocation" value="${addressLocation}" required>
                             </div>
                             <div class="form-group">
                                 <label for="numberHouse">Número:</label>
-                                <input type="number" class="form-control" name="numberHouse" id="numberHouse" value="${numberHouse}">
+                                <input type="number" class="form-control" name="numberHouse" id="numberHouse" value="${numberHouse}" required>
                             </div>
                             <div class="form-group">
                                 <label for="neighborhood">Bairro:</label>
-                                <input type="text" class="form-control" name="neighborhood" id="neighborhood" value="${neighborhood}">
+                                <input type="text" class="form-control" name="neighborhood" id="neighborhood" value="${neighborhood}" required>
                             </div>
                             <div class="form-group col s6">
                                 <label for="stateId">Estado:</label>
-                                <select class="form-control input-text-register" name="stateId" id="stateId">
+                                <select class="form-control input-text-register" name="stateId" id="stateId" required>
                                     <option notselected></option>
                                     <c:forEach items="${stateList}" var="state">
                                         <option id="stateId" value="${state.id}">${state.name}</option>                            
@@ -194,7 +194,7 @@
                             </div>
                             <div class="form-group col s6">
                                 <label for="cityId">Municipio:</label>
-                                <select class="form-control input-text-register" name="cityId" id="cityId">
+                                <select class="form-control input-text-register" name="cityId" id="cityId" required>
                                     <option notselected></option>
                                     <c:forEach items="${cityList}" var="city">
                                         <option id="cityId" value="${city.id}">${city.name}</option>                            
@@ -203,11 +203,11 @@
                             </div>
                             <div class="form-group col s6" style="padding: 0">
                                 <label for="zipCode">CEP:</label>
-                                <input type="text" class="form-control" name="zipCode" id="zipCode">
+                                <input type="text" class="form-control" name="zipCode" id="zipCode" required>
                             </div>
                             <div class="form-group col s6" style="padding-right:0">
                                 <label for="telephone">Telefone:</label>
-                                <input type="text" class="form-control" name="telephone" id="telephone">
+                                <input type="text" class="form-control" name="telephone" id="telephone" required>
                             </div>
                             <div>
                                 <label for="adm">Administrador:</label>
@@ -219,7 +219,7 @@
                             </div>
                             <div>
                                 <label for="active">Ativo:</label>
-                                <select class="form-control input-text-register" name="activeUser" id="activeId">
+                                <select class="form-control input-text-register" name="activeUser" id="activeId" required>
                                     <option notselected></option>
                                     <option value="true" selected="true">SIM</option>                            
                                     <option value="false">NÃO</option>                            
@@ -230,7 +230,7 @@
                                 <div class="file-field input-field">
                                     <div class="btn">
                                         <span><i class="material-icons center">file_upload</i></span>
-                                        <input type="file" id="imageUser" name="userImage">
+                                        <input type="file" id="imageUser" name="userImage" required>
                                     </div>
                                     <div class="file-path-wrapper">
                                         <input class="file-path validate" type="text" placeholder="Upload imagem">
@@ -253,36 +253,36 @@
                         <form class="col s12" method="POST" action="/ezmartWeb/userEdit">
                             <div class="form-group col s6" style="padding: 0">
                                 <label for="nameEdit">Nome:</label>
-                                <input type="text" class="form-control" name="nameEdit" id="nameEdit">
+                                <input type="text" class="form-control" name="nameEdit" id="nameEdit" required>
                                 <input type="text" style="display: none"  name="userIdEdit" id = "idUserEdit">
                             </div>
                             <div class="form-group col s6" style="padding-right: 0">
                                 <label for="lastNameEdit">Sobrenome:</label>
-                                <input type="text" class="form-control" name="lastNameEdit" id="lastNameEdit">
+                                <input type="text" class="form-control" name="lastNameEdit" id="lastNameEdit" required>
                             </div>
                             <div class="form-group">
                                 <label for="cpfEdit">CPF:</label>
-                                <input type="text" class="form-control" name="cpfEdit" maxlength="11" id="cpfEdit">
+                                <input type="text" class="form-control" name="cpfEdit" maxlength="11" id="cpfEdit" required>
                             </div>
                             <div class="form-group">
                                 <label for="emailEdit">Email:</label>
-                                <input type="email" class="form-control" name="emailEdit" id="emailEdit">
+                                <input type="email" class="form-control" name="emailEdit" id="emailEdit" required>
                             </div>
                             <div class="form-group" style="padding-right: 0">
                                 <label for="addressLocationEdit">Logradouro:</label>
-                                <input type="text" class="form-control" name="addressLocationEdit" id="addressLocationEdit">
+                                <input type="text" class="form-control" name="addressLocationEdit" id="addressLocationEdit" required>
                             </div>
                             <div class="form-group">
                                 <label for="numberHouseEdit">Número:</label>
-                                <input type="number" class="form-control" name="numberHouseEdit" id="numberHouse">
+                                <input type="number" class="form-control" name="numberHouseEdit" id="numberHouse" required>
                             </div>
                             <div class="form-group">
                                 <label for="neighborhoodEdit">Bairro:</label>
-                                <input type="text" class="form-control" name="neighborhoodEdit" id="neighborhoodEdit">
+                                <input type="text" class="form-control" name="neighborhoodEdit" id="neighborhoodEdit" required>
                             </div>
                             <div class="form-group col s6">
                                 <label for="stateIdEdit">Estado:</label>
-                                <select class="form-control input-text-register" name="stateIdEdit" id="stateIdEdit">
+                                <select class="form-control input-text-register" name="stateIdEdit" id="stateIdEdit" required>
                                     <option notselected></option>
                                     <c:forEach items="${stateList}" var="state">
                                         <option id="stateIdEdit" value="${state.id}">${state.name}</option>                            
@@ -291,7 +291,7 @@
                             </div>
                             <div class="form-group col s6">
                                 <label for="cityIdEdit">Municipio:</label>
-                                <select class="form-control input-text-register" name="cityIdEdit" id="cityIdEdit">
+                                <select class="form-control input-text-register" name="cityIdEdit" id="cityIdEdit" required>
                                     <option notselected></option>
                                     <c:forEach items="${cityList}" var="city">
                                         <option id="cityIdEdit" value="${city.id}">${city.name}</option>                            
@@ -300,15 +300,15 @@
                             </div>
                             <div class="form-group col s6" style="padding: 0">
                                 <label for="zipCodeEdit">CEP:</label>
-                                <input type="text" class="form-control" name="zipCodeEdit" id="zipCodeEdit">
+                                <input type="text" class="form-control" name="zipCodeEdit" id="zipCodeEdit" required>
                             </div>
                             <div class="form-group col s6" style="padding-right:0">
                                 <label for="telephoneEdit">Telefone:</label>
-                                <input type="text" class="form-control" name="telephoneEdit" id="telephoneEdit">
+                                <input type="text" class="form-control" name="telephoneEdit" id="telephoneEdit" required>
                             </div>
                             <div>
                                 <label for="admEdit">Administrador:</label>
-                                <select class="form-control input-text-register" name="adminEdit" id="adminIdEdit">
+                                <select class="form-control input-text-register" name="adminEdit" id="adminIdEdit" required>
                                     <option notselected></option>
                                     <option value="true" name="adminEditTrue">SIM</option>                            
                                     <option value="false" name="adminEditFalse">NÃO</option>                            
@@ -316,7 +316,7 @@
                             </div>
                             <div>
                                 <label for="activeEdit">Ativo:</label>
-                                <select class="form-control input-text-register" name="activeUserEdit" id="activeIdEdit">
+                                <select class="form-control input-text-register" name="activeUserEdit" id="activeIdEdit" required>
                                     <option notselected></option>
                                     <option value="true" name="activeUserTrue" >SIM</option>                            
                                     <option value="false" name="activeUserFalse" >NÃO</option>                            
@@ -338,20 +338,20 @@
                         <form class="col s12" enctype="multipart/form-data" method="POST" action="/ezmartWeb/userEstEdit">
                             <div class="form-group col s6" style="padding: 0">
                                     <label for="companyNameEdit">Nome Fantasia:</label>
-                                    <input type="text" class="form-control" name="companyNameEdit" id="companyNameEdit">
+                                    <input type="text" class="form-control" name="companyNameEdit" id="companyNameEdit" required>
                                     <input type="text" style="display: none"  name="userIdEstEdit" id = "idUserEstEdit">
                                 </div>
                                 <div class="form-group col s6" style="padding-right: 0">
                                     <label for="businessNameEdit">Razão Social:</label>
-                                    <input type="text" class="form-control" name="businessNameEdit" id="businessNameEdit">
+                                    <input type="text" class="form-control" name="businessNameEdit" id="businessNameEdit" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="cnpjEdit">CNPJ:</label>
-                                    <input type="text" class="form-control" name="cnpjEdit" maxlength="18" id="cnpjUserEdit">
+                                    <input type="text" class="form-control" name="cnpjEdit" maxlength="18" id="cnpjUserEdit" required>
                                 </div>
                                 <div class="form-group col s6">
                                     <label for="emailEstEdit">Email:</label>
-                                    <input type="email" class="form-control" name="emailEstEdit" id="emailEstEdit">
+                                    <input type="email" class="form-control" name="emailEstEdit" id="emailEstEdit" required>
                                 </div>
                                 <div class="form-group col s6">
                                     <label for="secondEmailEdit">Outro Email:</label>
@@ -359,19 +359,19 @@
                                 </div>
                                 <div class="form-groug" style="padding-right: 0">
                                     <label for="addressLocationEstEdit">Logradouro:</label>
-                                    <input type="text" class="form-control" name="addressLocationEstEdit" id="addressLocationEstEdit">
+                                    <input type="text" class="form-control" name="addressLocationEstEdit" id="addressLocationEstEdit" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="numberHouseEstEdit">Número:</label>
-                                    <input type="number" class="form-control" name="numberHouseEstEdit" id="numberHouseEstEdit">
+                                    <input type="number" class="form-control" name="numberHouseEstEdit" id="numberHouseEstEdit" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="neighborhoodEstEdit">Bairro:</label>
-                                    <input type="text" class="form-control" name="neighborhoodEstEdit" id="neighborhoodEstEdit">
+                                    <input type="text" class="form-control" name="neighborhoodEstEdit" id="neighborhoodEstEdit" required>
                                 </div>
                                 <div class="form-group col s6">
                                     <label for="stateIdEstEdit">Estado:</label>
-                                    <select class="form-control input-text-register" name="stateIdEstEdit" id="stateIdEstEdit">
+                                    <select class="form-control input-text-register" name="stateIdEstEdit" id="stateIdEstEdit" required>
                                         <option notselected></option>
                                     <c:forEach items="${stateList}" var="state">
                                         <option id="stateIdEstEdit" value="${state.id}">${state.name}</option>                            
@@ -380,7 +380,7 @@
                             </div>
                             <div class="form-group col s6">
                                 <label for="cityIdEstEdit">Municipio:</label>
-                                <select class="form-control input-text-register" name="cityIdEstEdit" id="cityIdEstEdit">
+                                <select class="form-control input-text-register" name="cityIdEstEdit" id="cityIdEstEdit" required>
                                     <option notselected></option>
                                     <c:forEach items="${cityList}" var="city">
                                         <option id="cityIdEstEdit" value="${city.id}">${city.name}</option>                            
@@ -389,15 +389,15 @@
                             </div>
                             <div class="form-group col s6" style="padding: 0">
                                 <label for="zipCodeEstEdit">CEP:</label>
-                                <input type="text" class="form-control" name="zipCodeEstEdit" id="zipCodeEstEdit">
+                                <input type="text" class="form-control" name="zipCodeEstEdit" id="zipCodeEstEdit" required>
                             </div>
                             <div class="form-group col s6" style="padding-right:0">
                                 <label for="telephoneEstEdit">Telefone:</label>
-                                <input type="text" class="form-control" name="telephoneEstEdit" id="telephoneEstEdit">
+                                <input type="text" class="form-control" name="telephoneEstEdit" id="telephoneEstEdit" required>
                             </div>
                             <div>
                                 <label for="planIdEdit">Plano:</label>
-                                <select class="form-control input-text-register" name="planEdit" id="planIdEdit">
+                                <select class="form-control input-text-register" name="planEdit" id="planIdEdit" required>
                                     <option notselected></option>
                                     <option id="planId" value="1">OURO</option>                            
                                     <option id="planId" value="2">PRATA</option>                            
@@ -406,15 +406,15 @@
                             </div>
                             <div>
                                 <label for="planStartIdEdit">Início do Plano:</label>
-                                <input type="date" name="planStartEdit">
+                                <input type="date" name="planStartEdit" required>
                             </div>
                             <div>
                                 <label for="planFinishIdEdit">Término do Plano:</label>
-                                <input type="date" name="planFinishEdit">
+                                <input type="date" name="planFinishEdit" required>
                             </div>
                             <div>
                                 <label for="activeEstEdit">Ativo:</label>
-                                <select class="form-control input-text-register" name="activeUserEstEdit" id="activeIdEstEdit">
+                                <select class="form-control input-text-register" name="activeUserEstEdit" id="activeIdEstEdit" required>
                                     <option notselected></option>
                                     <option value="true">SIM</option>                            
                                     <option value="false">NÃO</option>                            

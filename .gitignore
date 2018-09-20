@@ -12,3 +12,8 @@ EzMartGit/EzMart/Web/nbproject/private/private.xml
 /EzMartGit/EzMart/Model/build/
 EzMartGit/EzMart/Model/nbproject/private/private.properties
 EzMartGit/EzMart/Web/nbproject/private/private.properties
+EzMartGit/EzMart/Model/nbproject/private/private.properties
+EzMartGit/EzMart/Model/nbproject/private/private.xml
+EzMartGit/EzMart/Web/nbproject/private/private.properties
+EzMartGit/EzMart/Web/nbproject/private/private.xml
+EzMartGit/EzMart/Model/src/ezmart/model/ConnectionManager.java
