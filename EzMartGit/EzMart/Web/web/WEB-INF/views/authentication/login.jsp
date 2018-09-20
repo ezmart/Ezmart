@@ -48,7 +48,7 @@
                                     </div>
                                     <br>
                                 </form>   
-                                <div style="border-top: 3px solid#888; padding-top:15px; font-size:85%">Não tem uma conta! 
+                                <div style="border-top: 3px solid#888; padding-top:15px; font-size:85%">Não tem uma conta? 
                                     <a href="<c:url value="/register"/>">Crie uma agora.</a>
                                 </div>
                             </div>                     

@@ -23,10 +23,7 @@
                 <div class="col s5">                        
                     <div style="margin-top:40px; border-top: 3px solid#888" class="mainbox">                    
                         <div class="panel panel-info">
-                            <br/>
-                            <div class="panel-title" style="color: #9e9e9e">
-                                Ainda não tem conta? Cadastre-se agora!
-                            </div>                        
+                            <br/>                   
                             <div style="padding-top:40px" class="panel-body">
                                 <form id="loginform" class="form-horizontal">
                                     <div style="margin-top:10px" class="form-group">

@@ -18,9 +18,9 @@ public class ConnectionManager {
 
     private ConnectionManager() {
         dataSource = new PGPoolingDataSource();
-        dataSource.setDataSourceName("ezmart");
+        dataSource.setDataSourceName("EzMart");
         dataSource.setServerName("localhost");
-        dataSource.setDatabaseName("ezmart");
+        dataSource.setDatabaseName("EzMart");
         dataSource.setUser("postgres");
         dataSource.setPassword("postgres");
 

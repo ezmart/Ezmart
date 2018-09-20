@@ -28,6 +28,9 @@
             <c:if test="${userLogged.userType eq 'emporium'}">
                 <c:import url="/WEB-INF/views/templates/header_emporium.jsp"></c:import>
             </c:if>
+            <c:if test="${userLogged.userType eq 'admin'}">
+                <c:import url="/WEB-INF/views/templates/header_admin.jsp"></c:import>
+            </c:if>
             <div>
                 <nav>
                     <div class="nav-wrapper">
