@@ -43,7 +43,7 @@ public class UtilServices {
                         + "Sua senha foi alterada! \n\n"
                         + "Nova Senha: " + newPassword + "\n\n"
                         + "Acesse seu perfil e altere esta senha!\n\n\n"
-                        + "http://localhost:8084/login";
+                        + "http://localhost:8084/ezmartWeb/login";
             }
 
             mailSMTPServer = "ezmartfai@gmail.com";
@@ -90,8 +90,8 @@ public class UtilServices {
             int array[] = new int[10]; // 10 números serão gerados.
             for (int i = 0; i < array.length; i++) {
                 array[i] = random.nextInt(9); // Gera números aleatórios com limite 50.
-                int chupeta = array[i];
-                newPassword += "" + chupeta;
+                int pass = array[i];
+                newPassword += "" + pass;
             }
             System.out.println(newPassword);
         } catch (Exception exception) {

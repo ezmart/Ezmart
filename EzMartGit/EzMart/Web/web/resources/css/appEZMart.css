@@ -8,7 +8,12 @@ html, body {
     margin: 0;
     padding: 0;
 }
-
+#scroll-product {
+    width:auto;
+    height:450px;
+    background-color:#FFFFFF;
+    overflow:auto;
+}
 .menu-profile{
     text-align: center;
 }

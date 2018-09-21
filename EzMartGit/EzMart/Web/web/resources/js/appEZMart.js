@@ -187,6 +187,15 @@ function setDeleteDadaModalProductInList(data) {
 
 }
 
+//Seta o objeto
+function setModalData(productName, img, productSectorNameModal, productBrandModal, productProviderNameModal) {
+    document.getElementById('productNameModal').value = productName;
+    document.getElementById('productImgValue').src = img;
+    document.getElementById('productSectorNameModal').value = productSectorNameModal;
+    document.getElementById('productBrandModal').value = productBrandModal;
+    document.getElementById('productProviderNameModal').value = productProviderNameModal;
+    //alert(productName);
+}
 //function setDadaProductList(data) {
 //    document.getElementById('idDeleteProductList').value = data;
 ////    alert(data);
