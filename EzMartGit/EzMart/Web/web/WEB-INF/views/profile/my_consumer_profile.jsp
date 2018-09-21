@@ -28,6 +28,9 @@
             <c:if test="${userLogged.userType eq 'emporium'}">
                 <c:import url="/WEB-INF/views/templates/header_emporium.jsp"></c:import>
             </c:if>
+            <c:if test="${userLogged.userType eq 'admin'}">
+                <c:import url="/WEB-INF/views/templates/header_admin.jsp"></c:import>
+            </c:if>
             <div>
                 <nav>
                     <div class="nav-wrapper">
@@ -70,7 +73,7 @@
                             </li>
                             <li>
                                 <div class="col s12 controls" style="margin-top: 20px">                                                    
-                                    <a class="waves-effect waves-teal btn " id="myPhoto" href="<c:url value="/updatePhoto"/> "><i class="material-icons left">account_box</i>Altarar Foto</a>
+                                    <a class="waves-effect waves-teal btn " id="myPhoto" href="<c:url value="/updatePhoto"/> "><i class="material-icons left">account_box</i>Alterar Foto</a>
                                 </div>
                             </li>
                         </ul>

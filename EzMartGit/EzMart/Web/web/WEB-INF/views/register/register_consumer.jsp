@@ -85,17 +85,17 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="zipCode">CEP:</label>
-                                    <input type="text" class="form-control" name="zipCode" id="zipCode" value="${zipCode}">
+                                    <input type="text" class="form-control" name="zipCode" id="zipCodeUserConsumerRegister" value="${zipCode}">
                                     <span style="color: orangered">${errors.zipCode}</span>
                                 </div>
                                 <div class="form-group">
                                     <label for="zipCode">CPF:</label>
-                                    <input type="text" class="form-control" name="cpf" id="cpf" value="${cpf}">
+                                    <input type="text" class="form-control" name="cpf" id="cpfUserRegister" value="${cpf}">
                                     <span style="color: orangered">${errors.cpf}</span>
                                 </div>
                                 <div class="form-group">
                                     <label for="telephone">Celular:</label>
-                                    <input type="text"  class="form-control" name="telephone" id="telephone" value="${telephone}">
+                                    <input type="text"  class="form-control" name="telephone" id="cellUserConsumerRegister" value="${telephone}">
                                     <span style="color: orangered">${errors.telephone}</span>
                                 </div>
                                 <br/>
@@ -124,6 +124,7 @@
         <c:import url="/WEB-INF/views/templates/footer.jsp"></c:import>
         <script src="<c:url value="/resources/js/materialize.min.js"/>"></script>
         <script src="<c:url value="/resources/js/appEZMart.js"/>"></script>
+        <script type="text/javascript" src="<c:url value="/resources/js/mascara.js"/>"></script>
     </body>
 </html>
 

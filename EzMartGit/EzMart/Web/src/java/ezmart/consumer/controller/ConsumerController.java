@@ -14,18 +14,11 @@ import ezmart.model.service.ListProductService;
 import ezmart.model.service.ShoppingListService;
 import ezmart.model.service.StateService;
 import ezmart.model.service.UserService;
-import java.nio.file.Files;
-import java.nio.file.OpenOption;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import static java.nio.file.StandardOpenOption.CREATE_NEW;
-import static java.nio.file.StandardOpenOption.WRITE;
 import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpSession;
-import javax.swing.ImageIcon;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -141,7 +134,7 @@ public class ConsumerController {
     }
 
     @RequestMapping(value = "/shoppingList", method = RequestMethod.POST)
-    public ModelAndView postNewShoppingList(String value, String type, HttpSession session) {
+    public ModelAndView postShoppingList(String value, String type, Long idUpdateNameShoppingList, HttpSession session) throws Exception {
 
         ModelAndView mv = new ModelAndView("redirect:/shoppingList");
 
@@ -174,10 +167,12 @@ public class ConsumerController {
                 System.out.println(exception);
             }
         } else if (type != null && type.equals("UPDATE")) {
-//            ShoppingListService service = new ShoppingListService();
-//            Long id = (Long) value;
-//            
-//            service.update(id);
+            ShoppingListService service = new ShoppingListService();
+            String listName = value;
+            ShoppingList shoppingList = new ShoppingList();
+            shoppingList.setName(listName);
+            shoppingList.setId(idUpdateNameShoppingList);
+            service.update(shoppingList);
 
         } else if (type != null && type.equals("DELETE")) {
             try {
@@ -234,9 +229,9 @@ public class ConsumerController {
         return mv;
     }
 
-    @RequestMapping(value = "/products/{id}/list", method = RequestMethod.POST)
+    @RequestMapping(value = "/products-{id}", method = RequestMethod.POST)
     public ModelAndView postProductList(@PathVariable Long id, String value, String type, HttpSession session) {
-        ModelAndView mv = new ModelAndView("redirect:/products/" + id + "/list");
+        ModelAndView mv = new ModelAndView("redirect:/products-" + id);
 
         Object auxSession = session.getAttribute("userLogged");
         User user = null;
@@ -274,6 +269,7 @@ public class ConsumerController {
             try {
                 ListProductService service = new ListProductService();
                 Long productId = Long.parseLong(value);
+                //id da lista / id do produto
                 service.deleteFromList(id, productId);
 
             } catch (Exception exception) {

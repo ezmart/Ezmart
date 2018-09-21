@@ -3,9 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/marko/Desktop/EzMartGit2018/Ezmart/EzMartGit/EzMart/Web/web/WEB-INF/views/admin/product.jsp</file>
-            <file>file:/C:/Users/marko/Desktop/EzMartGit2018/Ezmart/EzMartGit/EzMart/Web/src/java/ezmart/admin/controller/AdminController.java</file>
-            <file>file:/C:/Users/marko/Desktop/EzMartGit2018/Ezmart/EzMartGit/EzMart/Web/web/resources/js/appEZMart.js</file>
+            <file>file:/C:/Users/Marcos%20Paulo/Documents/GitHub/Ezmart/EzMartGit/EzMart/Web/src/java/ezmart/register/controller/ConsumerRegisterController.java</file>
+            <file>file:/C:/Users/Marcos%20Paulo/Documents/GitHub/Ezmart/EzMartGit/EzMart/Web/src/java/ezmart/consumer/controller/ConsumerController.java</file>
         </group>
     </open-files>
 </project-private>

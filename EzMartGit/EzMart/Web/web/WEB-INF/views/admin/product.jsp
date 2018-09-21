@@ -161,7 +161,7 @@
                         <ul>
                             <c:forEach items="${productList}" var="product">
                                 <li class="col l4 m6 s12" >
-                                    <div class="card">
+                                    <div class="card-panel medium">
                                         <div class="row" style="padding: 20px;">
                                             <div>
                                                 <img class="responsive-img-center" src="<c:url value = "/resources/img/product/${product.id}.jpg"/>" alt="${product.barCode} - ${product.name}" width="150">
@@ -182,12 +182,12 @@
                                                 </form>
                                             </div>
                                             <br/>
-                                            <p style="font-size: 20px"><b>Id:</b> ${product.id}</p>
-                                            <p style="font-size: 20px"><b>Nome:</b> ${product.name}</p>
-                                            <p style="font-size: 20px"><b>Código EAN:</b> ${product.barCode}</p>
-                                            <p style="font-size: 20px"><b>Marca:</b> ${product.brand}</p>
-                                            <p style="font-size: 20px"><b>Linha:</b> ${product.sector.name}</p>
-                                            <p style="font-size: 20px"><b>Fornecedor:</b> ${product.provider.name}</p>
+                                            <p style="font-size: 18px"><b>Id:</b> ${product.id}</p>
+                                            <p style="font-size: 18px"><b>Nome:</b> ${product.name}</p>
+                                            <p style="font-size: 18px"><b>Código EAN:</b> ${product.barCode}</p>
+                                            <p style="font-size: 18px"><b>Marca:</b> ${product.brand}</p>
+                                            <p style="font-size: 18px"><b>Linha:</b> ${product.sector.name}</p>
+                                            <p style="font-size: 18px"><b>Fornecedor:</b> ${product.provider.name}</p>
                                             <div class="card-action card-content">
                                                 <div class="col s12 center">
                                                     <a class="btn btn-sm btn-default btn-small ffc400 amber accent-3 modal-trigger" href="#modal-update" style="color:white;" onclick="setProductEdit(${product.id}, '${product.name}', '${product.barCode}', '${product.brand}')"><i class="material-icons center">edit</i></a>
@@ -202,69 +202,6 @@
                     </div>
                 </div>
             </div>
-
-
-            <!--            <div>
-                            <div class="row">
-                                <div class="col s12">
-                                    <div class="card">
-                                        <div class="card-content">
-                                            <h3>Produtos</h3>
-                                            <table class="table">
-                                                <tr>
-                                                    <th>Id</th>
-                                                    <th>Imagem</th>
-                                                    <th>Nome</th>
-                                                    <th>Código de Barras</th>
-                                                    <th>Marca</th>
-                                                    <th>Id da Linha</th>
-                                                    <th>Id do Fornecedor</th>
-                                                <hr>
-                                                <th></th>
-                                                </tr>
-                                                <a href="#modal-create" class="btn-floating btn-n-floatingsmall green left modal-trigger" style="color:white;"><i class="material-icons center">add</i></a>
-                                                <br><br/>
-                                                <br><br/>
-            <%--<c:forEach items="${productList}" var="product">--%>
-                
-                <tr>
-                    <td>${product.id}</td>
-                    <td> <img class="responsive-img" src="<c:url value = "/resources/img/product/${product.barCode} - ${product.name}.png"/>" alt="foto" width="120">
-                        <form method="post" enctype="multipart/form-data">
-                            <div class="file-field input-field">
-                                <div class="btn">
-                                    <span><i class="material-icons center">file_upload</i></span>
-                                    <input type="file" id="productImage" name="productImage">
-                                    <input value="${product.id}" name="idProductForImage" style="display: none">
-                                </div>
-                                <div class="file-path-wrapper">
-                                    <input class="file-path validate" type="text" placeholder="Upload file">
-                                </div>
-                            </div>
-                            <container>
-                                <button id="btnUpload" type="submit" class="btn btn-success btn-small"><i class="material-icons left">save</i>Salvar</button>
-                            </container>
-                        </form></td>
-                    <td>${product.name}</td>
-                    <td>${product.barCode}</td>
-                    <td>${product.brand}</td>
-                    <td>${product.sector.id}</td>
-                    <td>${product.provider.id}</td>
-                    <td>
-                        <a class="btn btn-sm btn-default btn-small ffc400 amber accent-3 modal-trigger" href="#modal-update" style="color:white;" onclick="setProductEdit(${product.id}, '${product.name}', '${product.barCode}', '${product.brand}')"><i class="material-icons center">edit</i></a>
-                        <a class="btn btn-sm btn-danger btn-small red modal-trigger" href="#modal-delete" onclick="setDadosModalProduct(${product.id}, '${product.name}')" style="color:white;"><i class="material-icons center">delete</i></a>
-                    </td>
-                </tr>    
-                
-                
-            <%--</c:forEach>--%>
-        </table>
-    </div>
-</div>
-</div>
-</div>
-</div>   -->
-
         </c:if>
         <c:import url="/WEB-INF/views/templates/footer.jsp"></c:import>
         <script src="<c:url value="/resources/js/jquery.min.js"/>"></script>

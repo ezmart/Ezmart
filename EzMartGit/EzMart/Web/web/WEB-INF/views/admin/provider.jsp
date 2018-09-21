@@ -103,7 +103,7 @@
                     <div class="col s12">
 <!--                        <div class="card">
                             <div class="card-content">-->
-                                <h3>Fornecedores</h3>
+                                <h4>Fornecedores</h4>
                                 <table class="table">
                                     <tr>
                                         <th>Id</th>

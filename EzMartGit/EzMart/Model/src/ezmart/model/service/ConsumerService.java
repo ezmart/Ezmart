@@ -215,15 +215,16 @@ public class ConsumerService implements BaseConsumerService {
             //Validação de preenchimento do campo TELEFONE
             if (telephone == null || telephone.isEmpty()) {
                 errors.put("telephone", "*Campo telefone obrigatório!");
-            } else {
-                //Formato da expressão regular (XX)XXXXX-XXXX"
-                String regex = "^\\([1-9]{2}\\)[2-9][0-9]{3,4}\\-[0-9]{4}$";
-                Pattern VALID_TELEPHONE_REGEX = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
-                Matcher matcher = VALID_TELEPHONE_REGEX.matcher(telephone);
-                if (!matcher.find()) {
-                    errors.put("telephone", "*Formato correto: (XX)12345-6789");
-                }
-            }
+            } 
+//            else {
+//                //Formato da expressão regular (XX)XXXXX-XXXX"
+//                String regex = "^\\([1-9]{2}\\)[2-9][0-9]{3,4}\\-[0-9]{4}$";
+//                Pattern VALID_TELEPHONE_REGEX = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+//                Matcher matcher = VALID_TELEPHONE_REGEX.matcher(telephone);
+//                if (!matcher.find()) {
+//                    errors.put("telephone", "*Formato correto: (XX)12345-6789");
+//                }
+//            }
         }
 
         return errors;

@@ -2,9 +2,7 @@ package ezmart.model.dao;
 
 import ezmart.model.base.BaseDAO;
 import ezmart.model.criteria.ConsumerCriteria;
-import ezmart.model.criteria.UserCriteria;
 import ezmart.model.entity.Consumer;
-import ezmart.model.entity.Establishment;
 import ezmart.model.entity.User;
 import ezmart.model.util.PreparedStatementBuilder;
 import java.sql.Connection;
@@ -20,7 +18,7 @@ public class ConsumerDAO implements BaseDAO<Consumer> {
     public void create(Connection conn, Consumer entity) throws Exception {
 
         String sql = "INSERT INTO consumer(consumer_name, consumer_lastname, consumer_cpf, consumer_userid) "
-                + "VALUES (?,?,?,?) RETURNING consumer_userid;";
+                + "VALUES (?,?,?,?) ";
 
         PreparedStatement statement = conn.prepareStatement(sql);
         int i = 0;
@@ -30,7 +28,7 @@ public class ConsumerDAO implements BaseDAO<Consumer> {
         statement.setString(++i, entity.getCpf());
         statement.setLong(++i, entity.getId());
 
-        statement.executeQuery();
+        statement.execute();
 
         statement.close();
     }
@@ -106,7 +104,16 @@ public class ConsumerDAO implements BaseDAO<Consumer> {
 
     @Override
     public void delete(Connection conn, Long id) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = " DELETE FROM consumer WHERE consumer_id = ?;";
+
+        PreparedStatement statement = conn.prepareStatement(sql);
+        int i = 0;
+
+        statement.setLong(++i, id);
+
+        statement.execute();
+
+        statement.close();
     }
 
     public void readById(Connection conn, User user) throws Exception {
@@ -125,7 +132,7 @@ public class ConsumerDAO implements BaseDAO<Consumer> {
     }
 
     public Consumer readByUserId(Connection conn, Long userId) throws Exception {
-        String sql = "SELECT * from consumer INNER JOIN usersystem ON usersystem_id=consumer_userid "
+        String sql = "SELECT * from consumer INNER JOIN usersystem ON usersystem_id = consumer_userid "
                 + "WHERE consumer_userid=?;";
         Consumer consumer = null;
         try {
@@ -135,6 +142,8 @@ public class ConsumerDAO implements BaseDAO<Consumer> {
 
             if (resultSet.next()) {
                 consumer = new Consumer();
+                
+                consumer.setId(resultSet.getLong("consumer_id"));
                 consumer.setName(resultSet.getString("consumer_name"));
                 consumer.setLastName(resultSet.getString("consumer_lastname"));
                 consumer.setCpf(resultSet.getString("consumer_cpf"));
@@ -155,4 +164,5 @@ public class ConsumerDAO implements BaseDAO<Consumer> {
         }
         return consumer;
     }
+    
 }

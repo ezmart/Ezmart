@@ -66,7 +66,7 @@ public class EstablishmentDAO implements BaseDAO<Establishment> {
                 sql += " AND establishment_secondemail = ?";
                 paramList.add(secondEmail);
             }
-            
+
 //            if (criteria.containsKey(UserCriteria.ID_NE)) {
 //                Long id = (Long) criteria.get(UserCriteria.ID_NE);
 //                sql += " AND usersystem.usersystem_id != ?";
@@ -128,7 +128,16 @@ public class EstablishmentDAO implements BaseDAO<Establishment> {
 
     @Override
     public void delete(Connection conn, Long id) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = " DELETE FROM establishment WHERE establishment_id = ?;";
+
+        PreparedStatement statement = conn.prepareStatement(sql);
+        int i = 0;
+
+        statement.setLong(++i, id);
+
+        statement.execute();
+
+        statement.close();
     }
 
     public void readById(Connection conn, User user) throws Exception {
@@ -162,6 +171,7 @@ public class EstablishmentDAO implements BaseDAO<Establishment> {
             if (resultSet.next()) {
                 establishment = new Establishment();
 
+                establishment.setId(resultSet.getLong("establishment_id"));
                 establishment.setCnpj(resultSet.getString("establishment_cnpj"));
                 establishment.setSecondEmail(resultSet.getString("establishment_secondemail"));
                 establishment.setName(resultSet.getString("establishment_name"));

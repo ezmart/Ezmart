@@ -106,12 +106,12 @@ public class ShoppingListDAO implements BaseDAO<ShoppingList> {
 
     @Override
     public void update(Connection conn, ShoppingList entity) throws Exception {
-//        String sql = "UPDATE list SET nome=? WHERE id=?;";
-//        PreparedStatement statement = conn.prepareStatement(sql);
-//        statement.setString(1, entity.getName());
-//        statement.setLong(2, entity.getId());
-//        statement.execute();
-//        statement.close();
+        String sql = "UPDATE list SET list_name=? WHERE list_id=?;";
+        PreparedStatement statement = conn.prepareStatement(sql);
+        statement.setString(1, entity.getName());
+        statement.setLong(2, entity.getId());
+        statement.execute();
+        statement.close();
     }
 
     @Override
