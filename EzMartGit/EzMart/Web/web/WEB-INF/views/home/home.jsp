@@ -26,11 +26,11 @@
                     <div class="modal-footer">
                         <!--<form method="POST" action="/ezmartWeb/productDelete">-->
                         <div class="form-group col s6">
-                            <label for="cityId">Lista:</label>
-                            <select class="form-control input-text-register" name="cityId" id="cityId">
+                            <label for="listId">Lista:</label>
+                            <select class="form-control input-text-register" name="listId" id="listId">
                                 <option notselected></option>
-                                <c:forEach items="${cityList}" var="city">
-                                    <option <c:if test="${cityIdConsumer eq city.id}">selected="true"</c:if> id="cityId" value="${city.id}">${city.name}</option>                            
+                                <c:forEach items="${shoppingList}" var="list">
+                                    <option  id="listId" value="${list.id}">${list.name}</option>                            
                                 </c:forEach>
                             </select>
                             <span style="color: orangered">${errors.cityId}</span>
@@ -106,7 +106,7 @@
                 <div class="card horizontal">
                     <div class="card-stacked">
                         <div class="card-content" style="background-color: #F1F1F1">   
-                            <h4 class="center-align">Promoções</h4>
+                            <h4 class="center-align">Produtos</h4>
                             <!-- Listar uma lista de produtos e serviços aqui -->
                             <div class="row">
                                 <div class="col s12 m12">
@@ -128,7 +128,10 @@
                                                         <div class="card-action card-content" style="margin-top: 20px">
                                                             <div class="col s12 center">
                                                                 <!--<a class="btn btn-sm btn-default btn-small ffc400 amber accent-3 modal-trigger" href="#modal-update" style="color:white;" onclick="setProductEdit(${product.id}, '${product.name}', '${product.barCode}', '${product.brand}')"><i class="material-icons center">edit</i></a>-->
-                                                                <a class="btn btn-sm btn-danger btn-small green modal-trigger" href="#modal-add"  style="color:white;" title="Clique para adicionar o produto a sua lista"><i class="material-icons center">add</i></a>
+                                                                <c:if test="${userLogged.userType eq 'consumer'}">
+                                                                    <a class="btn btn-sm btn-danger btn-small green modal-trigger" href="#modal-add"  style="color:white;" title="Clique para adicionar o produto a sua lista"><i class="material-icons center">add</i></a>
+                                                                </c:if>
+
                                                                 <a class="btn btn-sm btn-danger btn-small blue-grey modal-trigger" href="#modal-view"  style="color:white;" 
                                                                    onclick="setModalData(
                                                                                    '${product.name}',

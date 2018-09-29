@@ -1,6 +1,7 @@
 package ezmart.consumer.controller;
 
 import ezmart.model.criteria.ListProductCriteria;
+import ezmart.model.criteria.UserCriteria;
 import ezmart.model.entity.City;
 import ezmart.model.entity.Consumer;
 import ezmart.model.entity.Establishment;
@@ -118,12 +119,25 @@ public class ConsumerController {
     }
 
     @RequestMapping(value = "/shoppingList", method = RequestMethod.GET)
-    public ModelAndView getShoppingList() {
+    public ModelAndView getShoppingList(HttpSession session) {
         ModelAndView mv = new ModelAndView("consumer/consumer_shopping_list");
 
+        Object auxSession = session.getAttribute("userLogged");
+        User user = null;
+        
         try {
+            if (auxSession instanceof Consumer) {
+                user = (Consumer) auxSession;
+                
+            } else {
+                user = (Establishment) auxSession;
+            }
+
+            //Apresentar as listas referentes ao usuário
             ShoppingListService service = new ShoppingListService();
-            List<ShoppingList> shoppingList = service.readByCriteria(null, null, null);
+            Map<Long, Object> criteria = new HashMap<>();
+            criteria.put(UserCriteria.ID_EQ, user.getId());
+            List<ShoppingList> shoppingList = service.readByCriteria(criteria, null, null);
 
             mv.addObject("shoppingList", shoppingList);
         } catch (Exception exception) {
