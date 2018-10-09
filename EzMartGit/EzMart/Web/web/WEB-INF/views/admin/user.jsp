@@ -134,7 +134,7 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <a class="btn btn-sm btn-default btn-small red modal-close modal-action" style="color:white;">Voltar</a>
+                                <a class="btn btn-sm btn-default btn-small red modal-close modal-action" style="color:white;">VOLTAR</a>
                                 <button class=" modal-action green btn-flat" id="addButton" value="confirmar" style="margin-right: 15px; color:white;">CONFIRMAR</button>
                             </div>
                         </form>

@@ -3,6 +3,10 @@ package ezmart.model.dao;
 import ezmart.model.base.BaseDAO;
 import ezmart.model.criteria.EstablishmentCriteria;
 import ezmart.model.entity.Establishment;
+import ezmart.model.entity.EstablishmentProduct;
+import ezmart.model.entity.Product;
+import ezmart.model.entity.Provider;
+import ezmart.model.entity.Sector;
 import ezmart.model.entity.User;
 import ezmart.model.util.PreparedStatementBuilder;
 import java.sql.Connection;
@@ -195,5 +199,78 @@ public class EstablishmentDAO implements BaseDAO<Establishment> {
             System.out.println(e);
         }
         return establishment;
+    }
+
+    public List<EstablishmentProduct> findAllEstablishmentProduct(Connection conn, Long id) throws Exception {
+        String sql = "SELECT * FROM establishmentproduct "
+                + " LEFT JOIN product ON product_id = establishmentproduct_productid"
+                + " WHERE establishmentproduct_establishmentid=?;";
+        
+        PreparedStatement statement = conn.prepareStatement(sql);
+        statement.setLong(1, id);
+        ResultSet resultSet = statement.executeQuery();
+
+        List<EstablishmentProduct> establishmentProductList = new ArrayList<>();
+        if (resultSet.next()) {
+            EstablishmentProduct establishmentProduct = new EstablishmentProduct();
+            Establishment establishment = new Establishment();
+            Product product = new Product();
+            
+            establishment.setId(id);
+            product.setId(resultSet.getLong("establishmentproduct_productid"));
+            
+            establishmentProduct.setId(resultSet.getLong("establishmentproduct_id"));
+            establishmentProduct.setDateAlteration(resultSet.getDate("establishmentproduct_date"));
+            establishmentProduct.setPrice(resultSet.getDouble("establishmentproduct_price"));
+            establishmentProduct.setEstablishment(establishment);
+            establishmentProduct.setProduct(product);
+            
+            establishmentProductList.add(establishmentProduct);
+        }
+        resultSet.close();
+        statement.close();
+        
+        return establishmentProductList;
+    }
+    
+    public List<Product> findAllProductByEstablishmentId(Connection conn, Long id) throws Exception {
+        String sql = "SELECT * FROM product "
+                + " LEFT JOIN sector ON sector_id = product_sectorid "
+                + " LEFT JOIN provider ON provider_id = product_providerid "
+                + " WHERE product_id NOT IN "
+                + "( SELECT establishmentproduct_productid FROM establishmentproduct WHERE establishmentproduct_establishmentid = ? );";
+        
+        PreparedStatement statement = conn.prepareStatement(sql);
+        statement.setLong(1, id);
+        ResultSet rs = statement.executeQuery();
+
+        List<Product> productList = new ArrayList<>();
+        if (rs.next()) {
+            Product product = new Product();
+            
+            Provider provider = new Provider();
+            Sector sector = new Sector();
+
+            sector.setId(rs.getLong("sector_id"));
+            sector.setName(rs.getString("sector_name"));
+            provider.setId(rs.getLong("provider_id"));
+            provider.setCnpj(rs.getString("provider_cnpj"));
+            provider.setName(rs.getString("provider_name"));
+            provider.setBusinessName(rs.getString("provider_businessname"));
+
+            product.setId(rs.getLong("product_id"));
+            product.setBarCode(rs.getString("product_barcode"));
+            product.setName(rs.getString("product_name"));
+            product.setBrand(rs.getString("product_brand"));
+            product.setImage(rs.getBytes("product_image"));
+            product.setSector(sector);
+            product.setProvider(provider);
+            
+            productList.add(product);
+        }
+        rs.close();
+        statement.close();
+        
+        return productList;
     }
 }

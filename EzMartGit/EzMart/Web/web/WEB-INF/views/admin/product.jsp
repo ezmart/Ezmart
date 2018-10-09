@@ -154,7 +154,7 @@
             </div>
             <div class="container">
                 <h4>Produtos</h4>
-                <a href="#modal-create" class="btn-floating btn-n-floatingsmall green left modal-trigger" style="color:white;"><i class="material-icons center">add</i></a>
+                <a href="#modal-create" class="btn btn-sm btn-default btn-small green left modal-trigger" style="color:white;"><i class="material-icons right">add_box</i>Adicionar</a>
                 <br><br/>
                 <div class="row">
                     <div class="col s12 m12">

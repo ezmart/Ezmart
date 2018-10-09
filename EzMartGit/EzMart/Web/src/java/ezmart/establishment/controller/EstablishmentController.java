@@ -1,16 +1,15 @@
 package ezmart.establishment.controller;
 
 import ezmart.model.entity.City;
-import ezmart.model.entity.Consumer;
 import ezmart.model.entity.Establishment;
 import ezmart.model.entity.Product;
 import ezmart.model.entity.State;
 import ezmart.model.entity.User;
 import ezmart.model.service.CityService;
-import ezmart.model.service.ConsumerService;
 import ezmart.model.service.EstablishmentService;
 import ezmart.model.service.ProductService;
 import ezmart.model.service.StateService;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -84,7 +83,7 @@ public class EstablishmentController {
             if (auxSession instanceof Establishment) {
 
                 user = (Establishment) auxSession;
- 
+
                 EstablishmentService service = new EstablishmentService();
                 Establishment establishment = new Establishment();
 
@@ -98,7 +97,7 @@ public class EstablishmentController {
                 establishment.setCity(cityId);
                 establishment.setZipCode(zipCode);
                 establishment.setTelephone(telephone);
-                
+
                 service.update(establishment);
             }
 
@@ -116,6 +115,37 @@ public class EstablishmentController {
         Map<Long, Object> criteria = new HashMap<>();
         List<Product> productList = service.readByCriteria(criteria, limit, offset);
         mv.addObject("productList", productList);
+
+        return mv;
+    }
+
+    @RequestMapping(value = "/product_establishment", method = RequestMethod.GET)
+    public ModelAndView findAllEstablishmentProduct(HttpSession session) throws Exception {
+
+        ModelAndView mv = null;
+        try {
+
+            Object auxSession = session.getAttribute("userLogged");
+            User user = null;
+
+            if (auxSession instanceof Establishment) {
+
+                mv = new ModelAndView("establishment/product_establishment");
+
+                user = (Establishment) auxSession;
+
+                EstablishmentService establishmentService = new EstablishmentService();
+                Establishment establishment = establishmentService.readByUserId(user.getId());
+
+                mv.addObject("establishment", establishment);
+                
+                mv.addObject("productList", establishmentService.findAllProductByEstablishmentId(establishment.getId()));
+                mv.addObject("establishmentProductList", establishmentService.findAllEstablishmentProduct(establishment.getId()));
+            }
+
+        } catch (Exception exception) {
+            System.out.println(exception);
+        }
 
         return mv;
     }
