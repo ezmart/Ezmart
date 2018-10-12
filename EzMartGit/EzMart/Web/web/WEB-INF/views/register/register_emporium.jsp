@@ -95,7 +95,7 @@
                                 </div>
                                 <div class="form-group ">
                                     <label for="zipCode">CEP:</label>
-                                    <input type="text" class="form-control" name="zipCode" id="zipCodeUserEstablishmentRegister" value="${zipCode}">
+                                    <input type="text" class="form-control" name="zipCode" id="zipCode" value="${zipCode}">
                                     <span style="color: orangered">${errors.zipCode}</span>
                                 </div>
                                 <div class="form-group ">
@@ -103,6 +103,9 @@
                                     <input type="text" class="form-control" name="telephone" id="cellUserEstablishmentRegister" value="${telephone}">
                                     <span style="color: orangered">${errors.telephone}</span>
                                 </div>
+                                <br/>
+                                <input type="text" style="display: none" name="latitude" id="latitude" value="">
+                                <input type="text" style="display: none" name="longitude" id="longitude" value="">
                                 <button id="btn-btn-ezmart-style" type="submit" class="btn"><i class="material-icons left">border_color</i>Cadastrar</button>
                             </form>
                         </div>

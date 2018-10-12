@@ -29,6 +29,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class ConsumerController {
 
+    //Chama o formulário de para edição dos dados do perfil
     @RequestMapping(value = "/editProfileConsumer", method = RequestMethod.GET)
     public ModelAndView getMyAddress(HttpSession session) {
         ModelAndView mv = null;
@@ -73,6 +74,7 @@ public class ConsumerController {
         return mv;
     }
 
+    //Atualisa os dados do perfil
     @RequestMapping(value = "/editProfileConsumer", method = RequestMethod.POST)
     public ModelAndView updateProfile(String name, String lastName, String addressLocation, Integer numberHouse,
             String neighborhood, Long cityId, String zipCode, String telephone, HttpSession session) throws Exception {
@@ -118,17 +120,18 @@ public class ConsumerController {
         return mv;
     }
 
+    //Chama todas as listas de compra do usuário 
     @RequestMapping(value = "/shoppingList", method = RequestMethod.GET)
     public ModelAndView getShoppingList(HttpSession session) {
         ModelAndView mv = new ModelAndView("consumer/consumer_shopping_list");
 
         Object auxSession = session.getAttribute("userLogged");
         User user = null;
-        
+
         try {
             if (auxSession instanceof Consumer) {
                 user = (Consumer) auxSession;
-                
+
             } else {
                 user = (Establishment) auxSession;
             }
@@ -147,6 +150,7 @@ public class ConsumerController {
         return mv;
     }
 
+    // Atualisa, excluí e cria a lista
     @RequestMapping(value = "/shoppingList", method = RequestMethod.POST)
     public ModelAndView postShoppingList(String value, String type, Long idUpdateNameShoppingList, HttpSession session) throws Exception {
 
@@ -202,6 +206,7 @@ public class ConsumerController {
         return mv;
     }
 
+    // Chama os produtos da lista em questão
     @RequestMapping(value = "/products-{id}", method = RequestMethod.GET)
     public ModelAndView getProductsList(@PathVariable Long id, HttpSession session) {
         ModelAndView mv = new ModelAndView("consumer/consumer_products_list");
@@ -221,20 +226,19 @@ public class ConsumerController {
             //Lista Atual
             mv.addObject("listId", id);
 
-            Object auxSession = session.getAttribute("userLogged");
-            User user = null;
-
-            if (auxSession instanceof Consumer) {
-                user = (Consumer) auxSession;
-            } else {
-                user = (Establishment) auxSession;
-            }
-//         byte[] bytes = Files.readAllBytes(path);
+//            Object auxSession = session.getAttribute("userLogged");
+//            User user = null;
+//
+//            if (auxSession instanceof Consumer) {
+//                user = (Consumer) auxSession;
+//            } else {
+//                user = (Establishment) auxSession;
+//            }
 
             //byte[] bytes = service.getImg(1L);
-            byte[] bytes = new UserService().getImg(user.getId());
+            //byte[] bytes = new UserService().getImg(user.getId());
 
-            mv.addObject("imgProfile123", bytes);
+            //mv.addObject("imgProfile123", bytes);
 
         } catch (Exception exception) {
             System.out.println(exception);
@@ -243,6 +247,7 @@ public class ConsumerController {
         return mv;
     }
 
+    // Excluí e incluí produtos na lista
     @RequestMapping(value = "/products-{id}", method = RequestMethod.POST)
     public ModelAndView postProductList(@PathVariable Long id, String value, String type, HttpSession session) {
         ModelAndView mv = new ModelAndView("redirect:/products-" + id);
@@ -291,6 +296,15 @@ public class ConsumerController {
             }
         }
 
+        return mv;
+    }
+
+    @RequestMapping(value = "/#", method = RequestMethod.GET)
+    public ModelAndView getProducts() {
+        ModelAndView mv = null;
+
+        
+        
         return mv;
     }
 

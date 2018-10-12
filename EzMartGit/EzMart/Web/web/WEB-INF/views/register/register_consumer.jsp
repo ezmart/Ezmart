@@ -12,7 +12,7 @@
                             <a href="<c:url value="/home"/>" class="breadcrumb">Início</a>
                         <a href="<c:url value="/login"/>" class="breadcrumb">Autenticação</a>
                         <a href="<c:url value="/register"/>" class="breadcrumb">Cadastro</a>
-                        <a href="#!" class="breadcrumb">Cadastro Consumidor</a>
+                        <a href="#!" class="breadcrumb">Cadastro consumidor</a>
                     </div>
                 </div>
             </nav>
@@ -69,7 +69,7 @@
                                     <select class="form-control input-text-register" name="stateId" id="stateId">
                                         <option notselected></option>
                                         <c:forEach items="${stateList}" var="state">
-                                            <option <c:if test="${stateIdConsumer eq state.id}">selected="true"</c:if> id="stateId" value="${state.id}">${state.name}</option>                            
+                                            <option  <c:if test="${stateIdConsumer eq state.id}">selected="true"</c:if> id="stateId" value="${state.id}">${state.name}</option>                            
                                         </c:forEach>
                                     </select>
                                 </div>
@@ -85,11 +85,11 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="zipCode">CEP:</label>
-                                    <input type="text" class="form-control" name="zipCode" id="zipCodeUserConsumerRegister" value="${zipCode}">
+                                    <input type="text" class="form-control" name="zipCode" id="zipCode" value="${zipCode}">
                                     <span style="color: orangered">${errors.zipCode}</span>
                                 </div>
                                 <div class="form-group">
-                                    <label for="zipCode">CPF:</label>
+                                    <label for="cpf">CPF:</label>
                                     <input type="text" class="form-control" name="cpf" id="cpfUserRegister" value="${cpf}">
                                     <span style="color: orangered">${errors.cpf}</span>
                                 </div>
@@ -99,6 +99,8 @@
                                     <span style="color: orangered">${errors.telephone}</span>
                                 </div>
                                 <br/>
+                                <input type="text" style="display: none" name="latitude" id="latitude" value="">
+                                <input type="text" style="display: none" name="longitude" id="longitude" value="">
                                 <button id="btn-btn-ezmart-style" type="submit" class="btn" value="confirmar"><i class="material-icons left">border_color</i>Cadastrar</button>
                             </form>
                         </div>

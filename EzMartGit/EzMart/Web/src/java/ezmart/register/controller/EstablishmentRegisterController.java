@@ -45,7 +45,7 @@ public class EstablishmentRegisterController {
     @RequestMapping(value = "/register/emporium", method = RequestMethod.POST)
     public ModelAndView create(String companyName, String secondEmail, String businessName, String cnpj, String email, String password,
             String passwordConfirm, String addressLocation, Integer numberHouse, String neighborhood, Long cityId, String zipCode,
-            String telephone) {
+            String telephone, String latitude, String longitude) {
 
         ModelAndView mv = null;
         String confirmationEmail = email;
@@ -86,8 +86,8 @@ public class EstablishmentRegisterController {
                 emporium.setCity(cityId);
                 emporium.setZipCode(zipCode);
                 emporium.setTelephone(telephone);
-                emporium.setLatitude("");
-                emporium.setLongitude("");
+                emporium.setLatitude(latitude);
+                emporium.setLongitude(longitude);
 
                 BufferedImage originalImage = null;
                 try {

@@ -17,7 +17,22 @@
         </c:if>
         <c:if test="${empty userLogged}">
             <c:import url="/WEB-INF/views/templates/header_logout.jsp"></c:import>
-        </c:if>   
+        </c:if>
+            <!--<form class="gb_ag" action="/store/search" target="" id="gbqf" method="get" name="gbqf"><fieldset class="gbxx"><legend class="gbxx">Campos ocultos</legend><div id="gbqffd"></div></fieldset><fieldset class="gbqff gb_R" id="gbqff"><legend class="gbxx">Pesquisar</legend><div id="gbfwa" class="gbqfwa "><div id="gbqfqw" class="gbqfqw"><div id="gbqfaa"></div><div id="gbqfqwb" class="gbqfqwb"><input id="gbqfq" class="gbqfif" name="q" type="text" autocomplete="off" value="" placeholder="Pesquisar" aria-label="Pesquisar" role="combobox" aria-autocomplete="list"></div><div id="gbqfab"></div></div></div></fieldset><div class="gb_R gb_9f" id="gbqfbw"><button class="gbqfb" aria-label="Pesquisa Google" name="" id="gbqfb"><span class="gbqfi gb_fc"></span></button></div></form>-->
+        <nav>
+            <div class="nav-wrapper" style="margin-left: 100px">
+                <form class="form-horizontal" method="POST">
+                    <ul>
+                        <li>
+                            <input id="senha" type="text" class="form-control white black-text" name="password" placeholder="Buscar">
+                        </li>
+                        <li style="margin-left: 10px">
+                            <button style=" height: 60px" id="" type="submit" class="btn" value="confirmar"><i class="material-icons center">search</i></button>
+                        </li>
+                    </ul>
+                </form> 
+            </div>
+        </nav>
         <div id="modal-add" class="modal">
             <div class="modal-content">
                 <c:if test="${not empty userLogged}">
@@ -107,7 +122,6 @@
                     <div class="card-stacked">
                         <div class="card-content" style="background-color: #F1F1F1">   
                             <h4 class="center-align">Produtos</h4>
-                            <!-- Listar uma lista de produtos e serviços aqui -->
                             <div class="row">
                                 <div class="col s12 m12">
                                     <ul>

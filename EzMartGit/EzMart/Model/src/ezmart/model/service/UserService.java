@@ -128,12 +128,13 @@ public class UserService implements BaseUserService {
             String password = (String) fields.get("password");
             if (password == null || password.isEmpty()) {
                 errors.put("password", "Campo obrigatório!");
-            } else {
-                int length = password.length();
-                if (length < 6 || length > 20) {
-                    errors.put("password", "Tamanho inválido!");
-                }
-            }
+            } 
+//            else {
+//                int length = password.length();
+//                if (length < 6 || length > 20) {
+//                    errors.put("password", "Tamanho inválido!");
+//                }
+//            }
 
         } else if (validationType.equals(SystemConstant.VALIDATION.USER.RECOVERY_PASSWORD)) {
             Map<Long, Object> criteria = new HashMap<>();
