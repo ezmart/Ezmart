@@ -120,7 +120,7 @@
 
                     <div class="card">
                         <div class="card-content">
-                            <c:import url="/WEB-INF/views/google_maps.jsp"/>
+                            <c:import url="/WEB-INF/views/maps/google_maps_register.jsp"/>
                         </div>
                     </div>
                 </div>

@@ -98,7 +98,6 @@ async defer></script>
         });
 
         marker.setPosition(latlng);
-
     }
 
     function codeLatLng(lat, lng) {
