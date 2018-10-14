@@ -68,6 +68,21 @@ function setProductEdit(productId, productName, productBarCode, productBrand, pr
 
 }
 
+function setProductEstablishmentId(productId) {
+    document.getElementById('idProduct').value = productId;
+}
+
+function setProductEstablishmentEdit(establishmentProductId, price) {
+    document.getElementById('idEstablishmentProductId').value = establishmentProductId;
+    document.querySelector("[name='priceProduct']").value = price;
+}
+
+function setProductEstablishmentDelete(establishmentProductId, barCodeProduct, nameProduct) {
+    document.getElementById('idProductDelete').value = establishmentProductId;
+    document.getElementById('barCodeProduct').innerHTML = barCodeProduct;
+    document.getElementById('nameProduct').innerHTML = nameProduct;
+}
+
 function setDadosModalUser(userId, consumerName, establishmentName) {
     var complement = '';
     if (consumerName != null && consumerName != '') {

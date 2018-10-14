@@ -15,6 +15,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Date;
 
 public class EstablishmentDAO implements BaseDAO<Establishment> {
 
@@ -204,50 +205,67 @@ public class EstablishmentDAO implements BaseDAO<Establishment> {
     public List<EstablishmentProduct> findAllEstablishmentProduct(Connection conn, Long id) throws Exception {
         String sql = "SELECT * FROM establishmentproduct "
                 + " LEFT JOIN product ON product_id = establishmentproduct_productid"
-                + " WHERE establishmentproduct_establishmentid=?;";
-        
+                + " LEFT JOIN sector on sector_id = product_sectorid"
+                + " LEFT JOIN provider on provider_id = product_providerid"
+                + " WHERE establishmentproduct_establishmentid=? "
+                + " ORDER BY sector_name, product_name;";
+
         PreparedStatement statement = conn.prepareStatement(sql);
         statement.setLong(1, id);
         ResultSet resultSet = statement.executeQuery();
 
         List<EstablishmentProduct> establishmentProductList = new ArrayList<>();
-        if (resultSet.next()) {
+        while (resultSet.next()) {
             EstablishmentProduct establishmentProduct = new EstablishmentProduct();
             Establishment establishment = new Establishment();
             Product product = new Product();
-            
+            Sector sector = new Sector();
+            Provider provider = new Provider();
+
             establishment.setId(id);
-            product.setId(resultSet.getLong("establishmentproduct_productid"));
-            
+
+            sector.setId(resultSet.getLong("sector_id"));
+            sector.setName(resultSet.getString("sector_name"));
+            provider.setId(resultSet.getLong("provider_id"));
+            provider.setName(resultSet.getString("provider_name"));
+
+            product.setId(resultSet.getLong("product_id"));
+            product.setBarCode(resultSet.getString("product_barcode"));
+            product.setName(resultSet.getString("product_name"));
+            product.setBrand(resultSet.getString("product_brand"));
+            product.setSector(sector);
+            product.setProvider(provider);
+
             establishmentProduct.setId(resultSet.getLong("establishmentproduct_id"));
             establishmentProduct.setDateAlteration(resultSet.getDate("establishmentproduct_date"));
             establishmentProduct.setPrice(resultSet.getDouble("establishmentproduct_price"));
             establishmentProduct.setEstablishment(establishment);
             establishmentProduct.setProduct(product);
-            
+
             establishmentProductList.add(establishmentProduct);
         }
         resultSet.close();
         statement.close();
-        
+
         return establishmentProductList;
     }
-    
+
     public List<Product> findAllProductByEstablishmentId(Connection conn, Long id) throws Exception {
         String sql = "SELECT * FROM product "
                 + " LEFT JOIN sector ON sector_id = product_sectorid "
                 + " LEFT JOIN provider ON provider_id = product_providerid "
                 + " WHERE product_id NOT IN "
-                + "( SELECT establishmentproduct_productid FROM establishmentproduct WHERE establishmentproduct_establishmentid = ? );";
-        
+                + "( SELECT establishmentproduct_productid FROM establishmentproduct WHERE establishmentproduct_establishmentid = ? )"
+                + " ORDER BY sector_name, product_name;";
+
         PreparedStatement statement = conn.prepareStatement(sql);
         statement.setLong(1, id);
         ResultSet rs = statement.executeQuery();
 
         List<Product> productList = new ArrayList<>();
-        if (rs.next()) {
+        while (rs.next()) {
             Product product = new Product();
-            
+
             Provider provider = new Provider();
             Sector sector = new Sector();
 
@@ -265,12 +283,50 @@ public class EstablishmentDAO implements BaseDAO<Establishment> {
             product.setImage(rs.getBytes("product_image"));
             product.setSector(sector);
             product.setProvider(provider);
-            
+
             productList.add(product);
         }
         rs.close();
         statement.close();
-        
+
         return productList;
+    }
+
+    public void saveProductEstablishment(Connection conn, EstablishmentProduct establishmentProduct) throws Exception {
+        String sql = "INSERT INTO establishmentproduct\n"
+                + "(establishmentproduct_establishmentid, establishmentproduct_productid, "
+                + "establishmentproduct_price, establishmentproduct_date)\n"
+                + "VALUES(?, ?, ?, ?);";
+
+        PreparedStatement statement = conn.prepareStatement(sql);
+        statement.setLong(1, establishmentProduct.getEstablishment().getId());
+        statement.setLong(2, establishmentProduct.getProduct().getId());
+        statement.setDouble(3, establishmentProduct.getPrice());
+        statement.setTimestamp(4, new java.sql.Timestamp(new Date().getTime()));
+        statement.execute();
+        statement.close();
+    }
+
+    public void updatePriceEstablishmentProduct(Connection conn, EstablishmentProduct establishmentProduct) throws Exception {
+        String sql = "UPDATE establishmentproduct\n"
+                + "SET establishmentproduct_price=?, establishmentproduct_date=?\n"
+                + "WHERE establishmentproduct_id=?";
+
+        PreparedStatement statement = conn.prepareStatement(sql);
+        statement.setDouble(1, establishmentProduct.getPrice());
+        statement.setTimestamp(2, new java.sql.Timestamp(new Date().getTime()));
+        statement.setLong(3, establishmentProduct.getId());
+        statement.execute();
+        statement.close();
+    }
+
+    public void deleteEstablishmentProduct(Connection conn, Long establishmentProductId) throws Exception {
+        String sql = "DELETE FROM establishmentproduct\n"
+                + "WHERE establishmentproduct_id=?";
+
+        PreparedStatement statement = conn.prepareStatement(sql);
+        statement.setDouble(1, establishmentProductId);
+        statement.execute();
+        statement.close();
     }
 }

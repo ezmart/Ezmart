@@ -311,4 +311,46 @@ public class EstablishmentService implements BaseEstablishmentService {
             throw e;
         }
     }
+
+    public void saveProductEstablishment(EstablishmentProduct establishmentProduct) throws Exception {
+        Connection conn = ConnectionManager.getInstance().getConnection();
+        try {
+            EstablishmentDAO establishmentDAO = new EstablishmentDAO();
+            establishmentDAO.saveProductEstablishment(conn, establishmentProduct);
+            conn.commit();
+            conn.close();
+        } catch (Exception e) {
+            conn.rollback();
+            conn.close();
+            throw e;
+        }
+    }
+
+    public void updatePriceEstablishmentProduct(EstablishmentProduct establishmentProduct) throws Exception {
+        Connection conn = ConnectionManager.getInstance().getConnection();
+        try {
+            EstablishmentDAO establishmentDAO = new EstablishmentDAO();
+            establishmentDAO.updatePriceEstablishmentProduct(conn, establishmentProduct);
+            conn.commit();
+            conn.close();
+        } catch (Exception e) {
+            conn.rollback();
+            conn.close();
+            throw e;
+        }
+    }
+
+    public void deleteEstablishmentProduct(Long establishmentProductId) throws Exception {
+        Connection conn = ConnectionManager.getInstance().getConnection();
+        try {
+            EstablishmentDAO establishmentDAO = new EstablishmentDAO();
+            establishmentDAO.deleteEstablishmentProduct(conn, establishmentProductId);
+            conn.commit();
+            conn.close();
+        } catch (Exception e) {
+            conn.rollback();
+            conn.close();
+            throw e;
+        }
+    }
 }

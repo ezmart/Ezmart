@@ -34,7 +34,7 @@
                                     <input id="sectorName" name="nameSector" type="text" class="validate" required>
                                 </div>
                                 <div class="modal-footer">
-                                    <a class="btn btn-sm btn-default btn-small red modal-close modal-action" style="color:white;">Voltar</a>
+                                    <a class="btn btn-sm btn-default btn-small red modal-close modal-action" style="color:white;">VOLTAR</a>
                                     <button class=" modal-action green btn-flat" type="submit" value="confirmar" style="margin-right: 15px; color:white;">CONFIRMAR</button>
                                 </div>
                             </form>
@@ -66,8 +66,8 @@
                         <div class="modal-footer">
                             <form method="POST" action="/ezmartWeb/sectorDelete">
                                 <input type="text" style="display: none"  name="sectorId" id = "idSectorDelete">
-                                <a class="btn btn-sm btn-default btn-small red modal-close modal-action" style="color:white;">Não</a>
-                                <button class="btn btn-sm btn-default btn-small green" type="submit" style="color:white; margin-right: 10px;" >Sim</button>
+                                <a class="btn btn-sm btn-default btn-small red modal-close modal-action" style="color:white;">NÃO</a>
+                                <button class="btn btn-sm btn-default btn-small green" type="submit" style="color:white; margin-right: 10px;" >SIM</button>
                             </form>
                         </div>
                     </div>
@@ -103,8 +103,8 @@
                                             <td>${sector.id}</td>
                                             <td>${sector.name}</td>
                                             <td>
-                                                <a class="btn btn-sm btn-default btn-small ffc400 amber accent-3 modal-trigger" href="#modal-update" style="color:white;" onclick="setNameSectorEdit(${sector.id}, '${sector.name}')"><i class="material-icons right">edit</i>Alterar</a>
-                                                <a class="btn btn-sm btn-danger btn-small red modal-trigger" href="#modal-delete" onclick="setDadosModalSector(${sector.id}, '${sector.name}')" style="color:white;"><i class="material-icons right">delete</i>Excluir</a>
+                                                <a class="btn btn-sm btn-default btn-small ffc400 amber accent-3 modal-trigger" href="#modal-update" style="color:white;" onclick="setNameSectorEdit(${sector.id}, '${sector.name}')"><i class="material-icons right">edit</i>ALTERAR</a>
+                                                <a class="btn btn-sm btn-danger btn-small red modal-trigger" href="#modal-delete" onclick="setDadosModalSector(${sector.id}, '${sector.name}')" style="color:white;"><i class="material-icons right">delete</i>EXCLUIR</a>
                                             </td>
                                         </tr>    
                                     </c:forEach>
