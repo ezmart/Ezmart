@@ -104,7 +104,11 @@ public class UserDAO implements BaseDAO<User> {
                 sql += " AND usersystem.usersystem_id != ?";
                 paramList.add(id);
             }
-            //Add criterio ....
+            if (criteria.containsKey(UserCriteria.USER_TYPE_EQ)) {
+                String userType = (String) criteria.get(UserCriteria.USER_TYPE_EQ);
+                sql += " AND usersystem_usertype = ?";
+                paramList.add(userType);
+            }
         }
 
         if (limit != null) {
@@ -120,7 +124,7 @@ public class UserDAO implements BaseDAO<User> {
         ResultSet rs = statement.executeQuery();
         List<User> userList = new ArrayList<>();
         Long aux = null;
-        if (rs.next()) {
+        while (rs.next()) {
             User user = null;
             if (rs.getString("usersystem_usertype").equals("consumer")) {
                 user = new Consumer();
@@ -378,7 +382,7 @@ public class UserDAO implements BaseDAO<User> {
                 establishment.setPlanStartDate(rs.getDate("establishment_planstartdate"));
                 establishment.setPlanFinalDate(rs.getDate("establishment_planfinaldate"));
             }
-            
+
             city.setId(rs.getLong("city_id"));
             city.setName(rs.getString("city_name"));
             city.setCodeIbge(rs.getString("city_codeibge"));
@@ -404,7 +408,7 @@ public class UserDAO implements BaseDAO<User> {
                 userSystem.setAdm(true);
             }
             userSystem.setZipCode(rs.getString("usersystem_zipcode"));
-            
+
             userSystem.setActive(rs.getBoolean("usersystem_active"));
             if (userSystem.getActive()) {
                 userSystem.setActiveString("SIM");
@@ -424,8 +428,8 @@ public class UserDAO implements BaseDAO<User> {
         statement.close();
         return userSystemList;
     }
-    
-    public UserSystem createUserSystem (Connection conn, UserSystem entity) throws Exception {
+
+    public UserSystem createUserSystem(Connection conn, UserSystem entity) throws Exception {
 
         String sql = "INSERT INTO "
                 + "usersystem(usersystem_email, usersystem_password, usersystem_addresslocation, usersystem_numberhouse, "
@@ -454,13 +458,13 @@ public class UserDAO implements BaseDAO<User> {
         }
         resultSet.close();
         statement.close();
-        
+
         return entity;
     }
 
-    public void updateUserSystem(Connection conn, UserSystem entity) throws Exception{
-        
-         String sql = "UPDATE usersystem SET "
+    public void updateUserSystem(Connection conn, UserSystem entity) throws Exception {
+
+        String sql = "UPDATE usersystem SET "
                 + "usersystem_email = ?, usersystem_addresslocation = ?, usersystem_numberhouse = ?, "
                 + "usersystem_neighborhood = ?, usersystem_cityid = ?, usersystem_zipcode = ?, usersystem_telephone = ?, "
                 + "usersystem_usertype = ?, usersystem_active = ? WHERE usersystem_id = ? ";
@@ -478,7 +482,7 @@ public class UserDAO implements BaseDAO<User> {
         statement.setString(++i, entity.getUserType());
         statement.setBoolean(++i, entity.getActive());
         statement.setLong(++i, entity.getId());
-        
+
         statement.execute();
         statement.close();
     }

@@ -47,10 +47,10 @@
                             <form method="POST">
                                 <input type="text" style="display: none" name="type" id="type" value="DELETE">
                                 <input type="text" style="display: none"  name="value" id="idDeleteProductList" value="">
+                                <a class="btn btn-sm right btn-default btn-small red modal-close modal-action" style="color:white; margin-left: 10px;">Não</a>
                                 <button class="btn btn-sm btn-default btn-small green" type="submit" style="color:white;" >Sim</button>
                                 <!--<button id="btn-btn-ezmart-style" type="submit" class="btn modal-close" value="confirmar">Sim</button>-->
                             </form>
-                            <a class="btn btn-sm btn-default btn-small red modal-close modal-action" style="color:white; margin-right: 10px;">Não</a>
                         </div>
                     </div>
                 </div>
@@ -78,37 +78,41 @@
             </c:if>
             <c:if test="${not empty productsList}">
                 <div class="container">
-                    <!--<div class="card">-->
-                    <!--<div class="card-content">-->
-                    <h3>Produtos cadastrados na lista</h3>
-
-                    <table class="table">
-                        <tr>
-                            <th>Foto</th>
-                            <!--<th>Id</th>-->
-                            <th>Nome</th>
-                        </tr>
-                        <!--<a href="<c:url value="/products/${listId}/list"/>" class="btn btn-sm btn-default btn-small green left modal-trigger" style="color:white;"><i class="material-icons right">add_box</i>Adicionar Novo Produto</a>-->
-                        <a class="btn btn-sm btn-danger btn-small green modal-trigger" href="#modal-create" onclick="setDadaModalProductList(${listId})" style="color:white;"><i class="material-icons right">add_box</i>Adicionar</a>
-
-                        <!--<a href="#modal-create" id="btn-btn-ezmart-style" class="btn modal-trigger">Adicionar</a>-->
-                        <br/>
-                        <br/>
-                        <c:forEach items="${productsList}" var="productList">
-                            <tr>
-                                <td><img class="responsive-img" width="50px" height="50px" src="<c:url value = "/resources/img/product/${productList.productId}.jpg"/>"></td>
-                                <!--<td>${productList.id}</td>-->
-                                <td>${productList.productName}</td>
-                                <td>
-                                    <!--<a class="btn btn-sm btn-default btn-small yellow modal-trigger" href="#modal-update" style="color:white;">Gerênciar Lista</a>-->
-                                    <!--<a class="btn yellow" href="<c:url value="/products/${productList.id}/list"/>" style="color:white;">Gerenciar Lista</a>-->
-                                    <a class="btn btn-sm btn-danger btn-small red modal-trigger" href="#modal-delete" onclick="setDeleteDadaModalProductInList(${productList.productId})" style="color:white;"><i class="material-icons right">delete</i>Excluir</a>
-                                </td>
-                            </tr>    
-                        </c:forEach>
-                    </table>
-                    <!--</div>-->
-                    <!--</div>-->
+                    <div class="card">
+                        <div class="card-content" style="background-color: #F1F1F1">
+                            <div class="row left">
+                                <div class="col s12" style="margin-top: 0">
+                                    <h3>Produtos cadastrados na lista</h3>
+                                </div>
+                            </div>
+                            <table class="table s12">
+                                <tr>
+                                    <th></th>
+                                    <!--<th>Id</th>-->
+                                    <th class="center">Nome do produto</th>
+                                </tr>
+                                <!--<a href="<c:url value="/products/${listId}/list"/>" class="btn btn-sm btn-default btn-small green left modal-trigger" style="color:white;"><i class="material-icons right">add_box</i>Adicionar Novo Produto</a>-->
+                                <div class="col s6 right">
+                                    <a class="btn btn-sm btn-danger btn-small green modal-trigger" href="#modal-create" onclick="setDadaModalProductList(${listId})" style="color:white;"><i class="material-icons right">add_box</i>Adicionar</a>
+                                </div>
+                                <!--<a href="#modal-create" id="btn-btn-ezmart-style" class="btn modal-trigger">Adicionar</a>-->
+                                <br/>
+                                <br/>
+                                <c:forEach items="${productsList}" var="productList">
+                                    <tr>
+                                        <td class="center"><img class="responsive-img" width="60px" height="60px" src="<c:url value = "/resources/img/product/${productList.productId}.jpg"/>"></td>
+                                        <!--<td>${productList.id}</td>-->
+                                        <td class="center">${productList.productName}</td>
+                                        <td>
+                                            <!--<a class="btn btn-sm btn-default btn-small yellow modal-trigger" href="#modal-update" style="color:white;">Gerênciar Lista</a>-->
+                                            <!--<a class="btn yellow" href="<c:url value="/products/${productList.id}/list"/>" style="color:white;">Gerenciar Lista</a>-->
+                                            <a class="center btn btn-sm btn-danger btn-small red modal-trigger" href="#modal-delete" onclick="setDeleteDadaModalProductInList(${productList.productId})" style="color:white; margin-left: 15px"><i class="material-icons right">delete</i>Excluir</a>
+                                        </td>
+                                    </tr>    
+                                </c:forEach>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </c:if>
         </c:if>

@@ -175,13 +175,10 @@ $(document).ready(function () {
     var $cellUserEstablishmentRegister = $("#cellUserEstablishmentRegister");
     $cellUserEstablishmentRegister.mask('00 00000-0000', {reverse: true});
 
-    //Mascara para CEP no cadastro de consumidor
-    var $zipCodeUserConsumerRegister = $("#zipCodeUserConsumerRegister");
-    $zipCodeUserConsumerRegister.mask('00000-000', {reverse: true});
+    //Mascara para CEP
+    var $zipCode = $("#zipCode");
+    $zipCode.mask('00000-000', {reverse: true});
 
-    //Mascara para CEP no cadastro de estabelicimento
-    var $zipCodeUserEstablishmentRegister = $("#zipCodeUserEstablishmentRegister");
-    $zipCodeUserEstablishmentRegister.mask('00000-000', {reverse: true});
 });
 
 //Deleta a lista dos usuário
@@ -211,7 +208,32 @@ function setModalData(productName, img, productSectorNameModal, productBrandModa
     document.getElementById('productProviderNameModal').value = productProviderNameModal;
     //alert(productName);
 }
-//function setDadaProductList(data) {
-//    document.getElementById('idDeleteProductList').value = data;
-////    alert(data);
-//}
+
+    function funcionaFDP(stateId) {
+        $.ajax({
+            //url: 'http://http://localhost:8084/getCity' + stateId,
+            url: 'http://localhost:8084/ezmartWeb/getCity-'+ stateId,
+            type: 'GET',
+            dataType: "json",
+            success: function (response) {
+
+                console.log(response);
+
+//                response.forEach(function (euSouOItemDaIteracao) {
+//                    console.log(euSouOItemDaIteracao);
+//
+//                    if(euSouOItemDaIteracao.name == 'luciano') {
+//                        console.log(euSouOItemDaIteracao.name + " | " + euSouOItemDaIteracao.age);
+//                        $("#chupeta").text(euSouOItemDaIteracao.name + " | " + euSouOItemDaIteracao.age);
+//                    }
+//
+
+ //               });
+            },
+            error: function () {
+                console.log('Failed! =/');
+            },
+        });
+
+        alert(stateId);
+    }

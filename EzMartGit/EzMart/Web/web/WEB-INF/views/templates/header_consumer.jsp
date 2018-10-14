@@ -1,15 +1,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <header>
     <ul style="margin-top: 65px" id="main" class="dropdown-content">
-        <li><a class="dropdown-content-user-header-style" href="<c:url value="/shoppingList"/>">Minhas Listas</a></li>
+        <li><a class="dropdown-content-user-header-style" href="<c:url value="/shoppingList"/>">Minhas listas</a></li>
         <li class="divider"></li>
-        <li><a class="dropdown-content-user-header-style" href="<c:url value="#!"/>">Dashboard</a></li>
+        <li><a class="dropdown-content-user-header-style" href="<c:url value="/localMarkets"/>">Mercados próximos</a></li>
         <li class="divider"></li>
     </ul>
     <ul style="margin-top: 65px" id="user" class="dropdown-content">
-        <li><a class="dropdown-content-user-header-style" href="<c:url value="/profile"/>">Meu Perfil</a></li>
+        <li><a class="dropdown-content-user-header-style" href="<c:url value="/profile"/>">Meu perfil</a></li>
         <li class="divider"></li>
-        <li><a class="dropdown-content-user-header-style" href="<c:url value="/changePassword"/>">Alterar Senha</a></li>
+        <li><a class="dropdown-content-user-header-style" href="<c:url value="/changePassword"/>">Alterar senha</a></li>
         <li class="divider"></li>
         <li><a class="dropdown-content-user-header-style" href="<c:url value="/logout"/>">Sair</a></li>
         <li class="divider"></li>

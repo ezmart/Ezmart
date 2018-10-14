@@ -6,7 +6,7 @@
                 <div class="form-group col s6" style="padding: 0">
                     <label for="name">Nome da nova lista:</label>
                     <input type="text" style="display: none" class="form-control input-text-register" name="type" id="type" value="CREATE">
-                    <input type="text" class="form-control input-text-register" name="value" id="value">
+                    <input type="text" maxlength="15" class="form-control input-text-register" name="value" id="value">
                 </div>
                 <br/>
                 <br/>
