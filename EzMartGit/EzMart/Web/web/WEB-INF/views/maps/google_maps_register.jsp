@@ -101,7 +101,10 @@ async defer></script>
     }
 
     function codeLatLng(lat, lng) {
-        var latlng = new google.maps.LatLng(lat, lng);
+        var latitude = lat;
+        var longitude = lng;
+        var latlng = new google.maps.LatLng(latitude, longitude);
+
         geocoder.geocode({
             'latLng': latlng
         }, function (results, status) {
@@ -109,16 +112,14 @@ async defer></script>
                 if (results[1]) {
                     //var formattedAddress = results[0].formatted_address.split(",");
                     var addressComponents = results[1].address_components;
-
+                    document.getElementById("latitude").value = latitude.toString();
+                    document.getElementById("longitude").value = longitude.toString();
                     document.getElementById("addressLocation").value = addressComponents[1].short_name;
                     document.getElementById("numberHouse").value = addressComponents[0].short_name;
                     document.getElementById("neighborhood").value = addressComponents[2].short_name;
                     document.getElementById("zipCode").value = addressComponents[6].short_name;
 
-                    document.getElementById("latitude").value = lat;
-                    document.getElementById("longitude").value = lng;
-
-                    console.log(results[1]);
+                    //console.log(results[1]);
                 } else {
                     alert('No results found');
                 }

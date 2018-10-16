@@ -126,6 +126,8 @@
                                 <br/>
                                 <c:forEach items="${shoppingList}" var="shoppingList">
                                     <tr>
+                                        <td style="font-weight: bold;">${shoppingList.id}</td>
+
                                         <td style="font-weight: bold;">${shoppingList.name}</td>
                                         <td>
                                             <a class="right btn btn-sm btn-danger btn-small red modal-trigger" href="#modal-delete" onclick="setDeleteDadaModalShoppingList(${shoppingList.id})" style="color:white; margin-left: 15px"><i class="material-icons right">delete</i>Excluir</a>

@@ -5,6 +5,7 @@ import ezmart.model.criteria.UserCriteria;
 import ezmart.model.entity.City;
 import ezmart.model.entity.Consumer;
 import ezmart.model.entity.Establishment;
+import ezmart.model.entity.ListProduct;
 import ezmart.model.entity.ShoppingList;
 import ezmart.model.entity.State;
 import ezmart.model.entity.User;
@@ -14,7 +15,6 @@ import ezmart.model.service.ConsumerService;
 import ezmart.model.service.ListProductService;
 import ezmart.model.service.ShoppingListService;
 import ezmart.model.service.StateService;
-import ezmart.model.service.UserService;
 import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -226,20 +226,6 @@ public class ConsumerController {
             //Lista Atual
             mv.addObject("listId", id);
 
-//            Object auxSession = session.getAttribute("userLogged");
-//            User user = null;
-//
-//            if (auxSession instanceof Consumer) {
-//                user = (Consumer) auxSession;
-//            } else {
-//                user = (Establishment) auxSession;
-//            }
-
-            //byte[] bytes = service.getImg(1L);
-            //byte[] bytes = new UserService().getImg(user.getId());
-
-            //mv.addObject("imgProfile123", bytes);
-
         } catch (Exception exception) {
             System.out.println(exception);
         }
@@ -249,11 +235,12 @@ public class ConsumerController {
 
     // Excluí e incluí produtos na lista
     @RequestMapping(value = "/products-{id}", method = RequestMethod.POST)
-    public ModelAndView postProductList(@PathVariable Long id, String value, String type, HttpSession session) {
+    public ModelAndView postProductList(@PathVariable Long id, String value, String type, HttpSession session) throws Exception {
         ModelAndView mv = new ModelAndView("redirect:/products-" + id);
 
         Object auxSession = session.getAttribute("userLogged");
         User user = null;
+        ListProductService service = new ListProductService();
 
         if (auxSession instanceof Consumer) {
             user = (Consumer) auxSession;
@@ -261,32 +248,9 @@ public class ConsumerController {
             user = (Establishment) auxSession;
         }
 
-        if (type != null && type.equals("CREATE")) {
+        if (type != null && type.equals("DELETE")) {
             try {
-//                String name = value;
-//                ShoppingList shoppingList = new ShoppingList();
-//                shoppingList.setName(name);
-//                shoppingList.setConsumerId(user.getId());
-//                shoppingList.setFavorite(false);
 
-                //Paga a data atual do sistema
-//                Date date = new Date(System.currentTimeMillis());
-//                shoppingList.setDate(date);
-                //shoppingList.setProductList(null);
-//                ShoppingListService service = new ShoppingListService();
-//                service.create(shoppingList);
-            } catch (Exception exception) {
-                System.out.println(exception);
-            }
-        } else if (type != null && type.equals("UPDATE")) {
-//            ShoppingListService service = new ShoppingListService();
-//            Long id = (Long) value;
-//            
-//            service.update(id);
-
-        } else if (type != null && type.equals("DELETE")) {
-            try {
-                ListProductService service = new ListProductService();
                 Long productId = Long.parseLong(value);
                 //id da lista / id do produto
                 service.deleteFromList(id, productId);
@@ -294,6 +258,13 @@ public class ConsumerController {
             } catch (Exception exception) {
                 System.out.println(exception);
             }
+        } else {
+            Long productId = Long.parseLong(value);
+            ListProduct listProduct = new ListProduct();
+            listProduct.setListId(id);
+            listProduct.setProdutcId(productId);
+            listProduct.setQuantity(2);
+            service.create(listProduct);
         }
 
         return mv;
@@ -303,8 +274,6 @@ public class ConsumerController {
     public ModelAndView getProducts() {
         ModelAndView mv = null;
 
-        
-        
         return mv;
     }
 

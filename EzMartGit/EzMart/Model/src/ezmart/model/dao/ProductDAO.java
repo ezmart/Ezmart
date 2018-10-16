@@ -68,10 +68,11 @@ public class ProductDAO implements BaseDAO<Product> {
                 paramList.add(barCode);
             }
 
-//            if (criteria.containsKey(CategoriaCriteria.NOME_EQ)) {
-//                String nome = (String) criteria.get(CategoriaCriteria.NOME_EQ);
-//                sql += " AND nome = ?";
-//                paramList.add(nome);
+            if (criteria.containsKey(ProductCriteria.PRODUCT_ILIKE)) {
+                String productName = (String) criteria.get(ProductCriteria.PRODUCT_ILIKE);
+                sql += " AND product_name ILIKE ?";
+                paramList.add("%" + productName + "%");
+            }
 //            }
 //
 //            if (criteria.containsKey(CategoriaCriteria.QUANTIDADE_PRODUTO_GT)) {

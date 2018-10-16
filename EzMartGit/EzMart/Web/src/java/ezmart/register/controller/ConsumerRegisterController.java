@@ -73,7 +73,7 @@ public class ConsumerRegisterController {
         ModelAndView mv = null;
         String confirmationEmail = email;
         String userName = name;
-
+        
         try {
             ConsumerService consumerService = new ConsumerService();
             Map<String, Object> fields = new HashMap<>();

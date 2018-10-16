@@ -16,7 +16,19 @@ public class ListProductDAO implements BaseDAO<ListProduct> {
 
     @Override
     public void create(Connection conn, ListProduct entity) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = "INSERT INTO listproduct(listproduct_listid, listproduct_productid, listproduct_quantity) "
+                + "VALUES (?,?,?) ";
+
+        PreparedStatement statement = conn.prepareStatement(sql);
+        int i = 0;
+
+        statement.setLong(++i, entity.getListId());
+        statement.setLong(++i, entity.getProdutcId());
+        statement.setInt(++i, entity.getQuantity());
+
+        statement.execute();
+
+        statement.close();
     }
 
     @Override

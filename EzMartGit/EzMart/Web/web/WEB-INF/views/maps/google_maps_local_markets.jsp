@@ -34,7 +34,7 @@ async defer></script>
         });
 
         $.ajax({
-            url: '<c:url value="api/localMarkets"/>',
+            url: 'api/system/localMarkets',
             type: 'GET',
             dataType: "json",
             success: function (response) {
