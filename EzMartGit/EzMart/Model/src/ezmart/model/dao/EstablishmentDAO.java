@@ -329,4 +329,57 @@ public class EstablishmentDAO implements BaseDAO<Establishment> {
         statement.execute();
         statement.close();
     }
+    
+    public List<EstablishmentProduct> findAllEstablishmentProductForPromotion(Connection conn, Long establishmentId, Long promotionId) throws Exception {
+        String sql = "SELECT * FROM establishmentproduct \n" +
+"                LEFT JOIN product ON product_id = establishmentproduct_productid \n" +
+"                LEFT JOIN sector ON sector_id = product_sectorid \n" +
+"                LEFT JOIN provider ON provider_id = product_providerid\n" +
+"                LEFT JOIN establishment on establishment_id = establishmentproduct_establishmentid\n" +
+"                WHERE \n" +
+"                establishmentproduct_establishmentid = ? \n" +
+"                AND establishmentproduct_id NOT IN \n" +
+"                ( SELECT promotionestablishmentproduct_establishmentproductid FROM promotionestablishmentproduct WHERE promotionestablishmentproduct_promotionid = ? )\n" +
+"                ORDER BY sector_name, product_name;";
+
+        PreparedStatement statement = conn.prepareStatement(sql);
+        statement.setLong(1, establishmentId);
+        statement.setLong(2, promotionId);
+        ResultSet resultSet = statement.executeQuery();
+
+        List<EstablishmentProduct> establishmentProductList = new ArrayList<>();
+        while (resultSet.next()) {
+            EstablishmentProduct establishmentProduct = new EstablishmentProduct();
+            Establishment establishment = new Establishment();
+            Product product = new Product();
+            Sector sector = new Sector();
+            Provider provider = new Provider();
+
+            establishment.setId(establishmentId);
+
+            sector.setId(resultSet.getLong("sector_id"));
+            sector.setName(resultSet.getString("sector_name"));
+            provider.setId(resultSet.getLong("provider_id"));
+            provider.setName(resultSet.getString("provider_name"));
+
+            product.setId(resultSet.getLong("product_id"));
+            product.setBarCode(resultSet.getString("product_barcode"));
+            product.setName(resultSet.getString("product_name"));
+            product.setBrand(resultSet.getString("product_brand"));
+            product.setSector(sector);
+            product.setProvider(provider);
+
+            establishmentProduct.setId(resultSet.getLong("establishmentproduct_id"));
+            establishmentProduct.setDateAlteration(resultSet.getDate("establishmentproduct_date"));
+            establishmentProduct.setPrice(resultSet.getDouble("establishmentproduct_price"));
+            establishmentProduct.setEstablishment(establishment);
+            establishmentProduct.setProduct(product);
+
+            establishmentProductList.add(establishmentProduct);
+        }
+        resultSet.close();
+        statement.close();
+
+        return establishmentProductList;
+    }
 }
