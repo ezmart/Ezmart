@@ -353,4 +353,19 @@ public class EstablishmentService implements BaseEstablishmentService {
             throw e;
         }
     }
+
+    public List<EstablishmentProduct> findAllEstablishmentProductForPromotion(Long establishmentId, Long promotionId) throws Exception {
+        Connection conn = ConnectionManager.getInstance().getConnection();
+        try {
+            EstablishmentDAO establishmentDAO = new EstablishmentDAO();
+            List<EstablishmentProduct> establishmentList = establishmentDAO.findAllEstablishmentProductForPromotion(conn, establishmentId, promotionId);
+            conn.commit();
+            conn.close();
+            return establishmentList;
+        } catch (Exception e) {
+            conn.rollback();
+            conn.close();
+            throw e;
+        }
+    }
 }

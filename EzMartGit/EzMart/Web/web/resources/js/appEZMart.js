@@ -83,6 +83,10 @@ function setProductEstablishmentDelete(establishmentProductId, barCodeProduct, n
     document.getElementById('nameProduct').innerHTML = nameProduct;
 }
 
+function setEstablishmentProductId(establishmentProductId) {
+    document.getElementById('idEstablishmentProduct').value = establishmentProductId;
+}
+
 function setDadosModalUser(userId, consumerName, establishmentName) {
     var complement = '';
     if (consumerName != null && consumerName != '') {
