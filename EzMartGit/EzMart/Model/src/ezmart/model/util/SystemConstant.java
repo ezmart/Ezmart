@@ -41,5 +41,12 @@ public final class SystemConstant {
             public final static String REGISTER_ESTABLISHMENT = "REGISTER_ESTABLISHMENT";
 
         }
+
+        public class PRODUCT {
+
+            public final static String ADD_PRODUCT_LIST = "ADD_PRODUCT_LIST";
+            public final static String REGISTER_ESTABLISHMENT = "REGISTER_ESTABLISHMENT";
+
+        }
     }
 }

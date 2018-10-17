@@ -49,27 +49,17 @@ public class ListProductDAO implements BaseDAO<ListProduct> {
         List<Object> paramList = new ArrayList<>();
 
         if (criteria != null) {
-//            if (criteria.containsKey(ListProductCriteria.STATE_ID_EQ)) {
-//                String cityStateId = (String) criteria.get(CityCriteria.STATE_ID_EQ);
-//                sql += " AND state_id ILIKE ?";
-//                paramList.add("%" + nome + "%");
-//            }
 
-//            if (criteria.containsKey(CategoriaCriteria.NOME_EQ)) {
-//                String nome = (String) criteria.get(CategoriaCriteria.NOME_EQ);
-//                sql += " AND nome = ?";
-//                paramList.add(nome);
-//            }
-//
-//            if (criteria.containsKey(CategoriaCriteria.QUANTIDADE_PRODUTO_GT)) {
-//                Integer quantidadeProdutos = (Integer) criteria.get(CategoriaCriteria.QUANTIDADE_PRODUTO_GT);
-//                sql += " AND id IN(SELECT categoria_fk FROM produto GROUP BY categoria_fk HAVING count(*) > ?)";
-//                paramList.add(quantidadeProdutos);
-//            }
             if (criteria.containsKey(ListProductCriteria.PRODUCT_ID_EQ)) {
                 Long productId = (Long) criteria.get(ListProductCriteria.PRODUCT_ID_EQ);
-                sql += " AND listproduct_listid = ?";
+                sql += " AND product_id = ?";
                 paramList.add(productId);
+            }
+
+            if (criteria.containsKey(ListProductCriteria.LIST_ID_EQ)) {
+                Long listId = (Long) criteria.get(ListProductCriteria.LIST_ID_EQ);
+                sql += " AND listproduct_listid = ?";
+                paramList.add(listId);
             }
         }
 

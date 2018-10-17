@@ -15,6 +15,7 @@ import ezmart.model.service.ConsumerService;
 import ezmart.model.service.ListProductService;
 import ezmart.model.service.ShoppingListService;
 import ezmart.model.service.StateService;
+import ezmart.model.util.SystemConstant;
 import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -217,7 +218,7 @@ public class ConsumerController {
 
             ListProductService listProductService = new ListProductService();
             Map<Long, Object> criteria = new HashMap<>();
-            criteria.put(ListProductCriteria.PRODUCT_ID_EQ, id);
+            criteria.put(ListProductCriteria.LIST_ID_EQ, id);
             List<ListProductModel> productsList = listProductService.readByCriteriaModel(criteria, null, null);
 
             mv.addObject("shoppingList", shoppingList);
@@ -233,20 +234,12 @@ public class ConsumerController {
         return mv;
     }
 
-    // Excluí e incluí produtos na lista
+    // Excluí e incluí produtos na lista no menu da lista
     @RequestMapping(value = "/products-{id}", method = RequestMethod.POST)
-    public ModelAndView postProductList(@PathVariable Long id, String value, String type, HttpSession session) throws Exception {
+    public ModelAndView postProductList(@PathVariable Long id, String value, String type) throws Exception {
         ModelAndView mv = new ModelAndView("redirect:/products-" + id);
 
-        Object auxSession = session.getAttribute("userLogged");
-        User user = null;
         ListProductService service = new ListProductService();
-
-        if (auxSession instanceof Consumer) {
-            user = (Consumer) auxSession;
-        } else {
-            user = (Establishment) auxSession;
-        }
 
         if (type != null && type.equals("DELETE")) {
             try {
@@ -259,12 +252,58 @@ public class ConsumerController {
                 System.out.println(exception);
             }
         } else {
+
             Long productId = Long.parseLong(value);
-            ListProduct listProduct = new ListProduct();
-            listProduct.setListId(id);
-            listProduct.setProdutcId(productId);
-            listProduct.setQuantity(2);
-            service.create(listProduct);
+            Map<String, Object> fields = new HashMap<>();
+
+            fields.put("listId", id);
+            fields.put("productId", productId);
+            fields.put("validationType", SystemConstant.VALIDATION.PRODUCT.ADD_PRODUCT_LIST);
+
+            Map<String, String> errors = service.validate(fields);
+
+            //Valida se o produto já está na lista em questão
+            if (errors == null || errors.isEmpty()) {
+                ListProduct listProduct = new ListProduct();
+                listProduct.setListId(id);
+                listProduct.setProdutcId(productId);
+                listProduct.setQuantity(2);
+                service.create(listProduct);
+            }
+
+        }
+
+        return mv;
+    }
+
+    //Incluí produtos na lista no HOME
+    @RequestMapping(value = "/newproducts", method = RequestMethod.POST)
+    public ModelAndView postProductListHome(Long listId, Long productId) throws Exception {
+        ModelAndView mv = null;
+        ListProductService service = new ListProductService();
+        
+        try {
+            Map<String, Object> fields = new HashMap<>();
+            fields.put("listId", listId);
+            fields.put("productId", productId);
+            fields.put("validationType", SystemConstant.VALIDATION.PRODUCT.ADD_PRODUCT_LIST);
+
+            Map<String, String> errors = service.validate(fields);
+
+            //Valida se o produto já está na lista em questão
+            if (errors == null || errors.isEmpty()) {
+                ListProduct listProduct = new ListProduct();
+                listProduct.setListId(listId);
+                listProduct.setProdutcId(productId);
+                listProduct.setQuantity(2);
+                service.create(listProduct);
+            }
+            
+            //mv = new ModelAndView("redirect:/home");
+            mv = new ModelAndView("redirect:/products-" + listId);
+
+        } catch (Exception e) {
+            mv = new ModelAndView();
         }
 
         return mv;

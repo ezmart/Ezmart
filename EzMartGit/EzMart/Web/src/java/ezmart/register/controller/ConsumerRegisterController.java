@@ -1,8 +1,6 @@
 package ezmart.register.controller;
 
-import ezmart.model.entity.City;
 import ezmart.model.entity.Consumer;
-import ezmart.model.service.CityService;
 import ezmart.model.service.ConsumerService;
 import ezmart.model.service.StateService;
 import ezmart.model.util.SystemConstant;
@@ -20,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import ezmart.model.entity.State;
-import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 public class ConsumerRegisterController {
@@ -73,7 +70,7 @@ public class ConsumerRegisterController {
         ModelAndView mv = null;
         String confirmationEmail = email;
         String userName = name;
-        
+
         try {
             ConsumerService consumerService = new ConsumerService();
             Map<String, Object> fields = new HashMap<>();
@@ -173,12 +170,17 @@ public class ConsumerRegisterController {
                     mv.addObject("passwordConfirm", passwordConfirm);
                 }
                 if (cityId != null || cityId == null) {
-                    CityService cityService = new CityService();
-                    Map<Long, Object> criteria = new HashMap<>();
-                    //criteria.put(new CityCriteria().STATE_ID_EQ, mv);
-                    List<City> cityList = cityService.readByCriteria(null, null, null);
-                    mv.addObject("cityList", cityList);
+//                    CityService cityService = new CityService();
+//                    Map<Long, Object> criteria = new HashMap<>();
+//                    //criteria.put(new CityCriteria().STATE_ID_EQ, mv);
+//                    List<City> cityList = cityService.readByCriteria(null, null, null);
+                    mv.addObject("cityId", cityId);
                 }
+                
+                StateService stateService = new StateService();
+                List<State> stateList = stateService.readByCriteria(null, null, null);
+                mv.addObject("stateList", stateList);
+                
                 //Caso haja erros, será mostrado
                 mv.addObject("errors", errors);
             }

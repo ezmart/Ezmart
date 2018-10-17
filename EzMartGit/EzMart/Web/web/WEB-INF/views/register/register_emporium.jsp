@@ -12,7 +12,7 @@
                             <a href="<c:url value="/home"/>" class="breadcrumb">Início</a>
                         <a href="<c:url value="/login"/>" class="breadcrumb">Autenticação</a>
                         <a href="<c:url value="/register"/>" class="breadcrumb">Cadastro</a>
-                        <a href="#!" class="breadcrumb">Cadastro Estabelecimento</a>
+                        <a href="#!" class="breadcrumb">Cadastro estabelecimento</a>
                     </div>
                 </div>
             </nav>
@@ -20,7 +20,7 @@
         <div class="container" >
             <div class="row">
                 <div class="col s12">
-                    <h3 style="color: #2196f3">Cadastro Para Estabelecimento</h3>
+                    <h3 style="color: #2196f3">Cadastro para estabelecimento</h3>
                     <div class="card">
                         <div class="card-content">
                             <form method="POST">
@@ -76,7 +76,7 @@
                                 </div>
                                 <div class="form-group col s6">
                                     <label for="stateId">Estado:</label>
-                                    <select class="form-control input-text-register" name="stateId" id="stateId">
+                                    <select onchange="setCitiesWithState()" class="form-control input-text-register" name="stateId" id="stateId">
                                         <option notselected></option>
                                         <c:forEach items="${stateList}" var="state">
                                             <option <c:if test="${stateIdConsumer eq state.id}">selected="true"</c:if> id="stateId" value="${state.id}">${state.name}</option>                            
@@ -84,12 +84,10 @@
                                     </select>
                                 </div>
                                 <div class="form-group col s6">
-                                    <label for="cityId">Municipio:</label>
+                                    <label>Municipio:</label>
                                     <select class="form-control input-text-register" name="cityId" id="cityId">
-                                        <option notselected></option>
-                                        <c:forEach items="${cityList}" var="city">
-                                            <option <c:if test="${cityIdConsumer eq city.id}">selected="true"</c:if> id="cityId" value="${city.id}">${city.name}</option>                            
-                                        </c:forEach>
+                                        <option notselected>Selecione primeiro seu estado</option>
+                                        
                                     </select>
                                     <span style="color: orangered">${errors.cityId}</span>
                                 </div>

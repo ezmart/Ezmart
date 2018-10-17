@@ -25,7 +25,7 @@
             <c:import url="/WEB-INF/views/templates/header_consumer.jsp"></c:import>
             <div id="modal-create" class="modal">
                 <div class="modal-content">
-                    <h4>Por qual produto deseja pesquisar  ?</h4>
+                    <h4>Por qual produto deseja pesquisar ?</h4>
                     <input type="text" name="searchProduct" id="searchProduct" value="${searchProduct}">
                     <input type="text" style="display: none" name="listId" id="listId" value="${listId}">
                     <a class="btn waves-yellow"  onclick="setDadaModalProductList()"style="color:white;">Pesquisar</a>

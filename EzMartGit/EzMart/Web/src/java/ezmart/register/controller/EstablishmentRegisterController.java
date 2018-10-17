@@ -2,8 +2,10 @@ package ezmart.register.controller;
 
 import ezmart.model.entity.City;
 import ezmart.model.entity.Establishment;
+import ezmart.model.entity.State;
 import ezmart.model.service.CityService;
 import ezmart.model.service.EstablishmentService;
+import ezmart.model.service.StateService;
 import ezmart.model.util.SystemConstant;
 import ezmart.model.util.UtilServices;
 import java.awt.image.BufferedImage;
@@ -14,7 +16,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.imageio.ImageIO;
-import org.apache.tomcat.jni.Directory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,13 +29,11 @@ public class EstablishmentRegisterController {
         ModelAndView mv = new ModelAndView("register/register_emporium");
 
         try {
-            //StateService stateService = new StateService();
-
-            CityService cityService = new CityService();
+            StateService stateService = new StateService();
             Map<Long, Object> criteria = new HashMap<>();
-            //criteria.put(new CityCriteria().STATE_ID_EQ, mv);
-            List<City> cityList = cityService.readByCriteria(null, null, null);
-            mv.addObject("cityList", cityList);
+            List<State> stateList = stateService.readByCriteria(null, null, null);
+            mv.addObject("stateList", stateList);
+
         } catch (Exception exception) {
             System.out.println(exception);
         }
@@ -91,7 +90,7 @@ public class EstablishmentRegisterController {
 
                 BufferedImage originalImage = null;
                 try {
-                     
+
                     originalImage = ImageIO.read(new File("D:\\TCC 2018\\EzMart\\Web\\web\\resources\\img\\avatar\\storm.jpg"));
 
                     ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -157,12 +156,14 @@ public class EstablishmentRegisterController {
                     mv.addObject("passwordConfirm", passwordConfirm);
                 }
                 if (cityId != null || cityId == null) {
-                    CityService cityService = new CityService();
-                    Map<Long, Object> criteria = new HashMap<>();
-                    //criteria.put(new CityCriteria().STATE_ID_EQ, mv);
-                    List<City> cityList = cityService.readByCriteria(null, null, null);
-                    mv.addObject("cityList", cityList);
+
+                    mv.addObject("cityId", cityId);
                 }
+
+                StateService stateService = new StateService();
+                List<State> stateList = stateService.readByCriteria(null, null, null);
+                mv.addObject("stateList", stateList);
+
                 //Caso haja erros, será mostrado
                 mv.addObject("errors", errors);
             }

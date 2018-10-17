@@ -85,7 +85,7 @@ public class CityDAO implements BaseDAO<City> {
 
         }
 
-        sql += " ORDER BY city_id ASC ";
+        sql += " ORDER BY city_name ASC ";
 
         if (limit != null) {
             sql += " LIMIT ?";
