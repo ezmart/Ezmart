@@ -33,7 +33,7 @@
                                 Início
                             </a>
                             <a href="<c:url value="!#"/>" class="breadcrumb"> 
-                                Mercados mais próximos
+                                Mercados encontrados
                             </a>
                         </div>
                     </div>
