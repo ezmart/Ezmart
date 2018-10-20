@@ -368,4 +368,19 @@ public class EstablishmentService implements BaseEstablishmentService {
             throw e;
         }
     }
+    
+    public List<Establishment> findAllEstablishmentForQuotation(Long id) throws Exception {
+        Connection conn = ConnectionManager.getInstance().getConnection();
+        try {
+            EstablishmentDAO establishmentDAO = new EstablishmentDAO();
+            List<Establishment> establishmentList = establishmentDAO.findAllEstablishmentForQuotation(conn, id);
+            conn.commit();
+            conn.close();
+            return establishmentList;
+        } catch (Exception e) {
+            conn.rollback();
+            conn.close();
+            throw e;
+        }
+    }
 }

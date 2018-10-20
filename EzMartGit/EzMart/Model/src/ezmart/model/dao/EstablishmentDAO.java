@@ -382,4 +382,27 @@ public class EstablishmentDAO implements BaseDAO<Establishment> {
 
         return establishmentProductList;
     }
+    
+    public List<Establishment> findAllEstablishmentForQuotation(Connection conn, Long establishmentId) throws Exception {
+        String sql = "SELECT * FROM establishment "
+                + "WHERE establishment_id not in(?) ";
+
+        PreparedStatement statement = conn.prepareStatement(sql);
+        statement.setLong(1, establishmentId);
+        ResultSet resultSet = statement.executeQuery();
+
+        List<Establishment> establishmentList = new ArrayList<>();
+        while (resultSet.next()) {
+            Establishment establishment = new Establishment();
+
+            establishment.setId(resultSet.getLong("establishment_id"));
+            establishment.setBusinessName(resultSet.getString("establishment_businessname"));
+
+            establishmentList.add(establishment);
+        }
+        resultSet.close();
+        statement.close();
+
+        return establishmentList;
+    }
 }
