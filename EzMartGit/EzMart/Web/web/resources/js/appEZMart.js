@@ -81,6 +81,10 @@ function setEstablishmentProductId(establishmentProductId) {
     document.getElementById('idEstablishmentProduct').value = establishmentProductId;
 }
 
+//function setEstablishmentIdForQuotation$(establishmentId) {
+//    document.getElementById('idEstablishmentProduct').value = establishmentId;
+//}
+
 function setDadosModalUser(userId, consumerName, establishmentName) {
     var complement = '';
     if (consumerName != null && consumerName != '') {

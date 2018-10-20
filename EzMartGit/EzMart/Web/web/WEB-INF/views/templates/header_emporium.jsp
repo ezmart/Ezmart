@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <header>
     <ul style="margin-top: 65px" id="main" class="dropdown-content">
-        <li><a class="dropdown-content-user-header-style" href="<c:url value="#!"/>">Dashboard</a></li>
+        <li><a class="dropdown-content-user-header-style" href="<c:url value="quotation"/>">Cotação</a></li>
         <li class="divider"></li>
         <li><a class="dropdown-content-user-header-style" href="<c:url value="product_establishment"/>">Meus Produtos</a></li>
         <li class="divider"></li>

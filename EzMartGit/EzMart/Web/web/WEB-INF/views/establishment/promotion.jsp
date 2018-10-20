@@ -78,9 +78,6 @@
                                     <hr>
                                     <th></th>
                                     </tr>
-                                    <!--<a href="#modal-create" class="btn btn-sm btn-default btn-small green left modal-trigger" style="color:white;"><i class="material-icons right">add_box</i>Adicionar</a>-->
-                                    <!--<br><br/>-->
-                                    <!--<br><br/>-->
                                     <c:forEach items="${promotionList}" var="promotionList">
                                         <tr>
                                             <td>${promotionList.promotion.name}</td>
