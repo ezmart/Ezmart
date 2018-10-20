@@ -140,7 +140,9 @@ public class ConsumerController {
             //Apresentar as listas referentes ao usuário
             ShoppingListService service = new ShoppingListService();
             Map<Long, Object> criteria = new HashMap<>();
-            criteria.put(UserCriteria.ID_EQ, user.getId());
+            ConsumerService consumerService = new ConsumerService();
+            Consumer consumer = consumerService.readById(user.getId());
+            criteria.put(UserCriteria.ID_EQ, consumer.getId());
             List<ShoppingList> shoppingList = service.readByCriteria(criteria, null, null);
 
             mv.addObject("shoppingList", shoppingList);
@@ -165,13 +167,16 @@ public class ConsumerController {
         } else {
             user = (Establishment) auxSession;
         }
-
+        ConsumerService consumerService = new ConsumerService();
+        Consumer consumer = consumerService.readById(user.getId());
         if (type != null && type.equals("CREATE")) {
             try {
                 String name = value;
+
                 ShoppingList shoppingList = new ShoppingList();
                 shoppingList.setName(name);
-                shoppingList.setConsumerId(user.getId());
+
+                shoppingList.setConsumerId(consumer.getId());
                 shoppingList.setFavorite(false);
 
                 //Paga a data atual do sistema
@@ -281,7 +286,7 @@ public class ConsumerController {
     public ModelAndView postProductListHome(Long listId, Long productId) throws Exception {
         ModelAndView mv = null;
         ListProductService service = new ListProductService();
-        
+
         try {
             Map<String, Object> fields = new HashMap<>();
             fields.put("listId", listId);
@@ -298,7 +303,7 @@ public class ConsumerController {
                 listProduct.setQuantity(2);
                 service.create(listProduct);
             }
-            
+
             //mv = new ModelAndView("redirect:/home");
             mv = new ModelAndView("redirect:/products-" + listId);
 

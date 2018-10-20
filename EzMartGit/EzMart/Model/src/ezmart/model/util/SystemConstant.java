@@ -49,4 +49,14 @@ public final class SystemConstant {
 
         }
     }
+
+    public class USER {
+
+        public class TYPE {
+
+            public final static String ESTABLISHMENT = "emporium";
+            public final static String CONSUMER = "consumer";
+
+        }
+    }
 }

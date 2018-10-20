@@ -23,20 +23,22 @@
         </c:if>   
         <c:if test="${not empty userLogged}">
             <c:import url="/WEB-INF/views/templates/header_consumer.jsp"></c:import>
-            <div id="modal-create" class="modal">
-                <div class="modal-content">
-                    <h4>Por qual produto deseja pesquisar ?</h4>
-                    <input type="text" name="searchProduct" id="searchProduct" value="${searchProduct}">
+                <div id="modal-create" class="modal">
+                    <div class="modal-content">
+                        <h4>Por qual produto deseja pesquisar ?</h4>
+                        <input type="text" name="searchProduct" id="searchProduct" value="${searchProduct}">
                     <input type="text" style="display: none" name="listId" id="listId" value="${listId}">
                     <a class="btn waves-yellow"  onclick="setDadaModalProductList()"style="color:white;">Pesquisar</a>
                     <c:if test="${not empty userLogged}">
-                    <div class="card">
-                        <div class="card-content" style="background-color: #F1F1F1">
-                            <div id="content_insert">
+                        <div class="card">
+                            <div class="card-content" style="background-color: #F1F1F1">
+
+                                <div id="content_insert">
+
+                                </div>
 
                             </div>
                         </div>
-                    </div>
                     </c:if>
                 </div>
             </div>
@@ -86,9 +88,15 @@
                 <div class="container">
                     <div class="card">
                         <div class="card-content" style="background-color: #F1F1F1">
-                            <div class="row left">
+                            <div class="row" style="padding: 0">
                                 <div class="col s12" style="margin-top: 0">
-                                    <h3>Produtos cadastrados na lista</h3>
+                                    <div class="col s4">
+                                        <a class="btn btn-sm btn-danger btn-small green modal-trigger" href="#modal-create" style="color:white;"><i class="material-icons left">add_box</i>Adicionar</a>
+                                    </div>
+                                    <div class="col s8">
+                                        <p style="font-size: xx-large"><b>Produtos cadastrados:</b> ${shoppingList.name}</p>
+                                        <p>Data de criação: ${shoppingList.date}</p>
+                                    </div>
                                 </div>
                             </div>
                             <table class="table s12">
@@ -97,9 +105,6 @@
                                     <!--<th>Id</th>-->
                                     <th class="center">Nome do produto</th>
                                 </tr>
-                                <div class="col s6 right">
-                                    <a class="btn btn-sm btn-danger btn-small green modal-trigger" href="#modal-create" style="color:white;"><i class="material-icons right">add_box</i>Adicionar</a>
-                                </div>
                                 <!--<a href="#modal-create" id="btn-btn-ezmart-style" class="btn modal-trigger">Adicionar</a>-->
                                 <br/>
                                 <br/>

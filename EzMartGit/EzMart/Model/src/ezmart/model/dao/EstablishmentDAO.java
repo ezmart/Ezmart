@@ -46,7 +46,28 @@ public class EstablishmentDAO implements BaseDAO<Establishment> {
 
     @Override
     public Establishment readById(Connection conn, Long id) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = "SELECT * from establishment WHERE establishment_id=?";
+        Establishment establishment = new Establishment();
+        try {
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setLong(1, id);
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+
+                establishment.setName(resultSet.getString("establishment_name"));
+                establishment.setBusinessName(resultSet.getString("establishment_businessname"));
+                establishment.setCnpj(resultSet.getString("establishment_cnpj"));
+                //establishment.setId(resultSet.getLong("establishment_id"));
+
+            }
+            resultSet.close();
+            statement.close();
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return establishment;
     }
 
     @Override
@@ -93,7 +114,7 @@ public class EstablishmentDAO implements BaseDAO<Establishment> {
         ResultSet rs = statement.executeQuery();
         List<Establishment> establishmentList = new ArrayList<>();
         Long aux = null;
-        if (rs.next()) {
+        while (rs.next()) {
 
             Establishment establishment = new Establishment();
             establishment.setId(rs.getLong("establishment_id"));
@@ -329,18 +350,18 @@ public class EstablishmentDAO implements BaseDAO<Establishment> {
         statement.execute();
         statement.close();
     }
-    
+
     public List<EstablishmentProduct> findAllEstablishmentProductForPromotion(Connection conn, Long establishmentId, Long promotionId) throws Exception {
-        String sql = "SELECT * FROM establishmentproduct \n" +
-"                LEFT JOIN product ON product_id = establishmentproduct_productid \n" +
-"                LEFT JOIN sector ON sector_id = product_sectorid \n" +
-"                LEFT JOIN provider ON provider_id = product_providerid\n" +
-"                LEFT JOIN establishment on establishment_id = establishmentproduct_establishmentid\n" +
-"                WHERE \n" +
-"                establishmentproduct_establishmentid = ? \n" +
-"                AND establishmentproduct_id NOT IN \n" +
-"                ( SELECT promotionestablishmentproduct_establishmentproductid FROM promotionestablishmentproduct WHERE promotionestablishmentproduct_promotionid = ? )\n" +
-"                ORDER BY sector_name, product_name;";
+        String sql = "SELECT * FROM establishmentproduct \n"
+                + "                LEFT JOIN product ON product_id = establishmentproduct_productid \n"
+                + "                LEFT JOIN sector ON sector_id = product_sectorid \n"
+                + "                LEFT JOIN provider ON provider_id = product_providerid\n"
+                + "                LEFT JOIN establishment on establishment_id = establishmentproduct_establishmentid\n"
+                + "                WHERE \n"
+                + "                establishmentproduct_establishmentid = ? \n"
+                + "                AND establishmentproduct_id NOT IN \n"
+                + "                ( SELECT promotionestablishmentproduct_establishmentproductid FROM promotionestablishmentproduct WHERE promotionestablishmentproduct_promotionid = ? )\n"
+                + "                ORDER BY sector_name, product_name;";
 
         PreparedStatement statement = conn.prepareStatement(sql);
         statement.setLong(1, establishmentId);
