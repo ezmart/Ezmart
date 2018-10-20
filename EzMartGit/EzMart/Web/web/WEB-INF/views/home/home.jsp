@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html class="no-js" lang="PT-BR">
     <c:import url="/WEB-INF/views/templates/head.jsp"></c:import>
-        <body>
+    <body>
         <c:if test="${not empty userLogged}">
             <c:if test="${userLogged.userType eq 'admin'}">
                 <c:import url="/WEB-INF/views/templates/header_admin.jsp"></c:import>

@@ -112,13 +112,13 @@
                 <div class="container">
                     <div class="card">
                         <div class="card-content" style="background-color: #F1F1F1">
-                            <div class="row left">
-                                <div class="col s12" style="margin-top: 0">
-                                    <h3>Listas cadastradas</h3>
+                            <div class="row">
+                                <div class="col s4">
+                                    <a href="#modal-create" class="btn btn-sm btn-default btn-small green left modal-trigger" style="color:white;"><i class="material-icons right">add_box</i>Adicionar</a>
                                 </div>
-                            </div>
-                            <div class="col s6 right">
-                                <a href="#modal-create" class="btn btn-sm btn-default btn-small green left modal-trigger" style="color:white;"><i class="material-icons right">add_box</i>Adicionar</a>
+                                <div class="col s8" style="margin-top: 0">
+                                    <p style="font-size: xx-large">Listas cadastradas</p>
+                                </div>
                             </div>
                             <table class="table s12">
                                 <!--<a href="#modal-create" id="btn-btn-ezmart-style" class="btn modal-trigger">Adicionar</a>-->
@@ -126,14 +126,13 @@
                                 <br/>
                                 <c:forEach items="${shoppingList}" var="shoppingList">
                                     <tr>
-                                        <td style="font-weight: bold;">${shoppingList.id}</td>
 
                                         <td style="font-weight: bold;">${shoppingList.name}</td>
                                         <td>
                                             <a class="right btn btn-sm btn-danger btn-small red modal-trigger" href="#modal-delete" onclick="setDeleteDadaModalShoppingList(${shoppingList.id})" style="color:white; margin-left: 15px"><i class="material-icons right">delete</i>Excluir</a>
                                             <a class="right btn btn-sm btn-default btn-small ffc400 amber accent-3 modal-trigger" href="#modal-update" onclick="setUpdateDadaModalShoppingList(${shoppingList.id})" style="color:black; margin-left: 15px"><i class="material-icons right">edit</i>Alterar</a>
-                                            <a class="right btn btn-sm btn-default btn-small blue-grey" href="<c:url value="/products-${shoppingList.id}"/>" style="color:white; margin-left: 15px"><i class="material-icons right">edit</i>Produtos</a>
-                                            <a class="right btn btn-sm btn-default btn-small f80113 modal-trigger" href="#modal-select-search" onclick="setUpdateDadaModalShoppingList(${shoppingList.id})" style="color:white; margin-left: 15px"><i class="material-icons right">search</i>Pesquisar</a>
+                                            <a class="right btn btn-sm btn-default btn-small blue-grey" href="<c:url value="/products-${shoppingList.id}"/>" style="color:white; margin-left: 15px"><i class="material-icons right">add_shopping_cart</i>Produtos</a>
+                                            <a class="right btn btn-sm btn-default btn-small f80113 modal-trigger" href="<c:url value="/comparePrices-${shoppingList.id}"/>" style="color:white; margin-left: 15px"><i class="material-icons right">attach_money</i>Comparar</a>
                                         </td>
                                     </tr>    
                                 </c:forEach>

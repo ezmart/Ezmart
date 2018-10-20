@@ -41,7 +41,7 @@ public class ShoppingListDAO implements BaseDAO<ShoppingList> {
             ResultSet resultSet = statement.executeQuery();
 
             if (resultSet.next()) {
-                
+                shoppingList = new ShoppingList();
                 shoppingList.setId(resultSet.getLong("list_id"));
                 shoppingList.setConsumerId(resultSet.getLong("list_consumerid"));
                 shoppingList.setName(resultSet.getString("list_name"));
@@ -59,7 +59,7 @@ public class ShoppingListDAO implements BaseDAO<ShoppingList> {
     }
 
     @Override
-    public java.util.List<ShoppingList> readByCriteria(Connection conn, Map<Long, Object> criteria, Long limit, Long offset) throws Exception {
+    public List<ShoppingList> readByCriteria(Connection conn, Map<Long, Object> criteria, Long limit, Long offset) throws Exception {
         String sql = "SELECT * from list WHERE 1=1 ";
 
         List<Object> paramList = new ArrayList<>();

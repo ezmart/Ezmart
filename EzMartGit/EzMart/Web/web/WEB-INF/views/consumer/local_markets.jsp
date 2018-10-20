@@ -49,8 +49,8 @@
                         <div class="card">
                             <div class="card-content">
                                 <c:import url="/WEB-INF/views/maps/google_maps_local_markets.jsp"/>
-                                
-                                
+
+
                             </div>
                         </div>
                     </div>
@@ -60,6 +60,5 @@
         <script src="<c:url value="/resources/js/jquery.min.js"/>"></script>
         <c:import url="/WEB-INF/views/templates/footer.jsp"></c:import>
         <script src="<c:url value="/resources/js/materialize.min.js"/>"></script>
-
     </body>
 </html>
