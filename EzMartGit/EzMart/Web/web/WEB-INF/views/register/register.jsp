@@ -19,7 +19,7 @@
         </div>
         <div class="container">   
             <div class="row">
-                <h3 style="color: #2196f3">Torne sua experiência por compras, a mais incrível possível!</h3>
+                <h3 style="color: #2196f3">Torne sua experiência por compras a mais incrível possível!</h3>
                 <div class="col s5">                        
                     <div style="margin-top:40px; border-top: 3px solid#888" class="mainbox">                    
                         <div class="panel panel-info">

@@ -223,6 +223,39 @@ function setDadaModalProductList() {
                 //console.log(locationItens.name);
                 //console.log(locationItens.id);
                 //<input type="text" style="display: none"  name="value" id="idCreateProductList" value="">
+                var tagDiv = document.createElement('div');
+                tagDiv.className = " row col s12";
+
+                var tagDiv1 = document.createElement('div');
+                tagDiv1.className = "col s3";
+                var imgTag = document.createElement('img');
+                imgTag.className = "responsive-img";
+                imgTag.width = "60";
+                imgTag.height = "60";
+                imgTag.src = "/ezmartWeb/resources/img/product/" + locationItens.id + ".jpg";
+                tagDiv1.appendChild(imgTag);
+
+                var tagDiv2 = document.createElement('div');
+                tagDiv2.className = "col s5";
+                var labelTag = document.createElement('label');
+                labelTag.innerHTML = locationItens.name;
+                labelTag.style = "color:black; margin-left: 15px";
+                tagDiv2.appendChild(labelTag);
+
+                var tagDiv3 = document.createElement('div');
+                tagDiv3.className = "col s4";
+
+                var buttonTag = document.createElement('button');
+                buttonTag.type = "submit";
+                buttonTag.innerHTML = "Adicionar";
+                //aTag.setAttribute('href', "/ezmartWeb/products-" + listId);
+                buttonTag.className = "btn btn-sm btn-default btn-small green modal-close";
+                buttonTag.style = "color:white";
+                var iTag = document.createElement('i');
+                iTag.innerHTML = "add_shopping_cart";
+                iTag.className = "material-icons right";
+                buttonTag.appendChild(iTag);
+                tagDiv3.appendChild(buttonTag);
 
                 var inputTag = document.createElement('input');
                 inputTag.type = "text";
@@ -230,51 +263,19 @@ function setDadaModalProductList() {
                 inputTag.name = "value";
                 inputTag.id = "idCreateProductList";
                 inputTag.value = locationItens.id;
-                
-                var tdTag1 = document.createElement('td');
-                
-                var tdTag2 = document.createElement('td');
-                
-                var tdTag3 = document.createElement('td');
-                tdTag3.style = "align-items: flex-end";
-                tdTag3.class = "right-align";
-                var trTag = document.createElement('tr');
-                trTag.appendChild(tdTag1);
-                trTag.appendChild(tdTag2);
-                trTag.appendChild(tdTag3);
-                trTag.appendChild(inputTag);
-                
+
+
                 var formTag = document.createElement('form');
                 formTag.method = "POST";
-                formTag.appendChild(trTag);
-                //formTag.appendChild(trTag);
 
+                tagDiv.appendChild(tagDiv1);
+                tagDiv.appendChild(tagDiv2);
+                tagDiv.appendChild(tagDiv3);
+                
+                formTag.appendChild(tagDiv);
+                formTag.appendChild(inputTag);
+                
                 mydiv.appendChild(formTag);
-                
-                var labelTag = document.createElement('label');
-                labelTag.innerHTML = locationItens.name;
-                labelTag.style = "color:black; margin-left: 15px";
-                tdTag2.appendChild(labelTag);
-                
-                var imgTag = document.createElement('img');
-                imgTag.className = "responsive-img";
-                imgTag.width = "60";
-                imgTag.height = "60";
-                imgTag.src = "/ezmartWeb/resources/img/product/" + locationItens.id + ".jpg";
-                tdTag1.appendChild(imgTag);
-                
-                var buttonTag = document.createElement('button');
-                buttonTag.type = "submit";
-                buttonTag.innerHTML = "Adicionar";
-                //aTag.setAttribute('href', "/ezmartWeb/products-" + listId);
-                buttonTag.className = "btn btn-sm btn-default btn-small green modal-close";
-                buttonTag.style = "color:white";
-                tdTag3.appendChild(buttonTag);
-                
-                var iTag = document.createElement('i');
-                iTag.innerHTML = "add_shopping_cart";
-                iTag.className = "material-icons right";
-                buttonTag.appendChild(iTag);
             });
         },
         error: function () {
@@ -282,78 +283,7 @@ function setDadaModalProductList() {
         }
     });
 }
-//function setDadaModalProductList() {
-//    var searchProduct = document.getElementById('searchProduct').value;
-//    var listId = document.getElementById('listId').value;
-//    //console.log(listId);
-//    document.getElementById("content_insert").innerHTML = "";
-//    $.ajax({
-//        url: 'api/system/products-' + searchProduct,
-//        type: 'GET',
-//        dataType: "json",
-//        success: function (response) {
-//
-//            document.getElementById('searchProduct').value = "Achei algo";
-//            //console.log(response);
-//            var mydiv = document.getElementById("content_insert");
-//            var h3TagProduct = document.createElement('h5');
-//            h3TagProduct.innerHTML = "Produtos encontrados";
-//            mydiv.appendChild(h3TagProduct);
-//            response.forEach(function (locationItens) {
-//                //console.log(locationItens.name);
-//                //console.log(locationItens.id);
-//                //<input type="text" style="display: none"  name="value" id="idCreateProductList" value="">
-//
-//                var inputTag = document.createElement('input');
-//                inputTag.type = "text";
-//                inputTag.style = "display: none";
-//                inputTag.name = "value";
-//                inputTag.id = "idCreateProductList";
-//                inputTag.value = locationItens.id;
-//                var tdTag1 = document.createElement('td');
-//                var tdTag2 = document.createElement('td');
-//                var tdTag3 = document.createElement('td');
-//                tdTag3.style = "align-items: flex-end";
-//                tdTag3.class = "right-align";
-//                var trTag = document.createElement('tr');
-//                trTag.appendChild(tdTag1);
-//                trTag.appendChild(tdTag2);
-//                trTag.appendChild(tdTag3);
-//                trTag.appendChild(inputTag);
-//                var formTag = document.createElement('form');
-//                formTag.method = "POST";
-//                formTag.appendChild(trTag);
-//                //formTag.appendChild(trTag);
-//
-//                mydiv.appendChild(formTag);
-//                var labelTag = document.createElement('label');
-//                labelTag.innerHTML = locationItens.name;
-//                labelTag.style = "color:black; margin-left: 15px";
-//                tdTag2.appendChild(labelTag);
-//                var imgTag = document.createElement('img');
-//                imgTag.className = "responsive-img";
-//                imgTag.width = "60";
-//                imgTag.height = "60";
-//                imgTag.src = "/ezmartWeb/resources/img/product/" + locationItens.id + ".jpg";
-//                tdTag1.appendChild(imgTag);
-//                var buttonTag = document.createElement('button');
-//                buttonTag.type = "submit";
-//                buttonTag.innerHTML = "Adicionar";
-//                //aTag.setAttribute('href', "/ezmartWeb/products-" + listId);
-//                buttonTag.className = "btn btn-sm btn-default btn-small green modal-close";
-//                buttonTag.style = "color:white";
-//                tdTag3.appendChild(buttonTag);
-//                var iTag = document.createElement('i');
-//                iTag.innerHTML = "add_shopping_cart";
-//                iTag.className = "material-icons right";
-//                buttonTag.appendChild(iTag);
-//            });
-//        },
-//        error: function () {
-//            document.getElementById('searchProduct').value = "Nenhum produto encontrado";
-//        }
-//    });
-//}
+
 //Busca o produto a ser pesquisado no sistema
 function setCitiesWithState() {
     var stateId = document.getElementById('stateId').value;

@@ -32,11 +32,9 @@
                     <c:if test="${not empty userLogged}">
                         <div class="card">
                             <div class="card-content" style="background-color: #F1F1F1">
-
-                                <div id="content_insert">
-
+                                <div id="content_insert" class="col s12">
+                                    
                                 </div>
-
                             </div>
                         </div>
                     </c:if>
