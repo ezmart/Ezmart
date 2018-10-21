@@ -48,7 +48,7 @@
                         <li><a class="dropdown-content-user-header-style" href="<c:url value="/changePassword"/>">Alterar senha</a></li>
                         <li><a class="dropdown-content-user-header-style" href="<c:url value="/shoppingList"/>">Minhas listas</a></li>
                         <li><a class="dropdown-content-user-header-style" href="<c:url value="/localMarkets"/>">Mercados próximos</a></li>
-                        <li><a class="dropdown-content-user-header-style" href="<c:url value="/#!"/>">Avaliar mercados</a></li>
+                        <li><a class="dropdown-content-user-header-style" href="<c:url value="/marketEvaluation"/>">Avaliar mercados</a></li>
                         <li><a class="user-header-style" href="/contact">Contato</a></li>
                         <li><a class="user-header-style" href="<c:url value="/logout"/>">Sair</a></li>
                     </ul>

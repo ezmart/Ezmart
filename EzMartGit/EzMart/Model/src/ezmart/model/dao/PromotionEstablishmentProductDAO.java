@@ -5,6 +5,8 @@ import ezmart.model.entity.Establishment;
 import ezmart.model.entity.EstablishmentProduct;
 import ezmart.model.entity.Promotion;
 import ezmart.model.entity.PromotionEstablishmentProduct;
+import ezmart.model.model_entity.PromotionEProductModel;
+import ezmart.model.util.PreparedStatementBuilder;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -48,6 +50,52 @@ public class PromotionEstablishmentProductDAO implements BaseDAO<PromotionEstabl
     @Override
     public void delete(Connection conn, Long id) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public List<PromotionEProductModel> findAllPromotionEstablishmentProductByCriteria(Connection conn, Map<Long, Object> criteria, Long limit, Long offset) throws Exception {
+        String sql = "SELECT promotionestablishmentproduct_id, promotionestablishmentproduct_promotionid, "
+                + "promotionestablishmentproduct_establishmentproductid, promotionestablishmentproduct_promotionalprice "
+                + "FROM promotionestablishmentproduct "
+                + "WHERE 1=1";
+
+        List<Object> paramList = new ArrayList<>();
+        if (criteria != null) {
+
+//            if (criteria.containsKey(UserCriteria.ID_NE)) {
+//                Long id = (Long) criteria.get(UserCriteria.ID_NE);
+//                sql += " AND usersystem.usersystem_id != ?";
+//                paramList.add(id);
+//            }
+            //Add criterio ....
+        }
+
+        if (limit != null) {
+            sql += " LIMIT ?";
+            paramList.add(limit);
+        }
+        if (offset != null) {
+            sql += " OFFSET ?";
+            paramList.add(offset);
+        }
+
+        PreparedStatement statement = PreparedStatementBuilder.build(conn, sql, paramList);
+        ResultSet rs = statement.executeQuery();
+        List<PromotionEProductModel> promotionEProductModelList = new ArrayList<>();
+        Long aux = null;
+        while (rs.next()) {
+
+            PromotionEProductModel promotionEProductModel = new PromotionEProductModel();
+            promotionEProductModel.setId(rs.getLong("promotionestablishmentproduct_id"));
+            promotionEProductModel.setPromationPromotionId(rs.getLong("promotionestablishmentproduct_promotionid"));
+            promotionEProductModel.setEstablishmentProductId(rs.getLong("promotionestablishmentproduct_establishmentproductid"));
+            promotionEProductModel.setPromotionalPrice(rs.getDouble("promotionestablishmentproduct_promotionalprice"));
+
+            promotionEProductModelList.add(promotionEProductModel);
+        }
+
+        rs.close();
+        statement.close();
+        return promotionEProductModelList;
     }
 
     public List<PromotionEstablishmentProduct> findAllPromotionEstablishmentProduct(Connection conn, Long id) throws Exception {

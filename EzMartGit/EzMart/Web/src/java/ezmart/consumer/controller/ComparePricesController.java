@@ -6,8 +6,10 @@ import ezmart.model.entity.EstablishmentProduct;
 import ezmart.model.model_entity.ListProductModel;
 import ezmart.model.model_entity.PriceComparisonModel;
 import ezmart.model.model_entity.ProductModel;
+import ezmart.model.model_entity.PromotionEProductModel;
 import ezmart.model.service.EstablishmentService;
 import ezmart.model.service.ListProductService;
+import ezmart.model.service.PromotionEstablishmentProductService;
 import ezmart.model.util.UtilServices;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,6 +33,9 @@ public class ComparePricesController {
 
     private Map<Long, ListProductModel> productsConsumerOnList;
 
+    private List<PromotionEProductModel> promotionEstablishmentProductlist;
+
+    //Verica os preços dos produtos
     @RequestMapping(value = "/comparePrices?{id}", method = RequestMethod.GET)
     public ModelAndView comparePrices(@PathVariable Long id) throws Exception {
         ModelAndView mv = null;
@@ -43,6 +48,12 @@ public class ComparePricesController {
 
             productsConsumerOnList = null;
             productsConsumerOnList = new HashMap<>();
+
+            promotionEstablishmentProductlist = null;
+            promotionEstablishmentProductlist = new ArrayList<>();
+
+            PromotionEstablishmentProductService service = new PromotionEstablishmentProductService();
+            promotionEstablishmentProductlist = service.findAllPromotionEstablishmentProductByCriteria(null, null, null);
 
             //Pega a lista de produtos do usuário armazenando os Ids dos produtos desta lista
             ListProductService listProductService = new ListProductService();
@@ -88,7 +99,7 @@ public class ComparePricesController {
                 productsByMarket.put(establishment.getId(), productsListByMarket);
             }
         }
-        
+
         productsByMarket.forEach((key, value) -> {
             PriceComparisonModel priceComparisonModel = new PriceComparisonModel();
 
@@ -121,13 +132,24 @@ public class ComparePricesController {
                     //productModel = new ProductModel();
                     productModel.setBarCode(establishmentProduct.getProduct().getBarCode());
                     //model.setDescription(establishmentProduct.getProduct().);
-                    productModel.setPrice(establishmentProduct.getPrice());
-
-                    //Adiciona os preços
-                    pricesList.add(establishmentProduct.getPrice());
-
                     establishmentName = establishment.getName();
                     productModel.setProductName(product.getProductName());
+
+                    //vefica se há promoção para este produto
+                    Double valuePromation = 0.0;
+                    try {
+                        valuePromation = checkPromotion(establishmentProduct.getId(), productId, 
+                                establishmentProduct.getEstablishment().getId());
+                    } catch (Exception ex) {
+                        //Logger.getLogger(ComparePricesController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    if (valuePromation != 0.0) {
+                        pricesList.add(valuePromation);
+                        productModel.setPrice(valuePromation);
+                    } else {
+                        pricesList.add(establishmentProduct.getPrice());
+                        productModel.setPrice(establishmentProduct.getPrice());
+                    }
 
                     productModelList.add(productModel);
 
@@ -148,6 +170,21 @@ public class ComparePricesController {
 
         });
 
+    }
+
+    //Verifica se há promoção do produto no mercado
+    private Double checkPromotion(Long establishmentProductId, Long productId, Long establishmentId) throws Exception {
+        Double valuePromation = 0.0;
+
+        for (PromotionEProductModel promotionEProductModel : promotionEstablishmentProductlist) {
+            if (promotionEProductModel.getEstablishmentProductId().equals(establishmentProductId)) {
+                //PromotionSer
+                
+                valuePromation = promotionEProductModel.getPromotionalPrice();
+            }
+        }
+
+        return valuePromation;
     }
 }
 
