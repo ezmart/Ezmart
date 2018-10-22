@@ -120,6 +120,8 @@ public class PromotionEstablishmentProductDAO implements BaseDAO<PromotionEstabl
             promotion.setName(rs.getString("promotion_name"));
             promotion.setStartDate(rs.getDate("promotion_startdate"));
             promotion.setFinalDate(rs.getDate("promotion_finaldate"));
+            promotion.setFinalDateTime(promotion.getFinalDate().getTime());
+            promotion.setCurrentDate(new java.util.Date().getTime());
             
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
             promotion.setStartDateConvert(sdf.format(promotion.getStartDate()));

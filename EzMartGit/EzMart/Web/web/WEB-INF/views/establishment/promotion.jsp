@@ -68,32 +68,32 @@
                 </c:if>
                 <c:if test="${not empty promotionList}">
 
-                        <div class="row">
-                            <div class="col s12 ">
-                                <table class="table">
+                    <div class="row">
+                        <div class="col s12 ">
+                            <table class="table">
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>Data inicial</th>
+                                    <th>Data final</th>
+                                <hr>
+                                <th></th>
+                                </tr>
+                                <c:forEach items="${promotionList}" var="promotionList">
                                     <tr>
-                                        <th>Nome</th>
-                                        <th>Data inicial</th>
-                                        <th>Data final</th>
-                                    <hr>
-                                    <th></th>
-                                    </tr>
-                                    <c:forEach items="${promotionList}" var="promotionList">
-                                        <tr>
-                                            <td>${promotionList.promotion.name}</td>
-                                            <td>${promotionList.promotion.startDateConvert}</td>
-                                            <td>${promotionList.promotion.finalDateConvert}</td>
-                                            <td>
-                                                <a class="btn btn-default btn-small green modal-trigger" href="promotion-product?establishmentId=${promotionList.establishmentProduct.establishment.id}&promotionId=${promotionList.promotion.id}&isVisualizar=false" style="color:white;"><i class="material-icons right">add_shopping_cart</i>ADICIONAR PRODUTOS</a>
-                                            </td>
-                                            <td>
-                                                <a class="btn btn-default btn-small ffc400 amber accent-3 modal-trigger" href="promotion-product?establishmentId=${promotionList.establishmentProduct.establishment.id}&promotionId=${promotionList.promotion.id}&isVisualizar=true" style="color:white;"><i class="material-icons right">remove_red_eye</i>VISUALIZAR PRODUTOS</a>
-                                            </td>
-                                        </tr>    
-                                    </c:forEach>
-                                </table>
-                            </div>
+                                        <td>${promotionList.promotion.name}</td>
+                                        <td>${promotionList.promotion.startDateConvert}</td>
+                                        <td>${promotionList.promotion.finalDateConvert}</td>
+                                        <td>
+                                            <a class="btn btn-default btn-small green modal-trigger" href="promotion-product?establishmentId=${promotionList.establishmentProduct.establishment.id}&promotionId=${promotionList.promotion.id}&isVisualizar=false" style="color:white;"><i class="material-icons right">add_shopping_cart</i>ADICIONAR PRODUTOS</a>
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-default btn-small ffc400 amber accent-3 modal-trigger" href="promotion-product?establishmentId=${promotionList.establishmentProduct.establishment.id}&promotionId=${promotionList.promotion.id}&isVisualizar=true" style="color:white;"><i class="material-icons right">remove_red_eye</i>VISUALIZAR PRODUTOS</a>
+                                        </td>
+                                    </tr>    
+                                </c:forEach>
+                            </table>
                         </div>
+                    </div>
 
                     <!--</div>-->
                     <!--                    <ul class="pagination center" >

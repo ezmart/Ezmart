@@ -14,6 +14,10 @@ public class Promotion extends BaseEntity  {
     private String startDateConvert;
     
     private String finalDateConvert;
+    
+    private Long finalDateTime;
+    
+    private Long currentDate;
 
     public String getName() {
         return name;
@@ -53,5 +57,21 @@ public class Promotion extends BaseEntity  {
 
     public void setFinalDateConvert(String finalDateConvert) {
         this.finalDateConvert = finalDateConvert;
+    }
+
+    public Long getFinalDateTime() {
+        return finalDateTime;
+    }
+
+    public void setFinalDateTime(Long finalDateTime) {
+        this.finalDateTime = finalDateTime;
+    }
+
+    public Long getCurrentDate() {
+        return currentDate;
+    }
+
+    public void setCurrentDate(Long currentDate) {
+        this.currentDate = currentDate;
     }
 }

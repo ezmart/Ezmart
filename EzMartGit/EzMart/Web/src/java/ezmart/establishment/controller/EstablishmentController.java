@@ -301,6 +301,7 @@ public class EstablishmentController {
                 PromotionEstablishmentProductService promotionEstablishmentProductService = new PromotionEstablishmentProductService();
 
                 mv.addObject("promotionList", promotionEstablishmentProductService.findAllPromotionEstablishmentProduct(establishment.getId()));
+                mv.addObject("currentDate", new java.util.Date().getTime());
             }
 
         } catch (Exception exception) {
