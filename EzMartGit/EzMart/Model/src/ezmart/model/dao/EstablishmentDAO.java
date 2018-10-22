@@ -55,6 +55,7 @@ public class EstablishmentDAO implements BaseDAO<Establishment> {
 
             if (resultSet.next()) {
 
+                establishment.setId(resultSet.getLong("establishment_id"));
                 establishment.setName(resultSet.getString("establishment_name"));
                 establishment.setBusinessName(resultSet.getString("establishment_businessname"));
                 establishment.setCnpj(resultSet.getString("establishment_cnpj"));

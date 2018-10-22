@@ -4,16 +4,16 @@ import ezmart.model.base.BaseEntity;
 
 public class PromotionEProductModel extends BaseEntity {
 
-    private Long promationPromotionId;
+    private Long promotionId;
     private Long establishmentProductId;
     private Double promotionalPrice;
 
-    public Long getPromationPromotionId() {
-        return promationPromotionId;
+    public Long getPromotionId() {
+        return promotionId;
     }
 
-    public void setPromationPromotionId(Long promationPromotionId) {
-        this.promationPromotionId = promationPromotionId;
+    public void setPromotionId(Long promotionId) {
+        this.promotionId = promotionId;
     }
 
     public Long getEstablishmentProductId() {

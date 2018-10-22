@@ -9,6 +9,7 @@ import ezmart.model.util.PreparedStatementBuilder;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,15 +35,15 @@ public class ProductDAO implements BaseDAO<Product> {
         }
         statement.setString(++i, entity.getBrand());
 
-       ResultSet resultSet = statement.executeQuery();
- 
+        ResultSet resultSet = statement.executeQuery();
+
         Long productId = null;
-        if(resultSet.next()){
+        if (resultSet.next()) {
             productId = resultSet.getLong("product_id");
         }
         resultSet.close();
         statement.close();
-        
+
         return productId;
     }
 
@@ -252,6 +253,20 @@ public class ProductDAO implements BaseDAO<Product> {
         statement.execute();
 
         statement.close();
+    }
+
+    public Integer countByCriteria(Connection conn, Map<Long, Object> criteria) throws Exception {
+        String sql = "SELECT count(*) count FROM product WHERE 1=1 ";
+        //sql += applyCriteria(criteria);
+        Statement s = conn.createStatement();
+        ResultSet rs = s.executeQuery(sql);
+        Integer count = 0;
+        if (rs.next()) {
+            count = rs.getInt("count");
+        }
+        rs.close();
+        s.close();
+        return count;
     }
 
     @Override

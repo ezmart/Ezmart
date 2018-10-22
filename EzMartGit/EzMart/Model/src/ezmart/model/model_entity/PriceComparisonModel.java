@@ -6,7 +6,8 @@ public class PriceComparisonModel {
     
     private String establishmentName;
     private Double totalPrice;
-
+    private String note;
+    
     private List<ProductModel> productModelList;
 
     public Double getTotalPrice() {
@@ -31,6 +32,14 @@ public class PriceComparisonModel {
 
     public void setProductModelList(List<ProductModel> productModelList) {
         this.productModelList = productModelList;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
     }
     
 }

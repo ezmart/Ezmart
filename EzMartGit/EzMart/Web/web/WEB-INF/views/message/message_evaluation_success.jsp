@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html class="no-js" lang="PT-BR">
     <c:import url="/WEB-INF/views/templates/head.jsp"></c:import>
-        <body>   
+        <body>       
         <c:if test="${empty userLogged}">
             <c:import url="/WEB-INF/views/templates/header_logout.jsp"></c:import>
                 <div class="container" >
@@ -23,20 +23,15 @@
             </div> 
         </c:if>   
         <c:if test="${not empty userLogged}">
-            <c:if test="${userLogged.userType eq 'admin'}">
-                <c:import url="/WEB-INF/views/templates/header_admin.jsp"></c:import>
-            </c:if>
             <c:if test="${userLogged.userType eq 'consumer'}">
                 <c:import url="/WEB-INF/views/templates/header_consumer.jsp"></c:import>
-            </c:if>
-            <c:if test="${userLogged.userType eq 'emporium'}">
-                <c:import url="/WEB-INF/views/templates/header_emporium.jsp"></c:import>
             </c:if>
             <div>
                 <nav>
                     <div class="nav-wrapper">
                         <div style="margin-left: 40px" class="col s12">
                             <a href="<c:url value="/home"/>" class="">Início</a>
+                            <a href="<c:url value="/marketEvaluation"/>" class="breadcrumb">Avaliar mercados</a>
                         </div>
                     </div>
                 </nav>
@@ -47,7 +42,7 @@
                     <br/>
                     <div class="col s5">
                         <p style="color: #898989; font-size: x-large">
-                            OPS! Algo não ocorreu conforme o esperado.
+                            Sucesso! Sua avaliação já foi registrada. Continue ajudando a melhorar os mercados.
                         </p>
                     </div>
                     <div class="col s4 offset-s2">

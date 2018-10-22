@@ -4,11 +4,13 @@ import ezmart.model.ConnectionManager;
 import ezmart.model.base.service.BaseAvaliationService;
 import ezmart.model.dao.AvaliationDAO;
 import ezmart.model.entity.Avaliation;
+import ezmart.model.util.SystemConstant;
 import java.sql.Connection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class AvaliationService implements BaseAvaliationService{
+public class AvaliationService implements BaseAvaliationService {
 
     @Override
     public void create(Avaliation entity) throws Exception {
@@ -47,7 +49,43 @@ public class AvaliationService implements BaseAvaliationService{
 
     @Override
     public Map<String, String> validate(Map<String, Object> fields) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Map<String, String> errors = new HashMap<>();
+
+        String validationType = (String) fields.get("validationType");
+        Long establishmentId = (Long) fields.get("establishmentId");
+        Integer satisfaction = (Integer) fields.get("satisfaction");
+        Integer priceProduct = (Integer) fields.get("priceProduct");
+        Integer prodDiversity = (Integer) fields.get("prodDiversity");
+        Integer employees = (Integer) fields.get("employees");
+        Integer ambience = (Integer) fields.get("ambience");
+        String commentary = (String) fields.get("commentary");
+
+        if (validationType.equals((SystemConstant.VALIDATION.EVALUATION.REGISTER_EVALUATION))) {
+            //Validação de preenchimento dos campos
+            if (establishmentId == null) {
+                errors.put("establishmentId", "*Selecione um mercado!");
+            }
+            if (satisfaction == null) {
+                errors.put("satisfaction", "*Selecione um grau de satisfação!");
+            }
+            if (priceProduct == null) {
+                errors.put("priceProduct", "*Selecione um grau de satisfação!");
+            }
+            if (prodDiversity == null) {
+                errors.put("prodDiversity", "*Selecione um grau de satisfação!");
+            }
+            if (employees == null) {
+                errors.put("employees", "*Selecione um grau de satisfação!");
+            }
+            if (ambience == null) {
+                errors.put("ambience", "*Selecione um grau de satisfação!");
+            }
+            if (commentary == null || commentary.isEmpty()) {
+                errors.put("commentary", "*Dê sua opinião em relação o mercado!");
+            }
+        }
+
+        return errors;
     }
-    
+
 }

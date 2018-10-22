@@ -3,6 +3,7 @@ package ezmart.home.controller;
 import ezmart.model.criteria.UserCriteria;
 import ezmart.model.entity.Consumer;
 import ezmart.model.entity.Establishment;
+import ezmart.model.entity.Product;
 import ezmart.model.entity.ShoppingList;
 import ezmart.model.entity.User;
 import ezmart.model.service.ProductService;
@@ -21,11 +22,11 @@ import org.springframework.web.servlet.ModelAndView;
 public class HomeController {
 
     @RequestMapping(value = "/home", method = RequestMethod.GET)
-    public ModelAndView getHome(HttpSession session) throws Exception {
+    public ModelAndView getHome(HttpSession session, Integer limit, Integer offset) throws Exception {
         ModelAndView mv = new ModelAndView("home/home");
         Object imgProfile = null;
         User user = null;
-        
+
         try {
             //Para tratar o conteúdo do usuário no Home
             Object auxSession = session.getAttribute("userLogged");
@@ -44,13 +45,24 @@ public class HomeController {
                 List<ShoppingList> shoppingList = service.readByCriteria(criteria, null, null);
 
                 mv.addObject("shoppingList", shoppingList);
+
             }
 
-            ProductService productService = new ProductService();
+            if (limit != null && offset != null) {
+                ProductService productService = new ProductService();
+                List<Product> productList = productService.findAll(offset, limit);
+                Integer count = productService.countByCriteria(null);
+                mv.addObject("productList", productList);
+                mv.addObject("limit", limit);
+                mv.addObject("offset", offset);
+                mv.addObject("count", count);
 
-            mv.addObject("productList", productService.findAll(Integer.parseInt(SystemConstant.PAGE.SIZE.LIMIT), null));
-            //mv.addObject("sectorList", sectorService.findAll(Integer.parseInt(SystemConstant.PAGE.SIZE.LIMIT), null));
-            //mv.addObject("providerList", providerService.findAll(Integer.parseInt(SystemConstant.PAGE.SIZE.LIMIT), null));
+            } else {
+
+                String url = "redirect:/home?limit=9&offset=0";
+                mv = new ModelAndView(url);
+            }
+
         } catch (Exception exception) {
             System.out.println(exception.getMessage());
         }

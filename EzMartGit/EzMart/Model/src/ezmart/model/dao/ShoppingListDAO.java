@@ -53,7 +53,7 @@ public class ShoppingListDAO implements BaseDAO<ShoppingList> {
             statement.close();
 
         } catch (Exception e) {
-            System.out.println(e);
+            throw e;
         }
         return shoppingList;
     }

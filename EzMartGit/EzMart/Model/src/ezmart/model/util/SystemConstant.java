@@ -48,6 +48,12 @@ public final class SystemConstant {
             public final static String REGISTER_ESTABLISHMENT = "REGISTER_ESTABLISHMENT";
 
         }
+
+        public class EVALUATION {
+
+            public final static String REGISTER_EVALUATION = "REGISTER_EVALUATION";
+
+        }
     }
 
     public class USER {

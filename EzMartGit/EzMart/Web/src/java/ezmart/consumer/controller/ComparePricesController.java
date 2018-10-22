@@ -3,6 +3,7 @@ package ezmart.consumer.controller;
 import ezmart.model.criteria.ListProductCriteria;
 import ezmart.model.entity.Establishment;
 import ezmart.model.entity.EstablishmentProduct;
+import ezmart.model.entity.Promotion;
 import ezmart.model.model_entity.ListProductModel;
 import ezmart.model.model_entity.PriceComparisonModel;
 import ezmart.model.model_entity.ProductModel;
@@ -10,7 +11,9 @@ import ezmart.model.model_entity.PromotionEProductModel;
 import ezmart.model.service.EstablishmentService;
 import ezmart.model.service.ListProductService;
 import ezmart.model.service.PromotionEstablishmentProductService;
+import ezmart.model.service.PromotionService;
 import ezmart.model.util.UtilServices;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -29,10 +32,13 @@ public class ComparePricesController {
     //Chave: ID do Mercado | Valor: Os produtos do mercado
     private Map<Long, List<EstablishmentProduct>> productsByMarket;
 
+    //Armazena os produtos encontrados por mercado
     private List<PriceComparisonModel> productsByMarketOnListConsumer;
 
+    //Armazena os produtos da lista em questão
     private Map<Long, ListProductModel> productsConsumerOnList;
 
+    //Armazena todas promoções do systema
     private List<PromotionEProductModel> promotionEstablishmentProductlist;
 
     //Verica os preços dos produtos
@@ -60,24 +66,33 @@ public class ComparePricesController {
             Map<Long, Object> criteria = new HashMap<>();
             criteria.put(ListProductCriteria.LIST_ID_EQ, id);
             List<ListProductModel> productsList = listProductService.readByCriteriaModel(criteria, null, null);
-            for (ListProductModel product : productsList) {
-                productsConsumerOnList.put(product.getProductId(), product);
-            }
 
-            productBuilderByMarket();
+            if (productsList == null || productsList.isEmpty()) {
 
-            //Caso a comparação esteja com os produtos
-            if (productsByMarketOnListConsumer != null && !productsByMarketOnListConsumer.isEmpty()) {
-
-                mv = new ModelAndView("consumer/compare_prices");
+                mv = new ModelAndView("message/message_list_empty");
 
             } else {
-                mv = new ModelAndView("redirect:/home");
-            }
+                
+                for (ListProductModel product : productsList) {
+                    productsConsumerOnList.put(product.getProductId(), product);
+                }
 
-            mv.addObject("productsByMarketOnListConsumer", productsByMarketOnListConsumer);
+                productBuilderByMarket();
+
+                //Caso a comparação esteja com os produtos
+                if (productsByMarketOnListConsumer != null && !productsByMarketOnListConsumer.isEmpty()) {
+
+                    mv = new ModelAndView("consumer/compare_prices");
+
+                } else {
+                    mv = new ModelAndView("redirect:/home");
+                }
+
+                mv.addObject("productsByMarketOnListConsumer", productsByMarketOnListConsumer);
+            }
         } catch (Exception exception) {
             mv = new ModelAndView("message/message_system_error");
+            throw exception;
         }
 
         return mv;
@@ -111,6 +126,8 @@ public class ComparePricesController {
             Establishment establishment = null;
             List<ProductModel> productModelList = new ArrayList<>();
             List<EstablishmentProduct> list = value;
+
+            int flag = 0;
             for (EstablishmentProduct establishmentProduct : list) {
 
                 Long productId = establishmentProduct.getProduct().getId();
@@ -126,7 +143,7 @@ public class ComparePricesController {
                     try {
                         establishment = establishmentService.readById(establishmentProduct.getEstablishment().getId());
                     } catch (Exception ex) {
-                        Logger.getLogger(ComparePricesController.class.getName()).log(Level.SEVERE, null, ex);
+                        //Logger.getLogger(ComparePricesController.class.getName()).log(Level.SEVERE, null, ex);
                     }
 
                     //productModel = new ProductModel();
@@ -138,8 +155,7 @@ public class ComparePricesController {
                     //vefica se há promoção para este produto
                     Double valuePromation = 0.0;
                     try {
-                        valuePromation = checkPromotion(establishmentProduct.getId(), productId, 
-                                establishmentProduct.getEstablishment().getId());
+                        valuePromation = checkPromotion(establishmentProduct.getId());
                     } catch (Exception ex) {
                         //Logger.getLogger(ComparePricesController.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -153,11 +169,16 @@ public class ComparePricesController {
 
                     productModelList.add(productModel);
 
+                    flag = flag + 1;
                 }
-
             }
 
             if (pricesList != null && !pricesList.isEmpty()) {
+
+                if (flag != productsConsumerOnList.size()) {
+                    priceComparisonModel.setNote("**Não contém todos produtos");
+                }
+
                 Double totalPrice = new UtilServices().totalPrice(pricesList);
                 priceComparisonModel.setTotalPrice(totalPrice);
                 priceComparisonModel.setEstablishmentName(establishmentName);
@@ -167,20 +188,42 @@ public class ComparePricesController {
                 productsByMarketOnListConsumer.add(priceComparisonModel);
                 //}
             }
-
         });
-
     }
 
     //Verifica se há promoção do produto no mercado
-    private Double checkPromotion(Long establishmentProductId, Long productId, Long establishmentId) throws Exception {
+    private Double checkPromotion(Long establishmentProductId) throws Exception {
         Double valuePromation = 0.0;
+        //Paga a data atual do sistema
+        Date date = new Date(System.currentTimeMillis());
+        PromotionService service = new PromotionService();
+        Promotion promotion = null;
 
+        //Valida a promoção
         for (PromotionEProductModel promotionEProductModel : promotionEstablishmentProductlist) {
             if (promotionEProductModel.getEstablishmentProductId().equals(establishmentProductId)) {
-                //PromotionSer
-                
-                valuePromation = promotionEProductModel.getPromotionalPrice();
+                promotion = new Promotion();
+                promotion = service.readById(promotionEProductModel.getPromotionId());
+
+                String datePromation = promotion.getFinalDate().toString();
+                String[] splitPromation = datePromation.split(" ");
+                String datePromationValue = splitPromation[0];
+
+                String dateSystem = date.toString();
+                String[] splitSystem = dateSystem.split(" ");
+                String dateSystemValue = splitSystem[0];
+
+                int finalDate = date.compareTo(promotion.getFinalDate());
+                if (finalDate == -1) {
+                    int startDate = date.compareTo(promotion.getStartDate());
+                    if (startDate == 1) {
+                        valuePromation = promotionEProductModel.getPromotionalPrice();
+                    }
+                } else {
+                    if (dateSystemValue.equals(datePromationValue)) {
+                        valuePromation = promotionEProductModel.getPromotionalPrice();
+                    }
+                }
             }
         }
 

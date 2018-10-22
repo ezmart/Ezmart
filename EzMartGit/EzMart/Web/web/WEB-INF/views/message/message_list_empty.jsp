@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html class="no-js" lang="PT-BR">
     <c:import url="/WEB-INF/views/templates/head.jsp"></c:import>
-        <body>   
+        <body>       
         <c:if test="${empty userLogged}">
             <c:import url="/WEB-INF/views/templates/header_logout.jsp"></c:import>
                 <div class="container" >
@@ -37,6 +37,7 @@
                     <div class="nav-wrapper">
                         <div style="margin-left: 40px" class="col s12">
                             <a href="<c:url value="/home"/>" class="">Início</a>
+                            <a href="<c:url value="/shoppingList"/>" class="breadcrumb">Minha listas</a>
                         </div>
                     </div>
                 </nav>
@@ -47,7 +48,7 @@
                     <br/>
                     <div class="col s5">
                         <p style="color: #898989; font-size: x-large">
-                            OPS! Algo não ocorreu conforme o esperado.
+                            OPS! Sua lista está vazia. Adicione produtos antes de comparar os preços.
                         </p>
                     </div>
                     <div class="col s4 offset-s2">

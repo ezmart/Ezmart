@@ -86,7 +86,7 @@ public class PromotionEstablishmentProductDAO implements BaseDAO<PromotionEstabl
 
             PromotionEProductModel promotionEProductModel = new PromotionEProductModel();
             promotionEProductModel.setId(rs.getLong("promotionestablishmentproduct_id"));
-            promotionEProductModel.setPromationPromotionId(rs.getLong("promotionestablishmentproduct_promotionid"));
+            promotionEProductModel.setPromotionId(rs.getLong("promotionestablishmentproduct_promotionid"));
             promotionEProductModel.setEstablishmentProductId(rs.getLong("promotionestablishmentproduct_establishmentproductid"));
             promotionEProductModel.setPromotionalPrice(rs.getDouble("promotionestablishmentproduct_promotionalprice"));
 

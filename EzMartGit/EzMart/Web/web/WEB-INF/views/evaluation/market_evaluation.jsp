@@ -61,81 +61,84 @@
                                                 <option id="establishmentId" value="${establishment.id}">${establishment.businessName}</option>                            
                                             </c:forEach>
                                         </select>
+                                        <span style="color: orangered">${errors.establishmentId}</span>
                                     </div>
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                    <p><b>Dê sua nota de acordo com os itens abaixo.</b></p>
                                     <div class="col s12" style="margin-top: 80px">
                                         <div class="form-group col s3">
                                             <label for="satisfaction" style="color: #000000; font-size: medium"><b>Grau de satisfação</b></label>
                                             <select class="form-control input-text-register" name="satisfaction" id="satisfaction">
                                                 <option notselected></option>
-                                                <option id="establishmentId" value="1">1</option> 
-                                                <option id="establishmentId" value="2">2</option>                            
-                                                <option id="establishmentId" value="3">3</option>                            
-                                                <option id="establishmentId" value="4">4</option>                            
-                                                <option id="establishmentId" value="5">5</option>                            
+                                                <option value="1">1</option> 
+                                                <option value="2">2</option>                            
+                                                <option value="3">3</option>                            
+                                                <option value="4">4</option>                            
+                                                <option value="5">5</option>                            
                                             </select>
+                                            <span style="color: orangered">${errors.satisfaction}</span>
                                         </div>
                                         <div class="form-group col s3">
                                             <label for="priceProduct" style="color: #000000; font-size: medium"><b>Preços dos produtos</b></label>
                                             <select class="form-control input-text-register" name="priceProduct" id="priceProduct">
                                                 <option notselected></option>
-                                                <option id="establishmentId" value="1">1</option> 
-                                                <option id="establishmentId" value="2">2</option>                            
-                                                <option id="establishmentId" value="3">3</option>                            
-                                                <option id="establishmentId" value="4">4</option>                            
-                                                <option id="establishmentId" value="5">5</option>                           
+                                                <option value="1">1</option> 
+                                                <option value="2">2</option>                            
+                                                <option value="3">3</option>                            
+                                                <option value="4">4</option>                            
+                                                <option value="5">5</option>                           
                                             </select>
+                                            <span style="color: orangered">${errors.priceProduct}</span>
                                         </div>
                                         <div class="form-group col s3">
-                                            <label for="diversity" style="color: #000000; font-size: medium"><b>Ambiente</b></label>
-                                            <select class="form-control input-text-register" name=diversity" id="diversity">
+                                            <label for="prodDiversity" style="color: #000000; font-size: medium"><b>Diversidade de produtos</b></label>
+                                            <select class="form-control input-text-register" name="prodDiversity" id="prodDiversity">
                                                 <option notselected></option>
-                                                <option id="establishmentId" value="1">1</option> 
-                                                <option id="establishmentId" value="2">2</option>                            
-                                                <option id="establishmentId" value="3">3</option>                            
-                                                <option id="establishmentId" value="4">4</option>                            
-                                                <option id="establishmentId" value="5">5</option>                           
+                                                <option value="1">1</option> 
+                                                <option value="2">2</option>                            
+                                                <option value="3">3</option>                            
+                                                <option value="4">4</option>                            
+                                                <option value="5">5</option>                           
                                             </select>
+                                            <span style="color: orangered">${errors.prodDiversity}</span>
                                         </div>
                                         <div class="form-group col s3">
                                             <label for="employees" style="color: #000000; font-size: medium"><b>Funcionários</b></label>
                                             <select class="form-control input-text-register" name="employees" id="employees">
                                                 <option notselected></option>
-                                                <option id="establishmentId" value="1">1</option> 
-                                                <option id="establishmentId" value="2">2</option>                            
-                                                <option id="establishmentId" value="3">3</option>                            
-                                                <option id="establishmentId" value="4">4</option>                            
-                                                <option id="establishmentId" value="5">5</option>                           
+                                                <option value="1">1</option> 
+                                                <option value="2">2</option>                            
+                                                <option value="3">3</option>                            
+                                                <option value="4">4</option>                            
+                                                <option value="5">5</option>                           
                                             </select>
+                                            <span style="color: orangered">${errors.employees}</span>
                                         </div>
                                     </div>
                                     <div class="col s12">
                                         <div class="form-group col s3">
-                                            <label for="ambience" style="color: #000000; font-size: medium"><b>Diversidade de produtos</b></label>
+                                            <label for="ambience" style="color: #000000; font-size: medium"><b>Ambiente</b></label>
                                             <select class="form-control input-text-register" name="ambience" id="ambience">
                                                 <option notselected></option>
-                                                <option id="establishmentId" value="1">1</option> 
-                                                <option id="establishmentId" value="2">2</option>                            
-                                                <option id="establishmentId" value="3">3</option>                            
-                                                <option id="establishmentId" value="4">4</option>                            
-                                                <option id="establishmentId" value="5">5</option>                           
+                                                <option value="1">1</option> 
+                                                <option value="2">2</option>                            
+                                                <option value="3">3</option>                            
+                                                <option value="4">4</option>                            
+                                                <option value="5">5</option>                           
                                             </select>
+                                            <span style="color: orangered">${errors.ambience}</span>
                                         </div>
-<!--                                        <div class="form-group col s3">
-                                            <label for="accessibility" style="color: #000000; font-size: medium"><b>Acessibilidade</b></label>
-                                            <select class="form-control input-text-register" name="accessibility" id="accessibility">
-                                                <option notselected></option>
-                                                <option id="establishmentId" value="1">1</option> 
-                                                <option id="establishmentId" value="2">2</option>                            
-                                                <option id="establishmentId" value="3">3</option>                            
-                                                <option id="establishmentId" value="4">4</option>                            
-                                                <option id="establishmentId" value="5">5</option>                           
-                                            </select>
-                                        </div>-->
                                     </div>
 
                                     <div style="margin-top: 80px" class="input-field col s12">
-                                        <textarea maxlength="100" minlength="3" id="commentary" class="materialize-textarea" rows="20" ></textarea>
+                                        <textarea maxlength="100" minlength="3" id="commentary" name="commentary" class="materialize-textarea" rows="20"></textarea>
                                         <label style="color: #000000; font-size: medium" for="commentary">Opinião</label>
+                                        <span style="color: orangered">${errors.commentary}</span>
                                     </div>
 
                                     <button id="btn-btn-ezmart-style" type="submit" class="btn" value="confirmar"><i class="material-icons left">border_color</i>Avaliar</button>

@@ -29,12 +29,9 @@
                 <nav>
                     <div class="nav-wrapper">
                         <div style="margin-left: 40px" class="col s12">
-                            <a href="<c:url value="/home"/>" class="breadcrumb">
-                                Início
-                            </a>
-                            <a href="<c:url value="!#"/>" class="breadcrumb"> 
-                                Mercados encontrados
-                            </a>
+                            <a href="<c:url value="/home"/>" class="breadcrumb">Início</a>
+                            <a href="<c:url value="/shoppingList"/>" class="breadcrumb">Minha listas</a>
+                            <a href="<c:url value="!#"/>" class="breadcrumb">Mercados encontrados</a>
                         </div>
                     </div>
                 </nav>
@@ -54,6 +51,7 @@
                                                         <div class="card-panel medium" id="scroll-product">
                                                             <div class="col s12 m12">
                                                                 <div>
+                                                                    <p style="color: red">${priceComparisonModel.note}</p>
                                                                     <p><b>${priceComparisonModel.establishmentName}</b></p>
                                                                     <p><b>Preço total:</b> R$ ${priceComparisonModel.totalPrice}</p>
                                                                 </div>
