@@ -100,7 +100,7 @@
             <c:if test="${empty shoppingList}">
                 <div class="card">
                     <div class="row center-align" style="padding: 20px;">
-                        <h4 class="center-align" style="color: #2196f3">Nenhuma lista encontrado! :)</h4>
+                        <h4 class="center-align" style="color: #2196f3">Nenhuma lista encontrada! :)</h4>
                         <br/>
                         <br/>
                         <a href="#modal-create" class="btn btn-sm btn-default btn-small green left modal-trigger" style="color:white;"><i class="material-icons right">add_box</i>Adicionar</a>

@@ -1,21 +1,22 @@
 package ezmart.model.service;
 
 import ezmart.model.ConnectionManager;
-import ezmart.model.dao.ShoppingListDAO;
-import ezmart.model.entity.ShoppingList;
+import ezmart.model.base.service.BaseProductService;
+import ezmart.model.base.service.BasePromotionService;
+import ezmart.model.dao.PromotionDAO;
+import ezmart.model.entity.Product;
+import ezmart.model.entity.Promotion;
 import java.sql.Connection;
-import java.util.Map;
 import java.util.List;
-import ezmart.model.base.service.BaseShoppingListService;
-import ezmart.model.dao.ListProductDAO;
+import java.util.Map;
 
-public class ShoppingListService implements BaseShoppingListService {
+public class PromotionService implements BasePromotionService{
 
     @Override
-    public void create(ShoppingList entity) throws Exception {
+    public void create(Promotion entity) throws Exception {
         Connection conn = ConnectionManager.getInstance().getConnection();
         try {
-            ShoppingListDAO dao = new ShoppingListDAO();
+            PromotionDAO dao = new PromotionDAO();
             dao.create(conn, entity);
             conn.commit();
             conn.close();
@@ -27,14 +28,14 @@ public class ShoppingListService implements BaseShoppingListService {
     }
 
     @Override
-    public ShoppingList readById(Long id) throws Exception {
+    public Promotion readById(Long id) throws Exception {
         Connection conn = ConnectionManager.getInstance().getConnection();
         try {
-            ShoppingListDAO dao = new ShoppingListDAO();
-            ShoppingList list = dao.readById(conn, id);
+            PromotionDAO dao = new PromotionDAO();
+            Promotion promotion = dao.readById(conn, id);
             conn.commit();
             conn.close();
-            return list;
+            return promotion;
         } catch (Exception e) {
             conn.rollback();
             conn.close();
@@ -43,11 +44,11 @@ public class ShoppingListService implements BaseShoppingListService {
     }
 
     @Override
-    public List<ShoppingList> readByCriteria(Map<Long, Object> criteria, Long limit, Long offset) throws Exception {
+    public List<Promotion> readByCriteria(Map<Long, Object> criteria, Long limit, Long offset) throws Exception {
         Connection conn = ConnectionManager.getInstance().getConnection();
         try {
-            ShoppingListDAO dao = new ShoppingListDAO();
-            List<ShoppingList> list = dao.readByCriteria(conn, criteria, limit, offset);
+            PromotionDAO dao = new PromotionDAO();
+            List<Promotion> list = dao.readByCriteria(conn, criteria, limit, offset);
             conn.commit();
             conn.close();
             return list;
@@ -55,14 +56,14 @@ public class ShoppingListService implements BaseShoppingListService {
             conn.rollback();
             conn.close();
             throw e;
-        }
+        } 
     }
 
     @Override
-    public void update(ShoppingList entity) throws Exception {
+    public void update(Promotion entity) throws Exception {
         Connection conn = ConnectionManager.getInstance().getConnection();
         try {
-            ShoppingListDAO dao = new ShoppingListDAO();
+            PromotionDAO dao = new PromotionDAO();
             dao.update(conn, entity);
             conn.commit();
             conn.close();
@@ -77,9 +78,7 @@ public class ShoppingListService implements BaseShoppingListService {
     public void delete(Long id) throws Exception {
         Connection conn = ConnectionManager.getInstance().getConnection();
         try {
-            ListProductDAO listProductDAO = new ListProductDAO();
-            listProductDAO.delete(conn, id);
-            ShoppingListDAO dao = new ShoppingListDAO();
+            PromotionDAO dao = new PromotionDAO();
             dao.delete(conn, id);
             conn.commit();
             conn.close();

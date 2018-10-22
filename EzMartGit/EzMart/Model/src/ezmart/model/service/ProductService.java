@@ -92,7 +92,7 @@ public class ProductService implements BaseProductService {
     public List<Product> findAll(Integer offset, Integer limit) throws Exception {
         Connection conn = ConnectionManager.getInstance().getConnection();
         try {
-            List<Product> productList = dao.findAll(conn, limit, offset);
+            List<Product> productList = dao.findAll(conn, offset, limit);
             conn.commit();
             conn.close();
             return productList;
@@ -114,6 +114,20 @@ public class ProductService implements BaseProductService {
             conn.close();
             throw e;
         }
+    }
+
+    public Integer countByCriteria(Map<Long, Object> criteria) throws Exception {
+        Connection conn = ConnectionManager.getInstance().getConnection();
+        Integer count = 0;
+        try {
+            count = dao.countByCriteria(conn, criteria);
+            conn.commit();
+            conn.close();
+        } catch (Exception e) {
+            conn.rollback();
+            conn.close();
+        }
+        return count;
     }
 
     @Override

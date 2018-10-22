@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html class="no-js" lang="PT-BR">
     <c:import url="/WEB-INF/views/templates/head.jsp"></c:import>
-    <body>
+        <body>
         <c:if test="${not empty userLogged}">
             <c:if test="${userLogged.userType eq 'admin'}">
                 <c:import url="/WEB-INF/views/templates/header_admin.jsp"></c:import>
@@ -122,7 +122,7 @@
                 <div class="card horizontal">
                     <div class="card-stacked">
                         <div class="card-content" style="background-color: #F1F1F1">   
-                            <h4 class="center-align">Produtos promocionais</h4>
+                            <h4 class="center-align">Produtos promocionais: ${count} encontrados</h4>
                             <div class="row">
                                 <div class="col s12 m12">
                                     <ul>
@@ -168,6 +168,14 @@
                     </div>
                 </div>
             </div>
+            <ul class="pagination center" >
+                <c:if test="${(offset-limit)>=0}">
+                    <li class="waves-effect"><a href="<c:url value="/home?limit=${limit}&offset=${offset-limit}"/>"><i class="material-icons">chevron_left</i></a></li>
+                </c:if>
+                <c:if test="${(limit+offset)<count}">
+                    <li class="waves-effect"><a href="<c:url value="/home?limit=${limit}&offset=${offset+limit}"/>"><i class="material-icons">chevron_right</i></a></li>
+                </c:if>
+            </ul>
         </div>
         <!--</div>-->
         <script src="<c:url value="/resources/js/jquery.min.js"/>"></script>

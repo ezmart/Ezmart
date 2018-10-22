@@ -101,7 +101,11 @@ public class ListProductDAO implements BaseDAO<ListProduct> {
 
     @Override
     public void delete(Connection conn, Long id) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = "DELETE FROM listproduct WHERE listproduct_listid=?;";
+        PreparedStatement statement = conn.prepareStatement(sql);
+        statement.setLong(1, id);
+        statement.execute();
+        statement.close();
     }
 
     //Deleta com base no ID da Lista e do ID do produto
