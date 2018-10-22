@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html class="no-js" lang="PT-BR">
     <c:import url="/WEB-INF/views/templates/head.jsp"></c:import>
-        <body>
+    <body>
         <c:if test="${not empty userLogged}">
             <c:if test="${userLogged.userType eq 'admin'}">
                 <c:import url="/WEB-INF/views/templates/header_admin.jsp"></c:import>
@@ -17,27 +17,43 @@
         </c:if>
         <c:if test="${empty userLogged}">
             <c:import url="/WEB-INF/views/templates/header_logout.jsp"></c:import>
-        </c:if>   
+        </c:if>
+        <!--<form class="gb_ag" action="/store/search" target="" id="gbqf" method="get" name="gbqf"><fieldset class="gbxx"><legend class="gbxx">Campos ocultos</legend><div id="gbqffd"></div></fieldset><fieldset class="gbqff gb_R" id="gbqff"><legend class="gbxx">Pesquisar</legend><div id="gbfwa" class="gbqfwa "><div id="gbqfqw" class="gbqfqw"><div id="gbqfaa"></div><div id="gbqfqwb" class="gbqfqwb"><input id="gbqfq" class="gbqfif" name="q" type="text" autocomplete="off" value="" placeholder="Pesquisar" aria-label="Pesquisar" role="combobox" aria-autocomplete="list"></div><div id="gbqfab"></div></div></div></fieldset><div class="gb_R gb_9f" id="gbqfbw"><button class="gbqfb" aria-label="Pesquisa Google" name="" id="gbqfb"><span class="gbqfi gb_fc"></span></button></div></form>-->
+        <nav>
+            <div class="nav-wrapper" style="margin-left: 100px">
+                <form class="form-horizontal" method="POST" action="">
+                    <ul>
+                        <li>
+                            <input id="senha" type="text" class="form-control white black-text" name="searchProductSystem" placeholder="Pesquise seu produto">
+                        </li>
+                        <li style="margin-left: 10px">
+                            <button style=" height: 60px" id="" type="submit" class="btn" value="confirmar"><i class="material-icons center">search</i></button>
+                        </li>
+                    </ul>
+                </form> 
+            </div>
+        </nav>
         <div id="modal-add" class="modal">
             <div class="modal-content">
                 <c:if test="${not empty userLogged}">
                     <h4>Adicionar Produto<i class=" small material-icons" style="margin-left: 10px;">note_add</i></h4>
                     <p><font size="5">Selecione a lista que deseja adicionar o produto: </font></p>
                     <div class="modal-footer">
-                        <!--<form method="POST" action="/ezmartWeb/productDelete">-->
-                        <div class="form-group col s6">
-                            <label for="cityId">Lista:</label>
-                            <select class="form-control input-text-register" name="cityId" id="cityId">
-                                <option notselected></option>
-                                <c:forEach items="${cityList}" var="city">
-                                    <option <c:if test="${cityIdConsumer eq city.id}">selected="true"</c:if> id="cityId" value="${city.id}">${city.name}</option>                            
-                                </c:forEach>
-                            </select>
-                            <span style="color: orangered">${errors.cityId}</span>
-                        </div>
-                        <a class="btn btn-sm btn-default btn-small red modal-close modal-action" style="color:white;">Não</a>
-                        <button class="btn btn-sm btn-default btn-small green" style="color:white; margin-right: 10px;" >Sim</button>
-                        <!--</form>-->
+                        <form method="POST" action="/ezmartWeb/newproducts">
+                            <input type="text" style="display: none" name="productId" id="productId" value="${product.id}">
+                            <div class="form-group col s6">
+                                <label for="listId">Lista:</label>
+                                <select class="form-control input-text-register" name="listId" id="listId">
+                                    <option notselected></option>
+                                    <c:forEach items="${shoppingList}" var="list">
+                                        <option  id="listId" value="${list.id}">${list.name}</option>                            
+                                    </c:forEach>
+                                </select>
+                                <span style="color: orangered">${errors.cityId}</span>
+                            </div>
+                            <a class="btn btn-sm btn-default btn-small red modal-close modal-action" style="color:white;">Não</a>
+                            <button class="btn btn-sm btn-default btn-small green" style="color:white; margin-right: 10px;" >Sim</button>
+                        </form>
                     </div>
                 </c:if>
                 <c:if test="${empty userLogged}">
@@ -85,7 +101,7 @@
                     </div>
                 </li>
                 <li>
-                    <img src="<c:url value = "/resources/img/banners/img_fundo_mercado_1.png"/>"> <!-- random image -->
+                    <img src="<c:url value = "/resources/img/banners/img_fundo_mercado_nova.png"/>"> <!-- random image -->
                     <div class="caption right-align">
                         <img style="width: 100px; height: 32px" src="<c:url value = "/resources/img/logo_branco.png"/>">
                         <h5 class="light grey-text text-lighten-2"></h5>
@@ -106,8 +122,7 @@
                 <div class="card horizontal">
                     <div class="card-stacked">
                         <div class="card-content" style="background-color: #F1F1F1">   
-                            <h4 class="center-align">Promoções</h4>
-                            <!-- Listar uma lista de produtos e serviços aqui -->
+                            <h4 class="center-align">Produtos promocionais</h4>
                             <div class="row">
                                 <div class="col s12 m12">
                                     <ul>
@@ -128,7 +143,10 @@
                                                         <div class="card-action card-content" style="margin-top: 20px">
                                                             <div class="col s12 center">
                                                                 <!--<a class="btn btn-sm btn-default btn-small ffc400 amber accent-3 modal-trigger" href="#modal-update" style="color:white;" onclick="setProductEdit(${product.id}, '${product.name}', '${product.barCode}', '${product.brand}')"><i class="material-icons center">edit</i></a>-->
-                                                                <a class="btn btn-sm btn-danger btn-small green modal-trigger" href="#modal-add"  style="color:white;" title="Clique para adicionar o produto a sua lista"><i class="material-icons center">add</i></a>
+                                                                <c:if test="${userLogged.userType eq 'consumer'}">
+                                                                    <a class="btn btn-sm btn-danger btn-small green modal-trigger" onclick="setProductId(${product.id})" href="#modal-add"  style="color:white;" title="Clique para adicionar o produto a sua lista"><i class="material-icons center">add</i></a>
+                                                                </c:if>
+
                                                                 <a class="btn btn-sm btn-danger btn-small blue-grey modal-trigger" href="#modal-view"  style="color:white;" 
                                                                    onclick="setModalData(
                                                                                    '${product.name}',

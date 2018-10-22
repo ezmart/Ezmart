@@ -35,7 +35,28 @@ public class ConsumerDAO implements BaseDAO<Consumer> {
 
     @Override
     public Consumer readById(Connection conn, Long id) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = "SELECT * from consumer WHERE consumer_userid=?";
+        Consumer consumer = new Consumer();
+        try {
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setLong(1, id);
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+
+                consumer.setName(resultSet.getString("consumer_name"));
+                consumer.setLastName(resultSet.getString("consumer_lastname"));
+                consumer.setCpf(resultSet.getString("consumer_cpf"));
+                consumer.setId(resultSet.getLong("consumer_id"));
+
+            }
+            resultSet.close();
+            statement.close();
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return consumer;
     }
 
     @Override
@@ -74,7 +95,7 @@ public class ConsumerDAO implements BaseDAO<Consumer> {
         ResultSet rs = statement.executeQuery();
         List<Consumer> consumerList = new ArrayList<>();
         Long aux = null;
-        if (rs.next()) {
+        while (rs.next()) {
 
             Consumer consumer = new Consumer();
             consumer.setId(rs.getLong("consumer_id"));
@@ -142,7 +163,7 @@ public class ConsumerDAO implements BaseDAO<Consumer> {
 
             if (resultSet.next()) {
                 consumer = new Consumer();
-                
+
                 consumer.setId(resultSet.getLong("consumer_id"));
                 consumer.setName(resultSet.getString("consumer_name"));
                 consumer.setLastName(resultSet.getString("consumer_lastname"));
@@ -164,5 +185,5 @@ public class ConsumerDAO implements BaseDAO<Consumer> {
         }
         return consumer;
     }
-    
+
 }

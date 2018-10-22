@@ -1,6 +1,7 @@
 package ezmart.model.dao;
 
 import ezmart.model.base.BaseDAO;
+import ezmart.model.criteria.UserCriteria;
 import ezmart.model.entity.ShoppingList;
 import ezmart.model.util.PreparedStatementBuilder;
 import java.sql.Connection;
@@ -40,7 +41,7 @@ public class ShoppingListDAO implements BaseDAO<ShoppingList> {
             ResultSet resultSet = statement.executeQuery();
 
             if (resultSet.next()) {
-                
+                shoppingList = new ShoppingList();
                 shoppingList.setId(resultSet.getLong("list_id"));
                 shoppingList.setConsumerId(resultSet.getLong("list_consumerid"));
                 shoppingList.setName(resultSet.getString("list_name"));
@@ -58,17 +59,17 @@ public class ShoppingListDAO implements BaseDAO<ShoppingList> {
     }
 
     @Override
-    public java.util.List<ShoppingList> readByCriteria(Connection conn, Map<Long, Object> criteria, Long limit, Long offset) throws Exception {
+    public List<ShoppingList> readByCriteria(Connection conn, Map<Long, Object> criteria, Long limit, Long offset) throws Exception {
         String sql = "SELECT * from list WHERE 1=1 ";
 
         List<Object> paramList = new ArrayList<>();
 
         if (criteria != null) {
-//            if (criteria.containsKey(CityCriteria.STATE_ID_EQ)) {
-//                String listId = (String) criteria.get(CityCriteria.STATE_ID_EQ);
-//                sql += " AND list_id ILIKE ?";
-//                paramList.add("%" + nome + "%");
-//            }
+            if (criteria.containsKey(UserCriteria.ID_EQ)) {
+                Long userId = (Long) criteria.get(UserCriteria.ID_EQ);
+                sql += " AND list_consumerid = ?";
+                paramList.add(userId);
+            }
 
         }
 

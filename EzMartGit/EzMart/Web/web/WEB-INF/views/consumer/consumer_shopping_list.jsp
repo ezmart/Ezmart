@@ -32,7 +32,7 @@
                 </div>
                 <div id="modal-update" class="modal">
                     <div class="modal-content">
-                        <h4>Modal Header</h4>
+                        <h4>Altere o nome da lista</h4>
                     <c:import url="/WEB-INF/views/consumer/modal/update_shopping_list.jsp"></c:import>
                     </div>
                 </div>
@@ -43,10 +43,48 @@
                             <form method="POST">
                                 <input type="text" style="display: none" name="type" id="type" value="DELETE">
                                 <input type="text" style="display: none"  name="value" id="idDeleteShoppingList" value="">
-                                <button id="btn-btn-ezmart-style" type="submit" class="btn modal-close" value="confirmar">Sim</button>
+                                <a class="btn btn-sm right btn-default btn-small red modal-close modal-action" style="color:white; margin-left: 10px;">Não</a>
+                                <button type="submit" class="btn btn-sm btn-default btn-small green" value="confirmar" style="color:white;">Sim</button>
                             </form>
-                            <a class="btn btn-sm btn-default btn-small red modal-close modal-sction">Não</a>
                         </div>
+                    </div>
+                </div>
+                <div id="modal-select-search" class="modal" style="background-color: #F1F1F1">
+                    <div class="modal-content">
+                        <h4 class="center-align">Selecione o tipo de pesquisa</h4>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <form method="POST">
+                            <input type="text" style="display: none"  name="value" id="idShoppingList" value="">
+                            <ul class="menu-profile center">                                               
+                                <li>
+                                    <div class="col s12">   
+                                        <a class="right btn btn-sm btn-default btn-small red modal-close modal-action" id="" style="color:white; margin-left: 10px;">Fechar</a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="col s12" style="margin-top: 20px"> 
+                                        <button type="submit" class="center btn btn-sm btn-default btn-small green" id="" value="confirmar" style="color:white; margin-left: 10px;">Mercado mais barato</button>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="col s12" style="margin-top: 20px">   
+                                        <button type="submit" class="left btn btn-sm btn-default btn-small yellow" id="" value="confirmar" style="color:white; margin-left: 10px;">Preços mais baratos</button>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="col s12" style="margin-top: 20px">   
+                                        <button type="submit" class="left btn btn-sm btn-default btn-small blue" id="" value="confirmar" style="color:white; margin-left: 10px;">Preços mais baratos proximos de mim</button>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="col s12" style="margin-top: 20px">   
+                                        <button type="submit" class="left btn btn-sm btn-default btn-small blue-grey" id="" value="confirmar" style="color:white; margin-left: 10px;">Mercado mais proximo</button>
+                                    </div>
+                                </li>
+                            </ul>
+                        </form>
                     </div>
                 </div>
                 <div>
@@ -54,7 +92,7 @@
                         <div class="nav-wrapper">
                             <div style="margin-left: 40px" class="col s12">
                                 <a href="<c:url value="/home"/>" class="breadcrumb">Início</a>
-                            <a href="<c:url value="/shoppingList"/>" class="breadcrumb">Minha Listas</a>
+                            <a href="<c:url value="/shoppingList"/>" class="breadcrumb">Minha listas</a>
                         </div>
                     </div>
                 </nav>
@@ -73,25 +111,28 @@
             <c:if test="${not empty shoppingList}">
                 <div class="container">
                     <div class="card">
-                        <div class="card-content">
-                            <h3>Listas cadastradas</h3>
-                            <table class="table">
-                                <tr>
-                                    <th>Id</th>
-                                    <th>Nome</th>
-                                </tr>
-                                <a href="#modal-create" class="btn btn-sm btn-default btn-small green left modal-trigger" style="color:white;"><i class="material-icons right">add_box</i>Adicionar</a>
+                        <div class="card-content" style="background-color: #F1F1F1">
+                            <div class="row">
+                                <div class="col s4">
+                                    <a href="#modal-create" class="btn btn-sm btn-default btn-small green left modal-trigger" style="color:white;"><i class="material-icons right">add_box</i>Adicionar</a>
+                                </div>
+                                <div class="col s8" style="margin-top: 0">
+                                    <p style="font-size: xx-large">Listas cadastradas</p>
+                                </div>
+                            </div>
+                            <table class="table s12">
                                 <!--<a href="#modal-create" id="btn-btn-ezmart-style" class="btn modal-trigger">Adicionar</a>-->
                                 <br/>
                                 <br/>
                                 <c:forEach items="${shoppingList}" var="shoppingList">
                                     <tr>
-                                        <td>${shoppingList.id}</td>
-                                        <td>${shoppingList.name}</td>
+
+                                        <td style="font-weight: bold;">${shoppingList.name}</td>
                                         <td>
-                                            <a class="btn btn-sm btn-default btn-small ffc400 amber accent-3 modal-trigger" href="#modal-update" onclick="setUpdateDadaModalShoppingList(${shoppingList.id})" style="color:white;"><i class="material-icons right">edit</i>Alterar</a>
-                                            <a class="btn btn-sm btn-default btn-small blue-grey" href="<c:url value="/products-${shoppingList.id}"/>" style="color:white;"><i class="material-icons right">edit</i>Gerenciar Produtos</a>
-                                            <a class="btn btn-sm btn-danger btn-small red modal-trigger" href="#modal-delete" onclick="setDeleteDadaModalShoppingList(${shoppingList.id})" style="color:white;"><i class="material-icons right">delete</i>Excluir</a>
+                                            <a class="right btn btn-sm btn-danger btn-small red modal-trigger" href="#modal-delete" onclick="setDeleteDadaModalShoppingList(${shoppingList.id})" style="color:white; margin-left: 15px"><i class="material-icons right">delete</i>Excluir</a>
+                                            <a class="right btn btn-sm btn-default btn-small ffc400 amber accent-3 modal-trigger" href="#modal-update" onclick="setUpdateDadaModalShoppingList(${shoppingList.id})" style="color:black; margin-left: 15px"><i class="material-icons right">edit</i>Alterar</a>
+                                            <a class="right btn btn-sm btn-default btn-small blue-grey" href="<c:url value="/products-${shoppingList.id}"/>" style="color:white; margin-left: 15px"><i class="material-icons right">add_shopping_cart</i>Produtos</a>
+                                            <a class="right btn btn-sm btn-default btn-small f80113 modal-trigger" href="<c:url value="/comparePrices-${shoppingList.id}"/>" style="color:white; margin-left: 15px"><i class="material-icons right">attach_money</i>Comparar</a>
                                         </td>
                                     </tr>    
                                 </c:forEach>

@@ -1,21 +1,26 @@
 package ezmart.establishment.controller;
 
 import ezmart.model.entity.City;
-import ezmart.model.entity.Consumer;
 import ezmart.model.entity.Establishment;
+import ezmart.model.entity.EstablishmentProduct;
 import ezmart.model.entity.Product;
+import ezmart.model.entity.Promotion;
+import ezmart.model.entity.PromotionEstablishmentProduct;
 import ezmart.model.entity.State;
 import ezmart.model.entity.User;
 import ezmart.model.service.CityService;
-import ezmart.model.service.ConsumerService;
 import ezmart.model.service.EstablishmentService;
 import ezmart.model.service.ProductService;
+import ezmart.model.service.PromotionEstablishmentProductService;
 import ezmart.model.service.StateService;
+import java.text.DecimalFormat;
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -84,7 +89,7 @@ public class EstablishmentController {
             if (auxSession instanceof Establishment) {
 
                 user = (Establishment) auxSession;
- 
+
                 EstablishmentService service = new EstablishmentService();
                 Establishment establishment = new Establishment();
 
@@ -98,7 +103,7 @@ public class EstablishmentController {
                 establishment.setCity(cityId);
                 establishment.setZipCode(zipCode);
                 establishment.setTelephone(telephone);
-                
+
                 service.update(establishment);
             }
 
@@ -119,4 +124,429 @@ public class EstablishmentController {
 
         return mv;
     }
+
+    @RequestMapping(value = "/product_establishment", method = RequestMethod.GET)
+    public ModelAndView findAllEstablishmentProduct(HttpSession session) throws Exception {
+
+        ModelAndView mv = null;
+        try {
+
+            Object auxSession = session.getAttribute("userLogged");
+            User user = null;
+
+            if (auxSession instanceof Establishment) {
+
+                mv = new ModelAndView("establishment/product_establishment");
+
+                user = (Establishment) auxSession;
+
+                EstablishmentService establishmentService = new EstablishmentService();
+                Establishment establishment = establishmentService.readByUserId(user.getId());
+
+                mv.addObject("establishment", establishment);
+
+//                mv.addObject("productList", establishmentService.findAllProductByEstablishmentId(establishment.getId()));
+                List<EstablishmentProduct> establishmentProductList = establishmentService.findAllEstablishmentProduct(establishment.getId());
+
+                DecimalFormat df = new DecimalFormat("0.00");
+
+                for (EstablishmentProduct establishmentProduct : establishmentProductList) {
+                    establishmentProduct.setPriceConvert(df.format(establishmentProduct.getPrice()));
+                }
+
+                mv.addObject("establishmentProductList", establishmentProductList);
+            }
+
+        } catch (Exception exception) {
+            System.out.println(exception);
+        }
+
+        return mv;
+    }
+
+    @RequestMapping(value = "/product_establishment", method = RequestMethod.POST)
+    public ModelAndView updatePriceEstablishmentProduct(String priceProduct, Long establishmentProductId, HttpSession session) throws Exception {
+
+        ModelAndView mv = new ModelAndView("redirect:/product_establishment");
+
+        try {
+
+            Object auxSession = session.getAttribute("userLogged");
+            User user = null;
+
+            if (auxSession instanceof Establishment) {
+
+                user = (Establishment) auxSession;
+                EstablishmentService establishmentService = new EstablishmentService();
+
+                Double price = Double.parseDouble(priceProduct.replace(".", "").replace(",", "."));
+
+                EstablishmentProduct establishmentProduct = new EstablishmentProduct();
+                establishmentProduct.setId(establishmentProductId);
+                establishmentProduct.setPrice(price);
+
+                establishmentService.updatePriceEstablishmentProduct(establishmentProduct);
+
+            }
+
+        } catch (Exception exception) {
+            System.out.println(exception);
+        }
+
+        return mv;
+    }
+
+    @RequestMapping(value = "/product_establishment-product", method = RequestMethod.GET)
+    public ModelAndView findAllProduct(HttpSession session) throws Exception {
+
+        ModelAndView mv = null;
+        try {
+
+            Object auxSession = session.getAttribute("userLogged");
+            User user = null;
+
+            if (auxSession instanceof Establishment) {
+
+                mv = new ModelAndView("establishment/product_list");
+
+                user = (Establishment) auxSession;
+                EstablishmentService establishmentService = new EstablishmentService();
+                Establishment establishment = establishmentService.readByUserId(user.getId());
+
+                mv.addObject("productList", establishmentService.findAllProductByEstablishmentId(establishment.getId()));
+            }
+
+        } catch (Exception exception) {
+            System.out.println(exception);
+        }
+
+        return mv;
+    }
+
+    @RequestMapping(value = "/product_establishment-product", method = RequestMethod.POST)
+    public ModelAndView savePriceProduct(String priceProduct, Long productId, HttpSession session) throws Exception {
+
+        ModelAndView mv = new ModelAndView("redirect:/product_establishment-product");
+
+        try {
+            Object auxSession = session.getAttribute("userLogged");
+
+            if (auxSession instanceof Establishment) {
+
+                EstablishmentService establishmentService = new EstablishmentService();
+
+                Establishment establishment = new Establishment();
+                Product product = new Product();
+
+                Double price = Double.parseDouble(priceProduct.replace(".", "").replace(",", "."));
+                User user = (Establishment) auxSession;
+                establishment = establishmentService.readByUserId(user.getId());
+                product.setId(productId);
+
+                EstablishmentProduct establishmentProduct = new EstablishmentProduct();
+                establishmentProduct.setEstablishment(establishment);
+                establishmentProduct.setProduct(product);
+                establishmentProduct.setPrice(price);
+
+                establishmentService.saveProductEstablishment(establishmentProduct);
+            }
+        } catch (Exception exception) {
+            System.out.println(exception);
+        }
+
+        return mv;
+    }
+
+    @RequestMapping(value = "/product_establishment-productDelete", method = RequestMethod.POST)
+    public ModelAndView deleteEstablishmentProduct(Long productDeleteId, HttpSession session) throws Exception {
+
+        ModelAndView mv = new ModelAndView("redirect:/product_establishment");
+        try {
+
+            Object auxSession = session.getAttribute("userLogged");
+            User user = null;
+
+            if (auxSession instanceof Establishment) {
+
+                user = (Establishment) auxSession;
+                EstablishmentService establishmentService = new EstablishmentService();
+
+                establishmentService.deleteEstablishmentProduct(productDeleteId);
+            }
+
+        } catch (Exception exception) {
+            System.out.println(exception);
+        }
+
+        return mv;
+    }
+
+    @RequestMapping(value = "/promotion", method = RequestMethod.GET)
+    public ModelAndView findAllPromotion(HttpSession session) throws Exception {
+
+        ModelAndView mv = null;
+        try {
+
+            Object auxSession = session.getAttribute("userLogged");
+            User user = null;
+
+            if (auxSession instanceof Establishment) {
+
+                mv = new ModelAndView("establishment/promotion");
+
+                user = (Establishment) auxSession;
+                EstablishmentService establishmentService = new EstablishmentService();
+                Establishment establishment = establishmentService.readByUserId(user.getId());
+                PromotionEstablishmentProductService promotionEstablishmentProductService = new PromotionEstablishmentProductService();
+
+                mv.addObject("promotionList", promotionEstablishmentProductService.findAllPromotionEstablishmentProduct(establishment.getId()));
+            }
+
+        } catch (Exception exception) {
+            System.out.println(exception);
+        }
+
+        return mv;
+    }
+
+    @RequestMapping(value = "/promotion", method = RequestMethod.POST)
+    public ModelAndView savePromotion(String namePromotion, Date promotionStart, Date promotionFinal, HttpSession session) throws Exception {
+
+        ModelAndView mv = new ModelAndView("redirect:/promotion");
+        try {
+
+            Object auxSession = session.getAttribute("userLogged");
+            User user = null;
+
+            if (auxSession instanceof Establishment) {
+
+                user = (Establishment) auxSession;
+                EstablishmentService establishmentService = new EstablishmentService();
+                Establishment establishment = establishmentService.readByUserId(user.getId());
+
+                PromotionEstablishmentProductService promotionEstablishmentProductService = new PromotionEstablishmentProductService();
+                PromotionEstablishmentProduct promotionEstablishmentProduct = new PromotionEstablishmentProduct();
+
+                Promotion promotion = new Promotion();
+                promotion.setName(namePromotion);
+                promotion.setStartDate(promotionStart);
+                promotion.setFinalDate(promotionFinal);
+
+                EstablishmentProduct establishmentProduct = new EstablishmentProduct();
+                establishmentProduct.setEstablishment(establishment);
+
+                promotionEstablishmentProduct.setPromotion(promotion);
+                promotionEstablishmentProduct.setEstablishmentProduct(establishmentProduct);
+
+                promotionEstablishmentProductService.savePromotion(promotionEstablishmentProduct);
+            }
+
+        } catch (Exception exception) {
+            System.out.println(exception);
+        }
+
+        return mv;
+    }
+
+    @RequestMapping(value = "/promotion-product", method = RequestMethod.GET)
+    public ModelAndView findAllEstablishmentProductForPromotion(Long establishmentId, Long promotionId, HttpSession session) throws Exception {
+
+        ModelAndView mv = null;
+        try {
+
+            Object auxSession = session.getAttribute("userLogged");
+            User user = null;
+
+            if (auxSession instanceof Establishment) {
+
+                mv = new ModelAndView("establishment/promotion_product");
+
+                user = (Establishment) auxSession;
+
+                EstablishmentService establishmentService = new EstablishmentService();
+
+                List<EstablishmentProduct> establishmentProductList = establishmentService.findAllEstablishmentProductForPromotion(establishmentId, promotionId);
+
+                DecimalFormat df = new DecimalFormat("0.00");
+
+                for (EstablishmentProduct establishmentProduct : establishmentProductList) {
+                    establishmentProduct.setPriceConvert(df.format(establishmentProduct.getPrice()));
+                }
+
+                mv.addObject("establishmentProductList", establishmentProductList);
+                mv.addObject("establishmentId", establishmentId);
+                mv.addObject("promotionId", promotionId);
+            }
+
+        } catch (Exception exception) {
+            System.out.println(exception);
+        }
+
+        return mv;
+    }
+
+    @RequestMapping(value = "/promotion-product", method = RequestMethod.POST)
+    public ModelAndView saveEstablishmentProductForPromotion(Long establishmentId, Long promotionId, Long establishmentProductId, String priceProduct, HttpSession session) throws Exception {
+
+        ModelAndView mv = new ModelAndView("redirect:promotion-product?establishmentId=" + establishmentId + "&promotionId=" + promotionId);
+//        ModelAndView mv = new ModelAndView("promotion-product");
+        try {
+
+            Object auxSession = session.getAttribute("userLogged");
+            User user = null;
+
+            if (auxSession instanceof Establishment) {
+
+                user = (Establishment) auxSession;
+
+                PromotionEstablishmentProductService promotionEstablishmentProductService = new PromotionEstablishmentProductService();
+                PromotionEstablishmentProduct promotionEstablishmentProduct = new PromotionEstablishmentProduct();
+
+                EstablishmentProduct establishmentProduct = new EstablishmentProduct();
+                establishmentProduct.setId(establishmentProductId);
+
+                Promotion promotion = new Promotion();
+                promotion.setId(promotionId);
+
+                promotionEstablishmentProduct.setEstablishmentProduct(establishmentProduct);
+                promotionEstablishmentProduct.setPromotion(promotion);
+                promotionEstablishmentProduct.setPromotionPrice(Double.parseDouble(priceProduct.replace(".", "").replace(",", ".")));
+
+                promotionEstablishmentProductService.create(promotionEstablishmentProduct);
+
+            }
+
+        } catch (Exception exception) {
+            System.out.println(exception);
+        }
+
+        return mv;
+    }
+    
+    @RequestMapping(value = "/quotation", method = RequestMethod.GET)
+    public ModelAndView findAllEstablishmentForQuotation(HttpSession session) {
+        ModelAndView mv = null;
+        try {
+            Object auxSession = session.getAttribute("userLogged");
+            User user = null;
+
+            if (auxSession instanceof Establishment) {
+
+                mv = new ModelAndView("establishment/quotation");
+
+                user = (Establishment) auxSession;
+
+                EstablishmentService establishmentService = new EstablishmentService();
+                Establishment establishment = establishmentService.readByUserId(user.getId());
+                
+                List<Establishment> establishmentList = establishmentService.findAllEstablishmentForQuotation(establishment.getId());
+                
+                mv.addObject("establishment", establishment);
+                mv.addObject("establishmentList", establishmentList);
+
+            }
+
+        } catch (Exception exception) {
+            System.out.println(exception);
+        }
+        return mv;
+    }
+    
+    @RequestMapping(value = "/quotation", method = RequestMethod.POST)
+    public ModelAndView findAllProductByCompetitor(Long competitorId, HttpSession session) {
+        ModelAndView mv = null;
+        try {
+            Object auxSession = session.getAttribute("userLogged");
+            User user = null;
+
+            if (auxSession instanceof Establishment) {
+
+                mv = new ModelAndView("establishment/quotation");
+
+                user = (Establishment) auxSession;
+
+                EstablishmentService establishmentService = new EstablishmentService();
+                Establishment establishment = establishmentService.readByUserId(user.getId());
+                
+                //TODO
+            }
+
+        } catch (Exception exception) {
+            System.out.println(exception);
+        }
+        return mv;
+    }
+
+//    @RequestMapping(value = "/quotation-competitor", method = RequestMethod.GET)
+//    public ModelAndView findAllProductByCompetitor(Long establishmentId, HttpSession session) throws Exception {
+
+//        ModelAndView mv = new ModelAndView("redirect:promotion-product?establishmentId=" + establishmentId + "&promotionId=" + promotionId);
+//        ModelAndView mv = new ModelAndView("quotation-competitor");
+//        try {
+
+//            Object auxSession = session.getAttribute("userLogged");
+//            User user = null;
+
+//            if (auxSession instanceof Establishment) {
+//
+//                user = (Establishment) auxSession;
+//
+//                PromotionEstablishmentProductService promotionEstablishmentProductService = new PromotionEstablishmentProductService();
+//                PromotionEstablishmentProduct promotionEstablishmentProduct = new PromotionEstablishmentProduct();
+//
+//                EstablishmentProduct establishmentProduct = new EstablishmentProduct();
+//                establishmentProduct.setId(establishmentProductId);
+//
+//                Promotion promotion = new Promotion();
+//                promotion.setId(promotionId);
+//
+//                promotionEstablishmentProduct.setEstablishmentProduct(establishmentProduct);
+//                promotionEstablishmentProduct.setPromotion(promotion);
+//                promotionEstablishmentProduct.setPromotionPrice(Double.parseDouble(priceProduct.replace(".", "").replace(",", ".")));
+//
+//                promotionEstablishmentProductService.create(promotionEstablishmentProduct);
+//
+//            }
+
+//        } catch (Exception exception) {
+//            System.out.println(exception);
+//        }
+//
+//        return mv;
+//    }
+    
+    //barra de pesquisa
+//    @RequestMapping(value = "/product_establishment-product-search", method = RequestMethod.POST)
+//    public ModelAndView searchProduct(HttpSession session) throws Exception {
+//
+//        ModelAndView mv = new ModelAndView("redirect:/product_establishment-product");
+//
+//        try {
+//            Object auxSession = session.getAttribute("userLogged");
+//
+//            if (auxSession instanceof Establishment) {
+//
+//                EstablishmentService establishmentService = new EstablishmentService();
+//
+//                Establishment establishment = new Establishment();
+//                Product product = new Product();
+//
+//                Double price = Double.parseDouble(priceProduct.replace(".", "").replace(",", "."));
+//                User user = (Establishment) auxSession;
+//                establishment = establishmentService.readByUserId(user.getId());
+//                product.setId(productId);
+//
+//                EstablishmentProduct establishmentProduct = new EstablishmentProduct();
+//                establishmentProduct.setEstablishment(establishment);
+//                establishmentProduct.setProduct(product);
+//                establishmentProduct.setPrice(price);
+//
+//                establishmentService.saveProductEstablishment(establishmentProduct);
+//            }
+//        } catch (Exception exception) {
+//            System.out.println(exception);
+//        }
+//
+//        return mv;
+//    }
 }

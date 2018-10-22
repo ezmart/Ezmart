@@ -51,7 +51,7 @@
                                 </select>
                             </div>
                             <div>
-                                <label for="provider">Fornecedor</label>
+                                <label for="provider">Fabricante</label>
                                 <select name="providerIdProduct" id="productProviderId" required>
                                     <option value=""></option>
                                     <c:forEach items="${providerList}" var="provider">
@@ -111,7 +111,7 @@
                                 </select>
                             </div>
                             <div>
-                                <label for="provider">Fornecedor</label>
+                                <label for="provider">Fabricante</label>
                                 <select name="providerIdProductEdit" id="providerIdProductEdit" required>
                                     <option notselected></option>
                                     <c:forEach items="${providerList}" var="provider">
@@ -154,7 +154,7 @@
             </div>
             <div class="container">
                 <h4>Produtos</h4>
-                <a href="#modal-create" class="btn-floating btn-n-floatingsmall green left modal-trigger" style="color:white;"><i class="material-icons center">add</i></a>
+                <a href="#modal-create" class="btn btn-sm btn-default btn-small green left modal-trigger" style="color:white;"><i class="material-icons right">add_box</i>Adicionar</a>
                 <br><br/>
                 <div class="row">
                     <div class="col s12 m12">
@@ -187,7 +187,7 @@
                                             <p style="font-size: 18px"><b>Código EAN:</b> ${product.barCode}</p>
                                             <p style="font-size: 18px"><b>Marca:</b> ${product.brand}</p>
                                             <p style="font-size: 18px"><b>Linha:</b> ${product.sector.name}</p>
-                                            <p style="font-size: 18px"><b>Fornecedor:</b> ${product.provider.name}</p>
+                                            <p style="font-size: 18px"><b>Fabricante:</b> ${product.provider.name}</p>
                                             <div class="card-action card-content">
                                                 <div class="col s12 center">
                                                     <a class="btn btn-sm btn-default btn-small ffc400 amber accent-3 modal-trigger" href="#modal-update" style="color:white;" onclick="setProductEdit(${product.id}, '${product.name}', '${product.barCode}', '${product.brand}')"><i class="material-icons center">edit</i></a>

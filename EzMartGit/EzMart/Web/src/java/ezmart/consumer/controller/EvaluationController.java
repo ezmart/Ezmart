@@ -1,0 +1,76 @@
+package ezmart.consumer.controller;
+
+import ezmart.model.entity.Avaliation;
+import ezmart.model.entity.Consumer;
+import ezmart.model.entity.Establishment;
+import ezmart.model.entity.User;
+import ezmart.model.service.AvaliationService;
+import ezmart.model.service.ConsumerService;
+import ezmart.model.service.EstablishmentService;
+import java.sql.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import javax.servlet.http.HttpSession;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+
+@Controller
+public class EvaluationController {
+
+    @RequestMapping(value = "/marketEvaluation", method = RequestMethod.GET)
+    public ModelAndView getFormMarketEvaluation() {
+        ModelAndView mv = new ModelAndView("evaluation/market_evaluation");
+        try {
+            EstablishmentService service = new EstablishmentService();
+            Map<Long, Object> criteria = new HashMap<>();
+            //criteria.put(UserCriteria.USER_TYPE_EQ, SystemConstant.USER.TYPE.ESTABLISHMENT);
+            List<Establishment> establishmentList = service.readByCriteria(criteria, null, null);
+
+            mv.addObject("establishmentList", establishmentList);
+
+        } catch (Exception e) {
+
+        }
+        return mv;
+    }
+
+    @RequestMapping(value = "/marketEvaluation", method = RequestMethod.POST)
+    public ModelAndView setMarketEvaluation(Long establishmentId, Integer satisfaction, Integer priceProduct,
+            Integer diversity, Integer employees, Integer ambience, String commentary, HttpSession session) {
+        ModelAndView mv = new ModelAndView("evaluation/market_evaluation");
+        Object auxSession = session.getAttribute("userLogged");
+        User user = (Consumer) auxSession;
+        try {
+            Avaliation avaliation = new Avaliation();
+
+            EstablishmentService establishmentService = new EstablishmentService();
+            Establishment establishment = establishmentService.readById(establishmentId);
+            avaliation.setEstablishment(establishment);
+            
+            ConsumerService consumerService = new ConsumerService();
+            Consumer consumer = consumerService.readById(user.getId());
+            avaliation.setConsumer(consumer);
+            
+            avaliation.setSatisfaction(satisfaction);
+            avaliation.setProductPrice(priceProduct);
+            avaliation.setDiversity(diversity);
+            avaliation.setEmployees(employees);
+            avaliation.setAmbience(ambience);
+            avaliation.setCommentary(commentary);
+
+            //Paga a data atual do sistema
+            Date dateAvaliation = new Date(System.currentTimeMillis());
+            avaliation.setDateAvaliation(dateAvaliation);
+            
+            AvaliationService avaliationService = new AvaliationService();
+            avaliationService.create(avaliation);
+
+        } catch (Exception e) {
+
+        }
+        return mv;
+    }
+}

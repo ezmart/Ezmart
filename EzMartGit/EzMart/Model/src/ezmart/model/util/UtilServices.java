@@ -1,5 +1,6 @@
 package ezmart.model.util;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Random;
@@ -100,6 +101,19 @@ public class UtilServices {
         }
 
         return newPassword;
+    }
+
+    public Double totalPrice(List<Double> pricesList) {
+        Double totalPrice = 0.0;
+        try {
+            for (Double price : pricesList) {
+                totalPrice = totalPrice + price;
+            }
+        } catch (Exception exception) {
+            System.out.println(exception);
+        }
+
+        return totalPrice;
     }
 
     // trata os 'exception' e os grava em um arquivo

@@ -1,9 +1,8 @@
 package ezmart.register.controller;
 
-import ezmart.model.entity.City;
 import ezmart.model.entity.Consumer;
-import ezmart.model.service.CityService;
 import ezmart.model.service.ConsumerService;
+import ezmart.model.service.StateService;
 import ezmart.model.util.SystemConstant;
 import ezmart.model.util.UtilServices;
 import java.awt.image.BufferedImage;
@@ -18,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import ezmart.model.entity.State;
 
 @Controller
 public class ConsumerRegisterController {
@@ -27,13 +27,34 @@ public class ConsumerRegisterController {
         ModelAndView mv = new ModelAndView("register/register_consumer");
 
         try {
-            //StateService stateService = new StateService();
-
-            CityService cityService = new CityService();
+            StateService stateService = new StateService();
             Map<Long, Object> criteria = new HashMap<>();
-            //criteria.put(new CityCriteria().STATE_ID_EQ, mv);
-            List<City> cityList = cityService.readByCriteria(null, null, null);
-            mv.addObject("cityList", cityList);
+            List<State> stateList = stateService.readByCriteria(null, null, null);
+            mv.addObject("stateList", stateList);
+
+//            CityService cityService = new CityService();
+//            Map<Long, Object> criteria = new HashMap<>();
+//            //criteria.put(new CityCriteria().STATE_ID_EQ, mv);
+//            List<City> cityList = cityService.readByCriteria(null, null, null);
+            //mv.addObject("cityList", cityList);
+        } catch (Exception exception) {
+            System.out.println(exception);
+        }
+
+        return mv;
+    }
+
+    @RequestMapping(value = "/getCity-{1}", method = RequestMethod.GET)
+    public ModelAndView getCity() {
+        ModelAndView mv = new ModelAndView();
+        //System.out.println(stateId);
+        try {
+
+//            CityService cityService = new CityService();
+//            Map<Long, Object> criteria = new HashMap<>();
+//            //criteria.put(new CityCriteria().STATE_ID_EQ, mv);
+//            List<City> cityList = cityService.readByCriteria(null, null, null);
+            //mv.addObject("cityList", cityList);
         } catch (Exception exception) {
             System.out.println(exception);
         }
@@ -44,7 +65,7 @@ public class ConsumerRegisterController {
     @RequestMapping(value = "/register/consumer", method = RequestMethod.POST)
     public ModelAndView create(String name, String lastName, String cpf, String email, String password,
             String passwordConfirm, String addressLocation, Integer numberHouse, String neighborhood,
-            Long cityId, String zipCode, String telephone) {
+            Long cityId, String zipCode, String telephone, String latitude, String longitude) {
 
         ModelAndView mv = null;
         String confirmationEmail = email;
@@ -82,8 +103,8 @@ public class ConsumerRegisterController {
                 consumer.setCity(cityId);
                 consumer.setZipCode(zipCode);
                 consumer.setTelephone(telephone);
-                consumer.setLatitude("");
-                consumer.setLongitude("");
+                consumer.setLatitude(latitude);
+                consumer.setLongitude(longitude);
 
                 BufferedImage originalImage = null;
                 try {
@@ -149,12 +170,17 @@ public class ConsumerRegisterController {
                     mv.addObject("passwordConfirm", passwordConfirm);
                 }
                 if (cityId != null || cityId == null) {
-                    CityService cityService = new CityService();
-                    Map<Long, Object> criteria = new HashMap<>();
-                    //criteria.put(new CityCriteria().STATE_ID_EQ, mv);
-                    List<City> cityList = cityService.readByCriteria(null, null, null);
-                    mv.addObject("cityList", cityList);
+//                    CityService cityService = new CityService();
+//                    Map<Long, Object> criteria = new HashMap<>();
+//                    //criteria.put(new CityCriteria().STATE_ID_EQ, mv);
+//                    List<City> cityList = cityService.readByCriteria(null, null, null);
+                    mv.addObject("cityId", cityId);
                 }
+                
+                StateService stateService = new StateService();
+                List<State> stateList = stateService.readByCriteria(null, null, null);
+                mv.addObject("stateList", stateList);
+                
                 //Caso haja erros, será mostrado
                 mv.addObject("errors", errors);
             }

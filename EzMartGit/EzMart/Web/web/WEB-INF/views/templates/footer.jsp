@@ -19,9 +19,9 @@
             <div class="col l4 offset-l2 s12">
                 <h5 class="grey-text text-lighten-3">Links</h5>
                 <ul>
-                    <li><a class="grey-text text-lighten-3" href="<c:url value="/home"/>">Home</a></li>
-                    <li><a class="grey-text text-lighten-3" href="<c:url value="/contato"/>">Contato</a></li>
-                    <li><a class="grey-text text-lighten-3" href="<c:url value="/sobre"/>">Sobre</a></li>
+                    <li><a class="grey-text text-lighten-3" href="<c:url value="/home"/>">Início</a></li>
+                    <li><a class="grey-text text-lighten-3" href="<c:url value="/contact"/>">Contato</a></li>
+                    <li><a class="grey-text text-lighten-3" href="<c:url value="/information"/>">Sobre</a></li>
                 </ul>
             </div>
         </div>

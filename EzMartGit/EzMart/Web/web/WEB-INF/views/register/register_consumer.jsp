@@ -12,7 +12,7 @@
                             <a href="<c:url value="/home"/>" class="breadcrumb">Início</a>
                         <a href="<c:url value="/login"/>" class="breadcrumb">Autenticação</a>
                         <a href="<c:url value="/register"/>" class="breadcrumb">Cadastro</a>
-                        <a href="#!" class="breadcrumb">Cadastro Consumidor</a>
+                        <a href="#!" class="breadcrumb">Cadastro consumidor</a>
                     </div>
                 </div>
             </nav>
@@ -20,7 +20,7 @@
         <div class="container">
             <div class="row">
                 <div class="col s12">
-                    <h3 style="color: #2196f3">Cadastro Para Consumidor</h3>
+                    <h3 style="color: #2196f3">Cadastro para consumidor</h3>
                     <div class="card">
                         <div class="card-content">
                             <form method="POST">
@@ -66,30 +66,28 @@
                                 </div>
                                 <div class="form-group col s6">
                                     <label for="stateId">Estado:</label>
-                                    <select class="form-control input-text-register" name="stateId" id="stateId">
+                                    <select onchange="setCitiesWithState()" class="form-control input-text-register" name="stateId" id="stateId">
                                         <option notselected></option>
                                         <c:forEach items="${stateList}" var="state">
-                                            <option <c:if test="${stateIdConsumer eq state.id}">selected="true"</c:if> id="stateId" value="${state.id}">${state.name}</option>                            
+                                            <option  <c:if test="${stateIdConsumer eq state.id}">selected="true"</c:if> id="stateId" value="${state.id}">${state.name}</option>                            
                                         </c:forEach>
                                     </select>
                                 </div>
                                 <div class="form-group col s6">
-                                    <label for="cityId">Municipio:</label>
+                                    <label>Municipio:</label>
                                     <select class="form-control input-text-register" name="cityId" id="cityId">
-                                        <option notselected></option>
-                                        <c:forEach items="${cityList}" var="city">
-                                            <option <c:if test="${cityIdConsumer eq city.id}">selected="true"</c:if> id="cityId" value="${city.id}">${city.name}</option>                            
-                                        </c:forEach>
+                                        <option notselected>Selecione primeiro seu estado</option>
+                                        
                                     </select>
                                     <span style="color: orangered">${errors.cityId}</span>
                                 </div>
                                 <div class="form-group">
                                     <label for="zipCode">CEP:</label>
-                                    <input type="text" class="form-control" name="zipCode" id="zipCodeUserConsumerRegister" value="${zipCode}">
+                                    <input type="text" class="form-control" name="zipCode" id="zipCode" value="${zipCode}">
                                     <span style="color: orangered">${errors.zipCode}</span>
                                 </div>
                                 <div class="form-group">
-                                    <label for="zipCode">CPF:</label>
+                                    <label for="cpf">CPF:</label>
                                     <input type="text" class="form-control" name="cpf" id="cpfUserRegister" value="${cpf}">
                                     <span style="color: orangered">${errors.cpf}</span>
                                 </div>
@@ -99,6 +97,8 @@
                                     <span style="color: orangered">${errors.telephone}</span>
                                 </div>
                                 <br/>
+                                <input type="text" style="display: none" name="latitude" id="latitude" value="">
+                                <input type="text" style="display: none" name="longitude" id="longitude" value="">
                                 <button id="btn-btn-ezmart-style" type="submit" class="btn" value="confirmar"><i class="material-icons left">border_color</i>Cadastrar</button>
                             </form>
                         </div>
@@ -113,7 +113,7 @@
 
                     <div class="card">
                         <div class="card-content">
-                            <c:import url="/WEB-INF/views/google_maps.jsp"/>
+                            <c:import url="/WEB-INF/views/maps/google_maps_register.jsp"/>
                         </div>
                     </div>
                 </div>

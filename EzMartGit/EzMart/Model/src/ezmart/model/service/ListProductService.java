@@ -2,10 +2,13 @@ package ezmart.model.service;
 
 import ezmart.model.ConnectionManager;
 import ezmart.model.base.service.BaseListProductService;
+import ezmart.model.criteria.ListProductCriteria;
 import ezmart.model.dao.ListProductDAO;
 import ezmart.model.entity.ListProduct;
 import ezmart.model.model_entity.ListProductModel;
+import ezmart.model.util.SystemConstant;
 import java.sql.Connection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -119,7 +122,31 @@ public class ListProductService implements BaseListProductService {
 
     @Override
     public Map<String, String> validate(Map<String, Object> fields) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        Map<String, String> errors = new HashMap<>();
+
+        String validationType = (String) fields.get("validationType");
+        Long listId = (Long) fields.get("listId");
+        Long productId = (Long) fields.get("productId");
+
+        if (validationType.equals((SystemConstant.VALIDATION.PRODUCT.ADD_PRODUCT_LIST))) {
+            //Validação de preenchimento
+            if (listId == null || productId == null) {
+                errors.put("error", "*Campo vazio!");
+            } else {
+                ListProductService listProductService = new ListProductService();
+                Map<Long, Object> criteria = new HashMap<>();
+                criteria.put(ListProductCriteria.LIST_ID_EQ, listId);
+                criteria.put(ListProductCriteria.PRODUCT_ID_EQ, productId);
+
+                List<ListProductModel> productsList = listProductService.readByCriteriaModel(criteria, null, null);
+                if(productsList.size() > 0 ){
+                    errors.put("error", "*Produto já cadastrado nesta lista!");
+                }
+            }
+
+        }
+        return errors;
     }
 
 }

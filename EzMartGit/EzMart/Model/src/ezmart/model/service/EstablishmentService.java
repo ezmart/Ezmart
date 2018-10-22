@@ -11,11 +11,12 @@ import java.util.Map;
 import ezmart.model.base.service.BaseEstablishmentService;
 import ezmart.model.criteria.EstablishmentCriteria;
 import ezmart.model.criteria.UserCriteria;
+import ezmart.model.entity.EstablishmentProduct;
+import ezmart.model.entity.Product;
 import ezmart.model.util.SystemConstant;
 import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.sql.Date;
 
 public class EstablishmentService implements BaseEstablishmentService {
 
@@ -274,6 +275,108 @@ public class EstablishmentService implements BaseEstablishmentService {
             conn.commit();
             conn.close();
             return establishment;
+        } catch (Exception e) {
+            conn.rollback();
+            conn.close();
+            throw e;
+        }
+    }
+
+    public List<EstablishmentProduct> findAllEstablishmentProduct(Long id) throws Exception {
+        Connection conn = ConnectionManager.getInstance().getConnection();
+        try {
+            EstablishmentDAO establishmentDAO = new EstablishmentDAO();
+            List<EstablishmentProduct> establishmentList = establishmentDAO.findAllEstablishmentProduct(conn, id);
+            conn.commit();
+            conn.close();
+            return establishmentList;
+        } catch (Exception e) {
+            conn.rollback();
+            conn.close();
+            throw e;
+        }
+    }
+
+    public List<Product> findAllProductByEstablishmentId(Long id) throws Exception {
+        Connection conn = ConnectionManager.getInstance().getConnection();
+        try {
+            EstablishmentDAO establishmentDAO = new EstablishmentDAO();
+            List<Product> productList = establishmentDAO.findAllProductByEstablishmentId(conn, id);
+            conn.commit();
+            conn.close();
+            return productList;
+        } catch (Exception e) {
+            conn.rollback();
+            conn.close();
+            throw e;
+        }
+    }
+
+    public void saveProductEstablishment(EstablishmentProduct establishmentProduct) throws Exception {
+        Connection conn = ConnectionManager.getInstance().getConnection();
+        try {
+            EstablishmentDAO establishmentDAO = new EstablishmentDAO();
+            establishmentDAO.saveProductEstablishment(conn, establishmentProduct);
+            conn.commit();
+            conn.close();
+        } catch (Exception e) {
+            conn.rollback();
+            conn.close();
+            throw e;
+        }
+    }
+
+    public void updatePriceEstablishmentProduct(EstablishmentProduct establishmentProduct) throws Exception {
+        Connection conn = ConnectionManager.getInstance().getConnection();
+        try {
+            EstablishmentDAO establishmentDAO = new EstablishmentDAO();
+            establishmentDAO.updatePriceEstablishmentProduct(conn, establishmentProduct);
+            conn.commit();
+            conn.close();
+        } catch (Exception e) {
+            conn.rollback();
+            conn.close();
+            throw e;
+        }
+    }
+
+    public void deleteEstablishmentProduct(Long establishmentProductId) throws Exception {
+        Connection conn = ConnectionManager.getInstance().getConnection();
+        try {
+            EstablishmentDAO establishmentDAO = new EstablishmentDAO();
+            establishmentDAO.deleteEstablishmentProduct(conn, establishmentProductId);
+            conn.commit();
+            conn.close();
+        } catch (Exception e) {
+            conn.rollback();
+            conn.close();
+            throw e;
+        }
+    }
+
+    public List<EstablishmentProduct> findAllEstablishmentProductForPromotion(Long establishmentId, Long promotionId) throws Exception {
+        Connection conn = ConnectionManager.getInstance().getConnection();
+        try {
+            EstablishmentDAO establishmentDAO = new EstablishmentDAO();
+            List<EstablishmentProduct> establishmentList = establishmentDAO.findAllEstablishmentProductForPromotion(conn, establishmentId, promotionId);
+            conn.commit();
+            conn.close();
+            return establishmentList;
+        } catch (Exception e) {
+            conn.rollback();
+            conn.close();
+            throw e;
+        }
+    }
+    
+    public List<Establishment> findAllEstablishmentForQuotation(Long id) throws Exception {
+        Connection conn = ConnectionManager.getInstance().getConnection();
+        try {
+            EstablishmentDAO establishmentDAO = new EstablishmentDAO();
+            List<Establishment> establishmentList = establishmentDAO.findAllEstablishmentForQuotation(conn, id);
+            conn.commit();
+            conn.close();
+            return establishmentList;
         } catch (Exception e) {
             conn.rollback();
             conn.close();
