@@ -25,11 +25,11 @@
         <c:if test="${not empty userLogged}">
             <c:import url="/WEB-INF/views/templates/header_emporium.jsp"></c:import>
 
-            <div>
-                <nav>
-                    <div class="nav-wrapper">
-                        <div style="margin-left: 40px" class="col s12">
-                            <a href="<c:url value="/home"/>" class="breadcrumb">Início</a>
+                <div>
+                    <nav>
+                        <div class="nav-wrapper">
+                            <div style="margin-left: 40px" class="col s12">
+                                <a href="<c:url value="/home"/>" class="breadcrumb">Início</a>
                             <a href="<c:url value="/promotion"/>" class="breadcrumb">Minhas Promoções</a>
                             <a href="<c:url value=""/>" class="breadcrumb">Produtos</a>
                         </div>
@@ -39,9 +39,9 @@
             <div class="container">
                 <h4>Produtos</h4>
                 <br><br/>
-                <input type="text" name="searchProduct" id="searchProduct" style="width: 50%; margin-left: 20%;">
+<!--                <input type="text" name="searchProduct" id="searchProduct" style="width: 50%; margin-left: 20%;">
                 <a class="btn btn-sm btn-default #ac1925 modal-trigger"  onclick="setDadaModalProductList()"style="color:ffc400 amber accent-3;"><i class="material-icons right">search</i>PESQUISAR</a>
-                <br><br/>
+                <br><br/>-->
                 <c:if test="${empty establishmentProductList}">
                     <div class="row" style="padding: 20px;">
                         <h4 class="center-align" style="color: #2196f3">Nenhum produto encontrado!</h4>
@@ -68,7 +68,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <!--<div class="container">-->
                     <div class="row">
                         <div class="col s12 m12">
@@ -86,8 +86,13 @@
                                                 <p style="font-size: 18px"><b>Marca:</b> ${establishmentProduct.product.brand}</p>
                                                 <p style="font-size: 18px"><b>Linha:</b> ${establishmentProduct.product.sector.name}</p>
                                                 <p style="font-size: 18px"><b>Fabricante:</b> ${establishmentProduct.product.provider.name}</p>
-                                                <p style="font-size: 18px"><b>Preço:</b> ${establishmentProduct.priceConvert}</p>
-                                                <a class="btn btn-sm btn-danger btn-small green modal-trigger" onclick="setEstablishmentProductId(${establishmentProduct.id})" href="#modal-create" style="color:white;margin-left: 10%;"><i class="material-icons right">add_shopping_cart</i>ADICIONAR</a>
+                                                <c:if test="${isVisualizar = true}">
+                                                    <p style="font-size: 18px"><b>Preço promocional:</b> ${establishmentProduct.priceConvert}</p>
+                                                </c:if>
+                                                <c:if test="${isVisualizar = false}">
+                                                    <p style="font-size: 18px"><b>Preço:</b> ${establishmentProduct.priceConvert}</p>
+                                                    <a class="btn btn-sm btn-danger btn-small green modal-trigger" onclick="setEstablishmentProductId(${establishmentProduct.id})" href="#modal-create" style="color:white;margin-left: 10%;"><i class="material-icons right">add_shopping_cart</i>ADICIONAR</a>
+                                                </c:if>
                                             </div>
                                         </div>
                                     </li>

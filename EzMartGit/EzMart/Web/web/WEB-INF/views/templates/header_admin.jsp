@@ -31,7 +31,7 @@
                         <li><a class="user-header-style" href="<c:url value="#!"/>"><i class="material-icons left" style="font-size: 20px">supervisor_account</i>Sobre</a></li>  
                         <li><a class="user-header-style" href="<c:url value="/contact"/>"><i class="material-icons left" style="font-size: 20px">contacts</i>Contato</a></li>
                         <li>
-                            <a class="dropdown-button user-header-style" href="#!" data-activates="main"><i class="material-icons left" style="font-size: 20px">settings</i>Minha opções</a>
+                            <a class="dropdown-button user-header-style" href="#!" data-activates="main"><i class="material-icons left" style="font-size: 20px">settings</i>Minhas opções</a>
                         </li>
                         <li>
                             <a class="dropdown-button user-header-style" href="#!" id="avatar" data-activates="user">

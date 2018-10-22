@@ -10,6 +10,10 @@ public class Promotion extends BaseEntity  {
     private Date startDate;
     
     private Date finalDate;
+    
+    private String startDateConvert;
+    
+    private String finalDateConvert;
 
     public String getName() {
         return name;
@@ -33,5 +37,21 @@ public class Promotion extends BaseEntity  {
 
     public void setFinalDate(Date finalDate) {
         this.finalDate = finalDate;
+    }
+
+    public String getStartDateConvert() {
+        return startDateConvert;
+    }
+
+    public void setStartDateConvert(String startDateConvert) {
+        this.startDateConvert = startDateConvert;
+    }
+
+    public String getFinalDateConvert() {
+        return finalDateConvert;
+    }
+
+    public void setFinalDateConvert(String finalDateConvert) {
+        this.finalDateConvert = finalDateConvert;
     }
 }

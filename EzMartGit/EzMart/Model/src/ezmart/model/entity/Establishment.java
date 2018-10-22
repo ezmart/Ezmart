@@ -1,6 +1,7 @@
 package ezmart.model.entity;
 
 import java.sql.Date;
+import java.util.List;
 
 
 public class Establishment extends User {
@@ -12,6 +13,7 @@ public class Establishment extends User {
     private Integer plan;
     private Date planStartDate;
     private Date planFinalDate;
+    private List<EstablishmentProduct> productList;
 
     public String getCnpj() {
         return cnpj;
@@ -67,6 +69,14 @@ public class Establishment extends User {
 
     public void setPlanFinalDate(Date planFinalDate) {
         this.planFinalDate = planFinalDate;
+    }
+
+    public List<EstablishmentProduct> getProductList() {
+        return productList;
+    }
+
+    public void setProductList(List<EstablishmentProduct> productList) {
+        this.productList = productList;
     }
 
 }

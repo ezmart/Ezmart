@@ -25,36 +25,6 @@
         <c:if test="${not empty userLogged}">
             <c:import url="/WEB-INF/views/templates/header_emporium.jsp"></c:import>
 
-                <!--                <div id="modal-add" class="modal">
-                                    <div class="modal-content">
-                                        <h4>Adicionar Produto<i class=" small material-icons" style="margin-left: 10px;">add_box</i></h4>
-                                        <div class="row">
-                                            <div class="col s10 m10">
-                                                <ul>
-            <%--<c:forEach items="${establishmentProductList}" var="establishmentProduct">--%>
-                <li class="col l4 m6 s12" >
-                    <div class="card-panel medium">
-                        <div class="row" style="padding: 20px;">
-                            <div>
-                                <img class="responsive-img-center" src="<c:url value = "/resources/img/product/${establishmentProduct.id}.jpg"/>" alt="${establishmentProduct.barCode} - ${establishmentProduct.name}" width="150">
-                            </div>
-                            <br/>
-                            <p style="font-size: 18px"><b>Id:</b> ${establishmentProduct.id}</p>
-                            <p style="font-size: 18px"><b>Nome:</b> ${establishmentProduct.name}</p>
-                            <p style="font-size: 18px"><b>Código EAN:</b> ${establishmentProduct.barCode}</p>
-                            <p style="font-size: 18px"><b>Marca:</b> ${establishmentProduct.brand}</p>
-                            <p style="font-size: 18px"><b>Linha:</b> ${establishmentProduct.sector.name}</p>
-                            <p style="font-size: 18px"><b>Fornecedor:</b> ${establishmentProduct.provider.name}</p>
-                        </div>
-                    </div>
-                </li>
-            <%--</c:forEach>--%>
-        </ul>
-    </div>
-</div>
-</div>
-</div>-->
-
             <div>
                 <nav>
                     <div class="nav-wrapper">
@@ -66,7 +36,7 @@
                 </nav>
             </div>
             <div class="container">
-                <h4>Meus Produtos</h4>
+                <h4>Meus produtos</h4>
                 <a href="/ezmartWeb/product_establishment-product" class="btn btn-sm btn-default btn-small green left modal-trigger" style="color:white;"><i class="material-icons right">add_box</i>Adicionar</a>
                 <br><br/>
                 <c:if test="${empty establishmentProductList}">
@@ -78,7 +48,7 @@
 
                     <div id="modal-update" class="modal">
                         <div class="modal-content">
-                            <h4>Alterar Preço<i class=" small material-icons" style="margin-left: 10px;">attach_money</i></h4>
+                            <h4>Alterar preço<i class=" small material-icons" style="margin-left: 10px;">attach_money</i></h4>
                             <div class="row">
                                 <form class="col s12" method="POST">
                                     <div>
@@ -96,8 +66,8 @@
                     
                     <div id="modal-delete" class="modal">
                     <div class="modal-content">
-                        <h4>Excluir Produto<i class=" small material-icons" style="margin-left: 10px;">delete</i></h4>
-                        <p><font size="5">Tem certeza que deseja excluir o Produto: </font><font color="red" size="5"><container id = "barCodeProduct"></container>  -  <container id = "nameProduct"></container></font> <font size="5">?</font></p>
+                        <h4>Excluir produto<i class=" small material-icons" style="margin-left: 10px;">delete</i></h4>
+                        <p><font size="5">Tem certeza que deseja excluir o produto: </font><font color="red" size="5"><container id = "barCodeProduct"></container>  -  <container id = "nameProduct"></container></font> <font size="5">?</font></p>
                         <div class="modal-footer">
                             <form method="POST" action="/ezmartWeb/product_establishment-productDelete">
                                 <input type="text" style="display: none"  name="productDeleteId" id = "idProductDelete">

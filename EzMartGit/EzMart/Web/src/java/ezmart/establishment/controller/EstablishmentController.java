@@ -15,6 +15,7 @@ import ezmart.model.service.PromotionEstablishmentProductService;
 import ezmart.model.service.StateService;
 import java.text.DecimalFormat;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -349,7 +350,7 @@ public class EstablishmentController {
     }
 
     @RequestMapping(value = "/promotion-product", method = RequestMethod.GET)
-    public ModelAndView findAllEstablishmentProductForPromotion(Long establishmentId, Long promotionId, HttpSession session) throws Exception {
+    public ModelAndView findAllEstablishmentProductForPromotion(Long establishmentId, Long promotionId, boolean isVisualizar, HttpSession session) throws Exception {
 
         ModelAndView mv = null;
         try {
@@ -365,7 +366,13 @@ public class EstablishmentController {
 
                 EstablishmentService establishmentService = new EstablishmentService();
 
-                List<EstablishmentProduct> establishmentProductList = establishmentService.findAllEstablishmentProductForPromotion(establishmentId, promotionId);
+                List<EstablishmentProduct> establishmentProductList = new ArrayList<>();
+
+                if (!isVisualizar) {
+                    establishmentProductList = establishmentService.findAllEstablishmentProductForPromotion(establishmentId, promotionId);
+                } else {
+                    establishmentProductList = establishmentService.findAllEstablishmentProductInPromotion(establishmentId, promotionId);
+                }
 
                 DecimalFormat df = new DecimalFormat("0.00");
 
@@ -376,6 +383,7 @@ public class EstablishmentController {
                 mv.addObject("establishmentProductList", establishmentProductList);
                 mv.addObject("establishmentId", establishmentId);
                 mv.addObject("promotionId", promotionId);
+                mv.addObject("isVizualizar", isVisualizar);
             }
 
         } catch (Exception exception) {
@@ -422,7 +430,7 @@ public class EstablishmentController {
 
         return mv;
     }
-    
+
     @RequestMapping(value = "/quotation", method = RequestMethod.GET)
     public ModelAndView findAllEstablishmentForQuotation(HttpSession session) {
         ModelAndView mv = null;
@@ -438,9 +446,9 @@ public class EstablishmentController {
 
                 EstablishmentService establishmentService = new EstablishmentService();
                 Establishment establishment = establishmentService.readByUserId(user.getId());
-                
+
                 List<Establishment> establishmentList = establishmentService.findAllEstablishmentForQuotation(establishment.getId());
-                
+
                 mv.addObject("establishment", establishment);
                 mv.addObject("establishmentList", establishmentList);
 
@@ -451,7 +459,7 @@ public class EstablishmentController {
         }
         return mv;
     }
-    
+
     @RequestMapping(value = "/quotation", method = RequestMethod.POST)
     public ModelAndView findAllProductByCompetitor(Long competitorId, HttpSession session) {
         ModelAndView mv = null;
@@ -461,14 +469,38 @@ public class EstablishmentController {
 
             if (auxSession instanceof Establishment) {
 
-                mv = new ModelAndView("establishment/quotation");
+                mv = new ModelAndView("establishment/quotation_result");
 
                 user = (Establishment) auxSession;
 
                 EstablishmentService establishmentService = new EstablishmentService();
                 Establishment establishment = establishmentService.readByUserId(user.getId());
-                
-                //TODO
+
+                List<EstablishmentProduct> establishmentProductList = establishmentService.findAllEstablishmentProduct(establishment.getId());
+                if (establishmentProductList != null && !establishmentProductList.isEmpty()) {
+                    establishment.setProductList(establishmentProductList);
+                }
+
+                Establishment competitor = establishmentService.readByEstablishmentId(competitorId);
+
+                List<Long> productIdList = new ArrayList<>();
+                for (EstablishmentProduct product : establishmentProductList) {
+                    productIdList.add(product.getId());
+                }
+
+                List<EstablishmentProduct> competitorList = establishmentService.findAllEstablishmentProductByCompetitorId(competitorId, productIdList);
+                if (competitorList != null && !competitorList.isEmpty()) {
+                    competitor.setProductList(competitorList);
+                }
+
+                List<Establishment> establishmentList = new ArrayList<>();
+                establishmentList.add(establishment);
+                establishmentList.add(competitor);
+
+                mv.addObject("establishmentList", establishmentList);
+                mv.addObject("establishmentProductList", establishmentProductList);
+                mv.addObject("competitorList", competitorList);
+
             }
 
         } catch (Exception exception) {
@@ -477,44 +509,6 @@ public class EstablishmentController {
         return mv;
     }
 
-//    @RequestMapping(value = "/quotation-competitor", method = RequestMethod.GET)
-//    public ModelAndView findAllProductByCompetitor(Long establishmentId, HttpSession session) throws Exception {
-
-//        ModelAndView mv = new ModelAndView("redirect:promotion-product?establishmentId=" + establishmentId + "&promotionId=" + promotionId);
-//        ModelAndView mv = new ModelAndView("quotation-competitor");
-//        try {
-
-//            Object auxSession = session.getAttribute("userLogged");
-//            User user = null;
-
-//            if (auxSession instanceof Establishment) {
-//
-//                user = (Establishment) auxSession;
-//
-//                PromotionEstablishmentProductService promotionEstablishmentProductService = new PromotionEstablishmentProductService();
-//                PromotionEstablishmentProduct promotionEstablishmentProduct = new PromotionEstablishmentProduct();
-//
-//                EstablishmentProduct establishmentProduct = new EstablishmentProduct();
-//                establishmentProduct.setId(establishmentProductId);
-//
-//                Promotion promotion = new Promotion();
-//                promotion.setId(promotionId);
-//
-//                promotionEstablishmentProduct.setEstablishmentProduct(establishmentProduct);
-//                promotionEstablishmentProduct.setPromotion(promotion);
-//                promotionEstablishmentProduct.setPromotionPrice(Double.parseDouble(priceProduct.replace(".", "").replace(",", ".")));
-//
-//                promotionEstablishmentProductService.create(promotionEstablishmentProduct);
-//
-//            }
-
-//        } catch (Exception exception) {
-//            System.out.println(exception);
-//        }
-//
-//        return mv;
-//    }
-    
     //barra de pesquisa
 //    @RequestMapping(value = "/product_establishment-product-search", method = RequestMethod.POST)
 //    public ModelAndView searchProduct(HttpSession session) throws Exception {
