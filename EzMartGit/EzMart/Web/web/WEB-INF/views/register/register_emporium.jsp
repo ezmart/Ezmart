@@ -87,7 +87,7 @@
                                     <label>Municipio:</label>
                                     <select class="form-control input-text-register" name="cityId" id="cityId">
                                         <option notselected>Selecione primeiro seu estado</option>
-                                        
+
                                     </select>
                                     <span style="color: orangered">${errors.cityId}</span>
                                 </div>
@@ -106,6 +106,8 @@
                                 <input type="text" style="display: none" name="longitude" id="longitude" value="">
                                 <button id="btn-btn-ezmart-style" type="submit" class="btn"><i class="material-icons left">border_color</i>Cadastrar</button>
                             </form>
+                            <br/>
+                            <p>Ao clicar em cadastrar você estará concordando com os <a href="<c:url value="/terms"/>">termos de uso</a></p>
                         </div>
                     </div>
                 </div>  

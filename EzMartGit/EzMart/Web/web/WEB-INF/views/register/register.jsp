@@ -12,7 +12,7 @@
                         <div style="margin-left: 40px" class="col s12">
                             <a href="<c:url value="/home"/>" class="breadcrumb">Início</a>
                         <a href="<c:url value="/login"/>" class="breadcrumb">Autenticação</a>
-                        <a href="<c:url value="/cadastro"/>" class="breadcrumb">Cadastro</a>
+                        <a href="<c:url value="/register"/>" class="breadcrumb">Cadastro</a>
                     </div>
                 </div>
             </nav>

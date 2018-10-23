@@ -66,41 +66,55 @@
             </div>
         </div>
         <div id="modal-view" class="modal">
-            <div class="modal-footer">
-                <div style="background-color: #F1F1F1" class="card-panel medium">
-                    <div class="row">
-                        <h3>Produto</h3>
-                        <div class="col s12">
-                            <div class="card-panel medium col s4" style="align-content: center">
-                                <img class="responsive-img-center" id="productImgValue" src="<c:url value = "/resources/img/product/${product.id}.jpg"/>" alt="${product.barCode} - ${product.name}" width="120">
-                            </div>
-                            <div class="col s8">
+            <div class="row">
+                <div class="col s12 m12">
+                    <div class="modal-footer">
+                        <div style="background-color: #F1F1F1" class="card-panel medium">
+                            <div style="padding: 20px;">
+                                <div style="align-content: center" class="card-panel medium col s4">
+                                    <div class="">
+                                        <img class="responsive-img-center" id="productImgValue" src="<c:url value = "/resources/img/product/${product.id}.jpg"/>" alt="${product.barCode} - ${product.name}" width="120">
+                                    </div>
+                                </div>
+                                <br/>
                                 <input style="color: #000000; border: 0" id="productNameModal" name="productNameModal" type="text" class="validate" disabled="">
-                                <!--<input style="color: #000000; border: 0" id="productSectorNameModal" name="productSectorNameModal" type="text" class="validate" disabled="">-->
+                                <input style="color: #000000; border: 0" id="productSectorNameModal" name="productSectorNameModal" type="text" class="validate" disabled="">
                                 <input style="color: #000000; border: 0" id="productBrandModal" name="productBrandModal" type="text" class="validate" disabled="">
                                 <input style="color: #000000; border: 0" id="productProviderNameModal" name="productProviderNameModal" type="text" class="validate" disabled="">
+                                <a class="btn btn-sm btn-default btn-small green modal-close modal-action" style="color:white; margin: -10px">Fechar</a>
                             </div>
                         </div>
-                        <a class="btn btn-sm btn-default btn-small green modal-close modal-action" style="color:white; margin: -10px">Fechar</a>
                     </div>
                 </div>
             </div>
         </div>
         <div class="slider">
-            <c:if test="${not empty userLogged}">
-                <c:if test="${userLogged.userType eq 'admin'}">
-                    <c:import url="/WEB-INF/views/home/banners/consumer/banner_consumer.jsp"></c:import>
-                </c:if>
-                <c:if test="${userLogged.userType eq 'consumer'}">
-                    <c:import url="/WEB-INF/views/home/banners/consumer/banner_consumer.jsp"></c:import>
-                </c:if>
-                <c:if test="${userLogged.userType eq 'emporium'}">
-                    <c:import url="/WEB-INF/views/home/banners/establishment/banner_establishment.jsp"></c:import>
-                </c:if>
-            </c:if>
-            <c:if test="${empty userLogged}">
-                <c:import url="/WEB-INF/views/home/banners/consumer/banner_consumer.jsp"></c:import>
-            </c:if>
+            <ul class="slides">
+                <li>
+                    <img src="<c:url value = "/resources/img/banners/img_fundo_mercado.png"/>"> <!-- random image -->
+                    <div class="caption center-align">
+                        <h3 class="light text-lighten-1">Bem vindo ao EzMart</h3>
+                        <h5 class="light text-lighten-1">${userLogged.name}</h5>
+                        <br/>
+                        <br/>
+                        <img style="width: 100px; height: 32px" src="<c:url value = "/resources/img/logo_branco.png"/>">
+                    </div>
+                </li>
+                <li>
+                    <img src="<c:url value = "/resources/img/banners/img_fundo_mercado_nova.png"/>"> <!-- random image -->
+                    <div class="caption right-align">
+                        <img style="width: 100px; height: 32px" src="<c:url value = "/resources/img/logo_branco.png"/>">
+                        <h5 class="light grey-text text-lighten-2"></h5>
+                    </div>
+                </li>
+                <li>
+                    <img style="opacity: 0.5" src="<c:url value = "/resources/img/banners/img_fundo_mercado_2.png"/>"> <!-- random image -->
+                    <div class="caption right-align">
+                        <img style="width: 100px; height: 32px" src="<c:url value = "/resources/img/logo_preto.png"/>">
+                        <h6 class="light grey-text text-lighten-3"></h6>
+                    </div>
+                </li>
+            </ul>
         </div>
         <!--<div class="container">-->
         <div class="row">
@@ -157,10 +171,10 @@
             <ul class="pagination center" >
                 <c:if test="${(offset-limit)>=0}">
                     <li class="waves-effect"><a href="<c:url value="/home?limit=${limit}&offset=${offset-limit}"/>"><i class="material-icons">chevron_left</i></a></li>
-                    </c:if>
-                    <c:if test="${(limit+offset)<count}">
+                </c:if>
+                <c:if test="${(limit+offset)<count}">
                     <li class="waves-effect"><a href="<c:url value="/home?limit=${limit}&offset=${offset+limit}"/>"><i class="material-icons">chevron_right</i></a></li>
-                    </c:if>
+                </c:if>
             </ul>
         </div>
         <!--</div>-->

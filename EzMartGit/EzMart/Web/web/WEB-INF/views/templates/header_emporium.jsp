@@ -3,15 +3,15 @@
     <ul style="margin-top: 65px" id="main" class="dropdown-content">
         <li><a class="dropdown-content-user-header-style" href="<c:url value="quotation"/>">Cotação</a></li>
         <li class="divider"></li>
-        <li><a class="dropdown-content-user-header-style" href="<c:url value="product_establishment"/>">Meus Produtos</a></li>
+        <li><a class="dropdown-content-user-header-style" href="<c:url value="product_establishment"/>">Meus produtos</a></li>
         <li class="divider"></li>
-        <li><a class="dropdown-content-user-header-style" href="<c:url value="promotion"/>">Minhas Promoções</a></li>
+        <li><a class="dropdown-content-user-header-style" href="<c:url value="promotion"/>">Minhas promoções</a></li>
         <li class="divider"></li>
     </ul>
     <ul style="margin-top: 65px" id="user" class="dropdown-content">
-        <li><a class="dropdown-content-user-header-style" href="<c:url value="/profile"/>">Meu Perfil</a></li>
+        <li><a class="dropdown-content-user-header-style" href="<c:url value="/profile"/>">Meu perfil</a></li>
         <li class="divider"></li>
-        <li><a class="dropdown-content-user-header-style" href="<c:url value="/changePassword"/>">Alterar Senha</a></li>
+        <li><a class="dropdown-content-user-header-style" href="<c:url value="/changePassword"/>">Alterar senha</a></li>
         <li class="divider"></li>
         <li><a class="dropdown-content-user-header-style" href="<c:url value="/logout"/>">Sair</a></li>
         <li class="divider"></li>
@@ -30,7 +30,7 @@
                         <li><a class="user-header-style" href="<c:url value="/contact"/>"><i class="material-icons left" style="font-size: 20px">contacts</i>Contato</a></li>
                         <!--<li><a class="user-header-style" href="<c:url value="#!"/>"><i class="material-icons left" style="font-size: 20px">email</i>Mensagens</a></li>-->
                         <li>
-                            <a class="dropdown-button user-header-style" href="<c:url value="#!"/>" data-activates="main"><i class="material-icons left" style="font-size: 20px">settings</i>Minha opções</a>
+                            <a class="dropdown-button user-header-style" href="<c:url value="#!"/>" data-activates="main"><i class="material-icons left" style="font-size: 20px">settings</i>Minhas opções</a>
                         </li>
                         <li>
                             <a class="dropdown-button user-header-style" href="#!" id="avatar" data-activates="user">

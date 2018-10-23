@@ -30,22 +30,22 @@
                         <div class="nav-wrapper">
                             <div style="margin-left: 40px" class="col s12">
                                 <a href="<c:url value="/home"/>" class="breadcrumb">Início</a>
-                            <a href="<c:url value=""/>" class="breadcrumb">Minhas Promoções</a>
+                            <a href="<c:url value=""/>" class="breadcrumb">Minhas promoções</a>
                         </div>
                     </div>
                 </nav>
             </div>
             <div id="modal-create" class="modal">
                 <div class="modal-content">
-                    <h4>Adicionar Promoção<i class=" small material-icons" style="margin-left: 10px;">add_box</i></h4>
+                    <h4>Criar promoção<i class=" small material-icons" style="margin-left: 10px;">add_box</i></h4>
                     <div class="row">
                         <form class="col s12" method="POST">
                             <div>
                                 <label for="nome">Nome</label>
                                 <input id="promotionName" placeholder="Digite aqui..." name="namePromotion" type="text" class="validate" required>
-                                <label for="startDate">Início da Promoção</label>
+                                <label for="startDate">Início da promoção</label>
                                 <input type="date" name="promotionStart" required>
-                                <label for="finalDate">Término da Promoção</label>
+                                <label for="finalDate">Término da promoção</label>
                                 <input type="date" name="promotionFinal" required>
                             </div>
                             <div class="modal-footer">
@@ -58,8 +58,8 @@
             </div>
 
             <div class="container">
-                <h4>Minhas Promoções</h4>
-                <a href="#modal-create" class="btn btn-sm btn-default btn-small green left modal-trigger" style="color:white;"><i class="material-icons right">add_box</i>Adicionar</a>
+                <h4>Minhas promoções</h4>
+                <a href="#modal-create" class="btn btn-sm btn-default btn-small green left modal-trigger" style="color:white;"><i class="material-icons right">add_box</i>CRIAR PROMOÇÃO</a>
                 <br><br/>
                 <c:if test="${empty promotionList}">
                     <div class="row" style="padding: 20px;">
@@ -68,29 +68,32 @@
                 </c:if>
                 <c:if test="${not empty promotionList}">
 
-                        <div class="row">
-                            <div class="col s12 ">
-                                <table class="table">
+                    <div class="row">
+                        <div class="col s12 ">
+                            <table class="table">
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>Data inicial</th>
+                                    <th>Data final</th>
+                                <hr>
+                                <th></th>
+                                </tr>
+                                <c:forEach items="${promotionList}" var="promotionList">
                                     <tr>
-                                        <th>Nome</th>
-                                        <th>Data Inicial</th>
-                                        <th>Data Final</th>
-                                    <hr>
-                                    <th></th>
-                                    </tr>
-                                    <c:forEach items="${promotionList}" var="promotionList">
-                                        <tr>
-                                            <td>${promotionList.promotion.name}</td>
-                                            <td>${promotionList.promotion.startDate}</td>
-                                            <td>${promotionList.promotion.finalDate}</td>
-                                            <td>
-                                                <a class="btn btn-default btn-small green modal-trigger" href="promotion-product?establishmentId=${promotionList.establishmentProduct.establishment.id}&promotionId=${promotionList.promotion.id}" style="color:white;"><i class="material-icons right">add_shopping_cart</i>ADICIONAR PRODUTOS</a>
-                                            </td>
-                                        </tr>    
-                                    </c:forEach>
-                                </table>
-                            </div>
+                                        <td>${promotionList.promotion.name}</td>
+                                        <td>${promotionList.promotion.startDateConvert}</td>
+                                        <td>${promotionList.promotion.finalDateConvert}</td>
+                                        <td>
+                                            <a class="btn btn-default btn-small green modal-trigger" href="promotion-product?establishmentId=${promotionList.establishmentProduct.establishment.id}&promotionId=${promotionList.promotion.id}&isVisualizar=false" style="color:white;"><i class="material-icons right">add_shopping_cart</i>ADICIONAR PRODUTOS</a>
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-default btn-small ffc400 amber accent-3 modal-trigger" href="promotion-product?establishmentId=${promotionList.establishmentProduct.establishment.id}&promotionId=${promotionList.promotion.id}&isVisualizar=true" style="color:white;"><i class="material-icons right">remove_red_eye</i>VISUALIZAR PRODUTOS</a>
+                                        </td>
+                                    </tr>    
+                                </c:forEach>
+                            </table>
                         </div>
+                    </div>
 
                     <!--</div>-->
                     <!--                    <ul class="pagination center" >

@@ -16,9 +16,16 @@
         <c:if test="${empty userLogged}">
             <c:import url="/WEB-INF/views/templates/header_logout.jsp"></c:import>
         </c:if>     
-        <!--        <div>
-                    <img class="responsive-img" src="<c:url value = "/resources/img/banners/home_cabecalho_1.jpg"/>">
-                </div>-->
+        <div>
+            <nav>
+                <div class="nav-wrapper">
+                    <div style="margin-left: 40px" class="col s12">
+                        <a href="<c:url value="/home"/>" class="breadcrumb">Início</a>
+                        <a href="<c:url value="/contact"/>" class="breadcrumb">Contato</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
         <div class="container">
             <div class="card">
                 <div class="row">

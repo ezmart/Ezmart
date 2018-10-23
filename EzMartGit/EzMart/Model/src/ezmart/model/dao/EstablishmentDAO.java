@@ -54,7 +54,6 @@ public class EstablishmentDAO implements BaseDAO<Establishment> {
             ResultSet resultSet = statement.executeQuery();
 
             if (resultSet.next()) {
-
                 establishment.setId(resultSet.getLong("establishment_id"));
                 establishment.setName(resultSet.getString("establishment_name"));
                 establishment.setBusinessName(resultSet.getString("establishment_businessname"));
@@ -189,6 +188,44 @@ public class EstablishmentDAO implements BaseDAO<Establishment> {
     public Establishment readByUserId(Connection conn, Long userId) throws Exception {
         String sql = "SELECT * FROM establishment INNER JOIN usersystem ON usersystem_id=establishment_userid "
                 + "WHERE establishment_userid=?;";
+        Establishment establishment = null;
+        try {
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setLong(1, userId);
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                establishment = new Establishment();
+
+                establishment.setId(resultSet.getLong("establishment_id"));
+                establishment.setCnpj(resultSet.getString("establishment_cnpj"));
+                establishment.setSecondEmail(resultSet.getString("establishment_secondemail"));
+                establishment.setName(resultSet.getString("establishment_name"));
+                establishment.setBusinessName(resultSet.getString("establishment_businessname"));
+                establishment.setPlanStartDate(resultSet.getDate("establishment_planstartdate"));
+                establishment.setPlanFinalDate(resultSet.getDate("establishment_planfinaldate"));
+
+                establishment.setEmail(resultSet.getString("usersystem_email"));
+                establishment.setAddressLocation(resultSet.getString("usersystem_addresslocation"));
+                establishment.setNumberHouse(resultSet.getInt("usersystem_numberhouse"));
+                establishment.setNeighborhood(resultSet.getString("usersystem_Neighborhood"));
+                establishment.setCity(resultSet.getLong("usersystem_cityid"));
+                establishment.setZipCode(resultSet.getString("usersystem_zipcode"));
+                establishment.setTelephone(resultSet.getString("usersystem_telephone"));
+
+            }
+            resultSet.close();
+            statement.close();
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return establishment;
+    }
+
+    public Establishment readByEstablishmentId(Connection conn, Long userId) throws Exception {
+        String sql = "SELECT * FROM establishment INNER JOIN usersystem ON usersystem_id=establishment_userid "
+                + "WHERE establishment_id=?;";
         Establishment establishment = null;
         try {
             PreparedStatement statement = conn.prepareStatement(sql);
@@ -404,7 +441,70 @@ public class EstablishmentDAO implements BaseDAO<Establishment> {
 
         return establishmentProductList;
     }
-    
+
+    public List<EstablishmentProduct> findAllEstablishmentProductInPromotion(Connection conn, Long establishmentId, Long promotionId) throws Exception {
+        String sql = "select\n"
+                + "	*\n"
+                + "from\n"
+                + "	establishmentproduct\n"
+                + "left join product on\n"
+                + "		product_id = establishmentproduct_productid\n"
+                + "	left join sector on\n"
+                + "			sector_id = product_sectorid\n"
+                + "		left join provider on\n"
+                + "				provider_id = product_providerid\n"
+                + "			left join establishment on\n"
+                + "					establishment_id = establishmentproduct_establishmentid\n"
+                + "					left join promotionestablishmentproduct \n"
+                + "						on establishmentproduct_id= promotionestablishmentproduct_establishmentproductid\n"
+                + "				where\n"
+                + "					establishmentproduct_establishmentid = ?\n"
+                + "					and promotionestablishmentproduct_promotionid = ?\n"
+                + "				order by\n"
+                + "					sector_name,\n"
+                + "					product_name;";
+
+        PreparedStatement statement = conn.prepareStatement(sql);
+        statement.setLong(1, establishmentId);
+        statement.setLong(2, promotionId);
+        ResultSet resultSet = statement.executeQuery();
+
+        List<EstablishmentProduct> establishmentProductList = new ArrayList<>();
+        while (resultSet.next()) {
+            EstablishmentProduct establishmentProduct = new EstablishmentProduct();
+            Establishment establishment = new Establishment();
+            Product product = new Product();
+            Sector sector = new Sector();
+            Provider provider = new Provider();
+
+            establishment.setId(establishmentId);
+
+            sector.setId(resultSet.getLong("sector_id"));
+            sector.setName(resultSet.getString("sector_name"));
+            provider.setId(resultSet.getLong("provider_id"));
+            provider.setName(resultSet.getString("provider_name"));
+
+            product.setId(resultSet.getLong("product_id"));
+            product.setBarCode(resultSet.getString("product_barcode"));
+            product.setName(resultSet.getString("product_name"));
+            product.setBrand(resultSet.getString("product_brand"));
+            product.setSector(sector);
+            product.setProvider(provider);
+
+            establishmentProduct.setId(resultSet.getLong("establishmentproduct_id"));
+            establishmentProduct.setDateAlteration(resultSet.getDate("establishmentproduct_date"));
+            establishmentProduct.setPrice(resultSet.getDouble("promotionestablishmentproduct_promotionalprice"));
+            establishmentProduct.setEstablishment(establishment);
+            establishmentProduct.setProduct(product);
+
+            establishmentProductList.add(establishmentProduct);
+        }
+        resultSet.close();
+        statement.close();
+
+        return establishmentProductList;
+    }
+
     public List<Establishment> findAllEstablishmentForQuotation(Connection conn, Long establishmentId) throws Exception {
         String sql = "SELECT * FROM establishment "
                 + "WHERE establishment_id not in(?) ";
@@ -426,5 +526,71 @@ public class EstablishmentDAO implements BaseDAO<Establishment> {
         statement.close();
 
         return establishmentList;
+    }
+
+    public List<EstablishmentProduct> findAllEstablishmentProductByCompetitorId(Connection conn, Long id, List<Long> productIdList) throws Exception {
+        StringBuffer sql = new StringBuffer();
+        sql.append("SELECT * FROM establishmentproduct ");
+        sql.append(" LEFT JOIN product ON product_id = establishmentproduct_productid");
+        sql.append(" LEFT JOIN sector on sector_id = product_sectorid");
+        sql.append(" LEFT JOIN provider on provider_id = product_providerid");
+        sql.append(" WHERE establishmentproduct_establishmentid=? ");
+
+        if (productIdList != null && !productIdList.isEmpty()) {
+            sql.append(" AND establishmentproduct_productid IN ( ");
+
+            for (int i = 0; i < productIdList.size(); i++) {
+                if (i != productIdList.size() - 1) {
+                    sql.append("?, ");
+                } else {
+                    sql.append("? )");
+                }
+            }
+        }
+
+        sql.append(" ORDER BY sector_name, product_name;");
+
+        PreparedStatement statement = conn.prepareStatement(sql.toString());
+        int i = 1;
+        statement.setLong(i++, id);
+        for (Long productId : productIdList) {
+            statement.setLong(i++, productId);
+        }
+        ResultSet resultSet = statement.executeQuery();
+
+        List<EstablishmentProduct> establishmentProductList = new ArrayList<>();
+        while (resultSet.next()) {
+            EstablishmentProduct establishmentProduct = new EstablishmentProduct();
+            Establishment establishment = new Establishment();
+            Product product = new Product();
+            Sector sector = new Sector();
+            Provider provider = new Provider();
+
+            establishment.setId(resultSet.getLong("establishmentproduct_establishmentid"));
+
+            sector.setId(resultSet.getLong("sector_id"));
+            sector.setName(resultSet.getString("sector_name"));
+            provider.setId(resultSet.getLong("provider_id"));
+            provider.setName(resultSet.getString("provider_name"));
+
+            product.setId(resultSet.getLong("product_id"));
+            product.setBarCode(resultSet.getString("product_barcode"));
+            product.setName(resultSet.getString("product_name"));
+            product.setBrand(resultSet.getString("product_brand"));
+            product.setSector(sector);
+            product.setProvider(provider);
+
+            establishmentProduct.setId(resultSet.getLong("establishmentproduct_id"));
+            establishmentProduct.setDateAlteration(resultSet.getDate("establishmentproduct_date"));
+            establishmentProduct.setPrice(resultSet.getDouble("establishmentproduct_price"));
+            establishmentProduct.setEstablishment(establishment);
+            establishmentProduct.setProduct(product);
+
+            establishmentProductList.add(establishmentProduct);
+        }
+        resultSet.close();
+        statement.close();
+
+        return establishmentProductList;
     }
 }

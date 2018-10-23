@@ -15,7 +15,17 @@
         </c:if>
         <c:if test="${empty userLogged}">
             <c:import url="/WEB-INF/views/templates/header_logout.jsp"></c:import>
-        </c:if>     
+        </c:if>  
+        <div>
+            <nav>
+                <div class="nav-wrapper">
+                    <div style="margin-left: 40px" class="col s12">
+                        <a href="<c:url value="/home"/>" class="breadcrumb">Início</a>
+                        <a href="<c:url value="/information"/>" class="breadcrumb">Sobre</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
         <div class="container">
             <div class="card">
                 <div class="row" style="background: #F1F1F1;">

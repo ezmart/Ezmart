@@ -197,11 +197,11 @@ function setProductId(id) {
 
 //Seta o objeto no modal de visualização do produto bo home
 function setModalData(productName, img, productSectorNameModal, productBrandModal, productProviderNameModal) {
-    document.getElementById('productNameModal').value = productName;
+    document.getElementById('productNameModal').value = "Nome do produto: " + productName;
     document.getElementById('productImgValue').src = img;
-    document.getElementById('productSectorNameModal').value = productSectorNameModal;
-    document.getElementById('productBrandModal').value = productBrandModal;
-    document.getElementById('productProviderNameModal').value = productProviderNameModal;
+    //document.getElementById('productSectorNameModal').value = productSectorNameModal;
+    document.getElementById('productBrandModal').value = "Marca: " + productBrandModal;
+    document.getElementById('productProviderNameModal').value = "Fornecedor: " + productProviderNameModal;
     //alert(productName);
 }
 
@@ -275,10 +275,10 @@ function setDadaModalProductList() {
                 tagDiv.appendChild(tagDiv1);
                 tagDiv.appendChild(tagDiv2);
                 tagDiv.appendChild(tagDiv3);
-                
+
                 formTag.appendChild(tagDiv);
                 formTag.appendChild(inputTag);
-                
+
                 mydiv.appendChild(formTag);
             });
         },

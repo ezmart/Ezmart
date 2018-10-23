@@ -10,6 +10,7 @@ import ezmart.model.util.PreparedStatementBuilder;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -119,6 +120,12 @@ public class PromotionEstablishmentProductDAO implements BaseDAO<PromotionEstabl
             promotion.setName(rs.getString("promotion_name"));
             promotion.setStartDate(rs.getDate("promotion_startdate"));
             promotion.setFinalDate(rs.getDate("promotion_finaldate"));
+            promotion.setFinalDateTime(promotion.getFinalDate().getTime());
+            promotion.setCurrentDate(new java.util.Date().getTime());
+            
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            promotion.setStartDateConvert(sdf.format(promotion.getStartDate()));
+            promotion.setFinalDateConvert(sdf.format(promotion.getFinalDate()));
 
             establishment.setId(id);
 
