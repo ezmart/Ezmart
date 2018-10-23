@@ -12,6 +12,7 @@ import ezmart.model.service.CityService;
 import ezmart.model.service.EstablishmentService;
 import ezmart.model.service.ProductService;
 import ezmart.model.service.PromotionEstablishmentProductService;
+import ezmart.model.service.PromotionService;
 import ezmart.model.service.StateService;
 import java.text.DecimalFormat;
 import java.sql.Date;
@@ -21,7 +22,6 @@ import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -127,7 +127,7 @@ public class EstablishmentController {
     }
 
     @RequestMapping(value = "/product_establishment", method = RequestMethod.GET)
-    public ModelAndView findAllEstablishmentProduct(HttpSession session) throws Exception {
+    public ModelAndView findAllEstablishmentProduct(HttpSession session, Boolean isPromotion) throws Exception {
 
         ModelAndView mv = null;
         try {
@@ -156,6 +156,7 @@ public class EstablishmentController {
                 }
 
                 mv.addObject("establishmentProductList", establishmentProductList);
+                mv.addObject("isPromotion", isPromotion);
             }
 
         } catch (Exception exception) {
@@ -271,8 +272,18 @@ public class EstablishmentController {
 
                 user = (Establishment) auxSession;
                 EstablishmentService establishmentService = new EstablishmentService();
+                Establishment establishment = establishmentService.readByUserId(user.getId());
 
-                establishmentService.deleteEstablishmentProduct(productDeleteId);
+                PromotionService promotionService = new PromotionService();
+
+                boolean isPromotion = promotionService.isProductInPromotion(establishment.getId(), productDeleteId);
+
+                if (!isPromotion) {
+                    establishmentService.deleteEstablishmentProduct(productDeleteId);
+                    mv.addObject("isPromotion", isPromotion);
+                }else{
+                    mv.addObject("isPromotion", isPromotion);
+                }
             }
 
         } catch (Exception exception) {
@@ -384,7 +395,7 @@ public class EstablishmentController {
                 mv.addObject("establishmentProductList", establishmentProductList);
                 mv.addObject("establishmentId", establishmentId);
                 mv.addObject("promotionId", promotionId);
-                mv.addObject("isVizualizar", isVisualizar);
+                mv.addObject("isVisualizar", isVisualizar);
             }
 
         } catch (Exception exception) {
@@ -432,6 +443,84 @@ public class EstablishmentController {
         return mv;
     }
     
+    @RequestMapping(value = "/quotation", method = RequestMethod.GET)
+    public ModelAndView findAllEstablishmentForQuotation(HttpSession session) {
+        ModelAndView mv = null;
+        try {
+            Object auxSession = session.getAttribute("userLogged");
+            User user = null;
+
+            if (auxSession instanceof Establishment) {
+
+                mv = new ModelAndView("establishment/quotation");
+
+                user = (Establishment) auxSession;
+
+                EstablishmentService establishmentService = new EstablishmentService();
+                Establishment establishment = establishmentService.readByUserId(user.getId());
+
+                List<Establishment> establishmentList = establishmentService.findAllEstablishmentForQuotation(establishment.getId());
+
+                mv.addObject("establishment", establishment);
+                mv.addObject("establishmentList", establishmentList);
+
+            }
+
+        } catch (Exception exception) {
+            System.out.println(exception);
+        }
+        return mv;
+    }
+
+    @RequestMapping(value = "/quotation", method = RequestMethod.POST)
+    public ModelAndView findAllProductByCompetitor(Long competitorId, HttpSession session) {
+        ModelAndView mv = null;
+        try {
+            Object auxSession = session.getAttribute("userLogged");
+            User user = null;
+
+            if (auxSession instanceof Establishment) {
+
+                mv = new ModelAndView("establishment/quotation_result");
+
+                user = (Establishment) auxSession;
+
+                EstablishmentService establishmentService = new EstablishmentService();
+                Establishment establishment = establishmentService.readByUserId(user.getId());
+
+                List<EstablishmentProduct> establishmentProductList = establishmentService.findAllEstablishmentProduct(establishment.getId());
+                if (establishmentProductList != null && !establishmentProductList.isEmpty()) {
+                    establishment.setProductList(establishmentProductList);
+                }
+
+                Establishment competitor = establishmentService.readByEstablishmentId(competitorId);
+
+                List<Long> productIdList = new ArrayList<>();
+                for (EstablishmentProduct product : establishmentProductList) {
+                    productIdList.add(product.getId());
+                }
+
+                List<EstablishmentProduct> competitorList = establishmentService.findAllEstablishmentProductByCompetitorId(competitorId, productIdList);
+                if (competitorList != null && !competitorList.isEmpty()) {
+                    competitor.setProductList(competitorList);
+                }
+
+                List<Establishment> establishmentList = new ArrayList<>();
+                establishmentList.add(establishment);
+                establishmentList.add(competitor);
+
+                mv.addObject("establishmentList", establishmentList);
+                mv.addObject("establishmentProductList", establishmentProductList);
+                mv.addObject("competitorList", competitorList);
+
+            }
+
+        } catch (Exception exception) {
+            System.out.println(exception);
+        }
+        return mv;
+    }
+
     //barra de pesquisa
 //    @RequestMapping(value = "/product_establishment-product-search", method = RequestMethod.POST)
 //    public ModelAndView searchProduct(HttpSession session) throws Exception {

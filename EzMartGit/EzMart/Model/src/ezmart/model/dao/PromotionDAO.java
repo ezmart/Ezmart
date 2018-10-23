@@ -55,4 +55,25 @@ public class PromotionDAO implements BaseDAO<Promotion> {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    public boolean isProductInPromotion(Connection conn, Long EstablishmentId, Long establishmentProductId) throws Exception {
+        String sql = "select * from establishmentproduct\n"
+                + "				inner join product on establishmentproduct_productid = product_id\n"
+                + "				inner join promotionestablishmentproduct on promotionestablishmentproduct_establishmentproductid = establishmentproduct_id\n"
+                + "				where establishmentproduct_establishmentid = ?\n"
+                + "				and promotionestablishmentproduct_establishmentproductid = ?";
+        PreparedStatement statement = conn.prepareStatement(sql);
+        statement.setLong(1, EstablishmentId);
+        statement.setLong(2, establishmentProductId);
+        ResultSet resultSet = statement.executeQuery();
+
+        boolean isPromotion = false;
+        if (resultSet.next()) {
+            isPromotion = true;
+        }
+        resultSet.close();
+        statement.close();
+        
+        return isPromotion;
+    }
+
 }

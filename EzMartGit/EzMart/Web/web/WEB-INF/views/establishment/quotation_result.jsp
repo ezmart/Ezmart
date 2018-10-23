@@ -54,7 +54,7 @@
                             <div class="card horizontal">
                                 <div class="card-stacked">
                                     <div class="card-content" style="background-color: #F1F1F1">   
-                                        <h4 class="center-align">Mercados encontrados</h4>
+                                        <h4 class="center-align">Resultado da cotação</h4>
                                         <div class="row">
                                             <div class="col s12 m12">
                                                 <ul>

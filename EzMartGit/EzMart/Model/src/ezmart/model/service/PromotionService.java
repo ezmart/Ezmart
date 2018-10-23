@@ -89,6 +89,21 @@ public class PromotionService implements BasePromotionService{
         }
     }
 
+    public boolean isProductInPromotion(Long establishmentId, Long establishmentProductId) throws Exception {
+        Connection conn = ConnectionManager.getInstance().getConnection();
+        try {
+            PromotionDAO dao = new PromotionDAO();
+            boolean isPromotion = dao.isProductInPromotion(conn, establishmentId, establishmentProductId);
+            conn.commit();
+            conn.close();
+            return isPromotion;
+        } catch (Exception e) {
+            conn.rollback();
+            conn.close();
+            throw e;
+        }
+    }
+
     @Override
     public Map<String, String> validate(Map<String, Object> fields) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

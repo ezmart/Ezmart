@@ -37,6 +37,10 @@
             </div>
             <div class="container">
                 <h4>Meus produtos</h4>
+                <c:if test="${isPromotion eq true}">
+                    <p style="color: red;">*Produto não foi excluído, pois está em promoção!</p>
+                </c:if>
+                
                 <a href="/ezmartWeb/product_establishment-product" class="btn btn-sm btn-default btn-small green left modal-trigger" style="color:white;"><i class="material-icons right">add_box</i>Adicionar</a>
                 <br><br/>
                 <c:if test="${empty establishmentProductList}">

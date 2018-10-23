@@ -86,10 +86,10 @@
                                                 <p style="font-size: 18px"><b>Marca:</b> ${establishmentProduct.product.brand}</p>
                                                 <p style="font-size: 18px"><b>Linha:</b> ${establishmentProduct.product.sector.name}</p>
                                                 <p style="font-size: 18px"><b>Fabricante:</b> ${establishmentProduct.product.provider.name}</p>
-                                                <c:if test="${isVisualizar = true}">
+                                                <c:if test="${isVisualizar eq true}">
                                                     <p style="font-size: 18px"><b>Preço promocional:</b> ${establishmentProduct.priceConvert}</p>
                                                 </c:if>
-                                                <c:if test="${isVisualizar = false}">
+                                                <c:if test="${isVisualizar eq false}">
                                                     <p style="font-size: 18px"><b>Preço:</b> ${establishmentProduct.priceConvert}</p>
                                                     <a class="btn btn-sm btn-danger btn-small green modal-trigger" onclick="setEstablishmentProductId(${establishmentProduct.id})" href="#modal-create" style="color:white;margin-left: 10%;"><i class="material-icons right">add_shopping_cart</i>ADICIONAR</a>
                                                 </c:if>

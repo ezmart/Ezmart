@@ -14,7 +14,7 @@ public class EstablishmentProduct extends BaseEntity {
     private String priceConvert;
     
     private Date dateAlteration;
-
+    
     public Establishment getEstablishment() {
         return establishment;
     }
@@ -54,5 +54,4 @@ public class EstablishmentProduct extends BaseEntity {
     public void setPriceConvert(String priceConvert) {
         this.priceConvert = priceConvert;
     }
-    
 }
