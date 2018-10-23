@@ -35,6 +35,7 @@
                     </div>
                 </nav>
             </div>
+
             <c:if test="${empty establishmentProductList}">
                 <div class="row" style="padding: 20px;">
                     <h4 class="center-align" style="color: #2196f3">Cadastre ao menos um produto primeiro =)</h4>
@@ -54,37 +55,37 @@
                             <div class="card horizontal">
                                 <div class="card-stacked">
                                     <div class="card-content" style="background-color: #F1F1F1">   
-                                        <h4 class="center-align">Mercados encontrados</h4>
+                                        <!--<h4 class="center-align">Mercados encontrados</h4>-->
                                         <div class="row">
                                             <div class="col s12 m12">
                                                 <ul>
-                                                    <c:forEach items="${establishmentList}" var="establishment">
+                                                    <c:forEach items="${establishmentList}" var="establishmentList">
                                                         <div class="col s4">
                                                             <div class="card">
                                                                 <div class="card-panel medium" id="scroll-product">
                                                                     <div class="col s12 m12">
                                                                         <div>
-                                                                            <p>${establishment.businessName}</p>
+                                                                            <p><b>${establishmentList.businessName}</b></p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col s12 m12">
-                                                                        <c:forEach items="${establishment.productList}" var="product">
+                                                                        <c:forEach items="${establishmentList.productList}" var="establishmentProduct">
                                                                             <div class="card horizontal" style="padding: 0">
                                                                                 <div class="card-content" id="scroll-product-list">   
                                                                                     <div class="col s12 m12">
                                                                                         <ul>
                                                                                             <div class=" center col s3" style="padding: 0">
-                                                                                                <img class="responsive-img" src="<c:url value = "/resources/img/product/${product.product.id}.jpg"/>">
+                                                                                                <img class="responsive-img" src="<c:url value = "/resources/img/product/${establishmentProduct.product.id}.jpg"/>">
                                                                                             </div>
                                                                                             <div class="col s9">
-                                                                                                <p><b>${product.product.name}</b></p>
-                                                                                                <p><b>R$ ${product.price}</b></p>
-                                                                                                <p><b>${product.product.barCode}</b></p>
+                                                                                                <p><b>${establishmentProduct.product.name}</b></p>
+                                                                                                <p><b>R$ ${establishmentProduct.product.price}</b></p>
+                                                                                                <p><b>${establishmentProduct.product.barCode}</b></p>
                                                                                             </div>
                                                                                         </ul>
                                                                                     </div>
                                                                                 </div>
-                                                                            </div>    
+                                                                            </div>                                  
                                                                         </c:forEach>
                                                                     </div>
                                                                 </div>
