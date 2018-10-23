@@ -4,6 +4,7 @@ import ezmart.model.ConnectionManager;
 import ezmart.model.base.service.BaseProductService;
 import ezmart.model.dao.ProductDAO;
 import ezmart.model.entity.Product;
+import ezmart.model.model_entity.ProductModel;
 import java.sql.Connection;
 import java.util.List;
 import java.util.Map;
@@ -93,6 +94,20 @@ public class ProductService implements BaseProductService {
         Connection conn = ConnectionManager.getInstance().getConnection();
         try {
             List<Product> productList = dao.findAll(conn, offset, limit);
+            conn.commit();
+            conn.close();
+            return productList;
+        } catch (Exception e) {
+            conn.rollback();
+            conn.close();
+            throw e;
+        }
+    }
+
+    public List<ProductModel> findAllProductModel(Integer offset, Integer limit) throws Exception {
+        Connection conn = ConnectionManager.getInstance().getConnection();
+        try {
+            List<ProductModel> productList = dao.findAllProductModel(conn, offset, limit);
             conn.commit();
             conn.close();
             return productList;

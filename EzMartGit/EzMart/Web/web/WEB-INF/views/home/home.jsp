@@ -49,7 +49,6 @@
                                         <option  id="listId" value="${list.id}">${list.name}</option>                            
                                     </c:forEach>
                                 </select>
-                                <span style="color: orangered">${errors.cityId}</span>
                             </div>
                             <a class="btn btn-sm btn-default btn-small red modal-close modal-action" style="color:white;">Não</a>
                             <button class="btn btn-sm btn-default btn-small green" style="color:white; margin-right: 10px;" >Sim</button>
@@ -116,6 +115,12 @@
                                             <li class="col l4 m6 s12" id="modal-teste">
                                                 <div class="card-panel medium" id="scroll-product">
                                                     <div class="row" style="padding: 20px;">
+                                                        <%--<c:if test="${userLogged.userType eq 'consumer'}">--%>
+                                                            <c:if test="${product.value > 0.0}">
+                                                                <p class="center" style="font-size: 18px; background-color: red; color: white"><b>Em promoção:</b> R$ ${product.value}</p>
+                                                                <br/>
+                                                            </c:if>
+                                                        <%--</c:if>--%>
                                                         <div>
                                                             <img class="responsive-img-center" src="<c:url value = "/resources/img/product/${product.id}.jpg"/>" alt="${product.barCode} - ${product.name}" width="150">
                                                         </div>
@@ -125,7 +130,6 @@
                                                         <!--<p style="font-size: 18px"><b>Código EAN:</b> ${product.barCode}</p>-->
                                                         <p style="font-size: 18px; margin-top: 10px"><b>Marca:</b> ${product.brand}</p>
                                                         <!--<p style="font-size: 18px; margin-top: 10px"><b>Linha:</b> ${product.sector.name}</p>-->
-                                                        <!--<p style="font-size: 18px"><b>Fornecedor:</b> ${product.provider.name}</p>-->
                                                         <div class="card-action card-content" style="margin-top: 20px">
                                                             <div class="col s12 center">
                                                                 <!--<a class="btn btn-sm btn-default btn-small ffc400 amber accent-3 modal-trigger" href="#modal-update" style="color:white;" onclick="setProductEdit(${product.id}, '${product.name}', '${product.barCode}', '${product.brand}')"><i class="material-icons center">edit</i></a>-->

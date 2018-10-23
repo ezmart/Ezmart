@@ -1,6 +1,7 @@
 package ezmart.model.dao;
 
 import ezmart.model.base.BaseDAO;
+import ezmart.model.criteria.ShoppingListCriteria;
 import ezmart.model.criteria.UserCriteria;
 import ezmart.model.entity.ShoppingList;
 import ezmart.model.util.PreparedStatementBuilder;
@@ -70,7 +71,11 @@ public class ShoppingListDAO implements BaseDAO<ShoppingList> {
                 sql += " AND list_consumerid = ?";
                 paramList.add(userId);
             }
-
+            if (criteria.containsKey(ShoppingListCriteria.LIST_FAVORITE_EQ)) {
+                Boolean favorite = (Boolean) criteria.get(ShoppingListCriteria.LIST_FAVORITE_EQ);
+                sql += " AND list_favorite = ?";
+                paramList.add(favorite);
+            }
         }
 
         sql += " ORDER BY list_id ASC ";
