@@ -145,7 +145,7 @@ public class UserDAO implements BaseDAO<User> {
             user.setActive(rs.getBoolean("usersystem_active"));
             user.setLatitude(rs.getString("usersystem_latitude"));
             user.setLongitude(rs.getString("usersystem_longitude"));
-
+            
             userList.add(user);
         }
 

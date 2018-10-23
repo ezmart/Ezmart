@@ -9,7 +9,7 @@ async defer></script>
 
 
     function initMap() {
-        
+
         //Inicializa o MAPS
         initialize();
 
@@ -38,23 +38,33 @@ async defer></script>
             type: 'GET',
             dataType: "json",
             success: function (response) {
-                var marker;
-                //var infowindow = new google.maps.InfoWindow();
 
+
+                console.log(response);
                 response.forEach(function (locationItens) {
+                    var marker = null;
+
+                    var contentString =
+                            '<p><b>' + locationItens.establishmentsName + '</b></p>';
+
+                    var infowindow = new google.maps.InfoWindow({
+                        content: contentString
+                    });
+
                     marker = new google.maps.Marker({
                         position: new google.maps.LatLng(locationItens.latitude, locationItens.longitude),
+                        title: locationItens.establishmentsName,
                         map: map
                     });
 
-//                    google.maps.event.addListener(marker, 'click', (function (marker, 0) {
-//                        return function () {
-//                            infowindow.setContent(locations[0][0]);
-//                            infowindow.open(map, marker);
-//                        }
-//                    })(marker, i));
-                });
+                    marker.addListener('click', function () {
+                        infowindow.open(map, marker);
+                    });
 
+                    marker.addListener('dblclick', function () {
+                        getMarketWithTheList(locationItens.id);
+                    });
+                });
             },
             error: function () {
                 console.log('Falha ao carregar! =/');
@@ -62,4 +72,17 @@ async defer></script>
         });
     }
 
+    function getMarketWithTheList(establishmentId) {
+
+        $.ajax({
+            url: '/ezmartWeb/localMarkets-' + establishmentId,
+            type: 'POST',
+            success: function (response) {
+                console.log('OK! =)');
+            },
+            error: function () {
+                console.log('Falha ao carregar! =/');
+            }
+        });
+    }
 </script>

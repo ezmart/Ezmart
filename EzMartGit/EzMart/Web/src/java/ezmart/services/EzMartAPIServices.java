@@ -5,10 +5,12 @@ import ezmart.model.criteria.CityCriteria;
 import ezmart.model.criteria.ProductCriteria;
 import ezmart.model.criteria.UserCriteria;
 import ezmart.model.entity.City;
+import ezmart.model.entity.Establishment;
 import ezmart.model.entity.Product;
 import ezmart.model.entity.User;
 import ezmart.model.model_entity.EstablishmentsLocationModel;
 import ezmart.model.service.CityService;
+import ezmart.model.service.EstablishmentService;
 import ezmart.model.service.ProductService;
 import ezmart.model.service.UserService;
 import java.util.ArrayList;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class EzMartAPIServices {
@@ -35,13 +38,18 @@ public class EzMartAPIServices {
             criteria.put(UserCriteria.USER_TYPE_EQ, "emporium");
             List<User> establishmentList = service.readByCriteria(criteria, null, null);
 
+            EstablishmentService establishmentService = new EstablishmentService();
+
             EstablishmentsLocationModel model = null;
             List<EstablishmentsLocationModel> modeList = new ArrayList<>();
             for (User user : establishmentList) {
+                Establishment establishment = establishmentService.readByUserId(user.getId());
                 model = new EstablishmentsLocationModel();
+                model.setEstablishmentsName(establishment.getName());
                 model.setId(user.getId());
                 model.setLatitude(user.getLatitude());
                 model.setLongitude(user.getLongitude());
+
                 modeList.add(model);
             }
 

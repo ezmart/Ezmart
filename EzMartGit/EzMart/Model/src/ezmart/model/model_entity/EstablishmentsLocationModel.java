@@ -2,8 +2,9 @@ package ezmart.model.model_entity;
 
 import ezmart.model.base.BaseEntity;
 
-public class EstablishmentsLocationModel extends BaseEntity{
+public class EstablishmentsLocationModel extends BaseEntity {
 
+    private String establishmentsName;
     private String latitude;
     private String longitude;
 
@@ -21,5 +22,13 @@ public class EstablishmentsLocationModel extends BaseEntity{
 
     public void setLongitude(String longitude) {
         this.longitude = longitude;
+    }
+
+    public String getEstablishmentsName() {
+        return establishmentsName;
+    }
+
+    public void setEstablishmentsName(String establishmentsName) {
+        this.establishmentsName = establishmentsName;
     }
 }

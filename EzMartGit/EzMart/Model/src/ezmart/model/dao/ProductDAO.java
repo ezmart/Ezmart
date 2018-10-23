@@ -5,6 +5,7 @@ import ezmart.model.criteria.ProductCriteria;
 import ezmart.model.entity.Product;
 import ezmart.model.entity.Provider;
 import ezmart.model.entity.Sector;
+import ezmart.model.model_entity.ProductModel;
 import ezmart.model.util.PreparedStatementBuilder;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -232,6 +233,42 @@ public class ProductDAO implements BaseDAO<Product> {
             product.setImage(rs.getBytes("product_image"));
             product.setSector(sector);
             product.setProvider(provider);
+
+            productList.add(product);
+        }
+
+        rs.close();
+        statement.close();
+        return productList;
+    }
+
+    public List<ProductModel> findAllProductModel(Connection conn, Integer offset, Integer limit) throws Exception {
+        String sql = "SELECT * FROM product"
+                + " LEFT JOIN sector on sector_id = product_sectorid"
+                + " LEFT JOIN provider on provider_id = product_providerid"
+                + " ORDER BY product_name ";
+
+        List<Object> paramList = new ArrayList<>();
+
+        if (offset != null) {
+            sql += " OFFSET ?";
+            paramList.add(offset);
+        }
+        if (limit != null) {
+            sql += " LIMIT ?";
+            paramList.add(limit);
+        }
+
+        PreparedStatement statement = PreparedStatementBuilder.build(conn, sql, paramList);
+        ResultSet rs = statement.executeQuery();
+        List<ProductModel> productList = new ArrayList<>();
+        while (rs.next()) {
+            ProductModel product = new ProductModel();
+
+            product.setProductId(rs.getLong("product_id"));
+            product.setBarCode(rs.getString("product_barcode"));
+            product.setProductName(rs.getString("product_name"));
+            product.setDescription(rs.getString("product_brand"));
 
             productList.add(product);
         }
