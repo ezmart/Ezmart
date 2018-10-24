@@ -19,6 +19,8 @@ import ezmart.model.service.PromotionEstablishmentProductService;
 import ezmart.model.service.PromotionService;
 import ezmart.model.service.ShoppingListService;
 import ezmart.model.service.UserService;
+import ezmart.model.util.Mascara;
+import ezmart.model.util.TrataNumero;
 import java.io.IOException;
 import java.sql.Date;
 import java.text.DecimalFormat;
@@ -154,19 +156,21 @@ public class ProductController {
 
                 //Verifica se há alguma promoção nos produtos
                 Double testPromation = 0.0;
-
+                String aux = "";
                 List<Product> productListAux = new ArrayList<>();
                 if (productList != null && !productList.isEmpty()) {
                     for (Product product : productList) {
                         Product productAux = new Product();
                         testPromation = productBuilderByMarket(product.getId());
+                        if (testPromation.equals(0.0)) {
+                            aux = "";
+                        } else {
+                            aux = TrataNumero.editarNumero(TrataNumero.mult2(testPromation), Mascara.getMascaraDuasCasas());
 
-                        DecimalFormat formato = new DecimalFormat("#.##");
-                        testPromation = Double.valueOf(formato.format(testPromation + 0.00));
-
+                        }
                         productAux.setId(product.getId());
                         productAux.setBrand(product.getBrand());
-                        productAux.setValue(testPromation);
+                        productAux.setValue(aux);
                         productAux.setAux(establishmentName);
                         productAux.setName(product.getName());
                         productAux.setProvider(product.getProvider());

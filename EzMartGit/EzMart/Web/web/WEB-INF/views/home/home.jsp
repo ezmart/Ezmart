@@ -106,7 +106,7 @@
                 <div class="card horizontal">
                     <div class="card-stacked">
                         <div class="card-content" style="background-color: #F1F1F1">   
-                            <h4 class="center-align">Produtos promocionais: ${count} encontrados</h4>
+                            <h4 class="center-align">Produtos: ${count} encontrados</h4>
                             <div class="row">
                                 <div class="col s12 m12">
                                     <ul>
@@ -115,7 +115,7 @@
                                                 <div class="card-panel medium" id="scroll-product">
                                                     <div class="row" style="padding: 20px;">
                                                         <%--<c:if test="${userLogged.userType eq 'consumer'}">--%>
-                                                        <c:if test="${product.value > 0.0}">
+                                                        <c:if test="${not empty product.value}">
                                                             <p class="center" style="font-size: 18px; background-color: red; color: white"><b>Em promoção:</b> R$ ${product.value}</p>
                                                             <p class="center" style="font-size: 18px; background-color: red; color: white"><b>Mercado:</b> ${product.aux}</p>
                                                             <br/>

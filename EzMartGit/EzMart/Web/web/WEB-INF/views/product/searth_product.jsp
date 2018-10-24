@@ -107,7 +107,7 @@
                                             <li class="col l4 m6 s12" id="modal-teste">
                                                 <div class="card-panel medium" id="scroll-product">
                                                     <div class="row" style="padding: 20px;">
-                                                        <c:if test="${product.value > 0.0}">
+                                                        <c:if test="${not empty product.value}">
                                                             <p class="center" style="font-size: 18px; background-color: red; color: white"><b>Em promoção:</b> R$ ${product.value}</p>
                                                             <p class="center" style="font-size: 18px; background-color: red; color: white"><b>Mercado:</b> ${product.aux}</p>
                                                             <br/>

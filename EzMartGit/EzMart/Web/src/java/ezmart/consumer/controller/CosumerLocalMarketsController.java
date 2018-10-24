@@ -20,6 +20,8 @@ import ezmart.model.service.ListProductService;
 import ezmart.model.service.PromotionEstablishmentProductService;
 import ezmart.model.service.PromotionService;
 import ezmart.model.service.ShoppingListService;
+import ezmart.model.util.Mascara;
+import ezmart.model.util.TrataNumero;
 import ezmart.model.util.UtilServices;
 import java.sql.Date;
 import java.util.ArrayList;
@@ -180,7 +182,8 @@ public class CosumerLocalMarketsController {
                         }
 
                         Double totalPrice = new UtilServices().totalPrice(pricesList);
-                        priceComparisonModel.setTotalPrice(totalPrice);
+                        String aux = TrataNumero.editarNumero(TrataNumero.mult2(totalPrice), Mascara.getMascaraDuasCasas());
+                        priceComparisonModel.setTotalPrice(aux);
                         priceComparisonModel.setEstablishmentName(establishmentName);
                         priceComparisonModel.setProductModelList(productModelList);
 

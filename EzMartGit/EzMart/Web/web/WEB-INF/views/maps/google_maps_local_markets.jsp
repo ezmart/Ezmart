@@ -88,7 +88,9 @@ async defer></script>
                 response.forEach(function (item) {
 
                     var mydiv = document.getElementById("content_insert");
-
+                    var tagH3 = document.createElement('h4');
+                    tagH3.innerHTML = "Produtos do mercado em relação a sua lista favorita";
+                    var tagBr4 = document.createElement('br');
                     var tagDiv1 = document.createElement('div');
                     tagDiv1.className = "col s12";
 
@@ -102,11 +104,13 @@ async defer></script>
                     tagDiv1.appendChild(labelTag);
 
                     var labelTag2 = document.createElement('label');
-                    labelTag2.innerHTML = "Preço total: " + item.totalPrice;
+                    labelTag2.innerHTML = "Preço total: R$ " + item.totalPrice;
                     labelTag2.style = "color:black; margin-left: 15px; font-size: x-large;";
 
                     tagDiv2.appendChild(labelTag2);
 
+                    mydiv.appendChild(tagH3);
+                    mydiv.appendChild(tagBr4);
                     mydiv.appendChild(tagDiv1);
                     mydiv.appendChild(tagDiv2);
 
@@ -125,12 +129,13 @@ async defer></script>
                         var tagBr2 = document.createElement('br');
                         var tagBr3 = document.createElement('br');
 
+
                         var labelTagAux1 = document.createElement('label');
                         labelTagAux1.innerHTML = "Nome do produto: " + value.productName;
                         labelTagAux1.style = "color:black; margin-left: 15px; font-size: x-large";
 
                         var labelTagAux2 = document.createElement('label');
-                        labelTagAux2.innerHTML = "Preço do produto: " + value.price;
+                        labelTagAux2.innerHTML = "Preço do produto: R$ " + value.price;
                         labelTagAux2.style = "color:black; margin-left: 15px; font-size: x-large";
 
                         var labelTagAux3 = document.createElement('label');
@@ -146,6 +151,7 @@ async defer></script>
                         tagDivAux2.appendChild(tagBr2);
                         tagDivAux2.appendChild(labelTagAux3);
                         tagDivAux2.appendChild(tagBr3);
+
 
                         mydiv.appendChild(tagDivAux2);
                     });
