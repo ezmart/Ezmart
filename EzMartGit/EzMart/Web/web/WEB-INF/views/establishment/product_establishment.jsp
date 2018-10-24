@@ -30,7 +30,7 @@
                         <div class="nav-wrapper">
                             <div style="margin-left: 40px" class="col s12">
                                 <a href="<c:url value="/home"/>" class="breadcrumb">Início</a>
-                            <a href="<c:url value=""/>" class="breadcrumb">Meus Produtos</a>
+                            <a href="<c:url value=""/>" class="breadcrumb">Meus produtos</a>
                         </div>
                     </div>
                 </nav>

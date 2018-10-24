@@ -29,7 +29,7 @@
                         <div class="nav-wrapper">
                             <div style="margin-left: 40px" class="col s12">
                                 <a href="<c:url value="/home"/>" class="breadcrumb">Início</a>
-                            <a href="<c:url value="/login"/>" class="breadcrumb">Meus Produtos</a>
+                            <a href="<c:url value="/login"/>" class="breadcrumb">Meus produtos</a>
                         </div>
                     </div>
                 </nav>
@@ -52,7 +52,7 @@
                     </c:if>
                     <c:if test="${not empty produtoList}">
                         <div class="row">
-                            <h4 class="center-align" style="color: #2196f3">Meus Produtos</h4>
+                            <h4 class="center-align" style="color: #2196f3">Meus produtos</h4>
                             <hr>
                         </div>
                         <div class="row">

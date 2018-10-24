@@ -24,14 +24,25 @@
         </c:if>  
         <c:if test="${not empty userLogged}">
             <c:import url="/WEB-INF/views/templates/header_emporium.jsp"></c:import>
-                <br><br>
-                
-                <input type="number" style="display: none" id = "satisfaction" value="${avaliation.satisfaction}">
-                <input type="number" style="display: none" id = "priceProduct" value="${avaliation.productPrice}">
-                <input type="number" style="display: none" id = "prodDiversity" value="${avaliation.diversity}">
-                <input type="number" style="display: none" id = "employees" value="${avaliation.employees}">
-                <input type="number" style="display: none" id = "ambience" value="${avaliation.ambience}">
-                <canvas id="bar-chart" width="400" height="150"></canvas>
+                <div>
+                    <nav>
+                        <div class="nav-wrapper">
+                            <div style="margin-left: 40px" class="col s12">
+                                <a href="<c:url value="/home"/>" class="breadcrumb">Início</a>
+                            <a href="<c:url value=""/>" class="breadcrumb">Dashboard Avaliação</a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+
+            <br><br>
+
+            <input type="number" style="display: none" id = "satisfaction" value="${avaliation.satisfactionConvert}">
+            <input type="number" style="display: none" id = "priceProduct" value="${avaliation.productPriceConvert}">
+            <input type="number" style="display: none" id = "prodDiversity" value="${avaliation.diversityConvert}">
+            <input type="number" style="display: none" id = "employees" value="${avaliation.employeesConvert}">
+            <input type="number" style="display: none" id = "ambience" value="${avaliation.ambienceConvert}">
+            <canvas id="bar-chart" width="400" height="150"></canvas>
 
         </c:if>
         <script src="<c:url value="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"/>"></script>

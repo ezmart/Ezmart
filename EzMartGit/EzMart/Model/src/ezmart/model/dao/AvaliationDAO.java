@@ -75,11 +75,11 @@ public class AvaliationDAO implements BaseDAO<Avaliation> {
         Avaliation avaliation = new Avaliation();
         if (rs.next()) {
             
-            avaliation.setSatisfaction(rs.getInt("satisfaction"));
-            avaliation.setProductPrice(rs.getInt("product"));
-            avaliation.setDiversity(rs.getInt("diversity"));
-            avaliation.setEmployees(rs.getInt("employees"));
-            avaliation.setAmbience(rs.getInt("ambience"));
+            avaliation.setSatisfactionConvert(rs.getDouble("satisfaction"));
+            avaliation.setProductPriceConvert(rs.getDouble("product"));
+            avaliation.setDiversityConvert(rs.getDouble("diversity"));
+            avaliation.setEmployeesConvert(rs.getDouble("employees"));
+            avaliation.setAmbienceConvert(rs.getDouble("ambience"));
         }
         rs.close();
         statement.close();

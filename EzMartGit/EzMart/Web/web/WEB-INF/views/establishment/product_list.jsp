@@ -60,9 +60,9 @@
             </div>
 
             <br><br/>
-            <input type="text" name="searchProduct" id="searchProduct" style="width: 50%; margin-left: 20%;">
+<!--            <input type="text" name="searchProduct" id="searchProduct" style="width: 50%; margin-left: 20%;">
             <a class="btn btn-sm btn-default #ac1925 modal-trigger"  style="color:ffc400 amber accent-3;"><i class="material-icons right">search</i>PESQUISAR</a>
-            <br><br/>
+            <br><br/>-->
             <div class="row">
                 <div class="col s12 m12">
                     <ul>

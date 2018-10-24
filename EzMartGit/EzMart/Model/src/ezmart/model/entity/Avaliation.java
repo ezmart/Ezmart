@@ -12,6 +12,11 @@ public class Avaliation extends BaseEntity {
     private Integer ambience;
     private String commentary;
     private Date dateAvaliation;
+    private Double satisfactionConvert;
+    private Double productPriceConvert;
+    private Double diversityConvert;
+    private Double employeesConvert;
+    private Double ambienceConvert;
     
     private Consumer consumer;
     private Establishment establishment;
@@ -86,5 +91,45 @@ public class Avaliation extends BaseEntity {
 
     public void setEstablishment(Establishment establishment) {
         this.establishment = establishment;
+    }
+
+    public Double getSatisfactionConvert() {
+        return satisfactionConvert;
+    }
+
+    public void setSatisfactionConvert(Double satisfactionConvert) {
+        this.satisfactionConvert = satisfactionConvert;
+    }
+
+    public Double getProductPriceConvert() {
+        return productPriceConvert;
+    }
+
+    public void setProductPriceConvert(Double productPriceConvert) {
+        this.productPriceConvert = productPriceConvert;
+    }
+
+    public Double getDiversityConvert() {
+        return diversityConvert;
+    }
+
+    public void setDiversityConvert(Double diversityConvert) {
+        this.diversityConvert = diversityConvert;
+    }
+
+    public Double getEmployeesConvert() {
+        return employeesConvert;
+    }
+
+    public void setEmployeesConvert(Double employeesConvert) {
+        this.employeesConvert = employeesConvert;
+    }
+
+    public Double getAmbienceConvert() {
+        return ambienceConvert;
+    }
+
+    public void setAmbienceConvert(Double ambienceConvert) {
+        this.ambienceConvert = ambienceConvert;
     }
 }

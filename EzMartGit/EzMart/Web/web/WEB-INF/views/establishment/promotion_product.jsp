@@ -31,7 +31,12 @@
                             <div style="margin-left: 40px" class="col s12">
                                 <a href="<c:url value="/home"/>" class="breadcrumb">Início</a>
                             <a href="<c:url value="/promotion"/>" class="breadcrumb">Minhas Promoções</a>
-                            <a href="<c:url value=""/>" class="breadcrumb">Produtos</a>
+                            <c:if test="${isVisualizar eq true}">
+                                <a href="<c:url value=""/>" class="breadcrumb">Visualizar produtos</a>
+                            </c:if>
+                            <c:if test="${isVisualizar eq false}">
+                                <a href="<c:url value=""/>" class="breadcrumb">Adicionar produtos</a>
+                            </c:if>
                         </div>
                     </div>
                 </nav>
