@@ -12,7 +12,8 @@ public class Product extends BaseEntity {
     private String brand;
 
     private Double value;
-
+    private String aux;
+    
     public String getBarCode() {
         return barCode;
     }
@@ -67,5 +68,13 @@ public class Product extends BaseEntity {
 
     public void setValue(Double value) {
         this.value = value;
+    }
+
+    public String getAux() {
+        return aux;
+    }
+
+    public void setAux(String aux) {
+        this.aux = aux;
     }
 }

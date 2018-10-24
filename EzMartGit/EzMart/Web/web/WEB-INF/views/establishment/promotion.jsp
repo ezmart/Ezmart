@@ -24,7 +24,6 @@
         </c:if>  
         <c:if test="${not empty userLogged}">
             <c:import url="/WEB-INF/views/templates/header_emporium.jsp"></c:import>
-
                 <div>
                     <nav>
                         <div class="nav-wrapper">
@@ -67,7 +66,6 @@
                     </div>
                 </c:if>
                 <c:if test="${not empty promotionList}">
-
                     <div class="row">
                         <div class="col s12 ">
                             <table class="table">
@@ -84,11 +82,14 @@
                                         <td>${promotionList.promotion.startDateConvert}</td>
                                         <td>${promotionList.promotion.finalDateConvert}</td>
                                         <td>
-                                            <a class="btn btn-default btn-small green modal-trigger" href="promotion-product?establishmentId=${promotionList.establishmentProduct.establishment.id}&promotionId=${promotionList.promotion.id}&isVisualizar=false" style="color:white;"><i class="material-icons right">add_shopping_cart</i>ADICIONAR PRODUTOS</a>
-                                        </td>
-                                        <td>
                                             <a class="btn btn-default btn-small ffc400 amber accent-3 modal-trigger" href="promotion-product?establishmentId=${promotionList.establishmentProduct.establishment.id}&promotionId=${promotionList.promotion.id}&isVisualizar=true" style="color:white;"><i class="material-icons right">remove_red_eye</i>VISUALIZAR PRODUTOS</a>
                                         </td>
+                                        <c:if test="${promotionList.value eq 1}">
+                                            <td>
+                                                <a class="btn btn-default btn-small green modal-trigger" href="promotion-product?establishmentId=${promotionList.establishmentProduct.establishment.id}&promotionId=${promotionList.promotion.id}&isVisualizar=false" style="color:white;"><i class="material-icons right">add_shopping_cart</i>ADICIONAR PRODUTOS</a>
+                                            </td>
+                                        </c:if>
+
                                     </tr>    
                                 </c:forEach>
                             </table>

@@ -63,11 +63,11 @@
                                     <a class="waves-effect waves-teal btn" id="myAddress" href="<c:url value="/editProfileEstablishment"/> "><i class="material-icons left">account_box</i>Editar Perfil</a>
                                 </div>
                             </li>
-                            <li>
+<!--                            <li>
                                 <div class="col s12 controls" style="margin-top: 20px">   
                                     <a class="waves-effect waves-teal btn" id="myList" href="<c:url value="#"/> "><i class="material-icons left">account_box</i>OUTRO VALOR</a>
                                 </div>
-                            </li>
+                            </li>-->
                             <li>
                                 <div class="col s12 controls" style="margin-top: 20px">                                                    
                                     <a class="waves-effect waves-teal btn " id="myPhoto" href="<c:url value="/updatePhoto"/> "><i class="material-icons left">account_box</i>Alterar Foto</a>

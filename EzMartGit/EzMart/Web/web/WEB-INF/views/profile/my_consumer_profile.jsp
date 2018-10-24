@@ -68,7 +68,7 @@
                             </li>
                             <li>
                                 <div class="col s12 controls" style="margin-top: 20px">   
-                                    <a class="waves-effect waves-teal btn" id="myList"  href="<c:url value="/myList"/> "><i class="material-icons left">account_box</i>Minhas Listas</a>
+                                    <a class="waves-effect waves-teal btn" id="myList"  href="<c:url value="/shoppingList"/> "><i class="material-icons left">account_box</i>Minhas Listas</a>
                                 </div>
                             </li>
                             <li>

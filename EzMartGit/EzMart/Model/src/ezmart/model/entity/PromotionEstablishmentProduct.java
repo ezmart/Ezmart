@@ -10,6 +10,8 @@ public class PromotionEstablishmentProduct extends BaseEntity{
     
     private Double promotionPrice;
 
+    private Integer value;
+    
     public EstablishmentProduct getEstablishmentProduct() {
         return establishmentProduct;
     }
@@ -32,5 +34,13 @@ public class PromotionEstablishmentProduct extends BaseEntity{
 
     public void setPromotionPrice(Double promotionPrice) {
         this.promotionPrice = promotionPrice;
+    }
+
+    public Integer getValue() {
+        return value;
+    }
+
+    public void setValue(Integer value) {
+        this.value = value;
     }
 }

@@ -118,9 +118,9 @@
                                                         <%--<c:if test="${userLogged.userType eq 'consumer'}">--%>
                                                             <c:if test="${product.value > 0.0}">
                                                                 <p class="center" style="font-size: 18px; background-color: red; color: white"><b>Em promoção:</b> R$ ${product.value}</p>
+                                                                <p class="center" style="font-size: 18px; background-color: red; color: white"><b>Mercado:</b> ${product.aux}</p>
                                                                 <br/>
                                                             </c:if>
-                                                        <%--</c:if>--%>
                                                         <div>
                                                             <img class="responsive-img-center" src="<c:url value = "/resources/img/product/${product.id}.jpg"/>" alt="${product.barCode} - ${product.name}" width="150">
                                                         </div>

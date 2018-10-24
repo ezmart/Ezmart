@@ -16,11 +16,16 @@ import ezmart.model.service.ProductService;
 import ezmart.model.service.PromotionEstablishmentProductService;
 import ezmart.model.service.PromotionService;
 import ezmart.model.service.ShoppingListService;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.sql.Date;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,6 +43,7 @@ public class HomeController {
 
     private Double vPromation = Double.MAX_VALUE;
     private Double vPromationAux = Double.MAX_VALUE;
+    private String establishmentName = "";
 
     @RequestMapping(value = "/home", method = RequestMethod.GET)
     public ModelAndView getHome(HttpSession session, Integer limit, Integer offset) throws Exception {
@@ -84,9 +90,13 @@ public class HomeController {
                         Product productAux = new Product();
                         testPromation = productBuilderByMarket(product.getId());
 
+                        DecimalFormat formato = new DecimalFormat("#.##");
+                        testPromation = Double.valueOf(formato.format(testPromation+0.00));
+
                         productAux.setId(product.getId());
                         productAux.setBrand(product.getBrand());
                         productAux.setValue(testPromation);
+                        productAux.setAux(establishmentName);
                         productAux.setName(product.getName());
                         productAux.setProvider(product.getProvider());
                         productAux.setSector(product.getSector());
@@ -95,7 +105,7 @@ public class HomeController {
 
                     }
                 }
-                
+
                 mv.addObject("productList", productListAux);
                 mv.addObject("limit", limit);
                 mv.addObject("offset", offset);
@@ -118,7 +128,17 @@ public class HomeController {
 
     private Double productBuilderByMarket(Long productId) throws Exception {
         vPromation = Double.MAX_VALUE;
+        establishmentName = "";
         productsByMarket.forEach((key, value) -> {
+            EstablishmentService establishmentService = new EstablishmentService();
+            Establishment establishment = new Establishment();
+            try {
+                establishment = establishmentService.readById(key);
+
+            } catch (Exception ex) {
+                System.out.println(ex.getMessage());
+            }
+
             PriceComparisonModel priceComparisonModel = new PriceComparisonModel();
 
             List<EstablishmentProduct> list = value;
@@ -133,6 +153,7 @@ public class HomeController {
                         if (!response.equals(0.0)) {
                             if (response < vPromation) {
                                 vPromation = response;
+                                establishmentName = establishment.getBusinessName();
                             }
                         }
 

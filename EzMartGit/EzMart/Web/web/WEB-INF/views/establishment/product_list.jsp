@@ -54,37 +54,40 @@
                 </div>
             </div>
 
-            <div class="container">
+            <!--<div class="container">-->
+            <div class="col s12 center">
                 <h4>Produtos</h4>
-                <br><br/>
-                <input type="text" name="searchProduct" id="searchProduct" style="width: 50%; margin-left: 20%;">
-                <a class="btn btn-sm btn-default #ac1925 modal-trigger"  style="color:ffc400 amber accent-3;"><i class="material-icons right">search</i>PESQUISAR</a>
-                <br><br/>
-                <div class="row">
-                    <div class="col s12 m12">
-                        <ul>
-                            <c:forEach items="${productList}" var="product">
-                                <li class="col l4 m6 s12" >
-                                    <div class="card-panel medium">
-                                        <div class="row" style="padding: 20px;">
-                                            <div>
-                                                <img class="responsive-img-center" src="<c:url value = "/resources/img/product/${product.id}.jpg"/>" alt="${product.barCode} - ${product.name}" width="150">
-                                            </div>
-                                            <br/>
-                                            <p style="font-size: 18px"><b>Nome:</b> ${product.name}</p>
-                                            <p style="font-size: 18px"><b>Código EAN:</b> ${product.barCode}</p>
-                                            <p style="font-size: 18px"><b>Marca:</b> ${product.brand}</p>
-                                            <p style="font-size: 18px"><b>Linha:</b> ${product.sector.name}</p>
-                                            <p style="font-size: 18px"><b>Fabricante:</b> ${product.provider.name}</p>
-                                            <a class="btn btn-default btn-small green modal-trigger" href="#modal-create" style="color:white;margin-left:10%;" onclick="setProductEstablishmentId(${product.id})"><i class="material-icons right">add_box</i>ADICIONAR</a>
+            </div>
+
+            <br><br/>
+            <input type="text" name="searchProduct" id="searchProduct" style="width: 50%; margin-left: 20%;">
+            <a class="btn btn-sm btn-default #ac1925 modal-trigger"  style="color:ffc400 amber accent-3;"><i class="material-icons right">search</i>PESQUISAR</a>
+            <br><br/>
+            <div class="row">
+                <div class="col s12 m12">
+                    <ul>
+                        <c:forEach items="${productList}" var="product">
+                            <li class="col l4 m6 s12" >
+                                <div class="card-panel medium" id="scroll-product-promotion">
+                                    <div class="row" style="padding: 20px;">
+                                        <div>
+                                            <img class="responsive-img-center" src="<c:url value = "/resources/img/product/${product.id}.jpg"/>" alt="${product.barCode} - ${product.name}" width="150">
                                         </div>
+                                        <br/>
+                                        <p style="font-size: 18px"><b>Nome:</b> ${product.name}</p>
+                                        <p style="font-size: 18px"><b>Código EAN:</b> ${product.barCode}</p>
+                                        <p style="font-size: 18px"><b>Marca:</b> ${product.brand}</p>
+                                        <p style="font-size: 18px"><b>Linha:</b> ${product.sector.name}</p>
+                                        <p style="font-size: 18px"><b>Fabricante:</b> ${product.provider.name}</p>
+                                        <a class="btn btn-default btn-small green modal-trigger" href="#modal-create" style="color:white;margin-left:10%;" onclick="setProductEstablishmentId(${product.id})"><i class="material-icons right">add_box</i>ADICIONAR</a>
                                     </div>
-                                </li>
-                            </c:forEach>
-                        </ul>
-                    </div>
+                                </div>
+                            </li>
+                        </c:forEach>
+                    </ul>
                 </div>
             </div>
+            <!--</div>-->
         </c:if>
         <script src="<c:url value="/resources/js/jquery.min.js"/>"></script>
         <c:import url="/WEB-INF/views/templates/footer.jsp"></c:import>
