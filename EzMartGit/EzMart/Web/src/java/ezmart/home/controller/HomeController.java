@@ -50,21 +50,22 @@ public class HomeController {
             Object auxSession = session.getAttribute("userLogged");
             if (auxSession != null) {
                 if (auxSession instanceof Consumer) {
+
                     user = (Consumer) auxSession;
+                    //Apresentar as listas referentes ao usuário
+                    ShoppingListService service = new ShoppingListService();
+                    Map<Long, Object> criteria = new HashMap<>();
+                    ConsumerService consumerService = new ConsumerService();
+                    Consumer consumer = consumerService.readById(user.getId());
+                    criteria.put(UserCriteria.ID_EQ, consumer.getId());
+                    List<ShoppingList> shoppingList = service.readByCriteria(criteria, null, null);
+
+                    mv.addObject("shoppingList", shoppingList);
 
                 } else {
                     user = (Establishment) auxSession;
                 }
 
-                //Apresentar as listas referentes ao usuário
-                ShoppingListService service = new ShoppingListService();
-                Map<Long, Object> criteria = new HashMap<>();
-                ConsumerService consumerService = new ConsumerService();
-                Consumer consumer = consumerService.readById(user.getId());
-                criteria.put(UserCriteria.ID_EQ, consumer.getId());
-                List<ShoppingList> shoppingList = service.readByCriteria(criteria, null, null);
-
-                mv.addObject("shoppingList", shoppingList);
                 //Valida a promoção
             }
 
@@ -78,25 +79,23 @@ public class HomeController {
                 Double testPromation = 0.0;
 
                 List<Product> productListAux = new ArrayList<>();
-                for (Product product : productList) {
-                    Product productAux = new Product();
-                    testPromation = productBuilderByMarket(product.getId());
+                if (productList != null && !productList.isEmpty()) {
+                    for (Product product : productList) {
+                        Product productAux = new Product();
+                        testPromation = productBuilderByMarket(product.getId());
 
-                    productAux.setId(product.getId());
-                    productAux.setBrand(product.getBrand());
-                    productAux.setValue(testPromation);
-                    productAux.setName(product.getName());
-                    productAux.setProvider(product.getProvider());
-                    productAux.setSector(product.getSector());
+                        productAux.setId(product.getId());
+                        productAux.setBrand(product.getBrand());
+                        productAux.setValue(testPromation);
+                        productAux.setName(product.getName());
+                        productAux.setProvider(product.getProvider());
+                        productAux.setSector(product.getSector());
 
-                    productListAux.add(productAux);
+                        productListAux.add(productAux);
 
+                    }
                 }
-
-//                if (test != 0.0) {
-//                    mv.addObject("promationTest", 1);
-//                    mv.addObject("pricePromotion", test);
-//                }
+                
                 mv.addObject("productList", productListAux);
                 mv.addObject("limit", limit);
                 mv.addObject("offset", offset);
