@@ -15,6 +15,13 @@ html, body {
     overflow:auto;
 }
 
+#scroll-product-promotion {
+    width:auto;
+    height:600px;
+    background-color:#FFFFFF;
+    overflow:auto;
+}
+
 #scroll-product-list {
     width:auto;
     height:auto;

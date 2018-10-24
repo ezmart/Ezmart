@@ -22,7 +22,7 @@
         <nav>
             <div class="nav-wrapper">
                 <div class="container">
-                    <form action="/ezmartWeb/searthProduct">
+                    <form method="GET" action="/ezmartWeb/searthProduct">
                         <div class="input-field">
                             <input style="height: 60px; font-size: x-large" name="search" id="search" type="search" placeholder="Pesquise pelo produto" required>
                             <label class="label-icon" for="search"><i class="material-icons">search</i></label>
@@ -52,13 +52,6 @@
                             <a class="btn btn-sm btn-default btn-small red modal-close modal-action" style="color:white;">Não</a>
                             <button class="btn btn-sm btn-default btn-small green" style="color:white; margin-right: 10px;" >Sim</button>
                         </form>
-                    </div>
-                </c:if>
-                <c:if test="${empty userLogged}">
-                    <div class="modal-footer">
-                        <h4>Ops!!! Você não está logado no sistema.<i class=" small material-icons" style="margin-left: 10px;">sentiment_very_dissatisfied</i></h4>
-                        <a class="btn btn-sm btn-default btn-small green modal-close modal-action" style="color:white;">Fechar</a>
-
                     </div>
                 </c:if>
             </div>
@@ -106,7 +99,7 @@
                 <div class="card horizontal">
                     <div class="card-stacked">
                         <div class="card-content" style="background-color: #F1F1F1">   
-                            <h4 class="center-align">Produtos promocionais: ${count} encontrados</h4>
+                            <h4 class="center-align">Produtos: ${count} encontrados</h4>
                             <div class="row">
                                 <div class="col s12 m12">
                                     <ul>
@@ -114,7 +107,6 @@
                                             <li class="col l4 m6 s12" id="modal-teste">
                                                 <div class="card-panel medium" id="scroll-product">
                                                     <div class="row" style="padding: 20px;">
-                                                        <%--<c:if test="${userLogged.userType eq 'consumer'}">--%>
                                                         <c:if test="${product.value > 0.0}">
                                                             <p class="center" style="font-size: 18px; background-color: red; color: white"><b>Em promoção:</b> R$ ${product.value}</p>
                                                             <p class="center" style="font-size: 18px; background-color: red; color: white"><b>Mercado:</b> ${product.aux}</p>
@@ -124,14 +116,10 @@
                                                             <img class="responsive-img-center" src="<c:url value = "/resources/img/product/${product.id}.jpg"/>" alt="${product.barCode} - ${product.name}" width="150">
                                                         </div>
                                                         <br/>
-                                                        <!--<p style="font-size: 18px"><b>Id:</b> ${product.id}</p>-->
                                                         <p style="font-size: 18px"><b>Nome:</b> ${product.name}</p>
-                                                        <!--<p style="font-size: 18px"><b>Código EAN:</b> ${product.barCode}</p>-->
                                                         <p style="font-size: 18px; margin-top: 10px"><b>Marca:</b> ${product.brand}</p>
-                                                        <!--<p style="font-size: 18px; margin-top: 10px"><b>Linha:</b> ${product.sector.name}</p>-->
                                                         <div class="card-action card-content" style="margin-top: 20px">
                                                             <div class="col s12 center">
-                                                                <!--<a class="btn btn-sm btn-default btn-small ffc400 amber accent-3 modal-trigger" href="#modal-update" style="color:white;" onclick="setProductEdit(${product.id}, '${product.name}', '${product.barCode}', '${product.brand}')"><i class="material-icons center">edit</i></a>-->
                                                                 <c:if test="${userLogged.userType eq 'consumer'}">
                                                                     <a class="btn btn-sm btn-danger btn-small green modal-trigger" onclick="setProductId(${product.id})" href="#modal-add"  style="color:white;" title="Clique para adicionar o produto a sua lista"><i class="material-icons center">add</i></a>
                                                                 </c:if>
@@ -159,10 +147,10 @@
             </div>
             <ul class="pagination center" >
                 <c:if test="${(offset-limit)>=0}">
-                    <li class="waves-effect"><a href="<c:url value="/home?limit=${limit}&offset=${offset-limit}"/>"><i class="material-icons">chevron_left</i></a></li>
+                    <li class="waves-effect"><a href="<c:url value="/searthProduct?limit=${limit}&offset=${offset-limit}"/>"><i class="material-icons">chevron_left</i></a></li>
                     </c:if>
                     <c:if test="${(limit+offset)<count}">
-                    <li class="waves-effect"><a href="<c:url value="/home?limit=${limit}&offset=${offset+limit}"/>"><i class="material-icons">chevron_right</i></a></li>
+                    <li class="waves-effect"><a href="<c:url value="/searthProduct?limit=${limit}&offset=${offset+limit}"/>"><i class="material-icons">chevron_right</i></a></li>
                     </c:if>
             </ul>
         </div>

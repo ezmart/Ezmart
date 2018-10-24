@@ -11,9 +11,9 @@
         <li class="divider"></li>
     </ul>
     <ul style="margin-top: 65px" id="user" class="dropdown-content">
-        <li><a class="dropdown-content-user-header-style" href="<c:url value="/profile"/>">Meu perfil</a></li>
-        <li class="divider"></li>
         <li><a class="dropdown-content-user-header-style" href="<c:url value="/changePassword"/>">Alterar senha</a></li>
+        <li class="divider"></li>
+        <li><a class="dropdown-content-user-header-style" href="<c:url value="/profile"/>">Meu perfil</a></li>
         <li class="divider"></li>
         <li><a class="dropdown-content-user-header-style" href="<c:url value="/logout"/>">Sair</a></li>
         <li class="divider"></li>

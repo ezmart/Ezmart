@@ -16,11 +16,16 @@ import ezmart.model.service.ProductService;
 import ezmart.model.service.PromotionEstablishmentProductService;
 import ezmart.model.service.PromotionService;
 import ezmart.model.service.ShoppingListService;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.sql.Date;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,6 +43,7 @@ public class HomeController {
 
     private Double vPromation = Double.MAX_VALUE;
     private Double vPromationAux = Double.MAX_VALUE;
+    private String establishmentName = "";
 
     @RequestMapping(value = "/home", method = RequestMethod.GET)
     public ModelAndView getHome(HttpSession session, Integer limit, Integer offset) throws Exception {
@@ -50,21 +56,22 @@ public class HomeController {
             Object auxSession = session.getAttribute("userLogged");
             if (auxSession != null) {
                 if (auxSession instanceof Consumer) {
+
                     user = (Consumer) auxSession;
+                    //Apresentar as listas referentes ao usuário
+                    ShoppingListService service = new ShoppingListService();
+                    Map<Long, Object> criteria = new HashMap<>();
+                    ConsumerService consumerService = new ConsumerService();
+                    Consumer consumer = consumerService.readById(user.getId());
+                    criteria.put(UserCriteria.ID_EQ, consumer.getId());
+                    List<ShoppingList> shoppingList = service.readByCriteria(criteria, null, null);
+
+                    mv.addObject("shoppingList", shoppingList);
 
                 } else {
                     user = (Establishment) auxSession;
                 }
 
-                //Apresentar as listas referentes ao usuário
-                ShoppingListService service = new ShoppingListService();
-                Map<Long, Object> criteria = new HashMap<>();
-                ConsumerService consumerService = new ConsumerService();
-                Consumer consumer = consumerService.readById(user.getId());
-                criteria.put(UserCriteria.ID_EQ, consumer.getId());
-                List<ShoppingList> shoppingList = service.readByCriteria(criteria, null, null);
-
-                mv.addObject("shoppingList", shoppingList);
                 //Valida a promoção
             }
 
@@ -78,32 +85,34 @@ public class HomeController {
                 Double testPromation = 0.0;
 
                 List<Product> productListAux = new ArrayList<>();
-                for (Product product : productList) {
-                    Product productAux = new Product();
-                    testPromation = productBuilderByMarket(product.getId());
+                if (productList != null && !productList.isEmpty()) {
+                    for (Product product : productList) {
+                        Product productAux = new Product();
+                        testPromation = productBuilderByMarket(product.getId());
 
-                    productAux.setId(product.getId());
-                    productAux.setBrand(product.getBrand());
-                    productAux.setValue(testPromation);
-                    productAux.setName(product.getName());
-                    productAux.setProvider(product.getProvider());
-                    productAux.setSector(product.getSector());
+                        DecimalFormat formato = new DecimalFormat("#.##");
+                        testPromation = Double.valueOf(formato.format(testPromation+0.00));
 
-                    productListAux.add(productAux);
+                        productAux.setId(product.getId());
+                        productAux.setBrand(product.getBrand());
+                        productAux.setValue(testPromation);
+                        productAux.setAux(establishmentName);
+                        productAux.setName(product.getName());
+                        productAux.setProvider(product.getProvider());
+                        productAux.setSector(product.getSector());
 
+                        productListAux.add(productAux);
+
+                    }
                 }
 
-//                if (test != 0.0) {
-//                    mv.addObject("promationTest", 1);
-//                    mv.addObject("pricePromotion", test);
-//                }
                 mv.addObject("productList", productListAux);
                 mv.addObject("limit", limit);
                 mv.addObject("offset", offset);
                 mv.addObject("count", count);
 
             } else {
-
+                //buildMarket();
                 String url = "redirect:/home?limit=9&offset=0";
                 mv = new ModelAndView(url);
             }
@@ -119,7 +128,17 @@ public class HomeController {
 
     private Double productBuilderByMarket(Long productId) throws Exception {
         vPromation = Double.MAX_VALUE;
+        establishmentName = "";
         productsByMarket.forEach((key, value) -> {
+            EstablishmentService establishmentService = new EstablishmentService();
+            Establishment establishment = new Establishment();
+            try {
+                establishment = establishmentService.readById(key);
+
+            } catch (Exception ex) {
+                System.out.println(ex.getMessage());
+            }
+
             PriceComparisonModel priceComparisonModel = new PriceComparisonModel();
 
             List<EstablishmentProduct> list = value;
@@ -134,6 +153,7 @@ public class HomeController {
                         if (!response.equals(0.0)) {
                             if (response < vPromation) {
                                 vPromation = response;
+                                establishmentName = establishment.getBusinessName();
                             }
                         }
 

@@ -18,6 +18,8 @@ import ezmart.model.service.PromotionService;
 import ezmart.model.service.StateService;
 import java.text.DecimalFormat;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -308,13 +310,46 @@ public class EstablishmentController {
 
                 mv = new ModelAndView("establishment/promotion");
 
+                //Paga a data atual do sistema
+                Date currentDate = new Date(System.currentTimeMillis());
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
                 user = (Establishment) auxSession;
                 EstablishmentService establishmentService = new EstablishmentService();
                 Establishment establishment = establishmentService.readByUserId(user.getId());
                 PromotionEstablishmentProductService promotionEstablishmentProductService = new PromotionEstablishmentProductService();
 
-                mv.addObject("promotionList", promotionEstablishmentProductService.findAllPromotionEstablishmentProduct(establishment.getId()));
-                mv.addObject("currentDate", new java.util.Date().getTime());
+                List<PromotionEstablishmentProduct> promotionListAux = promotionEstablishmentProductService.findAllPromotionEstablishmentProduct(establishment.getId());
+                List<PromotionEstablishmentProduct> promotionList = new ArrayList<>();
+                for (PromotionEstablishmentProduct promotionEstablishmentProduct : promotionListAux) {
+                    PromotionEstablishmentProduct promotionEProduct = new PromotionEstablishmentProduct();
+
+                    promotionEProduct.setId(promotionEstablishmentProduct.getId());
+                    promotionEProduct.setEstablishmentProduct(promotionEstablishmentProduct.getEstablishmentProduct());
+                    promotionEProduct.setPromotion(promotionEstablishmentProduct.getPromotion());
+                    promotionEProduct.setPromotionPrice(promotionEstablishmentProduct.getPromotionPrice());
+
+                    Promotion promotion = promotionEstablishmentProduct.getPromotion();
+                    promotionList.add(promotionEProduct);
+
+                    Integer test = 0;
+
+                    if (currentDate.before(promotion.getFinalDate())) {
+                        test = 1;
+                    } else if (currentDate.after(promotion.getFinalDate())) {
+                        test = 0;
+                    } else {
+                        test = 1;
+                    }
+
+                    promotionEProduct.setValue(test);
+                }
+
+                mv.addObject("promotionList", promotionList);
+
+                //Paga a data atual do sistema
+                //Date currentDate = new Date(System.currentTimeMillis());
+                //mv.addObject("currentDate", new java.util.Date().getTime());
             }
 
         } catch (Exception exception) {

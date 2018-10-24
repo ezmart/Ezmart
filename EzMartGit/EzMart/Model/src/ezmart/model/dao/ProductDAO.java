@@ -7,6 +7,7 @@ import ezmart.model.entity.Provider;
 import ezmart.model.entity.Sector;
 import ezmart.model.model_entity.ProductModel;
 import ezmart.model.util.PreparedStatementBuilder;
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -294,7 +295,12 @@ public class ProductDAO implements BaseDAO<Product> {
 
     public Integer countByCriteria(Connection conn, Map<Long, Object> criteria) throws Exception {
         String sql = "SELECT count(*) count FROM product WHERE 1=1 ";
-        //sql += applyCriteria(criteria);
+        List<Object> paramList = new ArrayList<>();
+        if (criteria != null) {
+            sql += applyCriteria(criteria);
+        }
+
+        //PreparedStatement statement = PreparedStatementBuilder.build(conn, sql, paramList);
         Statement s = conn.createStatement();
         ResultSet rs = s.executeQuery(sql);
         Integer count = 0;
@@ -309,5 +315,18 @@ public class ProductDAO implements BaseDAO<Product> {
     @Override
     public void create(Connection conn, Product entity) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public String applyCriteria(Map<Long, Object> criteria) {
+        String sql = "";
+
+        if (criteria.containsKey(ProductCriteria.PRODUCT_ILIKE)) {
+
+            String productName = (String) criteria.get(ProductCriteria.PRODUCT_ILIKE);
+            if (productName != null && !productName.trim().isEmpty()) {
+                sql += " AND product_name ILIKE '%" + productName + "%'";
+            }
+        }
+        return sql;
     }
 }
