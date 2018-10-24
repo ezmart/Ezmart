@@ -59,7 +59,7 @@
                                             <div class="col s12 m12">
                                                 <ul>
                                                     <c:forEach items="${establishmentList}" var="establishment">
-                                                        <div class="col s4">
+                                                        <div class="col s6">
                                                             <div class="card">
                                                                 <div class="card-panel medium" id="scroll-product">
                                                                     <div class="col s12 m12">
@@ -78,7 +78,7 @@
                                                                                             </div>
                                                                                             <div class="col s9">
                                                                                                 <p><b>${product.product.name}</b></p>
-                                                                                                <p><b>R$ ${product.price}</b></p>
+                                                                                                <p><b>R$ ${product.priceConvert}</b></p>
                                                                                                 <p><b>${product.product.barCode}</b></p>
                                                                                             </div>
                                                                                         </ul>

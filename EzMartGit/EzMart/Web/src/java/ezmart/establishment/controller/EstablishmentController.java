@@ -281,7 +281,7 @@ public class EstablishmentController {
                 if (!isPromotion) {
                     establishmentService.deleteEstablishmentProduct(productDeleteId);
                     mv.addObject("isPromotion", isPromotion);
-                }else{
+                } else {
                     mv.addObject("isPromotion", isPromotion);
                 }
             }
@@ -442,7 +442,7 @@ public class EstablishmentController {
 
         return mv;
     }
-    
+
     @RequestMapping(value = "/quotation", method = RequestMethod.GET)
     public ModelAndView findAllEstablishmentForQuotation(HttpSession session) {
         ModelAndView mv = null;
@@ -496,8 +496,8 @@ public class EstablishmentController {
                 Establishment competitor = establishmentService.readByEstablishmentId(competitorId);
 
                 List<Long> productIdList = new ArrayList<>();
-                for (EstablishmentProduct product : establishmentProductList) {
-                    productIdList.add(product.getId());
+                for (EstablishmentProduct establishmentProduct : establishmentProductList) {
+                    productIdList.add(establishmentProduct.getProduct().getId());
                 }
 
                 List<EstablishmentProduct> competitorList = establishmentService.findAllEstablishmentProductByCompetitorId(competitorId, productIdList);

@@ -298,6 +298,7 @@ public class EstablishmentDAO implements BaseDAO<Establishment> {
             establishmentProduct.setId(resultSet.getLong("establishmentproduct_id"));
             establishmentProduct.setDateAlteration(resultSet.getDate("establishmentproduct_date"));
             establishmentProduct.setPrice(resultSet.getDouble("establishmentproduct_price"));
+            establishmentProduct.setPriceConvert(establishmentProduct.getPrice().toString().replace(".", ","));
             establishmentProduct.setEstablishment(establishment);
             establishmentProduct.setProduct(product);
 
@@ -583,6 +584,7 @@ public class EstablishmentDAO implements BaseDAO<Establishment> {
             establishmentProduct.setId(resultSet.getLong("establishmentproduct_id"));
             establishmentProduct.setDateAlteration(resultSet.getDate("establishmentproduct_date"));
             establishmentProduct.setPrice(resultSet.getDouble("establishmentproduct_price"));
+            establishmentProduct.setPriceConvert(establishmentProduct.getPrice().toString().replace(".", ","));
             establishmentProduct.setEstablishment(establishment);
             establishmentProduct.setProduct(product);
 

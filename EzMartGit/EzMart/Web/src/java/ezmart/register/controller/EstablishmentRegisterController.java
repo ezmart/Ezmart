@@ -91,7 +91,8 @@ public class EstablishmentRegisterController {
                 BufferedImage originalImage = null;
                 try {
 
-                    originalImage = ImageIO.read(new File("D:\\TCC 2018\\EzMart\\Web\\web\\resources\\img\\avatar\\storm.jpg"));
+//                    originalImage = ImageIO.read(new File("D:\\TCC 2018\\EzMart\\Web\\web\\resources\\img\\avatar\\storm.jpg"));
+                    originalImage = ImageIO.read(new File("C:\\Users\\marko\\Desktop\\EzMartGit2018\\Ezmart\\EzMartGit\\EzMart\\Web\\web\\resources\\img\\avatar\\storm.jpg"));
 
                     ByteArrayOutputStream baos = new ByteArrayOutputStream();
                     ImageIO.write(originalImage, "jpg", baos);
