@@ -38,11 +38,11 @@
             </div>
             <div class="container" >
                 <div class="row">
-                    <h1 style="color: #2196f3">Olá!</h1>                
+                    <h1 style="color: #2196f3">Obrigado!</h1>                
                     <br/>
                     <div class="col s5">
                         <p style="color: #898989; font-size: x-large">
-                            Sucesso! Sua avaliação já foi registrada. Continue ajudando a melhorar os mercados.
+                            Sua avaliação já foi registrada. Continue ajudando a melhorar os estabelecimentos.
                         </p>
                     </div>
                     <div class="col s4 offset-s2">
