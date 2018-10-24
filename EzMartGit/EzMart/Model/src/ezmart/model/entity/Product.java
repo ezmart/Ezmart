@@ -11,7 +11,7 @@ public class Product extends BaseEntity {
     private byte[] image;
     private String brand;
 
-    private Double value;
+    private String value;
     private String aux;
     
     public String getBarCode() {
@@ -62,11 +62,11 @@ public class Product extends BaseEntity {
         this.brand = brand;
     }
 
-    public Double getValue() {
+    public String getValue() {
         return value;
     }
 
-    public void setValue(Double value) {
+    public void setValue(String value) {
         this.value = value;
     }
 

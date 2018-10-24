@@ -3,9 +3,9 @@
     <ul style="margin-top: 65px" id="main" class="dropdown-content">
         <li><a class="dropdown-content-user-header-style" href="<c:url value="/marketEvaluation"/>">Avaliar mercados</a></li>
         <li class="divider"></li>
-        <li><a class="dropdown-content-user-header-style" href="<c:url value="/shoppingList"/>">Minhas listas</a></li>
-        <li class="divider"></li>
         <li><a class="dropdown-content-user-header-style" href="<c:url value="/localMarkets"/>">Mercados próximos</a></li>
+        <li class="divider"></li>
+        <li><a class="dropdown-content-user-header-style" href="<c:url value="/shoppingList"/>">Minhas listas</a></li>
         <li class="divider"></li>
     </ul>
     <ul style="margin-top: 65px" id="user" class="dropdown-content">

@@ -40,7 +40,7 @@ async defer></script>
             success: function (response) {
 
 
-                console.log(response);
+                //console.log(response);
                 response.forEach(function (locationItens) {
                     var marker = null;
 
@@ -74,13 +74,104 @@ async defer></script>
 
     function getMarketWithTheList(establishmentId) {
 
+        document.getElementById("content_insert").innerHTML = "";
+
         $.ajax({
             url: '/ezmartWeb/localMarkets-' + establishmentId,
-            type: 'POST',
+            type: 'GET',
+            dataType: "json",
             success: function (response) {
+
+
+                console.log(response);
+
+                response.forEach(function (item) {
+
+                    var mydiv = document.getElementById("content_insert");
+                    var tagH3 = document.createElement('h4');
+                    tagH3.innerHTML = "Produtos do mercado em relação a sua lista favorita";
+                    var tagBr4 = document.createElement('br');
+                    var tagDiv1 = document.createElement('div');
+                    tagDiv1.className = "col s12";
+
+                    var tagDiv2 = document.createElement('div');
+                    tagDiv2.className = "col s12";
+
+                    var labelTag = document.createElement('label');
+                    labelTag.innerHTML = "Nome do estabelecimento: " + item.establishmentName;
+                    labelTag.style = "color:black; margin-left: 15px; font-size: x-large";
+
+                    tagDiv1.appendChild(labelTag);
+
+                    var labelTag2 = document.createElement('label');
+                    labelTag2.innerHTML = "Preço total: R$ " + item.totalPrice;
+                    labelTag2.style = "color:black; margin-left: 15px; font-size: x-large;";
+
+                    tagDiv2.appendChild(labelTag2);
+
+                    mydiv.appendChild(tagH3);
+                    mydiv.appendChild(tagBr4);
+                    mydiv.appendChild(tagDiv1);
+                    mydiv.appendChild(tagDiv2);
+
+                    item.productModelList.forEach(function (value) {
+                        var tagDivAux2 = document.createElement('div');
+                        tagDivAux2.className = "col s12";
+
+                        var tagImg = document.createElement('img');
+                        tagImg.className = "responsive-img";
+                        tagImg.src = "/ezmartWeb/resources/img/product/" + value.productId + ".jpg";
+                        tagImg.width = "90";
+                        //tagImg.height = "60";
+
+                        var tagBr = document.createElement('br');
+                        var tagBr1 = document.createElement('br');
+                        var tagBr2 = document.createElement('br');
+                        var tagBr3 = document.createElement('br');
+
+
+                        var labelTagAux1 = document.createElement('label');
+                        labelTagAux1.innerHTML = "Nome do produto: " + value.productName;
+                        labelTagAux1.style = "color:black; margin-left: 15px; font-size: x-large";
+
+                        var labelTagAux2 = document.createElement('label');
+                        labelTagAux2.innerHTML = "Preço do produto: R$ " + value.price;
+                        labelTagAux2.style = "color:black; margin-left: 15px; font-size: x-large";
+
+                        var labelTagAux3 = document.createElement('label');
+                        labelTagAux3.innerHTML = "------------------------------------";
+                        labelTagAux3.style = "color:black; margin-left: 15px; font-size: x-large";
+                        labelTagAux3.className = "center";
+
+                        tagDivAux2.appendChild(tagImg);
+                        tagDivAux2.appendChild(tagBr1);
+                        tagDivAux2.appendChild(labelTagAux1);
+                        tagDivAux2.appendChild(tagBr);
+                        tagDivAux2.appendChild(labelTagAux2);
+                        tagDivAux2.appendChild(tagBr2);
+                        tagDivAux2.appendChild(labelTagAux3);
+                        tagDivAux2.appendChild(tagBr3);
+
+
+                        mydiv.appendChild(tagDivAux2);
+                    });
+
+
+
+
+                    //var tagP1 = document.createElement('p');
+
+                });
+
+
                 console.log('OK! =)');
             },
-            error: function () {
+            error: function (response) {
+
+                var mydiv = document.getElementById("content_insert");
+                var h3TagProduct = document.createElement('h5');
+                h3TagProduct.innerHTML = "Falhou";
+                mydiv.appendChild(h3TagProduct)
                 console.log('Falha ao carregar! =/');
             }
         });

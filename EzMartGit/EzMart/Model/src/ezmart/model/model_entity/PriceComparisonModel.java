@@ -5,16 +5,16 @@ import java.util.List;
 public class PriceComparisonModel {
     
     private String establishmentName;
-    private Double totalPrice;
+    private String totalPrice;
     private String note;
     
     private List<ProductModel> productModelList;
 
-    public Double getTotalPrice() {
+    public String getTotalPrice() {
         return totalPrice;
     }
 
-    public void setTotalPrice(Double totalPrice) {
+    public void setTotalPrice(String totalPrice) {
         this.totalPrice = totalPrice;
     }
 

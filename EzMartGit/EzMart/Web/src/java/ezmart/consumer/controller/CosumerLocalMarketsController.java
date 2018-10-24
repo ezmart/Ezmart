@@ -20,6 +20,8 @@ import ezmart.model.service.ListProductService;
 import ezmart.model.service.PromotionEstablishmentProductService;
 import ezmart.model.service.PromotionService;
 import ezmart.model.service.ShoppingListService;
+import ezmart.model.util.Mascara;
+import ezmart.model.util.TrataNumero;
 import ezmart.model.util.UtilServices;
 import java.sql.Date;
 import java.util.ArrayList;
@@ -31,6 +33,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -56,7 +59,8 @@ public class CosumerLocalMarketsController {
     }
 
     //Contem o id do estabelecimento
-    @RequestMapping(value = "/localMarkets-{id}", method = RequestMethod.POST)
+    @ResponseBody
+    @RequestMapping(value = "/localMarkets-{id}", method = RequestMethod.GET)
     public String getTEST(@PathVariable Long id, HttpSession session) throws Exception {
         String jsonString = null;
 
@@ -178,7 +182,8 @@ public class CosumerLocalMarketsController {
                         }
 
                         Double totalPrice = new UtilServices().totalPrice(pricesList);
-                        priceComparisonModel.setTotalPrice(totalPrice);
+                        String aux = TrataNumero.editarNumero(TrataNumero.mult2(totalPrice), Mascara.getMascaraDuasCasas());
+                        priceComparisonModel.setTotalPrice(aux);
                         priceComparisonModel.setEstablishmentName(establishmentName);
                         priceComparisonModel.setProductModelList(productModelList);
 

@@ -55,7 +55,27 @@
                         </div>
                     </div>
                 </div> 
-            </div>                 
+            </div>  
+            <div class="row">
+                <div class="col s12 m12">
+                    <div class="card horizontal">
+                        <div class="card-stacked">
+                            <div class="card-content" style="">   
+                                <div class="row">
+                                    <div class="col s12 m12">
+                                        <ul>
+                                            <div class="container col s12" id="content_insert">
+
+                                            </div>
+                                        </ul>
+                                    </div> 
+                                </div> 
+                            </div> 
+                        </div> 
+                    </div> 
+                </div> 
+            </div>  
+
         </c:if>
         <script src="<c:url value="/resources/js/jquery.min.js"/>"></script>
         <c:import url="/WEB-INF/views/templates/footer.jsp"></c:import>
