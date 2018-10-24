@@ -1,5 +1,6 @@
 package ezmart.establishment.controller;
 
+import ezmart.model.entity.Avaliation;
 import ezmart.model.entity.City;
 import ezmart.model.entity.Establishment;
 import ezmart.model.entity.EstablishmentProduct;
@@ -8,6 +9,7 @@ import ezmart.model.entity.Promotion;
 import ezmart.model.entity.PromotionEstablishmentProduct;
 import ezmart.model.entity.State;
 import ezmart.model.entity.User;
+import ezmart.model.service.AvaliationService;
 import ezmart.model.service.CityService;
 import ezmart.model.service.EstablishmentService;
 import ezmart.model.service.ProductService;
@@ -512,6 +514,38 @@ public class EstablishmentController {
                 mv.addObject("establishmentList", establishmentList);
                 mv.addObject("establishmentProductList", establishmentProductList);
                 mv.addObject("competitorList", competitorList);
+
+            }
+
+        } catch (Exception exception) {
+            System.out.println(exception);
+        }
+        return mv;
+    }
+    
+    
+    @RequestMapping(value = "/avaliation-report", method = RequestMethod.GET)
+    public ModelAndView getAvaliationReport(HttpSession session) {
+        ModelAndView mv = null;
+        try {
+            Object auxSession = session.getAttribute("userLogged");
+            User user = null;
+
+            if (auxSession instanceof Establishment) {
+
+                mv = new ModelAndView("establishment/avaliation_report");
+
+                user = (Establishment) auxSession;
+
+                EstablishmentService establishmentService = new EstablishmentService();
+                Establishment establishment = establishmentService.readByUserId(user.getId());
+                
+                AvaliationService avaliationService = new AvaliationService();
+                
+                Avaliation avaliation = avaliationService.findAvgAvaliation(establishment.getId());
+
+                mv.addObject("establishment", establishment);
+                mv.addObject("avaliation", avaliation);
 
             }
 

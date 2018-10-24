@@ -88,4 +88,19 @@ public class AvaliationService implements BaseAvaliationService {
         return errors;
     }
 
+    public Avaliation findAvgAvaliation(Long establishmentId) throws Exception {
+
+        Connection conn = ConnectionManager.getInstance().getConnection();
+        try {
+            AvaliationDAO dao = new AvaliationDAO();
+            Avaliation avaliation = dao.findAvgAvaliation(conn, establishmentId);
+            conn.commit();
+            conn.close();
+            return avaliation;
+        } catch (Exception e) {
+            conn.rollback();
+            conn.close();
+            throw e;
+        }
+    }
 }

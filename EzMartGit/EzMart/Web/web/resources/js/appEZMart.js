@@ -331,3 +331,53 @@ function setCitiesWithState() {
         }
     });
 }
+
+$(document).ready(function () {
+    
+    var satisfaction = document.getElementById('satisfaction').value;
+    var priceProduct = document.getElementById('priceProduct').value;
+    var prodDiversity = document.getElementById('prodDiversity').value;
+    var employees = document.getElementById('employees').value;
+    var ambience = document.getElementById('ambience').value;
+    
+    var ctx = document.getElementById("bar-chart").getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'horizontalBar',
+        data: {
+            labels: ["Grau de satisfação", "Preços dos produtos", "Diversidade de produtos", "Funcionários", "Ambiente"],
+            datasets: [{
+                    label: 'Avaliação',
+                    data: [satisfaction, priceProduct, prodDiversity, employees, ambience],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.8)',
+                        'rgba(54, 162, 235, 0.8)',
+                        'rgba(255, 206, 86, 0.8)',
+                        'rgba(75, 192, 192, 0.8)',
+                        'rgba(153, 102, 255, 0.8)'
+                    ],
+                    borderColor: [
+                        'rgba(255,99,132,1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)'
+                    ],
+                    borderWidth: 2
+                }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+            },
+            title: {
+                display: true,
+                fontSize: 20,
+                text: "MÉDIA DE AVALIAÇÃO (máx. 5)"
+            }
+        }
+    });
+});

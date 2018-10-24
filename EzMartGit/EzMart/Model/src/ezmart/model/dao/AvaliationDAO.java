@@ -4,6 +4,7 @@ import ezmart.model.base.BaseDAO;
 import ezmart.model.entity.Avaliation;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.List;
 import java.util.Map;
 
@@ -11,7 +12,7 @@ public class AvaliationDAO implements BaseDAO<Avaliation> {
 
     @Override
     public void create(Connection conn, Avaliation entity) throws Exception {
-        
+
         String sql = "INSERT INTO avaliation(avaliation_satisfaction, avaliation_productprice, avaliation_diversity, "
                 + "avaliation_employees, avaliation_ambience, avaliation_commentary, avaliation_consumerid, "
                 + "avaliation_establishmentid, avaliation_date) "
@@ -28,7 +29,7 @@ public class AvaliationDAO implements BaseDAO<Avaliation> {
         statement.setString(++i, entity.getCommentary());
         statement.setLong(++i, entity.getConsumer().getId());
         statement.setLong(++i, entity.getEstablishment().getId());
-        statement.setDate(++i, entity.getDateAvaliation(  ));
+        statement.setDate(++i, entity.getDateAvaliation());
 
         statement.execute();
 
@@ -53,6 +54,37 @@ public class AvaliationDAO implements BaseDAO<Avaliation> {
     @Override
     public void delete(Connection conn, Long id) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public Avaliation findAvgAvaliation(Connection conn, Long establishmentId) throws Exception {
+        String sql = "select\n"
+                + "	avg( avaliation_satisfaction ) as satisfaction,\n"
+                + "	avg( avaliation_productprice ) as product,\n"
+                + "	avg( avaliation_diversity ) as diversity,\n"
+                + "	avg( avaliation_employees ) as employees,\n"
+                + "	avg( avaliation_ambience ) as ambience\n"
+                + "from\n"
+                + "	avaliation\n"
+                + "where\n"
+                + "	avaliation_establishmentid = ?";
+
+        PreparedStatement statement = conn.prepareStatement(sql);
+        statement.setLong(1, establishmentId);
+        ResultSet rs = statement.executeQuery();
+
+        Avaliation avaliation = new Avaliation();
+        if (rs.next()) {
+            
+            avaliation.setSatisfaction(rs.getInt("satisfaction"));
+            avaliation.setProductPrice(rs.getInt("product"));
+            avaliation.setDiversity(rs.getInt("diversity"));
+            avaliation.setEmployees(rs.getInt("employees"));
+            avaliation.setAmbience(rs.getInt("ambience"));
+        }
+        rs.close();
+        statement.close();
+
+        return avaliation;
     }
 
 }
