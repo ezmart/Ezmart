@@ -112,7 +112,7 @@ public class HomeController {
                 mv.addObject("count", count);
 
             } else {
-
+                //buildMarket();
                 String url = "redirect:/home?limit=9&offset=0";
                 mv = new ModelAndView(url);
             }
