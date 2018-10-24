@@ -8,7 +8,9 @@ import ezmart.model.entity.Product;
 import ezmart.model.entity.Provider;
 import ezmart.model.entity.Sector;
 import ezmart.model.entity.User;
+import ezmart.model.util.Mascara;
 import ezmart.model.util.PreparedStatementBuilder;
+import ezmart.model.util.TrataNumero;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -298,7 +300,7 @@ public class EstablishmentDAO implements BaseDAO<Establishment> {
             establishmentProduct.setId(resultSet.getLong("establishmentproduct_id"));
             establishmentProduct.setDateAlteration(resultSet.getDate("establishmentproduct_date"));
             establishmentProduct.setPrice(resultSet.getDouble("establishmentproduct_price"));
-            establishmentProduct.setPriceConvert(establishmentProduct.getPrice().toString().replace(".", ","));
+            establishmentProduct.setPriceConvert(TrataNumero.editarNumero(TrataNumero.mult2(establishmentProduct.getPrice()), Mascara.getMascaraDuasCasas()));
             establishmentProduct.setEstablishment(establishment);
             establishmentProduct.setProduct(product);
 
@@ -584,7 +586,7 @@ public class EstablishmentDAO implements BaseDAO<Establishment> {
             establishmentProduct.setId(resultSet.getLong("establishmentproduct_id"));
             establishmentProduct.setDateAlteration(resultSet.getDate("establishmentproduct_date"));
             establishmentProduct.setPrice(resultSet.getDouble("establishmentproduct_price"));
-            establishmentProduct.setPriceConvert(establishmentProduct.getPrice().toString().replace(".", ","));
+            establishmentProduct.setPriceConvert(TrataNumero.editarNumero(TrataNumero.mult2(establishmentProduct.getPrice()), Mascara.getMascaraDuasCasas()));
             establishmentProduct.setEstablishment(establishment);
             establishmentProduct.setProduct(product);
 
