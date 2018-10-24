@@ -36,7 +36,7 @@ public class ComparePricesController {
     //Armazena os produtos da lista em questão
     private Map<Long, ListProductModel> productsConsumerOnList;
 
-    //Armazena todas promoções do systema
+    //Armazena todas promoções do sistema
     private List<PromotionEProductModel> promotionEstablishmentProductlist;
 
     //Verica os preços dos produtos

@@ -58,7 +58,7 @@ public class AvaliationService implements BaseAvaliationService {
         Integer prodDiversity = (Integer) fields.get("prodDiversity");
         Integer employees = (Integer) fields.get("employees");
         Integer ambience = (Integer) fields.get("ambience");
-        String commentary = (String) fields.get("commentary");
+        //String commentary = (String) fields.get("commentary");
 
         if (validationType.equals((SystemConstant.VALIDATION.EVALUATION.REGISTER_EVALUATION))) {
             //Validação de preenchimento dos campos
@@ -80,9 +80,9 @@ public class AvaliationService implements BaseAvaliationService {
             if (ambience == null) {
                 errors.put("ambience", "*Selecione um grau de satisfação!");
             }
-            if (commentary == null || commentary.isEmpty()) {
-                errors.put("commentary", "*Dê sua opinião em relação o mercado!");
-            }
+//            if (commentary == null || commentary.isEmpty()) {
+//                errors.put("commentary", "*Dê sua opinião em relação o mercado!");
+//            }
         }
 
         return errors;

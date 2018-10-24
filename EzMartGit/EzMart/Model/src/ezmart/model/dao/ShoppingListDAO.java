@@ -72,8 +72,8 @@ public class ShoppingListDAO implements BaseDAO<ShoppingList> {
                 paramList.add(userId);
             }
             if (criteria.containsKey(ShoppingListCriteria.LIST_FAVORITE_EQ)) {
-                Boolean favorite = (Boolean) criteria.get(ShoppingListCriteria.LIST_FAVORITE_EQ);
-                sql += " AND list_favorite = ?";
+                boolean favorite = (boolean) criteria.get(ShoppingListCriteria.LIST_FAVORITE_EQ);
+                sql += " AND list_favorite = TRUE";
                 paramList.add(favorite);
             }
         }

@@ -105,9 +105,9 @@ public class EvaluationController {
                 if (ambience != null) {
                     mv.addObject("ambience", ambience);
                 }
-                if (commentary != null && !commentary.isEmpty()) {
-                    mv.addObject("commentary", commentary);
-                }
+//                if (commentary != null && !commentary.isEmpty()) {
+//                    mv.addObject("commentary", commentary);
+//                }
 
                 EstablishmentService service = new EstablishmentService();
                 Map<Long, Object> criteria = new HashMap<>();
