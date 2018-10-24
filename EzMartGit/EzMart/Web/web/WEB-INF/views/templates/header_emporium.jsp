@@ -9,9 +9,9 @@
         <li class="divider"></li>
     </ul>
     <ul style="margin-top: 65px" id="user" class="dropdown-content">
-        <li><a class="dropdown-content-user-header-style" href="<c:url value="/profile"/>">Meu perfil</a></li>
-        <li class="divider"></li>
         <li><a class="dropdown-content-user-header-style" href="<c:url value="/changePassword"/>">Alterar senha</a></li>
+        <li class="divider"></li>
+        <li><a class="dropdown-content-user-header-style" href="<c:url value="/profile"/>">Meu perfil</a></li>
         <li class="divider"></li>
         <li><a class="dropdown-content-user-header-style" href="<c:url value="/logout"/>">Sair</a></li>
         <li class="divider"></li>
@@ -41,18 +41,18 @@
                         </li>
                     </ul>
                     <ul class="side-nav" id="mobile-demo">
-<!--                        <li>
-                            <a class="dropdown-button" href="<c:url value="#!"/>" data-activates="user">
-                                <i class="material-icons left" style="font-size: 20px">
-                                    <img class="circle responsive" style="width:25px;height:25px; padding-top: 0px;" name="img1" src="imgProfile">
-                                </i>${userLogged.name}
-                            </a>
-                        </li>-->
+                        <!--                        <li>
+                                                    <a class="dropdown-button" href="<c:url value="#!"/>" data-activates="user">
+                                                        <i class="material-icons left" style="font-size: 20px">
+                                                            <img class="circle responsive" style="width:25px;height:25px; padding-top: 0px;" name="img1" src="imgProfile">
+                                                        </i>${userLogged.name}
+                                                    </a>
+                                                </li>-->
                         <li><a class="user-header-style" href="<c:url value="/home"/>" class="active">Início</a></li>
                         <li><a class="user-header-style" href="<c:url value="/information"/>">Sobre</a></li>
-<!--                        <li>
-                            <a class="dropdown-button" href="<c:url value="#!"/>" data-activates="main">Minha opções<i class="material-icons right">arrow_drop_down</i></a>
-                        </li>-->
+                        <!--                        <li>
+                                                    <a class="dropdown-button" href="<c:url value="#!"/>" data-activates="main">Minha opções<i class="material-icons right">arrow_drop_down</i></a>
+                                                </li>-->
                         <li><a class="user-header-style" href="<c:url value="/contact"/>">Contato</a></li>
                         <li><a class="user-header-style" href="#!">Mensagens</a></li>
                         <li><a class="user-header-style" href="<c:url value="/logout"/>">Sair</a></li>
