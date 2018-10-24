@@ -31,6 +31,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -56,7 +57,8 @@ public class CosumerLocalMarketsController {
     }
 
     //Contem o id do estabelecimento
-    @RequestMapping(value = "/localMarkets-{id}", method = RequestMethod.POST)
+    @ResponseBody
+    @RequestMapping(value = "/localMarkets-{id}", method = RequestMethod.GET)
     public String getTEST(@PathVariable Long id, HttpSession session) throws Exception {
         String jsonString = null;
 
