@@ -42,13 +42,13 @@
                     </div>
                 </nav>
             </div>
-            <div class="container" >
+            <div id="empty-list" class="container" >
                 <div class="row">
                     <h1 style="color: #2196f3">Olá!</h1>                
                     <br/>
                     <div class="col s5">
                         <p style="color: #898989; font-size: x-large">
-                            OPS! Sua lista está vazia. Adicione produtos antes de comparar os preços.
+                            Sua lista está vazia. Adicione produtos antes de comparar os preços.
                         </p>
                     </div>
                     <div class="col s4 offset-s2">

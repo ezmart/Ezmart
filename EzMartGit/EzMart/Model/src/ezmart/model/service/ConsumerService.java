@@ -198,7 +198,7 @@ public class ConsumerService implements BaseConsumerService {
             }
 
             //Validação de preenchimento do campo CIDADE
-            if (cityId == null) {
+            if (cityId == null || cityId == 0) {
                 errors.put("cityId", "*Campo cidade obrigatório!");
                 flag = false;
             }

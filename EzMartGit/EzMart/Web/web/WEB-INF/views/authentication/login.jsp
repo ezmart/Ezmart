@@ -25,7 +25,7 @@
                                     EZMart | Login 
                                 </div>
                                 <div style="float:right; font-size: 80%; padding-right: 0" class="col s5">
-                                    <a href="<c:url value="/recoveryPassword"/>">Esqueceu a senha?</a>
+                                    <a id="recovery-password" href="<c:url value="/recoveryPassword"/>">Esqueceu a senha?</a>
                                 </div>
                             </div>     
                             <div style="padding-top:20px" class="panel-body" >

@@ -11,7 +11,7 @@
                 <br/>
                 <br/>
                 <!--<a id="btn-btn-ezmart-style" href="/newShoppingList" class="btn">Salvar nova lista</a>-->
-                <button id="btn-btn-ezmart-style" type="submit" class="btn" value="confirmar"><i class="material-icons left">border_color</i>Salvar nova lista</button>
+                <button id="btn-btn-ezmart-style" name="save-new-list" type="submit" class="btn" value="confirmar"><i class="material-icons left">border_color</i>Salvar nova lista</button>
             </form>
         </div>
     </div>

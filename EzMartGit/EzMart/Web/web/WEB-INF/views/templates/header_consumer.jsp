@@ -5,7 +5,7 @@
         <li class="divider"></li>
         <li><a class="dropdown-content-user-header-style" href="<c:url value="/localMarkets"/>">Mercados próximos</a></li>
         <li class="divider"></li>
-        <li><a class="dropdown-content-user-header-style" href="<c:url value="/shoppingList"/>">Minhas listas</a></li>
+        <li><a id="my-list" class="dropdown-content-user-header-style" href="<c:url value="/shoppingList"/>">Minhas listas</a></li>
         <li class="divider"></li>
     </ul>
     <ul style="margin-top: 65px" id="user" class="dropdown-content">
@@ -13,7 +13,7 @@
         <li class="divider"></li>
         <li><a class="dropdown-content-user-header-style" href="<c:url value="/profile"/>">Meu perfil</a></li>
         <li class="divider"></li>
-        <li><a class="dropdown-content-user-header-style" href="<c:url value="/logout"/>">Sair</a></li>
+        <li><a id="logout" class="dropdown-content-user-header-style" href="<c:url value="/logout"/>">Sair</a></li>
         <li class="divider"></li>
     </ul>
     <nav style="height: 70px">
@@ -30,7 +30,7 @@
                         <li><a class="user-header-style" href="<c:url value="/contact"/>"><i class="material-icons left" style="font-size: 20px">contacts</i>Contato</a></li>
                         <!--<li><a class="user-header-style" href="<c:url value="#!"/>"><i class="material-icons left" style="font-size: 20px">email</i>Mensagens</a></li>-->
                         <li>
-                            <a class="dropdown-button user-header-style" href="<c:url value="#!"/>" data-activates="main"><i class="material-icons left" style="font-size: 20px">settings</i>Minhas opções</a>
+                            <a id="my-option" class="dropdown-button user-header-style" href="<c:url value="#!"/>" data-activates="main"><i class="material-icons left" style="font-size: 20px">settings</i>Minhas opções</a>
                         </li>
                         <li>
                             <a class="dropdown-button user-header-style" href="#!" id="avatar" data-activates="user">

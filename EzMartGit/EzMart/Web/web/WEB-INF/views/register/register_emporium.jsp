@@ -86,7 +86,7 @@
                                 <div class="form-group col s6">
                                     <label>Municipio:</label>
                                     <select class="form-control input-text-register" name="cityId" id="cityId">
-                                        <option notselected>Selecione primeiro seu estado</option>
+                                        <option value="0" notselected>Selecione primeiro seu estado</option>
 
                                     </select>
                                     <span style="color: orangered">${errors.cityId}</span>

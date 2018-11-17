@@ -35,7 +35,7 @@ public class UtilServices {
                 subject = "Email de confirmação";
                 msg = "Olá " + userName + ",\n"
                         + "Clique no link para confirmar seu cadastro! \n\n"
-                        + "http://localhost:8084/ezmartWeb/" + email + "/authentication";
+                        + "http://192.168.1.104:8084/ezmartWeb/" + email + "/authentication";
 
             } else if (type.equals(SystemConstant.EMAIL.AUTHENTICATION.RECOVERY_PASSWORD)) {
                 String newPassword = (String) values.get("newPassword");
@@ -44,7 +44,7 @@ public class UtilServices {
                         + "Sua senha foi alterada! \n\n"
                         + "Nova Senha: " + newPassword + "\n\n"
                         + "Acesse seu perfil e altere esta senha!\n\n\n"
-                        + "http://localhost:8084/ezmartWeb/login";
+                        + "http://192.168.1.104:8084/ezmartWeb/login";
             }
 
             mailSMTPServer = "ezmartfai@gmail.com";

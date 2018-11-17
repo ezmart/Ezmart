@@ -52,7 +52,7 @@ public class AuthenticationController {
                         session.setAttribute("userLogged", user);
                         mv = new ModelAndView("redirect:/home");
                     } else {
-                        errors.put("information", "Seu cadastro ainda não confirmado. Acesse seu email e confirme.");
+                        errors.put("information", "Seu cadastro não foi confirmado. Acesse seu email e confirme.");
                         mv = new ModelAndView("authentication/login");
                     }
                     mv.addObject("errors", errors);

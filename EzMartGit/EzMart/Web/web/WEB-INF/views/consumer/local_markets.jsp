@@ -32,7 +32,7 @@
                             <a href="<c:url value="/home"/>" class="breadcrumb">
                                 Início
                             </a>
-                            <a href="<c:url value="!#"/>" class="breadcrumb"> 
+                            <a href="<c:url value="/localMarkets"/>" class="breadcrumb"> 
                                 Mercados mais próximos
                             </a>
                         </div>

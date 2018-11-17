@@ -44,7 +44,7 @@
                                 <input type="text" style="display: none" name="type" id="type" value="DELETE">
                                 <input type="text" style="display: none"  name="value" id="idDeleteShoppingList" value="">
                                 <a class="btn btn-sm right btn-default btn-small red modal-close modal-action" style="color:white; margin-left: 10px;">Não</a>
-                                <button type="submit" class="btn btn-sm btn-default btn-small green" value="confirmar" style="color:white;">Sim</button>
+                                <button id="delete-confimation-list" type="submit" class="btn btn-sm btn-default btn-small green" value="confirmar" style="color:white;">Sim</button>
                             </form>
                         </div>
                     </div>
@@ -100,13 +100,15 @@
             <c:if test="${empty shoppingList}">
                 <div class="card">
                     <div class="row center-align" style="padding: 20px;">
-                        <h4 class="center-align" style="color: #2196f3">Nenhuma lista encontrada! :)</h4>
+                        <h4 id="text-null-list" class="center-align" style="color: #2196f3">Nenhuma lista encontrada! :)</h4>
                         <br/>
                         <br/>
-                        <a href="#modal-create" class="btn btn-sm btn-default btn-small green left modal-trigger" style="color:white;"><i class="material-icons right">add_box</i>Adicionar</a>
+                        <a href="#modal-create" id="add-list" class="btn btn-sm btn-default btn-small green left modal-trigger" style="color:white;"><i class="material-icons right">add_box</i>Adicionar</a>
                         <!--<a href="#modal-create" id="btn-btn-ezmart-style" class="btn btn-sm btn-default btn-small modal-trigger">Adicionar nova lista de compras</a>-->
                     </div>
                 </div>
+                <br/>
+                <br/>
             </c:if>
             <c:if test="${not empty shoppingList}">
                 <div class="container">
@@ -117,7 +119,7 @@
                                     <a href="#modal-create" class="btn btn-sm btn-default btn-small green left modal-trigger" style="color:white;"><i class="material-icons right">add_box</i>Adicionar</a>
                                 </div>
                                 <div class="col s8" style="margin-top: 0">
-                                    <p style="font-size: xx-large">Listas cadastradas</p>
+                                    <p id="text-all-list" style="font-size: xx-large">Listas cadastradas</p>
                                 </div>
                             </div>
                             <table class="table s12">
@@ -126,13 +128,12 @@
                                 <br/>
                                 <c:forEach items="${shoppingList}" var="shoppingList">
                                     <tr>
-
-                                        <td style="font-weight: bold;">${shoppingList.name}</td>
+                                        <td id="shopping-list-name" style="font-weight: bold;">${shoppingList.name}</td>
                                         <td>
-                                            <a class="right btn btn-sm btn-danger btn-small red modal-trigger" href="#modal-delete" onclick="setDeleteDadaModalShoppingList(${shoppingList.id})" style="color:white; margin-left: 15px"><i class="material-icons right">delete</i>Excluir</a>
-                                            <a class="right btn btn-sm btn-default btn-small ffc400 amber accent-3 modal-trigger" href="#modal-update" onclick="setUpdateDadaModalShoppingList(${shoppingList.id})" style="color:black; margin-left: 15px"><i class="material-icons right">edit</i>Alterar</a>
-                                            <a class="right btn btn-sm btn-default btn-small blue-grey" href="<c:url value="/products-${shoppingList.id}"/>" style="color:white; margin-left: 15px"><i class="material-icons right">add_shopping_cart</i>Produtos</a>
-                                            <a class="right btn btn-sm btn-default btn-small f80113 modal-trigger" href="<c:url value="/comparePrices-${shoppingList.id}"/>" style="color:white; margin-left: 15px"><i class="material-icons right">attach_money</i>Comparar</a>
+                                            <a id="delete-list" class="right btn btn-sm btn-danger btn-small red modal-trigger" href="#modal-delete" onclick="setDeleteDadaModalShoppingList(${shoppingList.id})" style="color:white; margin-left: 15px"><i class="material-icons right">delete</i>Excluir</a>
+                                            <a id="update-new-list" class="right btn btn-sm btn-default btn-small ffc400 amber accent-3 modal-trigger" href="#modal-update" onclick="setUpdateDadaModalShoppingList(${shoppingList.id})" style="color:black; margin-left: 15px"><i class="material-icons right">edit</i>Alterar</a>
+                                            <a id="products-list" class="right btn btn-sm btn-default btn-small blue-grey" href="<c:url value="/products-${shoppingList.id}"/>" style="color:white; margin-left: 15px"><i class="material-icons right">add_shopping_cart</i>Produtos</a>
+                                            <a id="compare-list" class="right btn btn-sm btn-default btn-small f80113 modal-trigger" href="<c:url value="/comparePrices-${shoppingList.id}"/>" style="color:white; margin-left: 15px"><i class="material-icons right">attach_money</i>Comparar</a>
                                         </td>
                                     </tr>    
                                 </c:forEach>

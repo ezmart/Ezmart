@@ -252,6 +252,7 @@ function setDadaModalProductList() {
                 var buttonTag = document.createElement('button');
                 buttonTag.type = "submit";
                 buttonTag.innerHTML = "Adicionar";
+                buttonTag.id = "add-new-product";
                 //aTag.setAttribute('href', "/ezmartWeb/products-" + listId);
                 buttonTag.className = "btn btn-sm btn-default btn-small green modal-close";
                 buttonTag.style = "color:white";
@@ -325,6 +326,7 @@ function setCitiesWithState() {
             var selectTag = document.getElementById("cityId");
             var optionTagEmpty = document.createElement('option');
             optionTagEmpty.innerHTML = "Selecione sua cidade";
+            optionTagEmpty.value = 0;
             selectTag.appendChild(optionTagEmpty);
 
             $("#cityId").material_select();

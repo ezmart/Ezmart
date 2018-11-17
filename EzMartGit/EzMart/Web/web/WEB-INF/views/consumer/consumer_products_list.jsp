@@ -28,7 +28,7 @@
                         <h4>Por qual produto deseja pesquisar ?</h4>
                         <input type="text" name="searchProduct" id="searchProduct" value="${searchProduct}">
                     <input type="text" style="display: none" name="listId" id="listId" value="${listId}">
-                    <a class="btn waves-yellow"  onclick="setDadaModalProductList()"style="color:white;">Pesquisar</a>
+                    <a id="search-product" class="btn waves-yellow"  onclick="setDadaModalProductList()"style="color:white;">Pesquisar</a>
                     <c:if test="${not empty userLogged}">
                         <div class="card">
                             <div class="card-content" style="background-color: #F1F1F1">
@@ -77,10 +77,12 @@
                         <h4 class="center-align" style="color: #2196f3">Nenhum produto encontrado! :)</h4>
                         <br/>
                         <br/>
-                        <a class="btn btn-sm btn-danger btn-small green modal-trigger" href="#modal-create" style="color:white;"><i class="material-icons right">add_box</i>Adicionar</a>
+                        <a id="add-product" class="btn btn-sm btn-danger btn-small green modal-trigger" href="#modal-create" style="color:white;"><i class="material-icons right">add_box</i>Adicionar</a>
                         <!--<a href="#modal-create" id="btn-btn-ezmart-style" class="btn btn-sm btn-default btn-small modal-trigger">Adicionar nova lista de compras</a>-->
                     </div>
                 </div>
+                <br/>
+                <br/>
             </c:if>
             <c:if test="${not empty productsList}">
                 <div class="container">
@@ -89,10 +91,10 @@
                             <div class="row" style="padding: 0">
                                 <div class="col s12" style="margin-top: 0">
                                     <div class="col s4">
-                                        <a class="btn btn-sm btn-danger btn-small green modal-trigger" href="#modal-create" style="color:white;"><i class="material-icons left">add_box</i>Adicionar</a>
+                                        <a id="add-product" class="btn btn-sm btn-danger btn-small green modal-trigger" href="#modal-create" style="color:white;"><i class="material-icons left">add_box</i>Adicionar</a>
                                     </div>
-                                    <div class="col s8">
-                                        <p style="font-size: xx-large"><b>Produtos cadastrados:</b> ${shoppingList.name}</p>
+                                    <div id="list-name-with-products" class="col s8">
+                                        <p style="font-size: xx-large"><b>Produtos cadastrados: </b> ${shoppingList.name}</p>
                                         <p>Data de criação: ${shoppingList.date}</p>
                                     </div>
                                 </div>
