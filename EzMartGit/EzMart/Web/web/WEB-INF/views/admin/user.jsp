@@ -447,7 +447,7 @@
                     <div class="nav-wrapper">
                         <div style="margin-left: 40px" class="col s12">
                             <a href="<c:url value="/home"/>" class="breadcrumb">Início</a>
-                            <a href="<c:url value=""/>" class="breadcrumb">Produtos</a>
+                            <a href="<c:url value=""/>" class="breadcrumb">Usuários</a>
                         </div>
                     </div>
                 </nav>
@@ -462,7 +462,7 @@
                         <ul>
                             <c:forEach items="${userList}" var="user">
                                 <li class="col l4 m6 s12" >
-                                    <div class="card-panel medium">
+                                    <div class="card-panel medium" id="scroll-user-list">
                                         <div class="row" style="padding: 20px;">
                                             <div>
                                                 <img class="responsive-img-center" src="<c:url value = "/resources/img/user/${user.id}.jpg"/>" alt="imagem usuario" width="150">

@@ -161,7 +161,7 @@
                         <ul>
                             <c:forEach items="${productList}" var="product">
                                 <li class="col l4 m6 s12" >
-                                    <div class="card-panel medium">
+                                    <div class="card-panel medium" id="scroll-user-list">
                                         <div class="row" style="padding: 20px;">
                                             <div>
                                                 <img class="responsive-img-center" src="<c:url value = "/resources/img/product/${product.id}.jpg"/>" alt="${product.barCode} - ${product.name}" width="150">
