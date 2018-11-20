@@ -1,0 +1,628 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="ezmart.model.entity">
+  <ClassDiagramComponents>
+    <Class name="Avaliation" package="ezmart.model.entity" visibility="public" xPosition="769.0" yPosition="301.0">
+      <Fields>
+        <Field name="satisfaction" type="Integer" visibility="private"/>
+        <Field name="productPrice" type="Integer" visibility="private"/>
+        <Field name="diversity" type="Integer" visibility="private"/>
+        <Field name="employees" type="Integer" visibility="private"/>
+        <Field name="ambience" type="Integer" visibility="private"/>
+        <Field name="commentary" type="String" visibility="private"/>
+        <Field name="dateAvaliation" type="Date" visibility="private"/>
+        <Field name="satisfactionConvert" type="Double" visibility="private"/>
+        <Field name="productPriceConvert" type="Double" visibility="private"/>
+        <Field name="diversityConvert" type="Double" visibility="private"/>
+        <Field name="employeesConvert" type="Double" visibility="private"/>
+        <Field name="ambienceConvert" type="Double" visibility="private"/>
+        <Field name="consumer" type="Consumer" visibility="private"/>
+        <Field name="establishment" type="Establishment" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="getSatisfaction" returnType="Integer" visibility="public"/>
+        <Method name="setSatisfaction" returnType="void" visibility="public">
+          <Argument type="Integer" name="satisfaction"/>
+        </Method>
+        <Method name="getProductPrice" returnType="Integer" visibility="public"/>
+        <Method name="setProductPrice" returnType="void" visibility="public">
+          <Argument type="Integer" name="productPrice"/>
+        </Method>
+        <Method name="getDiversity" returnType="Integer" visibility="public"/>
+        <Method name="setDiversity" returnType="void" visibility="public">
+          <Argument type="Integer" name="diversity"/>
+        </Method>
+        <Method name="getEmployees" returnType="Integer" visibility="public"/>
+        <Method name="setEmployees" returnType="void" visibility="public">
+          <Argument type="Integer" name="employees"/>
+        </Method>
+        <Method name="getAmbience" returnType="Integer" visibility="public"/>
+        <Method name="setAmbience" returnType="void" visibility="public">
+          <Argument type="Integer" name="ambience"/>
+        </Method>
+        <Method name="getCommentary" returnType="String" visibility="public"/>
+        <Method name="setCommentary" returnType="void" visibility="public">
+          <Argument type="String" name="commentary"/>
+        </Method>
+        <Method name="getDateAvaliation" returnType="Date" visibility="public"/>
+        <Method name="setDateAvaliation" returnType="void" visibility="public">
+          <Argument type="Date" name="dateAvaliation"/>
+        </Method>
+        <Method name="getConsumer" returnType="Consumer" visibility="public"/>
+        <Method name="setConsumer" returnType="void" visibility="public">
+          <Argument type="Consumer" name="consumer"/>
+        </Method>
+        <Method name="getEstablishment" returnType="Establishment" visibility="public"/>
+        <Method name="setEstablishment" returnType="void" visibility="public">
+          <Argument type="Establishment" name="establishment"/>
+        </Method>
+        <Method name="getSatisfactionConvert" returnType="Double" visibility="public"/>
+        <Method name="setSatisfactionConvert" returnType="void" visibility="public">
+          <Argument type="Double" name="satisfactionConvert"/>
+        </Method>
+        <Method name="getProductPriceConvert" returnType="Double" visibility="public"/>
+        <Method name="setProductPriceConvert" returnType="void" visibility="public">
+          <Argument type="Double" name="productPriceConvert"/>
+        </Method>
+        <Method name="getDiversityConvert" returnType="Double" visibility="public"/>
+        <Method name="setDiversityConvert" returnType="void" visibility="public">
+          <Argument type="Double" name="diversityConvert"/>
+        </Method>
+        <Method name="getEmployeesConvert" returnType="Double" visibility="public"/>
+        <Method name="setEmployeesConvert" returnType="void" visibility="public">
+          <Argument type="Double" name="employeesConvert"/>
+        </Method>
+        <Method name="getAmbienceConvert" returnType="Double" visibility="public"/>
+        <Method name="setAmbienceConvert" returnType="void" visibility="public">
+          <Argument type="Double" name="ambienceConvert"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="City" package="ezmart.model.entity" visibility="public" xPosition="318.0" yPosition="1934.0">
+      <Fields>
+        <Field name="name" type="String" visibility="private"/>
+        <Field name="codeIbge" type="String" visibility="private"/>
+        <Field name="state" type="State" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="getName" returnType="String" visibility="public"/>
+        <Method name="setName" returnType="void" visibility="public">
+          <Argument type="String" name="name"/>
+        </Method>
+        <Method name="getCodeIbge" returnType="String" visibility="public"/>
+        <Method name="setCodeIbge" returnType="void" visibility="public">
+          <Argument type="String" name="codeIbge"/>
+        </Method>
+        <Method name="getState" returnType="State" visibility="public"/>
+        <Method name="setState" returnType="void" visibility="public">
+          <Argument type="State" name="state"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Consumer" package="ezmart.model.entity" visibility="public" xPosition="558.0" yPosition="20.0">
+      <Fields>
+        <Field name="name" type="String" visibility="private"/>
+        <Field name="lastName" type="String" visibility="private"/>
+        <Field name="cpf" type="String" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="getName" returnType="String" visibility="public"/>
+        <Method name="setName" returnType="void" visibility="public">
+          <Argument type="String" name="name"/>
+        </Method>
+        <Method name="getLastName" returnType="String" visibility="public"/>
+        <Method name="setLastName" returnType="void" visibility="public">
+          <Argument type="String" name="lastName"/>
+        </Method>
+        <Method name="getCpf" returnType="String" visibility="public"/>
+        <Method name="setCpf" returnType="void" visibility="public">
+          <Argument type="String" name="cpf"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Establishment" package="ezmart.model.entity" visibility="public" xPosition="531.0" yPosition="1232.0">
+      <Fields>
+        <Field name="cnpj" type="String" visibility="private"/>
+        <Field name="secondEmail" type="String" visibility="private"/>
+        <Field name="name" type="String" visibility="private"/>
+        <Field name="businessName" type="String" visibility="private"/>
+        <Field name="plan" type="Integer" visibility="private"/>
+        <Field name="planStartDate" type="Date" visibility="private"/>
+        <Field name="planFinalDate" type="Date" visibility="private"/>
+        <Field name="productList" type="List&lt;EstablishmentProduct&gt;" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="getCnpj" returnType="String" visibility="public"/>
+        <Method name="setCnpj" returnType="void" visibility="public">
+          <Argument type="String" name="cnpj"/>
+        </Method>
+        <Method name="getSecondEmail" returnType="String" visibility="public"/>
+        <Method name="setSecondEmail" returnType="void" visibility="public">
+          <Argument type="String" name="secondEmail"/>
+        </Method>
+        <Method name="getName" returnType="String" visibility="public"/>
+        <Method name="setName" returnType="void" visibility="public">
+          <Argument type="String" name="name"/>
+        </Method>
+        <Method name="getBusinessName" returnType="String" visibility="public"/>
+        <Method name="setBusinessName" returnType="void" visibility="public">
+          <Argument type="String" name="businessName"/>
+        </Method>
+        <Method name="getPlan" returnType="Integer" visibility="public"/>
+        <Method name="setPlan" returnType="void" visibility="public">
+          <Argument type="Integer" name="plan"/>
+        </Method>
+        <Method name="getPlanStartDate" returnType="Date" visibility="public"/>
+        <Method name="setPlanStartDate" returnType="void" visibility="public">
+          <Argument type="Date" name="planStartDate"/>
+        </Method>
+        <Method name="getPlanFinalDate" returnType="Date" visibility="public"/>
+        <Method name="setPlanFinalDate" returnType="void" visibility="public">
+          <Argument type="Date" name="planFinalDate"/>
+        </Method>
+        <Method name="getProductList" returnType="List&lt;EstablishmentProduct&gt;" visibility="public"/>
+        <Method name="setProductList" returnType="void" visibility="public">
+          <Argument type="List&lt;EstablishmentProduct&gt;" name="productList"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="EstablishmentProduct" package="ezmart.model.entity" visibility="public" xPosition="623.0" yPosition="1820.0">
+      <Fields>
+        <Field name="establishment" type="Establishment" visibility="private"/>
+        <Field name="product" type="Product" visibility="private"/>
+        <Field name="price" type="Double" visibility="private"/>
+        <Field name="priceConvert" type="String" visibility="private"/>
+        <Field name="dateAlteration" type="Date" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="getEstablishment" returnType="Establishment" visibility="public"/>
+        <Method name="setEstablishment" returnType="void" visibility="public">
+          <Argument type="Establishment" name="establishment"/>
+        </Method>
+        <Method name="getProduct" returnType="Product" visibility="public"/>
+        <Method name="setProduct" returnType="void" visibility="public">
+          <Argument type="Product" name="product"/>
+        </Method>
+        <Method name="getPrice" returnType="Double" visibility="public"/>
+        <Method name="setPrice" returnType="void" visibility="public">
+          <Argument type="Double" name="price"/>
+        </Method>
+        <Method name="getDateAlteration" returnType="Date" visibility="public"/>
+        <Method name="setDateAlteration" returnType="void" visibility="public">
+          <Argument type="Date" name="dateAlteration"/>
+        </Method>
+        <Method name="getPriceConvert" returnType="String" visibility="public"/>
+        <Method name="setPriceConvert" returnType="void" visibility="public">
+          <Argument type="String" name="priceConvert"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="ListProduct" package="ezmart.model.entity" visibility="public" xPosition="1152.0" yPosition="1232.0">
+      <Fields>
+        <Field name="listId" type="Long" visibility="private"/>
+        <Field name="produtcId" type="Long" visibility="private"/>
+        <Field name="quantity" type="Integer" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="getListId" returnType="Long" visibility="public"/>
+        <Method name="setListId" returnType="void" visibility="public">
+          <Argument type="Long" name="listId"/>
+        </Method>
+        <Method name="getProdutcId" returnType="Long" visibility="public"/>
+        <Method name="setProdutcId" returnType="void" visibility="public">
+          <Argument type="Long" name="produtcId"/>
+        </Method>
+        <Method name="getQuantity" returnType="Integer" visibility="public"/>
+        <Method name="setQuantity" returnType="void" visibility="public">
+          <Argument type="Integer" name="qauntity"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Product" package="ezmart.model.entity" visibility="public" xPosition="1161.0" yPosition="1520.0">
+      <Fields>
+        <Field name="sector" type="Sector" visibility="private"/>
+        <Field name="provider" type="Provider" visibility="private"/>
+        <Field name="barCode" type="String" visibility="private"/>
+        <Field name="name" type="String" visibility="private"/>
+        <Field name="image" type="byte[]" visibility="private"/>
+        <Field name="brand" type="String" visibility="private"/>
+        <Field name="value" type="String" visibility="private"/>
+        <Field name="aux" type="String" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="getBarCode" returnType="String" visibility="public"/>
+        <Method name="setBarCode" returnType="void" visibility="public">
+          <Argument type="String" name="barCode"/>
+        </Method>
+        <Method name="getName" returnType="String" visibility="public"/>
+        <Method name="setName" returnType="void" visibility="public">
+          <Argument type="String" name="name"/>
+        </Method>
+        <Method name="getSector" returnType="Sector" visibility="public"/>
+        <Method name="setSector" returnType="void" visibility="public">
+          <Argument type="Sector" name="sector"/>
+        </Method>
+        <Method name="getProvider" returnType="Provider" visibility="public"/>
+        <Method name="setProvider" returnType="void" visibility="public">
+          <Argument type="Provider" name="provider"/>
+        </Method>
+        <Method name="getImage" returnType="byte[]" visibility="public"/>
+        <Method name="setImage" returnType="void" visibility="public">
+          <Argument type="byte[]" name="image"/>
+        </Method>
+        <Method name="getBrand" returnType="String" visibility="public"/>
+        <Method name="setBrand" returnType="void" visibility="public">
+          <Argument type="String" name="brand"/>
+        </Method>
+        <Method name="getValue" returnType="String" visibility="public"/>
+        <Method name="setValue" returnType="void" visibility="public">
+          <Argument type="String" name="value"/>
+        </Method>
+        <Method name="getAux" returnType="String" visibility="public"/>
+        <Method name="setAux" returnType="void" visibility="public">
+          <Argument type="String" name="aux"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Promotion" package="ezmart.model.entity" visibility="public" xPosition="2120.0" yPosition="20.0">
+      <Fields>
+        <Field name="name" type="String" visibility="private"/>
+        <Field name="startDate" type="Date" visibility="private"/>
+        <Field name="finalDate" type="Date" visibility="private"/>
+        <Field name="startDateConvert" type="String" visibility="private"/>
+        <Field name="finalDateConvert" type="String" visibility="private"/>
+        <Field name="finalDateTime" type="Long" visibility="private"/>
+        <Field name="currentDate" type="Long" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="getName" returnType="String" visibility="public"/>
+        <Method name="setName" returnType="void" visibility="public">
+          <Argument type="String" name="name"/>
+        </Method>
+        <Method name="getStartDate" returnType="Date" visibility="public"/>
+        <Method name="setStartDate" returnType="void" visibility="public">
+          <Argument type="Date" name="startDate"/>
+        </Method>
+        <Method name="getFinalDate" returnType="Date" visibility="public"/>
+        <Method name="setFinalDate" returnType="void" visibility="public">
+          <Argument type="Date" name="finalDate"/>
+        </Method>
+        <Method name="getStartDateConvert" returnType="String" visibility="public"/>
+        <Method name="setStartDateConvert" returnType="void" visibility="public">
+          <Argument type="String" name="startDateConvert"/>
+        </Method>
+        <Method name="getFinalDateConvert" returnType="String" visibility="public"/>
+        <Method name="setFinalDateConvert" returnType="void" visibility="public">
+          <Argument type="String" name="finalDateConvert"/>
+        </Method>
+        <Method name="getFinalDateTime" returnType="Long" visibility="public"/>
+        <Method name="setFinalDateTime" returnType="void" visibility="public">
+          <Argument type="Long" name="finalDateTime"/>
+        </Method>
+        <Method name="getCurrentDate" returnType="Long" visibility="public"/>
+        <Method name="setCurrentDate" returnType="void" visibility="public">
+          <Argument type="Long" name="currentDate"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="PromotionEstablishmentProduct" package="ezmart.model.entity" visibility="public" xPosition="2065.0" yPosition="1877.0">
+      <Fields>
+        <Field name="establishmentProduct" type="EstablishmentProduct" visibility="private"/>
+        <Field name="promotion" type="Promotion" visibility="private"/>
+        <Field name="promotionPrice" type="Double" visibility="private"/>
+        <Field name="value" type="Integer" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="getEstablishmentProduct" returnType="EstablishmentProduct" visibility="public"/>
+        <Method name="setEstablishmentProduct" returnType="void" visibility="public">
+          <Argument type="EstablishmentProduct" name="establishmentProduct"/>
+        </Method>
+        <Method name="getPromotion" returnType="Promotion" visibility="public"/>
+        <Method name="setPromotion" returnType="void" visibility="public">
+          <Argument type="Promotion" name="promotion"/>
+        </Method>
+        <Method name="getPromotionPrice" returnType="Double" visibility="public"/>
+        <Method name="setPromotionPrice" returnType="void" visibility="public">
+          <Argument type="Double" name="promotionPrice"/>
+        </Method>
+        <Method name="getValue" returnType="Integer" visibility="public"/>
+        <Method name="setValue" returnType="void" visibility="public">
+          <Argument type="Integer" name="value"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Provider" package="ezmart.model.entity" visibility="public" xPosition="1675.0" yPosition="1662.0">
+      <Fields>
+        <Field name="cnpj" type="String" visibility="private"/>
+        <Field name="name" type="String" visibility="private"/>
+        <Field name="businessName" type="String" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="getCnpj" returnType="String" visibility="public"/>
+        <Method name="setCnpj" returnType="void" visibility="public">
+          <Argument type="String" name="cnpj"/>
+        </Method>
+        <Method name="getName" returnType="String" visibility="public"/>
+        <Method name="setName" returnType="void" visibility="public">
+          <Argument type="String" name="name"/>
+        </Method>
+        <Method name="getBusinessName" returnType="String" visibility="public"/>
+        <Method name="setBusinessName" returnType="void" visibility="public">
+          <Argument type="String" name="businessName"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Sector" package="ezmart.model.entity" visibility="public" xPosition="1461.0" yPosition="1092.0">
+      <Fields>
+        <Field name="name" type="String" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="getName" returnType="String" visibility="public"/>
+        <Method name="setName" returnType="void" visibility="public">
+          <Argument type="String" name="name"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="ShoppingList" package="ezmart.model.entity" visibility="public" xPosition="1675.0" yPosition="1270.0">
+      <Fields>
+        <Field name="name" type="String" visibility="private"/>
+        <Field name="consumerId" type="Long" visibility="private"/>
+        <Field name="favorite" type="Boolean" visibility="private"/>
+        <Field name="date" type="Date" visibility="private"/>
+        <Field name="productList" type="List&lt;Product&gt;" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="getName" returnType="String" visibility="public"/>
+        <Method name="setName" returnType="void" visibility="public">
+          <Argument type="String" name="name"/>
+        </Method>
+        <Method name="getConsumerId" returnType="Long" visibility="public"/>
+        <Method name="setConsumerId" returnType="void" visibility="public">
+          <Argument type="Long" name="consumerId"/>
+        </Method>
+        <Method name="getFavorite" returnType="Boolean" visibility="public"/>
+        <Method name="setFavorite" returnType="void" visibility="public">
+          <Argument type="Boolean" name="favorite"/>
+        </Method>
+        <Method name="getDate" returnType="Date" visibility="public"/>
+        <Method name="setDate" returnType="void" visibility="public">
+          <Argument type="Date" name="date"/>
+        </Method>
+        <Method name="getProductList" returnType="List&lt;Product&gt;" visibility="public"/>
+        <Method name="setProductList" returnType="void" visibility="public">
+          <Argument type="List&lt;Product&gt;" name="productList"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="State" package="ezmart.model.entity" visibility="public" xPosition="40.0" yPosition="1991.0">
+      <Fields>
+        <Field name="name" type="String" visibility="private"/>
+        <Field name="initials" type="String" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="getName" returnType="String" visibility="public"/>
+        <Method name="setName" returnType="void" visibility="public">
+          <Argument type="String" name="name"/>
+        </Method>
+        <Method name="getInitials" returnType="String" visibility="public"/>
+        <Method name="setInitials" returnType="void" visibility="public">
+          <Argument type="String" name="initials"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="User" package="ezmart.model.entity" visibility="public" isAbstract="true" xPosition="1548.0" yPosition="171.0">
+      <Fields>
+        <Field name="email" type="String" visibility="private"/>
+        <Field name="password" type="String" visibility="private"/>
+        <Field name="addressLocation" type="String" visibility="private"/>
+        <Field name="numberHouse" type="Integer" visibility="private"/>
+        <Field name="neighborhood" type="String" visibility="private"/>
+        <Field name="cityId" type="Long" visibility="private"/>
+        <Field name="zipCode" type="String" visibility="private"/>
+        <Field name="telephone" type="String" visibility="private"/>
+        <Field name="userType" type="String" visibility="private"/>
+        <Field name="active" type="Boolean" visibility="private"/>
+        <Field name="latitude" type="String" visibility="private"/>
+        <Field name="longitude" type="String" visibility="private"/>
+        <Field name="img" type="byte[]" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="getEmail" returnType="String" visibility="public"/>
+        <Method name="setEmail" returnType="void" visibility="public">
+          <Argument type="String" name="email"/>
+        </Method>
+        <Method name="getPassword" returnType="String" visibility="public"/>
+        <Method name="setPassword" returnType="void" visibility="public">
+          <Argument type="String" name="password"/>
+        </Method>
+        <Method name="getAddressLocation" returnType="String" visibility="public"/>
+        <Method name="setAddressLocation" returnType="void" visibility="public">
+          <Argument type="String" name="addressLocation"/>
+        </Method>
+        <Method name="getNumberHouse" returnType="Integer" visibility="public"/>
+        <Method name="setNumberHouse" returnType="void" visibility="public">
+          <Argument type="Integer" name="numberHouse"/>
+        </Method>
+        <Method name="getNeighborhood" returnType="String" visibility="public"/>
+        <Method name="setNeighborhood" returnType="void" visibility="public">
+          <Argument type="String" name="neighborhood"/>
+        </Method>
+        <Method name="getCity" returnType="Long" visibility="public"/>
+        <Method name="setCity" returnType="void" visibility="public">
+          <Argument type="Long" name="cityId"/>
+        </Method>
+        <Method name="getZipCode" returnType="String" visibility="public"/>
+        <Method name="setZipCode" returnType="void" visibility="public">
+          <Argument type="String" name="zipCode"/>
+        </Method>
+        <Method name="getTelephone" returnType="String" visibility="public"/>
+        <Method name="setTelephone" returnType="void" visibility="public">
+          <Argument type="String" name="telephone"/>
+        </Method>
+        <Method name="getUserType" returnType="String" visibility="public"/>
+        <Method name="setUserType" returnType="void" visibility="public">
+          <Argument type="String" name="userType"/>
+        </Method>
+        <Method name="isActive" returnType="Boolean" visibility="public"/>
+        <Method name="setActive" returnType="void" visibility="public">
+          <Argument type="Boolean" name="active"/>
+        </Method>
+        <Method name="getLatitude" returnType="String" visibility="public"/>
+        <Method name="setLatitude" returnType="void" visibility="public">
+          <Argument type="String" name="latitude"/>
+        </Method>
+        <Method name="getLongitude" returnType="String" visibility="public"/>
+        <Method name="setLongitude" returnType="void" visibility="public">
+          <Argument type="String" name="longitude"/>
+        </Method>
+        <Method name="getImg" returnType="byte[]" visibility="public"/>
+        <Method name="setImg" returnType="void" visibility="public">
+          <Argument type="byte[]" name="img"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="UserSystem" package="ezmart.model.entity" visibility="public" xPosition="101.0" yPosition="37.0">
+      <Fields>
+        <Field name="TIPO_CONSUMER" type="String" visibility="public" isStatic="true" isFinal="true"/>
+        <Field name="TIPO_EMPORIUM" type="String" visibility="public" isStatic="true" isFinal="true"/>
+        <Field name="TIPO_ADMIN" type="String" visibility="public" isStatic="true" isFinal="true"/>
+        <Field name="consumer" type="Consumer" visibility="private"/>
+        <Field name="establishment" type="Establishment" visibility="private"/>
+        <Field name="city" type="City" visibility="private"/>
+        <Field name="state" type="State" visibility="private"/>
+        <Field name="email" type="String" visibility="private"/>
+        <Field name="password" type="String" visibility="private"/>
+        <Field name="addressLocation" type="String" visibility="private"/>
+        <Field name="numberHouse" type="Integer" visibility="private"/>
+        <Field name="neighborhood" type="String" visibility="private"/>
+        <Field name="cityId" type="Long" visibility="private"/>
+        <Field name="zipCode" type="String" visibility="private"/>
+        <Field name="telephone" type="String" visibility="private"/>
+        <Field name="userType" type="String" visibility="private"/>
+        <Field name="active" type="Boolean" visibility="private"/>
+        <Field name="activeString" type="String" visibility="private"/>
+        <Field name="image" type="byte[]" visibility="private"/>
+        <Field name="adm" type="Boolean" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="getConsumer" returnType="Consumer" visibility="public"/>
+        <Method name="setConsumer" returnType="void" visibility="public">
+          <Argument type="Consumer" name="consumer"/>
+        </Method>
+        <Method name="getEstablishment" returnType="Establishment" visibility="public"/>
+        <Method name="setEstablishment" returnType="void" visibility="public">
+          <Argument type="Establishment" name="establishment"/>
+        </Method>
+        <Method name="getCity" returnType="City" visibility="public"/>
+        <Method name="setCity" returnType="void" visibility="public">
+          <Argument type="City" name="city"/>
+        </Method>
+        <Method name="getState" returnType="State" visibility="public"/>
+        <Method name="setState" returnType="void" visibility="public">
+          <Argument type="State" name="state"/>
+        </Method>
+        <Method name="getEmail" returnType="String" visibility="public"/>
+        <Method name="setEmail" returnType="void" visibility="public">
+          <Argument type="String" name="email"/>
+        </Method>
+        <Method name="getPassword" returnType="String" visibility="public"/>
+        <Method name="setPassword" returnType="void" visibility="public">
+          <Argument type="String" name="password"/>
+        </Method>
+        <Method name="getAddressLocation" returnType="String" visibility="public"/>
+        <Method name="setAddressLocation" returnType="void" visibility="public">
+          <Argument type="String" name="addressLocation"/>
+        </Method>
+        <Method name="getNumberHouse" returnType="Integer" visibility="public"/>
+        <Method name="setNumberHouse" returnType="void" visibility="public">
+          <Argument type="Integer" name="numberHouse"/>
+        </Method>
+        <Method name="getNeighborhood" returnType="String" visibility="public"/>
+        <Method name="setNeighborhood" returnType="void" visibility="public">
+          <Argument type="String" name="neighborhood"/>
+        </Method>
+        <Method name="getCityId" returnType="Long" visibility="public"/>
+        <Method name="setCityId" returnType="void" visibility="public">
+          <Argument type="Long" name="cityId"/>
+        </Method>
+        <Method name="getZipCode" returnType="String" visibility="public"/>
+        <Method name="setZipCode" returnType="void" visibility="public">
+          <Argument type="String" name="zipCode"/>
+        </Method>
+        <Method name="getTelephone" returnType="String" visibility="public"/>
+        <Method name="setTelephone" returnType="void" visibility="public">
+          <Argument type="String" name="telephone"/>
+        </Method>
+        <Method name="getUserType" returnType="String" visibility="public"/>
+        <Method name="setUserType" returnType="void" visibility="public">
+          <Argument type="String" name="userType"/>
+        </Method>
+        <Method name="getActive" returnType="Boolean" visibility="public"/>
+        <Method name="setActive" returnType="void" visibility="public">
+          <Argument type="Boolean" name="active"/>
+        </Method>
+        <Method name="getActiveString" returnType="String" visibility="public"/>
+        <Method name="setActiveString" returnType="void" visibility="public">
+          <Argument type="String" name="activeString"/>
+        </Method>
+        <Method name="getImage" returnType="byte[]" visibility="public"/>
+        <Method name="setImage" returnType="void" visibility="public">
+          <Argument type="byte[]" name="image"/>
+        </Method>
+        <Method name="getAdm" returnType="Boolean" visibility="public"/>
+        <Method name="setAdm" returnType="void" visibility="public">
+          <Argument type="Boolean" name="adm"/>
+        </Method>
+      </Methods>
+    </Class>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <HasRelation name="establishmentProduct" source="ezmart.model.entity.PromotionEstablishmentProduct" target="ezmart.model.entity.EstablishmentProduct" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="ezmart.model.entity.Avaliation" target="ezmart.model.entity.Establishment" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="city" source="ezmart.model.entity.UserSystem" target="ezmart.model.entity.City" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="productList" source="ezmart.model.entity.ShoppingList" target="ezmart.model.entity.Product" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;Product&gt;"/>
+    <UseRelation source="ezmart.model.entity.Avaliation" target="ezmart.model.entity.Consumer" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="ezmart.model.entity.Establishment" target="ezmart.model.entity.User"/>
+    <HasRelation name="consumer" source="ezmart.model.entity.Avaliation" target="ezmart.model.entity.Consumer" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="ezmart.model.entity.Product" target="ezmart.model.entity.Provider" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="ezmart.model.entity.City" target="ezmart.model.entity.State" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="product" source="ezmart.model.entity.EstablishmentProduct" target="ezmart.model.entity.Product" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="ezmart.model.entity.EstablishmentProduct" target="ezmart.model.entity.Establishment" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="ezmart.model.entity.UserSystem" target="ezmart.model.entity.City" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="promotion" source="ezmart.model.entity.PromotionEstablishmentProduct" target="ezmart.model.entity.Promotion" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="productList" source="ezmart.model.entity.Establishment" target="ezmart.model.entity.EstablishmentProduct" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;EstablishmentProduct&gt;"/>
+    <IsRelation name="is" source="ezmart.model.entity.Consumer" target="ezmart.model.entity.User"/>
+    <HasRelation name="provider" source="ezmart.model.entity.Product" target="ezmart.model.entity.Provider" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="sector" source="ezmart.model.entity.Product" target="ezmart.model.entity.Sector" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="ezmart.model.entity.EstablishmentProduct" target="ezmart.model.entity.Product" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="state" source="ezmart.model.entity.UserSystem" target="ezmart.model.entity.State" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="establishment" source="ezmart.model.entity.UserSystem" target="ezmart.model.entity.Establishment" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="ezmart.model.entity.UserSystem" target="ezmart.model.entity.State" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="ezmart.model.entity.UserSystem" target="ezmart.model.entity.Establishment" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="state" source="ezmart.model.entity.City" target="ezmart.model.entity.State" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="ezmart.model.entity.Product" target="ezmart.model.entity.Sector" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="ezmart.model.entity.PromotionEstablishmentProduct" target="ezmart.model.entity.Promotion" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="ezmart.model.entity.UserSystem" target="ezmart.model.entity.Consumer" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="ezmart.model.entity.Establishment" target="ezmart.model.entity.Product" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="ezmart.model.entity.ShoppingList" target="ezmart.model.entity.Product" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="establishment" source="ezmart.model.entity.Avaliation" target="ezmart.model.entity.Establishment" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="establishment" source="ezmart.model.entity.EstablishmentProduct" target="ezmart.model.entity.Establishment" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="consumer" source="ezmart.model.entity.UserSystem" target="ezmart.model.entity.Consumer" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="ezmart.model.entity.PromotionEstablishmentProduct" target="ezmart.model.entity.Product" sourceCardinality="1..1" targetCardinality="1..1"/>
+  </ClassDiagramRelations>
+</ClassDiagram>
