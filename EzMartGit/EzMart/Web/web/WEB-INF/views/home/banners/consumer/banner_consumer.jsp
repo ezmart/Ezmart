@@ -5,7 +5,7 @@
     <li>
         <img src="<c:url value = "/resources/img/banners/consumer/consumer_1.png"/>"> <!-- random image -->
         <div class="caption right-align">
-            <h3 class="light text-lighten-1"><b>Bem vindo ao EzMart</b></h3>
+            <h3 class="light text-lighten-1"><b>Bem-vindo ao EzMart</b></h3>
             <h5 class="light text-lighten-1">${userLogged.name}</h5>
             <br/>
             <br/>
