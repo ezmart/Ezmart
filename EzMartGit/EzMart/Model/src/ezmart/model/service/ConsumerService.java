@@ -9,6 +9,7 @@ import ezmart.model.dao.UserDAO;
 import ezmart.model.entity.Consumer;
 import ezmart.model.entity.User;
 import ezmart.model.util.SystemConstant;
+import ezmart.model.util.ValidaCpf;
 import java.sql.Connection;
 import java.util.HashMap;
 import java.util.List;
@@ -162,6 +163,15 @@ public class ConsumerService implements BaseConsumerService {
                 criteriaCpf.put(ConsumerCriteria.CPF_EQ, cpf);
                 if (readByCriteria(criteriaCpf, null, null).size() > 0) {
                     errors.put("cpf", "*CPF já cadastrado no sistema!");
+                }
+                
+                //Valida CNPJ
+                ValidaCpf valida = new ValidaCpf();
+                
+                cpf = cpf.replace(".", "").replace("-", "");
+                boolean cpfValido = valida.isCPF(cpf);
+                if(!cpfValido){
+                    errors.put("cpf", "*CPF inválido!");
                 }
             }
 

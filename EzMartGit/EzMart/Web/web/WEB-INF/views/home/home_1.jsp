@@ -93,7 +93,7 @@
                 <li>
                     <img src="<c:url value = "/resources/img/banners/img_fundo_mercado.png"/>"> <!-- random image -->
                     <div class="caption center-align">
-                        <h3 class="light text-lighten-1">Bem-vindo ao EzMart</h3>
+                        <h3 class="light text-lighten-1">Bem-vindo(a) ao EzMart</h3>
                         <h5 class="light text-lighten-1">${userLogged.name}</h5>
                         <br/>
                         <br/>

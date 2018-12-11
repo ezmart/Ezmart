@@ -14,6 +14,7 @@ import ezmart.model.criteria.UserCriteria;
 import ezmart.model.entity.EstablishmentProduct;
 import ezmart.model.entity.Product;
 import ezmart.model.util.SystemConstant;
+import ezmart.model.util.ValidaCnpj;
 import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -29,7 +30,7 @@ public class EstablishmentService implements BaseEstablishmentService {
 
             UserDAO userDao = new UserDAO();
             userDao.create(conn, entity);
-            
+
             entity.setPlan(1);
             entity.setPlanStartDate(null);
             entity.setPlanStartDate(null);
@@ -138,16 +139,27 @@ public class EstablishmentService implements BaseEstablishmentService {
                 errors.put("businessName", "*Campo sobrenome obrigatório!");
             }
 
-            //Validação de preenchimento do campo CPF
+            //Validação de preenchimento do campo CNPJ
             if (cnpj == null || cnpj.isEmpty()) {
                 errors.put("cnpj", "*Campo CNPJ obrigatório!");
             } else {
-                //Verifica se o CPF já foi cadastrado
+
+                //Verifica se o CNPJ já foi cadastrado
                 Map<Long, Object> criteriaCnpj = new HashMap<>();
                 criteriaCnpj.put(EstablishmentCriteria.CNPJ_EQ, cnpj);
                 if (readByCriteria(criteriaCnpj, null, null).size() > 0) {
                     errors.put("cnpj", "*CNPJ já cadastrado no sistema!");
                 }
+
+                //Valida CNPJ
+                ValidaCnpj valida = new ValidaCnpj();
+                
+                cnpj = cnpj.replace(".", "").replace("/", "").replace("-", "");
+                boolean cnpjValido = valida.isCNPJ(cnpj);
+                if(!cnpjValido){
+                    errors.put("cnpj", "*CNPJ inválido!");
+                }
+
             }
 
             //Validação de preenchimento do campo EMAIL
@@ -238,7 +250,7 @@ public class EstablishmentService implements BaseEstablishmentService {
             //Validação de preenchimento do campo TELEFONE
             if (telephone == null || telephone.isEmpty()) {
                 errors.put("telephone", "*Campo telefone obrigatório!");
-            } 
+            }
 //            else {
 //                //Formato da expressão regular (XX)XXXXX-XXXX"
 //                String regex = "^\\([1-9]{2}\\)[2-9][0-9]{3,4}\\-[0-9]{4}$";
@@ -398,7 +410,7 @@ public class EstablishmentService implements BaseEstablishmentService {
             throw e;
         }
     }
-    
+
     public List<Establishment> findAllEstablishmentForQuotation(Long id) throws Exception {
         Connection conn = ConnectionManager.getInstance().getConnection();
         try {
